@@ -1,12 +1,12 @@
 import { RouteObject } from "react-router-dom";
 
-const PublicRoutes: RouteObject[] = [
+const publicRoutes: RouteObject[] = [
   {
     path: "/",
     children: [
       {
         path: "",
-        element: <p>eee</p>,
+        element: <p>home</p>,
       },
       {
         path: "login",
@@ -16,12 +16,12 @@ const PublicRoutes: RouteObject[] = [
         path: "register",
         element: <p>register</p>,
       },
+      {
+        path: "*",
+        element: <p>404</p>,
+      },
     ],
-  },
-  {
-    path: "*",
-    element: <p>err</p>,
   },
 ];
 
-export default PublicRoutes;
+export default publicRoutes;
