@@ -5,7 +5,7 @@ const userRoutes: RouteObject[] = [
     path: "/user",
     children: [
       {
-        path: "dashboard",
+        path: "",
         element: <p>dashboard</p>,
       },
       {
@@ -15,6 +15,10 @@ const userRoutes: RouteObject[] = [
       {
         path: "chat",
         element: <p>chat</p>,
+      },
+      {
+        path: "*",
+        element: <p>404</p>,
       },
     ],
   },

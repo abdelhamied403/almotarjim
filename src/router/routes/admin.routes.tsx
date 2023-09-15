@@ -5,7 +5,7 @@ const adminRoutes: RouteObject[] = [
     path: "/admin",
     children: [
       {
-        path: "dashboard",
+        path: "",
         element: <p>dashboard</p>,
       },
       {
@@ -15,6 +15,10 @@ const adminRoutes: RouteObject[] = [
       {
         path: "chat",
         element: <p>chat</p>,
+      },
+      {
+        path: "*",
+        element: <p>404</p>,
       },
     ],
   },
