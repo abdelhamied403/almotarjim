@@ -1,27 +1,35 @@
 import { RouteObject } from "react-router-dom";
 
+// pages
+import Error404 from "@/pages/shared/error/Error404";
+import CreateRequest from "@/pages/user/CreateRequest";
+import Home from "@/pages/user/Home";
+import Requests from "@/pages/user/Requests";
+import SingleChat from "@/pages/user/SingleChat";
+import SingleRequest from "@/pages/user/SingleRequest";
+
 const userRoutes: RouteObject[] = [
   {
     path: "/user",
     children: [
       {
         path: "",
-        element: <p>home</p>,
+        element: <Home />,
       },
       {
         path: "request",
         children: [
           {
             path: "",
-            element: <p>requests page</p>,
+            element: <Requests />,
           },
           {
             path: "create",
-            element: <p>create request page</p>,
+            element: <CreateRequest />,
           },
           {
             path: ":id",
-            element: <p>single request page</p>,
+            element: <SingleRequest />,
           },
         ],
       },
@@ -30,13 +38,13 @@ const userRoutes: RouteObject[] = [
         children: [
           {
             path: ":id",
-            element: <p>single chat page</p>,
+            element: <SingleChat />,
           },
         ],
       },
       {
         path: "*",
-        element: <p>404</p>,
+        element: <Error404 />,
       },
     ],
   },

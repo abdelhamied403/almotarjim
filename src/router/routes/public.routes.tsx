@@ -1,24 +1,30 @@
 import { RouteObject } from "react-router-dom";
 
+// pages
+import Home from "@/pages/shared/Home";
+import Login from "@/pages/shared/Login";
+import Register from "@/pages/shared/Register";
+import Error404 from "@/pages/shared/error/Error404";
+
 const publicRoutes: RouteObject[] = [
   {
     path: "/",
     children: [
       {
         path: "",
-        element: <p className="bg-primary-400">home</p>,
+        element: <Home />,
       },
       {
         path: "login",
-        element: <p>login</p>,
+        element: <Login />,
       },
       {
         path: "register",
-        element: <p>register</p>,
+        element: <Register />,
       },
       {
         path: "*",
-        element: <p>404</p>,
+        element: <Error404 />,
       },
     ],
   },

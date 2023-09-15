@@ -1,33 +1,40 @@
 import { RouteObject } from "react-router-dom";
 
+// pages
+import Dashboard from "@/pages/translator/Dashboard";
+import Requests from "@/pages/translator/Requests";
+import SingleRequest from "@/pages/translator/SingleRequest";
+import SubmitRequest from "@/pages/translator/SubmitRequest";
+import Error404 from "@/pages/shared/error/Error404";
+
 const translatorRoutes: RouteObject[] = [
   {
     path: "/translator",
     children: [
       {
         path: "",
-        element: <p>dashboard</p>,
+        element: <Dashboard />,
       },
       {
         path: "request",
         children: [
           {
             path: "",
-            element: <p>requests page</p>,
+            element: <Requests />,
           },
           {
             path: ":id",
-            element: <p>single request page</p>,
+            element: <SingleRequest />,
           },
           {
             path: ":id/submit",
-            element: <p>submit request page</p>,
+            element: <SubmitRequest />,
           },
         ],
       },
       {
         path: "*",
-        element: <p>404</p>,
+        element: <Error404 />,
       },
     ],
   },

@@ -1,24 +1,33 @@
 import { RouteObject } from "react-router-dom";
 
+// pages
+import Dashboard from "@/pages/agent/Dashboard";
+import Chats from "@/pages/agent/Chats";
+import SingleChat from "@/pages/agent/SingleChat";
+import Requests from "@/pages/agent/Requests";
+import CreateRequest from "@/pages/agent/CreateRequest";
+import SingleRequest from "@/pages/agent/SingleRequest";
+import Error404 from "@/pages/shared/error/Error404";
+
 const agentRoutes: RouteObject[] = [
   {
     path: "/agent",
     children: [
       {
         path: "",
-        element: <p>dashboard</p>,
+        element: <Dashboard />,
       },
       {
         path: "chat",
         children: [
           {
             path: "",
-            element: <p>all chats</p>,
+            element: <Chats />,
           },
 
           {
             path: ":id",
-            element: <p>single chat page</p>,
+            element: <SingleChat />,
           },
         ],
       },
@@ -27,21 +36,21 @@ const agentRoutes: RouteObject[] = [
         children: [
           {
             path: "",
-            element: <p>requests page</p>,
+            element: <Requests />,
           },
           {
             path: "create",
-            element: <p>create request page</p>,
+            element: <CreateRequest />,
           },
           {
             path: ":id",
-            element: <p>single request page</p>,
+            element: <SingleRequest />,
           },
         ],
       },
       {
         path: "*",
-        element: <p>404</p>,
+        element: <Error404 />,
       },
     ],
   },

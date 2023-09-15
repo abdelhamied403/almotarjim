@@ -1,27 +1,36 @@
 import { RouteObject } from "react-router-dom";
 
+// pages
+import Dashboard from "@/pages/supervisor/Dashboard";
+import Requests from "@/pages/supervisor/Requests";
+import CreateRequest from "@/pages/supervisor/CreateRequest";
+import SingleRequest from "@/pages/supervisor/SingleRequest";
+import Chats from "@/pages/supervisor/Chats";
+import SingleChat from "@/pages/supervisor/SingleChat";
+import Error404 from "@/pages/shared/error/Error404";
+
 const supervisorRoutes: RouteObject[] = [
   {
     path: "/supervisor",
     children: [
       {
         path: "",
-        element: <p>dashboard</p>,
+        element: <Dashboard />,
       },
       {
         path: "request",
         children: [
           {
             path: "",
-            element: <p>requests page</p>,
+            element: <Requests />,
           },
           {
             path: "create",
-            element: <p>create request page</p>,
+            element: <CreateRequest />,
           },
           {
             path: ":id",
-            element: <p>single request page</p>,
+            element: <SingleRequest />,
           },
         ],
       },
@@ -30,17 +39,17 @@ const supervisorRoutes: RouteObject[] = [
         children: [
           {
             path: "",
-            element: <p>all chats</p>,
+            element: <Chats />,
           },
           {
             path: ":id",
-            element: <p>single chat page</p>,
+            element: <SingleChat />,
           },
         ],
       },
       {
         path: "*",
-        element: <p>404</p>,
+        element: <Error404 />,
       },
     ],
   },
