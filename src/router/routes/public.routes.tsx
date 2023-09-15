@@ -6,7 +6,7 @@ const publicRoutes: RouteObject[] = [
     children: [
       {
         path: "",
-        element: <p>home</p>,
+        element: <p className="bg-primary-400">home</p>,
       },
       {
         path: "login",
