@@ -6,15 +6,7 @@ const adminRoutes: RouteObject[] = [
     children: [
       {
         path: "",
-        element: <p>dashboard</p>,
-      },
-      {
-        path: "requests",
-        element: <p>requests</p>,
-      },
-      {
-        path: "chat",
-        element: <p>chat</p>,
+        element: <p>admin page</p>,
       },
       {
         path: "*",

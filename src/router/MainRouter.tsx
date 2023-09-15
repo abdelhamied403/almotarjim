@@ -11,12 +11,15 @@ import role from "@/interfaces/role";
 import adminRoutes from "./routes/admin.routes";
 import publicRoutes from "./routes/public.routes";
 import userRoutes from "./routes/user.routes";
+import agentRoutes from "./routes/agent.routes";
+import supervisorRoutes from "./routes/supervisor.routes";
+import translatorRoutes from "./routes/translator.routes";
 
 const routesLookup: { [key in role]: RouteObject[] } = {
   admin: adminRoutes,
-  agent: adminRoutes,
-  supervisor: adminRoutes,
-  translator: adminRoutes,
+  agent: agentRoutes,
+  supervisor: supervisorRoutes,
+  translator: translatorRoutes,
   user: userRoutes,
 };
 

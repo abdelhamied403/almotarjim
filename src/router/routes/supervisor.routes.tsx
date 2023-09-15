@@ -1,12 +1,12 @@
 import { RouteObject } from "react-router-dom";
 
-const userRoutes: RouteObject[] = [
+const supervisorRoutes: RouteObject[] = [
   {
-    path: "/user",
+    path: "/supervisor",
     children: [
       {
         path: "",
-        element: <p>home</p>,
+        element: <p>dashboard</p>,
       },
       {
         path: "request",
@@ -29,6 +29,10 @@ const userRoutes: RouteObject[] = [
         path: "chat",
         children: [
           {
+            path: "",
+            element: <p>all chats</p>,
+          },
+          {
             path: ":id",
             element: <p>single chat page</p>,
           },
@@ -42,4 +46,4 @@ const userRoutes: RouteObject[] = [
   },
 ];
 
-export default userRoutes;
+export default supervisorRoutes;

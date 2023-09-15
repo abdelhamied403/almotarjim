@@ -1,12 +1,12 @@
 import { RouteObject } from "react-router-dom";
 
-const userRoutes: RouteObject[] = [
+const translatorRoutes: RouteObject[] = [
   {
-    path: "/user",
+    path: "/translator",
     children: [
       {
         path: "",
-        element: <p>home</p>,
+        element: <p>dashboard</p>,
       },
       {
         path: "request",
@@ -16,21 +16,12 @@ const userRoutes: RouteObject[] = [
             element: <p>requests page</p>,
           },
           {
-            path: "create",
-            element: <p>create request page</p>,
-          },
-          {
             path: ":id",
             element: <p>single request page</p>,
           },
-        ],
-      },
-      {
-        path: "chat",
-        children: [
           {
-            path: ":id",
-            element: <p>single chat page</p>,
+            path: ":id/submit",
+            element: <p>submit request page</p>,
           },
         ],
       },
@@ -42,4 +33,4 @@ const userRoutes: RouteObject[] = [
   },
 ];
 
-export default userRoutes;
+export default translatorRoutes;

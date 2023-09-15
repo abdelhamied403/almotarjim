@@ -10,7 +10,7 @@ const useUser = (): useUserReturnType => {
   return {
     user: {},
     isLoggedIn: true,
-    role: "user",
+    role: "supervisor",
   };
 };
 
