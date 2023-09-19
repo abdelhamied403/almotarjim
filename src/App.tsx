@@ -1,9 +1,12 @@
-import Router from "./router/MainRouter";
+import LanguageProvider from "./providers/LanguageProvider";
+import MainRouter from "./router/MainRouter";
 
 const App = () => {
   return (
     <>
-      <Router></Router>
+      <LanguageProvider defaultLocale="en">
+        <MainRouter></MainRouter>
+      </LanguageProvider>
     </>
   );
 };

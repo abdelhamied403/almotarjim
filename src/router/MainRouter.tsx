@@ -24,12 +24,12 @@ const routesLookup: { [key in role]: RouteObject[] } = {
 };
 
 const MainRouter = () => {
-  const { role } = useUser();
+  const { isLoggedIn, role } = useUser();
   const router = useMemo(() => {
-    const routes: RouteObject[] = routesLookup[role] || [];
+    const routes: RouteObject[] = isLoggedIn && role ? routesLookup[role] : [];
     console.log([...routes, ...publicRoutes]);
     return createBrowserRouter([...routes, ...publicRoutes]);
-  }, [role]);
+  }, [isLoggedIn, role]);
 
   return <RouterProvider router={router} />;
 };
