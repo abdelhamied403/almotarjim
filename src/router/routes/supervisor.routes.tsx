@@ -8,10 +8,12 @@ import SingleRequest from "@/pages/supervisor/SingleRequest";
 import Chats from "@/pages/supervisor/Chats";
 import SingleChat from "@/pages/supervisor/SingleChat";
 import Error404 from "@/pages/shared/error/Error404";
+import MainLayout from "@/layouts/MainLayout";
 
 const supervisorRoutes: RouteObject[] = [
   {
     path: "/supervisor",
+    element: <MainLayout />,
     children: [
       {
         path: "",

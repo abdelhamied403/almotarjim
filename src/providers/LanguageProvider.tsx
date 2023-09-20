@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import useI18n from "@/hooks/useI18n";
 import { Locale } from "@/i18n/locales";
 import { useEffect } from "react";
@@ -11,7 +10,7 @@ const LanguageProvider = ({
   defaultLocale = "en",
   children,
 }: LanguageProviderProps) => {
-  const { language, changeLocale, t } = useI18n();
+  const { language, changeLocale } = useI18n();
 
   useEffect(() => {
     const storeLocale = (localStorage.getItem("locale") ||
@@ -19,15 +18,7 @@ const LanguageProvider = ({
     changeLocale(storeLocale);
   }, [changeLocale, defaultLocale]);
 
-  return (
-    <div dir={language.dir}>
-      <Button onClick={() => changeLocale("ar")}>ar</Button>
-      <Button onClick={() => changeLocale("en")}>en</Button>
-      {t("translations:specificKey")}
-      {JSON.stringify(language)}
-      {children}
-    </div>
-  );
+  return <div dir={language.dir}>{children}</div>;
 };
 
 export default LanguageProvider;

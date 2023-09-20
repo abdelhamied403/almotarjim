@@ -9,7 +9,7 @@ type useUserReturnType = {
 const useUser = (): useUserReturnType => {
   return {
     user: {},
-    isLoggedIn: false,
+    isLoggedIn: true,
     role: "supervisor",
   };
 };
