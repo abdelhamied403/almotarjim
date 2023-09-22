@@ -9,4 +9,22 @@
       }
     }
   }
+
+  // scrollbar
+  /* width */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-xl;
+  }
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
 }

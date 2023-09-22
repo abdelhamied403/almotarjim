@@ -48,7 +48,7 @@ const SupervisorLayout = () => {
           </div>
           <Button variant="outlineDanger">Logout</Button>
         </div>
-        <div className="page flex-1 flex flex-col gap-4 bg-gray-50 p-4">
+        <div className="page flex-1 flex flex-col gap-4 bg-gray-50 p-4 overflow-auto">
           <div className="header">
             <div className="bg-white p-4 rounded-xl">
               <div className="flex justify-end gap-4">
