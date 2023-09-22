@@ -10,12 +10,12 @@ import {
 import useI18n from "@/hooks/useI18n";
 import useUser from "@/hooks/useUser";
 
-const MainLayout = () => {
+const SupervisorLayout = () => {
   const { language, changeLocale } = useI18n();
   const { role, user } = useUser();
 
   return (
-    <div className="main-layout h-screen">
+    <div className="supervisor-layout h-screen">
       <div className="flex h-full">
         <div className="sidebar min-w-[300px] p-4 flex flex-col justify-between gap-4">
           <div className="flex-1 flex flex-col gap-4">
@@ -80,4 +80,4 @@ const MainLayout = () => {
   );
 };
 
-export default MainLayout;
+export default SupervisorLayout;

@@ -1,9 +1,10 @@
-import roleType from "@/interfaces/role";
+import Role from "@/interfaces/role";
+import User from "@/interfaces/user";
 
 type useUserReturnType = {
-  user: unknown;
+  user: Partial<User>;
   isLoggedIn: boolean;
-  role: roleType;
+  role: Role;
 };
 
 const useUser = (): useUserReturnType => {

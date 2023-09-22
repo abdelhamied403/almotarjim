@@ -6,7 +6,7 @@ export const content = [
   "./pages/**/*.{ts,tsx}",
   "./components/**/*.{ts,tsx}",
   "./app/**/*.{ts,tsx}",
-  "./src/**/*.{ts,tsx}",
+  "./src/**/*.{ts,tsx,scss}",
 ];
 export const theme = {
   container: {
@@ -60,5 +60,9 @@ export const theme = {
       },
     },
   },
+};
+
+export const corePlugins = {
+  preflight: false,
 };
 export const plugins = [tailwindcssAnimate];

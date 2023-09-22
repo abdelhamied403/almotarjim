@@ -5,7 +5,7 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 import { useMemo } from "react";
-import role from "@/interfaces/role";
+import Role from "@/interfaces/role";
 
 // routes
 import adminRoutes from "./routes/admin.routes";
@@ -15,7 +15,7 @@ import agentRoutes from "./routes/agent.routes";
 import supervisorRoutes from "./routes/supervisor.routes";
 import translatorRoutes from "./routes/translator.routes";
 
-const routesLookup: { [key in role]: RouteObject[] } = {
+const routesLookup: { [key in Role]: RouteObject[] } = {
   admin: adminRoutes,
   agent: agentRoutes,
   supervisor: supervisorRoutes,
