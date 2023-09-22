@@ -1,13 +1,53 @@
-import useUser from "@/hooks/useUser";
+import { Button } from "@/components/ui/button";
+import { HiGlobe, HiArrowNarrowRight } from "react-icons/hi";
+import home from "../../assets/auth/home.svg";
+import ellipse from "../../assets/auth/Ellipse18.svg";
+import ellipse2 from "../../assets/auth/Ellipse19.svg";
+import ellipse3 from "../../assets/auth/Ellipsedown.svg";
 
 const Home = () => {
-  const user = useUser();
-
   return (
-    <>
-      <p>{JSON.stringify(user)}</p>
-      <p>Home page</p>
-    </>
+    <div className="relative h-screen flex flex-col">
+      <div className="absolute top-0 right-0">
+        <img src={ellipse} alt="ellipse" />
+      </div>
+      <div className="absolute top-0 left-0">
+        <img src={ellipse2} alt="ellipse" />
+      </div>
+      <div className="absolute bottom-0 left-0">
+        <img src={ellipse3} alt="ellipse" />
+      </div>
+      <div className="container mx-auto py-28">
+        <div className="flex justify-end">
+          <Button variant={"language"}>
+            English
+            <HiGlobe />
+          </Button>
+        </div>
+      </div>
+      <div className="flex-1 gap-40">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-2 md:gap-40 items-center">
+            <div className="col-span-2 md:col-span-1">
+              <h1 className="text-4xl font-bold ">Welcome to Almotarjim</h1>
+              <p className="py-10">
+                Lorem ipsum dolor sit amet consectetur. Placerat vel turpis est
+                morbi pharetra tortor quis. Aenean enim faucibus fringilla id
+                elementum malesuada. Praesent turpis facilisis ornare
+                scelerisque nec
+              </p>
+              <Button variant={"language"}>
+                Get Started
+                <HiArrowNarrowRight />
+              </Button>
+            </div>
+            <div className="col-span-2 md:col-span-1">
+              <img src={home} alt="almotarjm-home" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
