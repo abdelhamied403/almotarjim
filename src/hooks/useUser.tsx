@@ -9,9 +9,12 @@ type useUserReturnType = {
 
 const useUser = (): useUserReturnType => {
   return {
-    user: {},
+    user: {
+      name: "Ahmed Mohamed",
+      email: "Ahmed@almorajim.com",
+    },
     isLoggedIn: true,
-    role: "supervisor",
+    role: "translator",
   };
 };
 

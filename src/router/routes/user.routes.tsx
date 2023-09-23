@@ -7,10 +7,12 @@ import Home from "@/pages/user/Home";
 import Requests from "@/pages/user/Requests";
 import SingleChat from "@/pages/user/SingleChat";
 import SingleRequest from "@/pages/user/SingleRequest";
+import UserLayout from "@/layouts/UserLayout";
 
 const userRoutes: RouteObject[] = [
   {
     path: "/user",
+    element: <UserLayout />,
     children: [
       {
         path: "",

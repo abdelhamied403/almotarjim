@@ -11,22 +11,22 @@ import useI18n from "@/hooks/useI18n";
 import Sidebar from "@/containers/Sidebar";
 import SidebarItem from "@/components/SidebarItem";
 
-const SupervisorLayout = () => {
+const UserLayout = () => {
   const { language, changeLocale } = useI18n();
 
   return (
-    <div className="supervisor-layout h-screen">
+    <div className="user-layout h-screen">
       <div className="flex h-full">
         <Sidebar>
-          <SidebarItem to="/supervisor" end>
+          <SidebarItem to="/user" end>
             <HiHome />
             <span className="hidden lg:block">Dashboard</span>
           </SidebarItem>
-          <SidebarItem to="/supervisor/chat">
+          <SidebarItem to="/user/chat">
             <HiChat />
             <span className="hidden lg:block">Chats</span>
           </SidebarItem>
-          <SidebarItem to="/supervisor/request">
+          <SidebarItem to="/user/request">
             <HiReceiptTax />
             <span className="hidden lg:block">Requests</span>
           </SidebarItem>
@@ -64,4 +64,4 @@ const SupervisorLayout = () => {
   );
 };
 
-export default SupervisorLayout;
+export default UserLayout;

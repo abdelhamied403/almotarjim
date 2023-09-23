@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Outlet } from "react-router-dom";
-import { HiChat, HiGlobe, HiHome, HiReceiptTax } from "react-icons/hi";
+import { HiGlobe, HiHome, HiReceiptTax } from "react-icons/hi";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,22 +11,18 @@ import useI18n from "@/hooks/useI18n";
 import Sidebar from "@/containers/Sidebar";
 import SidebarItem from "@/components/SidebarItem";
 
-const SupervisorLayout = () => {
+const TranslatorLayout = () => {
   const { language, changeLocale } = useI18n();
 
   return (
-    <div className="supervisor-layout h-screen">
+    <div className="translator-layout h-screen">
       <div className="flex h-full">
         <Sidebar>
-          <SidebarItem to="/supervisor" end>
+          <SidebarItem to="/translator" end>
             <HiHome />
             <span className="hidden lg:block">Dashboard</span>
           </SidebarItem>
-          <SidebarItem to="/supervisor/chat">
-            <HiChat />
-            <span className="hidden lg:block">Chats</span>
-          </SidebarItem>
-          <SidebarItem to="/supervisor/request">
+          <SidebarItem to="/translator/request">
             <HiReceiptTax />
             <span className="hidden lg:block">Requests</span>
           </SidebarItem>
@@ -64,4 +60,4 @@ const SupervisorLayout = () => {
   );
 };
 
-export default SupervisorLayout;
+export default TranslatorLayout;
