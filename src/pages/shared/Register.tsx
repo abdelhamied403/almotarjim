@@ -48,7 +48,7 @@ const Register = () => {
                 <FaPhone />
               </div>
               <Input
-                type="number"
+                type="text"
                 placeholder="+96612216454844"
                 className="pl-9 "
               />
@@ -70,7 +70,10 @@ const Register = () => {
           <Button variant={"language"}>Register</Button>
           <div className="flex flex-col gap-5">
             <p className="text-center">
-              Don’t have an account? <Link to="#">Register</Link>
+              Already have an account?{" "}
+              <Link to="/login" className="text-primary-500">
+                Login
+              </Link>
             </p>
             <div className="flex gap-2 items-center justify-center">
               <BsFacebook />

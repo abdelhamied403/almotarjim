@@ -42,7 +42,10 @@ const Login = () => {
           <Button variant={"outline"}>Anonymous Login</Button>
           <div className="flex flex-col gap-5">
             <p className="text-center">
-              Don’t have an account? <Link to="#">Register</Link>
+              Don’t have an account?{" "}
+              <Link to="/register" className="text-primary-500">
+                Register
+              </Link>
             </p>
             <div className="flex gap-2 items-center justify-center">
               <BsFacebook />
