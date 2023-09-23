@@ -3,6 +3,8 @@ import login from "../../assets/auth/login.svg";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { BsApple, BsFacebook, BsGoogle } from "react-icons/bs";
+import { HiMiniKey } from "react-icons/hi2";
+import { MdEmail } from "react-icons/md";
 
 const Login = () => {
   return (
@@ -11,12 +13,30 @@ const Login = () => {
         <div className="grid gap-5">
           <h1 className="text-3xl font-bold text-center">Welcome back!</h1>
           <div className="grid w-full items-center gap-2">
-            <label>Email</label>
-            <Input type="email" placeholder="olivia@untitledui.com" />
+            <label htmlFor="email">Email</label>
+            <div className="relative">
+              <div className="absolute left-0 inset-y-0 flex items-center pl-3">
+                <MdEmail />
+              </div>
+              <Input
+                type="email"
+                placeholder="olivia@untitledui.com"
+                className="pl-9 "
+              />
+            </div>
           </div>
           <div className="grid w-full items-center gap-2">
-            <label>Password</label>
-            <Input type="password" placeholder="********" />
+            <label htmlFor="password">Password</label>
+            <div className="relative">
+              <div className="absolute left-0 inset-y-0 flex items-center pl-3">
+                <HiMiniKey />
+              </div>
+              <Input
+                type="password"
+                placeholder="*********"
+                className="pl-9 "
+              />
+            </div>
           </div>
           <Button variant={"language"}>Login</Button>
           <Button variant={"outline"}>Anonymous Login</Button>
