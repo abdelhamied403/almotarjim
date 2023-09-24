@@ -8,10 +8,12 @@ import Requests from "@/pages/agent/Requests";
 import CreateRequest from "@/pages/agent/CreateRequest";
 import SingleRequest from "@/pages/agent/SingleRequest";
 import Error404 from "@/pages/shared/error/Error404";
+import AgentLayout from "@/layouts/AgentLayout";
 
 const agentRoutes: RouteObject[] = [
   {
     path: "/agent",
+    element: <AgentLayout />,
     children: [
       {
         path: "",

@@ -1,0 +1,30 @@
+@layer components {
+  .sidebar {
+    .sidebar-items {
+      a {
+        @apply px-4 py-3 rounded-xl bg-primary-100 text-primary-900 hover:bg-primary-200/70 border border-primary-200;
+      }
+      a.active {
+        @apply font-medium transition-colors bg-primary-600 text-primary-50 hover:bg-primary-600/90 dark:bg-primary-50 dark:text-primary-900 dark:hover:bg-primary-50/90;
+      }
+    }
+  }
+
+  // scrollbar
+  /* width */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-xl;
+  }
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+}

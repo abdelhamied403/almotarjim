@@ -6,10 +6,12 @@ import Requests from "@/pages/translator/Requests";
 import SingleRequest from "@/pages/translator/SingleRequest";
 import SubmitRequest from "@/pages/translator/SubmitRequest";
 import Error404 from "@/pages/shared/error/Error404";
+import TranslatorLayout from "@/layouts/TranslatorLayout";
 
 const translatorRoutes: RouteObject[] = [
   {
     path: "/translator",
+    element: <TranslatorLayout />,
     children: [
       {
         path: "",

@@ -1,3 +1,3 @@
-type role = "admin" | "supervisor" | "translator" | "agent" | "user";
+type Role = "admin" | "supervisor" | "translator" | "agent" | "user";
 
-export default role;
+export default Role;

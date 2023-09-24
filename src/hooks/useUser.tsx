@@ -1,16 +1,20 @@
-import roleType from "@/interfaces/role";
+import Role from "@/interfaces/role";
+import User from "@/interfaces/user";
 
 type useUserReturnType = {
-  user: unknown;
+  user: Partial<User>;
   isLoggedIn: boolean;
-  role: roleType;
+  role: Role;
 };
 
 const useUser = (): useUserReturnType => {
   return {
-    user: {},
+    user: {
+      name: "Ahmed Mohamed",
+      email: "Ahmed@almorajim.com",
+    },
     isLoggedIn: true,
-    role: "supervisor",
+    role: "translator",
   };
 };
 
