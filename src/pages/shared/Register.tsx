@@ -6,6 +6,7 @@ import { MdEmail } from "react-icons/md";
 import { HiMiniKey } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import signup from "../../assets/auth/signup.svg";
+import SocialLinks from "./social_links/SocialLinks";
 
 const Register = () => {
   return (
@@ -75,11 +76,7 @@ const Register = () => {
                 Login
               </Link>
             </p>
-            <div className="flex gap-2 items-center justify-center">
-              <BsFacebook />
-              <BsGoogle />
-              <BsApple />
-            </div>
+            <SocialLinks />
           </div>
         </div>
         <div>
