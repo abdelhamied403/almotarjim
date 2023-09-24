@@ -16,7 +16,7 @@ const Dashboard = () => {
     <>
       <p>{JSON.stringify(user)}</p>
       <p>Dashboard page</p>
-      <Button variant={"destructive"}>test</Button>
+      <Button variant="danger">test</Button>
       <Card>
         <CardHeader>
           <CardTitle>Card Title</CardTitle>
