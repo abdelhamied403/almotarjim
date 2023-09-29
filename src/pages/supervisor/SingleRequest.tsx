@@ -59,8 +59,18 @@ const SingleRequest = () => {
           </div>
         </div>
         <div className="grid grid-rows-2 gap-4">
-          {/* chat */}
-          <div className="bg-white p-4 rounded-xl">chat</div>
+          <div className="flex flex-col gap-2">
+            {/* actions */}
+            <div className="bg-white p-4 rounded-xl">
+              <div className="flex flex-wrap gap-2 sm:justify-between justify-center items-center">
+                <Button>Reopen</Button>
+                <Button>Reassign</Button>
+                <Button>Approve</Button>
+              </div>
+            </div>
+            {/* chat */}
+            <div className="flex-1 bg-white p-4 rounded-xl">chat</div>
+          </div>
 
           {/* Translations */}
           <div className="bg-white p-4 rounded-xl">
