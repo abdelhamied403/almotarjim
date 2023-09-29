@@ -2,9 +2,9 @@ import { Input } from "@/components/ui/input";
 import login from "../../assets/auth/login.svg";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { BsApple, BsFacebook, BsGoogle } from "react-icons/bs";
 import { HiMiniKey } from "react-icons/hi2";
 import { MdEmail } from "react-icons/md";
+import SocialLinks from "./social_links/SocialLinks";
 
 const Login = () => {
   return (
@@ -47,11 +47,7 @@ const Login = () => {
                 Register
               </Link>
             </p>
-            <div className="flex gap-2 items-center justify-center">
-              <BsFacebook />
-              <BsGoogle />
-              <BsApple />
-            </div>
+            <SocialLinks />
           </div>
         </div>
         <div className="">
