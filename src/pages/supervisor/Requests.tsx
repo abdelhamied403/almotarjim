@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { useState, useEffect } from "react";
 import { HiEye } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 const getData = () => {
   // Fetch data from your API here.
@@ -14,7 +15,11 @@ const getData = () => {
   });
 };
 
-const columns: ColumnDef<unknown>[] = [
+type Request = {
+  id: string;
+};
+
+const columns: ColumnDef<Request>[] = [
   {
     accessorKey: "status",
     header: "Status",
@@ -39,18 +44,18 @@ const columns: ColumnDef<unknown>[] = [
   {
     id: "actions",
     header: "Actions",
-    cell: () => {
-      return (
+    cell: ({ row }) => (
+      <Link to={`/request/${row.original.id}`}>
         <Button>
           <HiEye />
         </Button>
-      );
-    },
+      </Link>
+    ),
   },
 ];
 
 const Requests = () => {
-  const [data, setData] = useState<unknown[]>([]);
+  const [data, setData] = useState<Request[]>([]);
 
   useEffect(() => {
     setData(getData());

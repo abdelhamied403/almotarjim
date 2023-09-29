@@ -18,11 +18,11 @@ const TranslatorLayout = () => {
     <div className="translator-layout h-screen">
       <div className="flex h-full">
         <Sidebar>
-          <SidebarItem to="/translator" end>
+          <SidebarItem to="/" end>
             <HiHome />
             <span className="hidden lg:block">Dashboard</span>
           </SidebarItem>
-          <SidebarItem to="/translator/request">
+          <SidebarItem to="/request">
             <HiReceiptTax />
             <span className="hidden lg:block">Requests</span>
           </SidebarItem>

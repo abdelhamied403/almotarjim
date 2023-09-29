@@ -18,15 +18,15 @@ const AgentLayout = () => {
     <div className="agent-layout h-screen">
       <div className="flex h-full">
         <Sidebar>
-          <SidebarItem to="/agent" end>
+          <SidebarItem to="/" end>
             <HiHome />
             <span className="hidden lg:block">Dashboard</span>
           </SidebarItem>
-          <SidebarItem to="/agent/chat">
+          <SidebarItem to="/chat">
             <HiChat />
             <span className="hidden lg:block">Chats</span>
           </SidebarItem>
-          <SidebarItem to="/agent/request">
+          <SidebarItem to="/request">
             <HiReceiptTax />
             <span className="hidden lg:block">Requests</span>
           </SidebarItem>

@@ -33,6 +33,7 @@ export const theme = {
     },
     colors: {
       primary: {
+        DEFAULT: "#2676a3",
         50: "#f3f8fc",
         100: "#e5f1f9",
         200: "#c6e1f1",
@@ -46,6 +47,7 @@ export const theme = {
         950: "#142c3d",
       },
       gray: {
+        DEFAULT: "#5d5d5d",
         50: "#f6f6f6",
         100: "#e7e7e7",
         200: "#d1d1d1",
