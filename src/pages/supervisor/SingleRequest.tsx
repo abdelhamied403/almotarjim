@@ -1,11 +1,73 @@
 import Attachment from "@/components/Attatchment";
+import Combobox from "@/components/Combobox";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
 import { HiDownload } from "react-icons/hi";
 
 const SingleRequest = () => {
+  // reopen
+  const [isReopenDialogOpen, setIsReopenDialogOpen] = useState(false);
+  const [reopenNotes, setReopenNotes] = useState("");
+
+  // reassign
+  const [translators, setTranslators] = useState([
+    {
+      value: "next.js",
+      label: "Next.js",
+    },
+    {
+      value: "sveltekit",
+      label: "SvelteKit",
+    },
+    {
+      value: "nuxt.js",
+      label: "Nuxt.js",
+    },
+    {
+      value: "remix",
+      label: "Remix",
+    },
+    {
+      value: "astro",
+      label: "Astro",
+    },
+  ]);
+  const [isReassignDialogOpen, setIsReassignDialogOpen] = useState(false);
+  const [reassignedTranslator, setReassignedTranslator] = useState("");
+
+  // approve
+  const [isApproveDialogOpen, setIsApproveDialogOpen] = useState(false);
+
+  const onReopen = () => {
+    console.log(reopenNotes);
+    setReopenNotes("");
+    setIsReopenDialogOpen(false);
+  };
+
+  const onReassign = () => {
+    console.log(reassignedTranslator);
+    setReassignedTranslator("");
+    setIsReassignDialogOpen(false);
+  };
+
+  const onApprove = () => {
+    console.log("approve");
+    setIsApproveDialogOpen(false);
+  };
+
   return (
-    <>
+    <div className="single-request">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full">
         <div className="grid grid-rows-2 gap-4">
           <div className="bg-white p-4 rounded-xl">
@@ -63,9 +125,15 @@ const SingleRequest = () => {
             {/* actions */}
             <div className="bg-white p-4 rounded-xl">
               <div className="flex flex-wrap gap-2 sm:justify-between justify-center items-center">
-                <Button>Reopen</Button>
-                <Button>Reassign</Button>
-                <Button>Approve</Button>
+                <Button onClick={() => setIsReopenDialogOpen(true)}>
+                  Reopen
+                </Button>
+                <Button onClick={() => setIsReassignDialogOpen(true)}>
+                  Reassign
+                </Button>
+                <Button onClick={() => setIsApproveDialogOpen(true)}>
+                  Approve
+                </Button>
               </div>
             </div>
             {/* chat */}
@@ -89,7 +157,73 @@ const SingleRequest = () => {
           </div>
         </div>
       </div>
-    </>
+
+      {/* reopen dialog */}
+      <Dialog open={isReopenDialogOpen} onOpenChange={setIsReopenDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Are your sure to reopen this request?</DialogTitle>
+            <DialogDescription>
+              <Textarea
+                placeholder="Any notes you want to attach..."
+                value={reopenNotes}
+                onChange={(e) => setReopenNotes(e.target.value)}
+              />
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button onClick={onReopen}>Reopen</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* reassign dialog */}
+      <Dialog
+        open={isReassignDialogOpen}
+        onOpenChange={setIsReassignDialogOpen}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Reassign to another translator?</DialogTitle>
+            <DialogDescription asChild>
+              <>
+                <p>
+                  Are your sure to reassign this request to another translator
+                </p>
+                <Combobox
+                  noItemsTemplate="no items"
+                  onChange={setReassignedTranslator}
+                  value={reassignedTranslator}
+                  placeholder="choose translator..."
+                  options={translators}
+                ></Combobox>
+              </>
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button onClick={onReassign}>Reassign</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* approve dialog */}
+      <Dialog open={isApproveDialogOpen} onOpenChange={setIsApproveDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Are your sure to reopen this request?</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to approve note: this is permanent
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <DialogTrigger asChild>
+              <Button variant="subtle">Cancel</Button>
+            </DialogTrigger>
+            <Button onClick={onApprove}>Approve</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
   );
 };
 
