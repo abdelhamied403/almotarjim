@@ -1,12 +1,9 @@
-import useUser from "@/hooks/useUser";
+import Chat from "@/containers/Chat";
 
 const SingleChat = () => {
-  const user = useUser();
-
   return (
     <>
-      <p>{JSON.stringify(user)}</p>
-      <p>SingleChat page</p>
+      <Chat />
     </>
   );
 };
