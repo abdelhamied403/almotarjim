@@ -54,7 +54,7 @@ const Login = () => {
           <div className="flex flex-col gap-5">
             <p className="text-center">
               Don’t have an account?{" "}
-              <Link to="/register" className="text-primary-500">
+              <Link to="/register" className="text-primary">
                 Register
               </Link>
             </p>

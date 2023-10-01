@@ -86,7 +86,7 @@ const Register = () => {
           <div className="flex flex-col gap-5">
             <p className="text-center">
               Already have an account?{" "}
-              <Link to="/login" className="text-primary-500">
+              <Link to="/login" className="text-primary">
                 Login
               </Link>
             </p>

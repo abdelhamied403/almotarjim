@@ -2,7 +2,7 @@ import { RouteObject } from "react-router-dom";
 
 const adminRoutes: RouteObject[] = [
   {
-    path: "/admin",
+    path: "/",
     children: [
       {
         path: "",

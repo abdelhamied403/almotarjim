@@ -10,7 +10,7 @@ import TranslatorLayout from "@/layouts/TranslatorLayout";
 
 const translatorRoutes: RouteObject[] = [
   {
-    path: "/translator",
+    path: "/",
     element: <TranslatorLayout />,
     children: [
       {
