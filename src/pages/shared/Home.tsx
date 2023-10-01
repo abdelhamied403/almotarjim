@@ -19,7 +19,7 @@ const Home = () => {
       </div>
       <div className="container mx-auto py-28">
         <div className="flex justify-end">
-          <Button variant={"language"}>
+          <Button>
             English
             <HiGlobe />
           </Button>
@@ -36,7 +36,7 @@ const Home = () => {
                 elementum malesuada. Praesent turpis facilisis ornare
                 scelerisque nec
               </p>
-              <Button variant={"language"}>
+              <Button>
                 Get Started
                 <HiArrowNarrowRight />
               </Button>

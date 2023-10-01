@@ -23,8 +23,6 @@ const buttonVariants = cva(
           "hover:bg-primary-100 hover:text-primary-900 dark:hover:bg-primary-800 dark:hover:text-primary-50",
         subtle: "bg-primary-100 text-primary-900 hover:bg-primary-200/70",
         link: "text-primary-900 underline-offset-4 hover:underline dark:text-primary-50",
-        language:
-          "text-white text-lg bg-[#3694C1] px-6 py-2 flex items-center justify-center gap-2",
       },
       size: {
         default: "px-4 py-3",

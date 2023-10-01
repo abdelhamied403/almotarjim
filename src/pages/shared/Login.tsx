@@ -5,8 +5,17 @@ import { Link } from "react-router-dom";
 import { HiMiniKey } from "react-icons/hi2";
 import { MdEmail } from "react-icons/md";
 import SocialLinks from "./social_links/SocialLinks";
+import { useState } from "react";
+import AuthService from "@/services/auth.service";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    const res = await AuthService.login(email, password);
+    console.log(res);
+  };
   return (
     <div className="h-screen bg-gradient-to-l from-[#C6E1F1] from-50%  to-white to-50%">
       <div className="grid grid-cols-2 container mx-auto gap-52 items-center h-full">
@@ -22,6 +31,7 @@ const Login = () => {
                 type="email"
                 placeholder="olivia@untitledui.com"
                 className="pl-9 "
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
           </div>
@@ -35,10 +45,11 @@ const Login = () => {
                 type="password"
                 placeholder="*********"
                 className="pl-9 "
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
-          <Button variant={"language"}>Login</Button>
+          <Button onClick={handleLogin}>Login</Button>
           <Button variant={"outline"}>Anonymous Login</Button>
           <div className="flex flex-col gap-5">
             <p className="text-center">
