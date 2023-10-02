@@ -14,6 +14,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { HiDownload } from "react-icons/hi";
+import Chat from "@/containers/Chat";
 
 const SingleRequest = () => {
   // reopen
@@ -137,7 +138,9 @@ const SingleRequest = () => {
               </div>
             </div>
             {/* chat */}
-            <div className="flex-1 bg-white p-4 rounded-xl">chat</div>
+            <div className="flex-1 bg-white p-4 rounded-xl">
+              <Chat />
+            </div>
           </div>
 
           {/* Translations */}
