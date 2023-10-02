@@ -6,8 +6,19 @@ import { HiMiniKey } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import signup from "../../assets/auth/signup.svg";
 import SocialLinks from "./social_links/SocialLinks";
+import { useState } from "react";
+import AuthService from "@/services/auth.service";
 
 const Register = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleRegister = async () => {
+    const res = await AuthService.register(name, email, phone, password);
+    console.log(res);
+  };
   return (
     <div className="h-screen bg-gradient-to-l from-[#C6E1F1] from-50% to-white to-50%">
       <div className="grid grid-cols-2 h-full items-center container mx-auto gap-52">
@@ -25,6 +36,7 @@ const Register = () => {
                 type="text"
                 placeholder="Ahmed Mohamed"
                 className="pl-9 "
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
           </div>
@@ -38,6 +50,7 @@ const Register = () => {
                 type="email"
                 placeholder="olivia@untitledui.com"
                 className="pl-9 "
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
           </div>
@@ -51,6 +64,7 @@ const Register = () => {
                 type="text"
                 placeholder="+96612216454844"
                 className="pl-9 "
+                onChange={(e) => setPhone(e.target.value)}
               />
             </div>
           </div>
@@ -64,10 +78,11 @@ const Register = () => {
                 type="password"
                 placeholder="*********"
                 className="pl-9 "
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
-          <Button variant={"language"}>Register</Button>
+          <Button onClick={handleRegister}>Register</Button>
           <div className="flex flex-col gap-5">
             <p className="text-center">
               Already have an account?{" "}

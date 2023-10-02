@@ -14,7 +14,7 @@ const buttonVariants = cva(
         danger:
           "bg-red-500 text-primary-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-primary-50 dark:hover:bg-red-900/90",
         outline:
-          "border border-primary-200 bg-white hover:bg-primary-100 hover:text-primary-900 dark:border-primary-800 dark:bg-primary-950 dark:hover:bg-primary-800 dark:hover:text-primary-50",
+          "border border-primary-600 text-primary-600 hover:bg-primary-100 hover:text-primary-900 dark:border-primary-800 dark:bg-primary-950 dark:hover:bg-primary-800 dark:hover:text-primary-50",
         outlineDanger:
           "border border-red-600 text-red-900 bg-white hover:bg-red-100 dark:border-red-800 dark:bg-red-950 dark:hover:bg-red-800 dark:hover:text-red-50",
         secondary:
@@ -23,8 +23,6 @@ const buttonVariants = cva(
           "hover:bg-primary-100 hover:text-primary-900 dark:hover:bg-primary-800 dark:hover:text-primary-50",
         subtle: "bg-primary-100 text-primary-900 hover:bg-primary-200/70",
         link: "text-primary-900 underline-offset-4 hover:underline dark:text-primary-50",
-        language:
-          "text-white text-lg bg-[#3694C1] px-6 py-2 flex items-center justify-center gap-2",
       },
       size: {
         default: "px-4 py-3",
