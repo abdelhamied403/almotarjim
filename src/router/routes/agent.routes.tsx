@@ -12,11 +12,11 @@ import AgentLayout from "@/layouts/AgentLayout";
 
 const agentRoutes: RouteObject[] = [
   {
-    path: "/",
+    path: "/dashboard",
     element: <AgentLayout />,
     children: [
       {
-        path: "dashboard",
+        path: "",
         element: <Dashboard />,
       },
       {

@@ -12,11 +12,11 @@ import SupervisorLayout from "@/layouts/SupervisorLayout";
 
 const supervisorRoutes: RouteObject[] = [
   {
-    path: "/",
+    path: "/dashboard",
     element: <SupervisorLayout />,
     children: [
       {
-        path: "dashboard",
+        path: "",
         element: <Dashboard />,
         index: true,
       },

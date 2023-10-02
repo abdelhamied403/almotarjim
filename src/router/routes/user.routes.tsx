@@ -11,11 +11,11 @@ import UserLayout from "@/layouts/UserLayout";
 
 const userRoutes: RouteObject[] = [
   {
-    path: "/",
+    path: "/dashboard",
     element: <UserLayout />,
     children: [
       {
-        path: "dashboard",
+        path: "",
         element: <Home />,
       },
       {
