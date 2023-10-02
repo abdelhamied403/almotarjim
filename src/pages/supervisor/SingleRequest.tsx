@@ -21,7 +21,7 @@ const SingleRequest = () => {
   const [reopenNotes, setReopenNotes] = useState("");
 
   // reassign
-  const [translators, setTranslators] = useState([
+  const translators = [
     {
       value: "next.js",
       label: "Next.js",
@@ -42,7 +42,7 @@ const SingleRequest = () => {
       value: "astro",
       label: "Astro",
     },
-  ]);
+  ];
   const [isReassignDialogOpen, setIsReassignDialogOpen] = useState(false);
   const [reassignedTranslator, setReassignedTranslator] = useState("");
 

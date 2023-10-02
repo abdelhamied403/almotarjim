@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { BsApple, BsFacebook, BsGoogle } from "react-icons/bs";
 import { FaPhone, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { HiMiniKey } from "react-icons/hi2";
