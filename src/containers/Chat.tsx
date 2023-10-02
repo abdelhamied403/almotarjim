@@ -53,7 +53,7 @@ const Chat = () => {
           </div>
         </div>
         <div className="flex flex-col gap-4 p-8 bg-white rounded-2xl overflow-y-auto space-y-8">
-          {messages.map((msg, idx) => (
+          {messages.map((msg) => (
             <Message {...msg} />
           ))}
         </div>
