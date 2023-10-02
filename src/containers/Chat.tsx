@@ -12,19 +12,19 @@ const Chat = () => {
       provider: true,
       img: "https://placehold.co/400x400/fee/31343C",
       message:
-        " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat",
+        " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat , ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat  , ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat  , ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat  , ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat ",
     },
     {
       provider: false,
       img: "https://placehold.co/400x400/fee/31343C",
       message:
-        " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat",
+        " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat ",
     },
     {
       provider: true,
       img: "https://placehold.co/400x400/fee/31343C",
       message:
-        " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat",
+        " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat",
     },
     {
       provider: false,
@@ -35,7 +35,7 @@ const Chat = () => {
   ];
   return (
     <div className="h-full">
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col justify-between gap-3">
         <div className="flex items-center justify-between p-6 bg-primary-100 rounded-xl">
           <div className="flex gap-3 items-center">
             <img
@@ -52,13 +52,13 @@ const Chat = () => {
             </Button>
           </div>
         </div>
-        <div className="flex flex-col gap-4 p-8 bg-white rounded-2xl overflow-auto">
+        <div className="flex flex-col gap-4 p-8 bg-white rounded-2xl overflow-y-auto space-y-8">
           {messages.map((msg, idx) => (
             <Message {...msg} />
           ))}
         </div>
 
-        <div className="flex  items-center p-6 bg-primary-100 rounded-xl gap-3">
+        <div className="flex items-center p-6 bg-primary-100 rounded-xl gap-3">
           <div className="flex gap-3 items-center flex-1">
             <img
               src="https://placehold.co/400x400/fee/31343C"
