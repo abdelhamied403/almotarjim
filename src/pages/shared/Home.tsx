@@ -4,6 +4,7 @@ import home from "../../assets/auth/home.svg";
 import ellipse from "../../assets/auth/Ellipse18.svg";
 import ellipse2 from "../../assets/auth/Ellipse19.svg";
 import ellipse3 from "../../assets/auth/Ellipsedown.svg";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -19,7 +20,7 @@ const Home = () => {
       </div>
       <div className="container mx-auto py-28">
         <div className="flex justify-end">
-          <Button variant={"language"}>
+          <Button className="flex items-center gap-2">
             English
             <HiGlobe />
           </Button>
@@ -36,10 +37,12 @@ const Home = () => {
                 elementum malesuada. Praesent turpis facilisis ornare
                 scelerisque nec
               </p>
-              <Button variant={"language"}>
-                Get Started
-                <HiArrowNarrowRight />
-              </Button>
+              <Link to="/login">
+                <Button className="flex items-center gap-2">
+                  Get Started
+                  <HiArrowNarrowRight />
+                </Button>
+              </Link>
             </div>
             <div className="col-span-2 md:col-span-1">
               <img src={home} alt="almotarjm-home" />

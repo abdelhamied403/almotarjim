@@ -14,7 +14,7 @@ const translatorRoutes: RouteObject[] = [
     element: <TranslatorLayout />,
     children: [
       {
-        path: "",
+        path: "dashboard",
         element: <Dashboard />,
       },
       {

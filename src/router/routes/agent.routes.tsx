@@ -16,7 +16,7 @@ const agentRoutes: RouteObject[] = [
     element: <AgentLayout />,
     children: [
       {
-        path: "",
+        path: "dashboard",
         element: <Dashboard />,
       },
       {

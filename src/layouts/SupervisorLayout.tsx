@@ -18,7 +18,7 @@ const SupervisorLayout = () => {
     <div className="supervisor-layout h-screen">
       <div className="flex h-full">
         <Sidebar>
-          <SidebarItem to="/" end>
+          <SidebarItem to="/dashboard" end>
             <HiHome />
             <span className="hidden lg:block">Dashboard</span>
           </SidebarItem>

@@ -15,7 +15,7 @@ const userRoutes: RouteObject[] = [
     element: <UserLayout />,
     children: [
       {
-        path: "",
+        path: "dashboard",
         element: <Home />,
       },
       {

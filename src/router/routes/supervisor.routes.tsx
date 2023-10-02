@@ -16,7 +16,7 @@ const supervisorRoutes: RouteObject[] = [
     element: <SupervisorLayout />,
     children: [
       {
-        path: "",
+        path: "dashboard",
         element: <Dashboard />,
         index: true,
       },
