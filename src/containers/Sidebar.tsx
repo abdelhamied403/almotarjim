@@ -9,7 +9,7 @@ const Sidebar = ({ children }: SidebarProps) => {
   const { role, user } = useUser();
 
   return (
-    <div className="sidebar lg:w-[300px] p-4 flex flex-col justify-between gap-4">
+    <div className="sidebar lg:w-[300px] p-4 flex flex-col justify-between gap-4 sticky top-0 h-screen">
       <div className="flex-1 flex flex-col gap-4">
         <div className="user flex flex-col gap-2 items-center">
           <img src="" alt="src" />

@@ -23,7 +23,7 @@ const SupervisorLayout = () => {
           </SidebarItem>
         </Sidebar>
 
-        <main className="page flex-1 flex flex-col gap-4 bg-gray-50 p-4 h-full">
+        <main className="page flex-1 flex flex-col gap-4 bg-gray-50 p-4 lg:h-full overflow-auto">
           <div className="flex-1 flex flex-col gap-4 h-full">
             <div className="header bg-white p-4 rounded-xl">
               <div className="flex justify-end gap-4">

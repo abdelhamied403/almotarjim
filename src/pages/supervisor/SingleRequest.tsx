@@ -68,7 +68,7 @@ const SingleRequest = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-4 flex-1 overflow-hidden auto-rows-fr">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 lg:overflow-hidden lg:auto-rows-fr">
       {/* Grid Item 1 */}
       <div className="bg-white p-4 rounded-xl overflow-y-auto">
         {/* details */}
@@ -105,7 +105,7 @@ const SingleRequest = () => {
       </div>
 
       {/* Grid Item 2 */}
-      <div className="h-full overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl">
+      <div className="h-full max-h-[500px] overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl">
         <Chat />
       </div>
 
