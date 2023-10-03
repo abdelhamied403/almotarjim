@@ -17,7 +17,7 @@
   }
   /* Track */
   ::-webkit-scrollbar-track {
-    @apply bg-gray-100;
+    @apply bg-gray-100 rounded-xl;
   }
   /* Handle */
   ::-webkit-scrollbar-thumb {
