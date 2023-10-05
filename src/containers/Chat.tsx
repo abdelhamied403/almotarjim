@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import MessageType from "@/interfaces/message";
 import { HiLogout, HiMicrophone, HiPaperClip } from "react-icons/hi";
 import { IoSend } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const Chat = () => {
   const messages: MessageType[] = [
@@ -45,7 +46,9 @@ const Chat = () => {
           <h3>name</h3>
         </div>
         <div className="flex gap-3">
-          <Button className="">Create Request</Button>
+          <Link to="/dashboard/request/create">
+            <Button className="">Create Request</Button>
+          </Link>
           <Button variant={"danger"} className="flex gap-2 items-center">
             End Chat <HiLogout />
           </Button>
