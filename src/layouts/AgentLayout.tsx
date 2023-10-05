@@ -23,18 +23,16 @@ const AgentLayout = () => {
           </SidebarItem>
         </Sidebar>
 
-        <div className="page flex-1 flex flex-col gap-4 bg-gray-50 p-4 overflow-auto">
-          <div className="header">
-            <div className="bg-white p-4 rounded-xl">
+        <main className="page flex-1 flex flex-col gap-4 bg-gray-50 p-4 lg:h-full overflow-auto">
+          <div className="flex-1 flex flex-col gap-4 h-full">
+            <div className="header bg-white p-4 rounded-xl">
               <div className="flex justify-end gap-4">
                 <LanguageDropdown />
               </div>
             </div>
-          </div>
-          <div className="flex-1">
             <Outlet />
           </div>
-        </div>
+        </main>
       </div>
     </div>
   );
