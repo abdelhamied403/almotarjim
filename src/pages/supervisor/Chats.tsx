@@ -27,7 +27,7 @@ const Chats = () => {
       <div className="flex flex-col gap-2">
         {chats
           .filter((chat) => chat.status.includes(chatsFilter))
-          .map((chat: any, idx) => (
+          .map((chat, idx) => (
             <div
               className="flex justify-between items-center bg-white p-4 rounded-xl"
               key={`chat-${idx}`}
@@ -51,7 +51,7 @@ const Chats = () => {
                   <p>last message</p>
                 </div>
               </div>
-              <Link to="/chat/1">
+              <Link to="/dashboard/chat/1">
                 <Button size="icon">
                   <HiChat />
                 </Button>

@@ -10,11 +10,11 @@ import TranslatorLayout from "@/layouts/TranslatorLayout";
 
 const translatorRoutes: RouteObject[] = [
   {
-    path: "/",
+    path: "/dashboard",
     element: <TranslatorLayout />,
     children: [
       {
-        path: "",
+        path: "/",
         element: <Dashboard />,
       },
       {

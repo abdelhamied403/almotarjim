@@ -11,7 +11,7 @@ import UserLayout from "@/layouts/UserLayout";
 
 const userRoutes: RouteObject[] = [
   {
-    path: "/",
+    path: "/dashboard",
     element: <UserLayout />,
     children: [
       {
