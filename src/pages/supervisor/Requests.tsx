@@ -45,7 +45,7 @@ const columns: ColumnDef<Request>[] = [
     id: "actions",
     header: "Actions",
     cell: ({ row }) => (
-      <Link to={`/dashboard/request/${row.original.id}`}>
+      <Link to={`/request/${row.original.id}`}>
         <Button>
           <HiEye />
         </Button>
