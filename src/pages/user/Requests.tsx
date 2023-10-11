@@ -46,7 +46,7 @@ const columns: ColumnDef<Request>[] = [
     id: "actions",
     header: "Actions",
     cell: ({ row }) => (
-      <Link to={`/dashboard/request/${row.original.id}`}>
+      <Link to={`/request/${row.original.id}`}>
         <Button>
           <HiEye />
         </Button>
@@ -69,13 +69,13 @@ const Requests = () => {
           <div className="flex flex-col gap-4 justify-center items-center h-full">
             <img src={noRequestsImage} alt="" />
             <div className="flex justify-center gap-4">
-              <Link to="/dashboard/chat/123">
+              <Link to="/chat/123">
                 <Button className="flex gap-2 items-center" variant="subtle">
                   <HiChat />
                   Chat with us
                 </Button>
               </Link>
-              <Link to="/dashboard/request/create">
+              <Link to="/request/create">
                 <Button className="flex gap-2 items-center">
                   <HiPlus />
                   Create Request
@@ -86,13 +86,13 @@ const Requests = () => {
         </>
       )}
       <div className="flex justify-end gap-4">
-        <Link to="/dashboard/chat/123">
+        <Link to="/chat/123">
           <Button className="flex gap-2 items-center" variant="subtle">
             <HiChat />
             Chat with us
           </Button>
         </Link>
-        <Link to="/dashboard/request/create">
+        <Link to="/request/create">
           <Button className="flex gap-2 items-center">
             <HiPlus />
             Create Request

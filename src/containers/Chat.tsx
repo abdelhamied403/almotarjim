@@ -46,7 +46,7 @@ const Chat = () => {
           <h3>name</h3>
         </div>
         <div className="flex gap-3">
-          <Link to="/dashboard/request/create">
+          <Link to="/request/create">
             <Button className="">Create Request</Button>
           </Link>
           <Button variant={"danger"} className="flex gap-2 items-center">

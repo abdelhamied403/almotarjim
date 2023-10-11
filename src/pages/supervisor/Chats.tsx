@@ -51,7 +51,7 @@ const Chats = () => {
                   <p>last message</p>
                 </div>
               </div>
-              <Link to="/dashboard/chat/1">
+              <Link to="/chat/1">
                 <Button size="icon">
                   <HiChat />
                 </Button>

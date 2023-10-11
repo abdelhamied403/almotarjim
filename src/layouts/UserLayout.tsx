@@ -13,7 +13,7 @@ const UserLayout = () => {
             <HiHome />
             <span className="hidden lg:block">Dashboard</span>
           </SidebarItem>
-          <SidebarItem to="/dashboard/request">
+          <SidebarItem to="/request">
             <HiReceiptTax />
             <span className="hidden lg:block">Requests</span>
           </SidebarItem>
