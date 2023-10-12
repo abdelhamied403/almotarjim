@@ -2,7 +2,7 @@ import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { useState, useEffect } from "react";
-import { HiEye } from "react-icons/hi";
+import { HiChat, HiEye, HiPlus } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
 const getData = () => {
@@ -63,6 +63,20 @@ const Requests = () => {
 
   return (
     <>
+      <div className="flex justify-end gap-4">
+        <Link to="/chat/123">
+          <Button className="flex gap-2 items-center" variant="subtle">
+            <HiChat />
+            Chat with us
+          </Button>
+        </Link>
+        <Link to="/request/create">
+          <Button className="flex gap-2 items-center">
+            <HiPlus />
+            Create Request
+          </Button>
+        </Link>
+      </div>
       <DataTable columns={columns} data={data} />
     </>
   );

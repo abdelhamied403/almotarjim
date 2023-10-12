@@ -3,7 +3,7 @@ import { RouteObject } from "react-router-dom";
 // pages
 import Dashboard from "@/pages/supervisor/Dashboard";
 import Requests from "@/pages/supervisor/Requests";
-import CreateRequest from "@/pages/supervisor/CreateRequest";
+import CreateRequest from "@/pages/supervisor/CreateRequests";
 import SingleRequest from "@/pages/supervisor/SingleRequest";
 import Chats from "@/pages/supervisor/Chats";
 import SingleChat from "@/pages/supervisor/SingleChat";

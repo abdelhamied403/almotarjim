@@ -14,7 +14,7 @@ const useUser = (): useUserReturnType => {
       email: "Ahmed@almorajim.com",
     },
     isLoggedIn: true,
-    role: "user",
+    role: "supervisor",
   };
 };
 
