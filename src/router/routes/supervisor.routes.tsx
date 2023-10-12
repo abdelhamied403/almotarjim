@@ -3,12 +3,12 @@ import { RouteObject } from "react-router-dom";
 // pages
 import Dashboard from "@/pages/supervisor/Dashboard";
 import Requests from "@/pages/supervisor/Requests";
-import CreateRequest from "@/pages/supervisor/CreateRequests";
 import SingleRequest from "@/pages/supervisor/SingleRequest";
 import Chats from "@/pages/supervisor/Chats";
 import SingleChat from "@/pages/supervisor/SingleChat";
 import Error404 from "@/pages/shared/error/Error404";
 import SupervisorLayout from "@/layouts/SupervisorLayout";
+import CreateRequests from "@/pages/supervisor/CreateRequests";
 
 const supervisorRoutes: RouteObject[] = [
   {
@@ -28,7 +28,7 @@ const supervisorRoutes: RouteObject[] = [
           },
           {
             path: "create",
-            element: <CreateRequest />,
+            element: <CreateRequests />,
           },
           {
             path: ":id",

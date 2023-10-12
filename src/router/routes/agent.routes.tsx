@@ -5,10 +5,10 @@ import Dashboard from "@/pages/agent/Dashboard";
 import Chats from "@/pages/agent/Chats";
 import SingleChat from "@/pages/agent/SingleChat";
 import Requests from "@/pages/agent/Requests";
-import CreateRequest from "@/pages/agent/CreateRequest";
 import SingleRequest from "@/pages/agent/SingleRequest";
 import Error404 from "@/pages/shared/error/Error404";
 import AgentLayout from "@/layouts/AgentLayout";
+import CreateRequests from "@/pages/agent/CreateRequests";
 
 const agentRoutes: RouteObject[] = [
   {
@@ -42,7 +42,7 @@ const agentRoutes: RouteObject[] = [
           },
           {
             path: "create",
-            element: <CreateRequest />,
+            element: <CreateRequests />,
           },
           {
             path: ":id",

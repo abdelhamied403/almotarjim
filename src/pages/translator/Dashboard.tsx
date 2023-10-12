@@ -1,7 +1,7 @@
 const Dashboard = () => {
   return (
     <>
-      <p>Dashboard page</p>
+      <p>main translator page</p>
     </>
   );
 };
