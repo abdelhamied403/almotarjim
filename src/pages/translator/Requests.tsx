@@ -63,20 +63,6 @@ const Requests = () => {
 
   return (
     <>
-      <div className="flex justify-end gap-4">
-        <Link to="/chat/123">
-          <Button className="flex gap-2 items-center" variant="subtle">
-            <HiChat />
-            Chat with us
-          </Button>
-        </Link>
-        <Link to="/request/create">
-          <Button className="flex gap-2 items-center">
-            <HiPlus />
-            Create Request
-          </Button>
-        </Link>
-      </div>
       <DataTable columns={columns} data={data} />
     </>
   );
