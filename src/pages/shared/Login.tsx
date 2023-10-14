@@ -1,20 +1,26 @@
 import { Input } from "@/components/ui/input";
 import login from "../../assets/auth/login.svg";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HiMiniKey } from "react-icons/hi2";
 import { MdEmail } from "react-icons/md";
 import SocialLinks from "./social_links/SocialLinks";
 import { useState } from "react";
 import AuthService from "@/services/auth.service";
+import useProfileStore from "@/store/profile.slice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { setUser } = useProfileStore();
 
   const handleLogin = async () => {
     const res = await AuthService.login(email, password);
-    console.log(res);
+    localStorage.setItem("token", res.access_token);
+    navigate("/dashboard");
+    const userData = await AuthService.getUser();
+    setUser(userData.data);
   };
   return (
     <div className="h-screen bg-gradient-to-l from-[#C6E1F1] from-50%  to-white to-50%">

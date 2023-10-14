@@ -1,20 +1,11 @@
 import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
-import { useState, useEffect } from "react";
 import { HiChat, HiEye, HiPlus } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import noRequestsImage from "@/assets/no-requests.svg";
-
-const getData = () => {
-  // Fetch data from your API here.
-  return new Array(123).fill({
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  });
-};
+import RequestService from "@/services/request.service";
+import { useQuery } from "react-query";
 
 type Request = {
   id: string;
@@ -56,15 +47,18 @@ const columns: ColumnDef<Request>[] = [
 ];
 
 const Requests = () => {
-  const [data, setData] = useState<Request[]>([]);
+  const { isLoading, data: requests } = useQuery(
+    "requests",
+    RequestService.getRequests
+  );
 
-  useEffect(() => {
-    setData(getData());
-  }, []);
+  if (isLoading) {
+    return <div className="">loading....</div>;
+  }
 
   return (
     <div className="requests h-full">
-      {!data.length && (
+      {!requests.length && (
         <>
           <div className="flex flex-col gap-4 justify-center items-center h-full">
             <img src={noRequestsImage} alt="" />
@@ -85,21 +79,25 @@ const Requests = () => {
           </div>
         </>
       )}
-      <div className="flex justify-end gap-4">
-        <Link to="/chat/123">
-          <Button className="flex gap-2 items-center" variant="subtle">
-            <HiChat />
-            Chat with us
-          </Button>
-        </Link>
-        <Link to="/request/create">
-          <Button className="flex gap-2 items-center">
-            <HiPlus />
-            Create Request
-          </Button>
-        </Link>
-      </div>
-      <DataTable columns={columns} data={data} />
+      {!!requests.length && (
+        <>
+          <div className="flex justify-end gap-4">
+            <Link to="/chat/123">
+              <Button className="flex gap-2 items-center" variant="subtle">
+                <HiChat />
+                Chat with us
+              </Button>
+            </Link>
+            <Link to="/request/create">
+              <Button className="flex gap-2 items-center">
+                <HiPlus />
+                Create Request
+              </Button>
+            </Link>
+          </div>
+          <DataTable columns={columns} data={requests} />
+        </>
+      )}
     </div>
   );
 };

@@ -20,7 +20,7 @@ const routesLookup: { [key in Role]: RouteObject[] } = {
   agent: agentRoutes,
   supervisor: supervisorRoutes,
   translator: translatorRoutes,
-  user: userRoutes,
+  client: userRoutes,
 };
 
 const MainRouter = () => {

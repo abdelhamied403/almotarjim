@@ -8,7 +8,7 @@ import Chats from "@/pages/supervisor/Chats";
 import SingleChat from "@/pages/supervisor/SingleChat";
 import Error404 from "@/pages/shared/error/Error404";
 import SupervisorLayout from "@/layouts/SupervisorLayout";
-import CreateRequests from "@/pages/supervisor/CreateRequests";
+import CreateRequest from "@/pages/supervisor/CreateRequest";
 
 const supervisorRoutes: RouteObject[] = [
   {
@@ -28,7 +28,7 @@ const supervisorRoutes: RouteObject[] = [
           },
           {
             path: "create",
-            element: <CreateRequests />,
+            element: <CreateRequest />,
           },
           {
             path: ":id",

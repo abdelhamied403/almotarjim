@@ -1,20 +1,20 @@
 import Role from "@/interfaces/role";
 import User from "@/interfaces/user";
+import useProfileStore from "@/store/profile.slice";
 
 type useUserReturnType = {
-  user: Partial<User>;
+  user: User | null;
   isLoggedIn: boolean;
-  role: Role;
+  role: Role | null;
 };
 
 const useUser = (): useUserReturnType => {
+  const { user } = useProfileStore();
+
   return {
-    user: {
-      name: "Ahmed Mohamed",
-      email: "Ahmed@almorajim.com",
-    },
-    isLoggedIn: true,
-    role: "translator",
+    user,
+    isLoggedIn: !!user,
+    role: user?.role || null,
   };
 };
 

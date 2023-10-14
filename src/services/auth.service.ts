@@ -23,9 +23,16 @@ const register = async (
 
   return res.data;
 };
+
+const getUser = async () => {
+  const res = await api.get("/users/profile/me");
+  return res.data;
+};
+
 const AuthService = {
   login,
   register,
+  getUser,
 };
 
 export default AuthService;

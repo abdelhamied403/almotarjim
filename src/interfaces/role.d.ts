@@ -1,3 +1,3 @@
-type Role = "admin" | "supervisor" | "translator" | "agent" | "user";
+type Role = "admin" | "supervisor" | "translator" | "agent" | "client";
 
 export default Role;
