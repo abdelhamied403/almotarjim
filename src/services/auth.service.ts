@@ -22,10 +22,20 @@ const getUser = async () => {
   return res.data;
 };
 
+const getIsValidToken = async () => {
+  try {
+    await api.get("/users/profile/me");
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
 const AuthService = {
   login,
   register,
   getUser,
+  getIsValidToken,
 };
 
 export default AuthService;

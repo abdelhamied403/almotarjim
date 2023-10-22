@@ -1,12 +1,18 @@
 import useUser from "@/hooks/useUser";
 import { Button } from "../components/ui/button";
 import { HiLogout } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
 
 export type SidebarProps = {
   children: JSX.Element | JSX.Element[];
 };
 const Sidebar = ({ children }: SidebarProps) => {
   const { role, user } = useUser();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
   return (
     <div className="sidebar lg:w-[300px] p-4 flex flex-col justify-between gap-4 sticky top-0 h-screen">
@@ -28,7 +34,7 @@ const Sidebar = ({ children }: SidebarProps) => {
           {children}
         </div>
       </div>
-      <Button variant="outlineDanger">
+      <Button variant="outlineDanger" onClick={handleLogout}>
         <HiLogout />
         <span className="hidden lg:block">Logout</span>
       </Button>

@@ -4,10 +4,26 @@ import home from "../../assets/auth/home.svg";
 import ellipse from "../../assets/auth/Ellipse18.svg";
 import ellipse2 from "../../assets/auth/Ellipse19.svg";
 import ellipse3 from "../../assets/auth/Ellipsedown.svg";
-import { Link } from "react-router-dom";
 import LanguageDropdown from "@/components/LanguageDropdown";
+import AuthService from "@/services/auth.service";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const handleGetStarted = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const isValidToken = await AuthService.getIsValidToken();
+      console.log(isValidToken);
+      if (isValidToken) {
+        navigate("/dashboard");
+        return;
+      }
+    }
+    navigate("/login");
+  };
+
   return (
     <div className="relative h-screen flex flex-col">
       <div className="absolute top-0 right-0">
@@ -35,12 +51,13 @@ const Home = () => {
                 elementum malesuada. Praesent turpis facilisis ornare
                 scelerisque nec
               </p>
-              <Link to="/login">
-                <Button className="flex items-center gap-2">
-                  Get Started
-                  <HiArrowNarrowRight />
-                </Button>
-              </Link>
+              <Button
+                className="flex items-center gap-2"
+                onClick={handleGetStarted}
+              >
+                Get Started
+                <HiArrowNarrowRight />
+              </Button>
             </div>
             <div className="col-span-2 md:col-span-1">
               <img src={home} alt="almotarjm-home" />
