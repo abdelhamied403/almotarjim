@@ -12,15 +12,15 @@ const Sidebar = ({ children }: SidebarProps) => {
     <div className="sidebar lg:w-[300px] p-4 flex flex-col justify-between gap-4 sticky top-0 h-screen">
       <div className="flex-1 flex flex-col gap-4">
         <div className="user flex flex-col gap-2 items-center">
-          <img src="" alt="src" />
+          <img src={user?.image} alt="src" />
           <span className="details hidden lg:flex flex-col gap-1 items-center text-center">
             <p className="text-sm">{role}</p>
-            <h3>{user.name}</h3>
+            <h3>{user?.name}</h3>
             <a
               className="text-sm text-primary-600"
-              href={`mailto:${user.email}`}
+              href={`mailto:${user?.email}`}
             >
-              {user.email}
+              {user?.email}
             </a>
           </span>
         </div>

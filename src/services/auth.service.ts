@@ -1,3 +1,4 @@
+import { RegistrationSchemaType } from "@/schemas/registrationSchema";
 import { api } from "./api";
 
 const login = async (email: string, password: string) => {
@@ -7,17 +8,9 @@ const login = async (email: string, password: string) => {
   });
   return res.data;
 };
-const register = async (
-  name: string,
-  email: string,
-  phone: string,
-  password: string
-) => {
+const register = async (data: RegistrationSchemaType) => {
   const res = await api.post("/register/client", {
-    name,
-    email,
-    phone,
-    password,
+    ...data,
     role: "client",
   });
 

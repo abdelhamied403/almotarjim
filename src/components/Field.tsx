@@ -1,17 +1,14 @@
-import { Input, InputProps } from "./ui/input";
+export type FieldProps = {
+  label: string;
+  error?: string;
+  children?: JSX.Element | JSX.Element[];
+};
 
-export type FieldProps = InputProps &
-  React.RefAttributes<HTMLInputElement> & {
-    label: string;
-    error?: string;
-    children?: JSX.Element | JSX.Element[];
-  };
-
-const Field = ({ label, children, error, ...props }: FieldProps) => {
+const Field = ({ label, children, error }: FieldProps) => {
   return (
     <div className="field">
       <label>{label}</label>
-      {children || <Input {...props} />}
+      {children}
       <span className="text-red-500">{error}</span>
     </div>
   );

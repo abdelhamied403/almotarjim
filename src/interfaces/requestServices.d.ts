@@ -1,6 +1,6 @@
 type Service = {
   id: string;
-  img: string;
+  image: string;
   title: string;
 };
 

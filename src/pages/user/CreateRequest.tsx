@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import Field from "@/components/Field";
+import { Input } from "@/components/ui/input";
+import Dropzone from "@/components/ui/dropzone";
 
 const validationSchema = z.object({
   title: z.string().min(1, { message: "title is required" }),
@@ -69,27 +71,23 @@ const CreateRequest = () => {
         )}
         {step === 1 && (
           <>
-            <div className="flex gap-2">
-              <img src={currentService?.img} alt={currentService?.title} />
+            <div className="flex items-center gap-2">
+              <img src={currentService?.image} alt={currentService?.title} />
               <h4>{currentService?.title}</h4>
             </div>
             <div className="form">
               <div className="grid w-full items-center gap-2">
-                <Field
-                  label="Request Title"
-                  type="text"
-                  placeholder=""
-                  error={errors.title?.message}
-                  {...register("title")}
-                ></Field>
+                <Field label="Request Title" error={errors.title?.message}>
+                  <Input {...register("title")}></Input>
+                </Field>
                 <Field
                   label="Request Description"
-                  type="text"
-                  placeholder=""
                   error={errors.description?.message}
-                  className="pl-9"
                 >
                   <Textarea {...register("description")}></Textarea>
+                </Field>
+                <Field label="">
+                  <Dropzone />
                 </Field>
                 <Button onClick={handleSubmit(onSubmit)}>Create Request</Button>
               </div>
