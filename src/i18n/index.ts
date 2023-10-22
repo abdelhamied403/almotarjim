@@ -11,3 +11,5 @@ i18n.use(initReactI18next).init({
   },
   lng: "en",
 });
+
+console.log(i18n);

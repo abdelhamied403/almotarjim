@@ -1,5 +1,7 @@
 {
-  "translations": {
-    "specificKey": "العربيه"
+  "translation": {
+    "home": {
+      "title": "مرحبا بكم في منصة المترجم"
+    }
   }
 }

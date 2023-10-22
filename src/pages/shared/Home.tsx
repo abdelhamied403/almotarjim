@@ -8,8 +8,11 @@ import LanguageDropdown from "@/components/LanguageDropdown";
 import AuthService from "@/services/auth.service";
 import { useNavigate } from "react-router-dom";
 
+import useI18n from "@/hooks/useI18n";
+
 const Home = () => {
   const navigate = useNavigate();
+  const { t } = useI18n();
 
   const handleGetStarted = async () => {
     const token = localStorage.getItem("token");
@@ -44,7 +47,7 @@ const Home = () => {
         <div className="container mx-auto">
           <div className="grid grid-cols-2 md:gap-40 items-center">
             <div className="col-span-2 md:col-span-1">
-              <h1 className="text-4xl font-bold ">Welcome to Almotarjim</h1>
+              <h1 className="text-4xl font-bold ">{t("home.title")}</h1>
               <p className="py-10">
                 Lorem ipsum dolor sit amet consectetur. Placerat vel turpis est
                 morbi pharetra tortor quis. Aenean enim faucibus fringilla id

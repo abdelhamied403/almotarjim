@@ -1,5 +1,7 @@
 {
-  "translations": {
-    "specificKey": "english"
+  "translation": {
+    "home": {
+      "title": "Welcome to Almotarjim"
+    }
   }
 }
