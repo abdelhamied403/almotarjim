@@ -67,7 +67,7 @@ const Register = () => {
               />
               <span className="text-red-500">{errors.name}</span>
               <span className="text-red-500">
-                {validationErrors.name?.message}
+                {validationErrors?.name?.message}
               </span>
             </div>
           </div>
@@ -85,7 +85,7 @@ const Register = () => {
               />
               <span className="text-red-500">{errors.email}</span>
               <span className="text-red-500">
-                {validationErrors.email?.message}
+                {validationErrors?.email?.message}
               </span>
             </div>
           </div>
@@ -103,7 +103,7 @@ const Register = () => {
               />
               <span className="text-red-500">{errors.phone}</span>
               <span className="text-red-500">
-                {validationErrors.phone?.message}
+                {validationErrors?.phone?.message}
               </span>
             </div>
           </div>
@@ -121,7 +121,7 @@ const Register = () => {
               />
               <span className="text-red-500">{errors.password}</span>
               <span className="text-red-500">
-                {validationErrors.password?.message}
+                {validationErrors?.password?.message}
               </span>
             </div>
           </div>
