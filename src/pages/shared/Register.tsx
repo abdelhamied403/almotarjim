@@ -62,7 +62,7 @@ const Register = () => {
               <Input
                 type="text"
                 placeholder="Ahmed Mohamed"
-                className="pl-9 "
+                className="pl-9"
                 {...register("name")}
               />
               <span className="text-red-500">{errors.name}</span>
@@ -80,7 +80,7 @@ const Register = () => {
               <Input
                 type="email"
                 placeholder="olivia@untitledui.com"
-                className="pl-9 "
+                className="pl-9"
                 {...register("email")}
               />
               <span className="text-red-500">{errors.email}</span>
@@ -98,7 +98,7 @@ const Register = () => {
               <Input
                 type="text"
                 placeholder="+96612216454844"
-                className="pl-9 "
+                className="pl-9"
                 {...register("phone")}
               />
               <span className="text-red-500">{errors.phone}</span>
@@ -116,7 +116,7 @@ const Register = () => {
               <Input
                 type="password"
                 placeholder="*********"
-                className="pl-9 "
+                className="pl-9"
                 {...register("password")}
               />
               <span className="text-red-500">{errors.password}</span>

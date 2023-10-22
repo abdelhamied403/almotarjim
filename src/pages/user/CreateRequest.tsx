@@ -1,4 +1,4 @@
-import RequestService from "@/components/RequestService";
+import RequestServiceComponent from "@/components/RequestService";
 import Service from "@/interfaces/requestServices";
 import ServiceService from "@/services/services.service";
 import { useState } from "react";
@@ -11,24 +11,29 @@ import { z } from "zod";
 import Field from "@/components/Field";
 import { Input } from "@/components/ui/input";
 import Dropzone from "@/components/ui/dropzone";
+import UploadedFile from "@/interfaces/uploadedFile";
+import RequestService from "@/services/request.service";
+import useUser from "@/hooks/useUser";
 
-const validationSchema = z.object({
+const createRequestSchema = z.object({
   title: z.string().min(1, { message: "title is required" }),
   description: z.string().min(1, { message: "description is required" }),
 });
 
-type ValidationSchema = z.infer<typeof validationSchema>;
+type CreateRequestSchema = z.infer<typeof createRequestSchema>;
 
 const CreateRequest = () => {
   const [step, setStep] = useState(0);
-  const [currentService, setCurrentService] = useState<Service | null>(null);
+  const [currentService, setCurrentService] = useState<Service>();
+  const [files, setFiles] = useState<UploadedFile[]>([]);
+  const { user } = useUser();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ValidationSchema>({
-    resolver: zodResolver(validationSchema),
+  } = useForm<CreateRequestSchema>({
+    resolver: zodResolver(createRequestSchema),
   });
 
   const { isLoading, data: services } = useQuery(
@@ -41,8 +46,18 @@ const CreateRequest = () => {
     setStep(1);
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data: CreateRequestSchema) => {
+    if (files.length === 0) {
+      alert("No files selected");
+      return;
+    }
+    const res = await RequestService.createRequest({
+      ...data,
+      files,
+      service_id: currentService?.id || "",
+      client_id: user?.id,
+    });
+    console.log(res);
   };
 
   if (isLoading) {
@@ -63,7 +78,7 @@ const CreateRequest = () => {
             <div className="grid grid-cols-5 gap-2">
               {services.map((service: Service) => (
                 <div key={service.id} onClick={() => onServiceClick(service)}>
-                  <RequestService {...service} />
+                  <RequestServiceComponent {...service} />
                 </div>
               ))}
             </div>
@@ -75,7 +90,7 @@ const CreateRequest = () => {
               <img src={currentService?.image} alt={currentService?.title} />
               <h4>{currentService?.title}</h4>
             </div>
-            <div className="form">
+            <div className="form w-full">
               <div className="grid w-full items-center gap-2">
                 <Field label="Request Title" error={errors.title?.message}>
                   <Input {...register("title")}></Input>
@@ -87,7 +102,7 @@ const CreateRequest = () => {
                   <Textarea {...register("description")}></Textarea>
                 </Field>
                 <Field label="">
-                  <Dropzone />
+                  <Dropzone files={files} setFiles={setFiles} />
                 </Field>
                 <Button onClick={handleSubmit(onSubmit)}>Create Request</Button>
               </div>
