@@ -23,6 +23,8 @@ const buttonVariants = cva(
           "hover:bg-primary-100 hover:text-primary-900 dark:hover:bg-primary-800 dark:hover:text-primary-50",
         subtle: "bg-primary-100 text-primary-900 hover:bg-primary-200/70",
         link: "text-primary-900 underline-offset-4 hover:underline dark:text-primary-50",
+        success:
+          "bg-green-600 text-primary-50 hover:bg-green-600/90 dark:bg-green-50 dark:text-primary-900 dark:hover:bg-green-50/90",
       },
       size: {
         default: "px-4 py-3",
