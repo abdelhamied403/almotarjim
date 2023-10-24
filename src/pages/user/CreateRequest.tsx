@@ -37,7 +37,7 @@ const CreateRequest = () => {
   });
 
   const { isLoading, data: services } = useQuery(
-    "requests",
+    "services",
     ServiceService.listServices
   );
 
@@ -53,7 +53,7 @@ const CreateRequest = () => {
     }
     const res = await RequestService.createRequest({
       ...data,
-      files,
+      files: files.map(({ file }) => file),
       service_id: currentService?.id || "",
       client_id: user?.id,
     });
