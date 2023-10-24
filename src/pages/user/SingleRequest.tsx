@@ -3,8 +3,27 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { HiDownload } from "react-icons/hi";
 import Chat from "@/containers/Chat";
+import { useEffect, useState } from "react";
+import Request from "@/interfaces/request";
+import RequestService from "@/services/request.service";
+import { useParams } from "react-router-dom";
 
 const SingleRequest = () => {
+  const [request, setRequest] = useState<Request>();
+  const [loading, setLoading] = useState<boolean>(false);
+  const { id } = useParams();
+
+  const getRequest = async () => {
+    setLoading(true);
+    const res = await RequestService.getRequest(id || "");
+    console.log(res);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getRequest();
+  }, []);
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 lg:overflow-hidden lg:auto-rows-fr">
       {/* Grid Item 1 */}

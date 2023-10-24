@@ -5,6 +5,10 @@ const getRequests = async () => {
   const res = await api.get("/requests");
   return res.data.data;
 };
+const getRequest = async (id: string) => {
+  const res = await api.get(`/requests/${id}`);
+  return res.data.data;
+};
 const createRequest = async (request: Request) => {
   const headers = {
     "Content-Type":
@@ -19,6 +23,7 @@ const createRequest = async (request: Request) => {
 
 const RequestService = {
   getRequests,
+  getRequest,
   createRequest,
 };
 
