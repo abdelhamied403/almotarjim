@@ -1,10 +1,15 @@
 import { HiDocument, HiDownload } from "react-icons/hi";
 import { Button } from "./ui/button";
+import { downloadURI } from "@/lib/file";
 
 export type AttachmentProps = {
   fileName: string;
+  path: string;
 };
-const Attachment = ({ fileName }: AttachmentProps) => {
+const Attachment = ({ fileName, path }: AttachmentProps) => {
+  const downloadFile = () => {
+    downloadURI(path, fileName);
+  };
   return (
     <div className="flex flex-wrap gap-2 justify-between items-center bg-primary-50 hover:bg-primary-100 p-3 rounded-md">
       <div className="flex flex-wrap items-center gap-4">
@@ -13,7 +18,7 @@ const Attachment = ({ fileName }: AttachmentProps) => {
         </div>
         <p>{fileName}</p>
       </div>
-      <Button className="rounded-md" size="icon">
+      <Button className="rounded-md" size="icon" onClick={downloadFile}>
         <HiDownload />
       </Button>
     </div>

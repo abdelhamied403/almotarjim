@@ -2,38 +2,18 @@ import Message from "@/components/Message";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import useUser from "@/hooks/useUser";
 import MessageType from "@/interfaces/message";
 import { HiLogout, HiMicrophone, HiPaperClip } from "react-icons/hi";
 import { IoSend } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
-const Chat = () => {
-  const messages: MessageType[] = [
-    {
-      provider: true,
-      img: "https://placehold.co/400x400/fee/31343C",
-      message:
-        " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat , ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat  , ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat  , ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat  , ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat ",
-    },
-    {
-      provider: false,
-      img: "https://placehold.co/400x400/fee/31343C",
-      message:
-        " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat ",
-    },
-    {
-      provider: true,
-      img: "https://placehold.co/400x400/fee/31343C",
-      message:
-        " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat",
-    },
-    {
-      provider: false,
-      img: "https://placehold.co/400x400/fee/31343C",
-      message:
-        " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum ipsam beatae fugiat",
-    },
-  ];
+type ChatProps = {
+  messages: MessageType[];
+  status: "open" | "closed";
+};
+const Chat = ({ status, messages = [] }: ChatProps) => {
+  const { role } = useUser();
   return (
     <>
       <div className="flex flex-wrap items-center justify-between gap-4 p-6 bg-primary-100 rounded-xl">
@@ -45,14 +25,16 @@ const Chat = () => {
           />
           <h3>name</h3>
         </div>
-        <div className="flex gap-3">
-          <Link to="/request/create">
-            <Button className="">Create Request</Button>
-          </Link>
-          <Button variant={"danger"} className="flex gap-2 items-center">
-            End Chat <HiLogout />
-          </Button>
-        </div>
+        {status === "open" && role !== "client" && (
+          <div className="flex gap-3">
+            <Link to="/request/create">
+              <Button className="">Create Request</Button>
+            </Link>
+            <Button variant={"danger"} className="flex gap-2 items-center">
+              End Chat <HiLogout />
+            </Button>
+          </div>
+        )}
       </div>
       <div className="flex-1 h-full flex flex-col gap-4 p-8 bg-white rounded-2xl overflow-y-auto space-y-8">
         {messages.map((msg) => (

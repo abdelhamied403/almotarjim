@@ -6,8 +6,8 @@ const getRequests = async () => {
   return res.data.data;
 };
 const getRequest = async (id: string) => {
-  const res = await api.get(`/requests/${id}`);
-  return res.data.data;
+  const res = await api.get(`/requests/get-request/${id}`);
+  return res.data;
 };
 const createRequest = async (request: Request) => {
   const headers = {
@@ -18,7 +18,7 @@ const createRequest = async (request: Request) => {
   const res = await formAxios.post("/requests/create-request", request, {
     headers,
   });
-  return res.data.data;
+  return res.data;
 };
 
 const RequestService = {
