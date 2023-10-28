@@ -3,6 +3,7 @@ import { HiHome, HiReceiptTax } from "react-icons/hi";
 import Sidebar from "@/containers/Sidebar";
 import SidebarItem from "@/components/SidebarItem";
 import LanguageDropdown from "@/components/LanguageDropdown";
+import { t } from "i18next";
 
 const UserLayout = () => {
   return (
@@ -11,11 +12,15 @@ const UserLayout = () => {
         <Sidebar>
           <SidebarItem to="/dashboard" end>
             <HiHome />
-            <span className="hidden lg:block">Dashboard</span>
+            <span className="hidden lg:block">
+              {t("user.layout.dashboard")}
+            </span>
           </SidebarItem>
           <SidebarItem to="/request">
             <HiReceiptTax />
-            <span className="hidden lg:block">Requests</span>
+            <span className="hidden lg:block">
+              {t("user.layout.requestes")}
+            </span>
           </SidebarItem>
         </Sidebar>
 

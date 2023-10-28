@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import useUser from "@/hooks/useUser";
 import MessageType from "@/interfaces/message";
+import { t } from "i18next";
 import { HiLogout, HiMicrophone, HiPaperClip } from "react-icons/hi";
 import { IoSend } from "react-icons/io5";
 import { Link } from "react-router-dom";
@@ -23,15 +24,15 @@ const Chat = ({ status, messages = [] }: ChatProps) => {
             alt="almotarjim"
             className="w-14 h-14 rounded-full"
           />
-          <h3>name</h3>
+          <h3>{t("chat.name")}</h3>
         </div>
         {status === "open" && role !== "client" && (
           <div className="flex gap-3">
             <Link to="/request/create">
-              <Button className="">Create Request</Button>
+              <Button className="">{t("chat.create")}</Button>
             </Link>
             <Button variant={"danger"} className="flex gap-2 items-center">
-              End Chat <HiLogout />
+              {t("chat.endChat")} <HiLogout />
             </Button>
           </div>
         )}
@@ -48,7 +49,7 @@ const Chat = ({ status, messages = [] }: ChatProps) => {
             alt="almotarjim"
             className="w-14 h-14 rounded-full"
           />
-          <Input placeholder="Type a message...." className=""></Input>
+          <Input placeholder={t("chat.typeMessage")} className=""></Input>
         </div>
         <div className="flex gap-3 justify-end items-end ">
           <Button variant={"outline"} size={"icon"}>

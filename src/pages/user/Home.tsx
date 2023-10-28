@@ -12,6 +12,7 @@ import Field from "@/components/Field";
 import { Input } from "@/components/ui/input";
 import Dropzone from "@/components/ui/dropzone";
 import { BsFillChatDotsFill } from "react-icons/bs";
+import useI18n from "@/hooks/useI18n";
 
 const validationSchema = z.object({
   title: z.string().min(1, { message: "title is required" }),
@@ -21,6 +22,8 @@ const validationSchema = z.object({
 type ValidationSchema = z.infer<typeof validationSchema>;
 
 const Home = () => {
+  const { t } = useI18n();
+
   const [step, setStep] = useState(0);
   const [currentService, setCurrentService] = useState<Service | null>(null);
 
@@ -55,9 +58,9 @@ const Home = () => {
         {step === 0 && (
           <>
             <div className="flex flex-col gap-1">
-              <h1 className="font-bold text-2xl">Choose a service</h1>
+              <h1 className="font-bold text-2xl">{t("user.home.title")}</h1>
               <p className="font-normal text-gray-600 text-base">
-                choose from hand picked services designed for you.
+                {t("user.home.desc")}
               </p>
             </div>
             <div className="grid grid-cols-5 gap-2">
@@ -89,24 +92,27 @@ const Home = () => {
                 <Field label="">
                   <Dropzone />
                 </Field>
-                <Button onClick={handleSubmit(onSubmit)}>Create Request</Button>
+                <Button onClick={handleSubmit(onSubmit)}>
+                  {t("user.home.createRequest")}
+                </Button>
               </div>
             </div>
           </>
         )}
         <div className="flex flex-col gap-6">
           <div>
-            <span>can’t find what you’re looking for?</span>
+            <span>{t("user.home.checkServices")}</span>
           </div>
           <div className="flex gap-6">
             <div>
               <Button className="flex gap-2">
-                <span>Chat with us</span> <BsFillChatDotsFill />
+                <span>{t("user.home.chat")}</span> <BsFillChatDotsFill />
               </Button>
             </div>
             <div>
               <Button className="flex gap-2" variant={"success"}>
-                Whatsapp <BsFillChatDotsFill />
+                <span>{t("user.home.whatsapp")}</span>
+                <BsFillChatDotsFill />
               </Button>
             </div>
           </div>

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import noRequestsImage from "@/assets/no-requests.svg";
 import RequestService from "@/services/request.service";
 import { useQuery } from "react-query";
+import { t } from "i18next";
 
 type Request = {
   id: string;
@@ -63,13 +64,13 @@ const Requests = () => {
               <Link to="/chat/123">
                 <Button className="flex gap-2 items-center" variant="subtle">
                   <HiChat />
-                  Chat with us
+                  {t("user.requests.chat")}
                 </Button>
               </Link>
               <Link to="/request/create">
                 <Button className="flex gap-2 items-center">
                   <HiPlus />
-                  Create Request
+                  {t("user.requests.create")}
                 </Button>
               </Link>
             </div>
@@ -82,13 +83,13 @@ const Requests = () => {
             <Link to="/chat/123">
               <Button className="flex gap-2 items-center" variant="subtle">
                 <HiChat />
-                Chat with us
+                {t("user.requests.chat")}
               </Button>
             </Link>
             <Link to="/request/create">
               <Button className="flex gap-2 items-center">
                 <HiPlus />
-                Create Request
+                {t("user.requests.create")}
               </Button>
             </Link>
           </div>

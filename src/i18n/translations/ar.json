@@ -1,7 +1,60 @@
 {
   "translation": {
     "home": {
-      "title": "مرحبا بكم في منصة المترجم"
+      "title": "مرحبا بكم في منصة المترجم",
+      "content": "Lorem ipsum dolor sit amet consectetur Placerat vel turpis est morbi pharetra tortor quis. Aenean enim faucibus fringilla i elementum malesuada. Praesent turpis facilisis ornarescelerisque necs",
+      "button": "إبدأ من هنا"
+    },
+    "register": {
+      "title": "مرحبا بكم في منصة المترجم",
+      "name": "الإسم بالكامل",
+      "email": "البريد الالكترونى",
+      "phone": "الهاتف الجوال",
+      "password": "كلمه المرور",
+      "register": "إنشاء حساب",
+      "check": "لديك حساب بالفعل ؟ ",
+      "login": "تسجيل الدخول",
+      "nameError": "تأكد من وجود الاسم",
+      "emailError": "تأكد من وجود البريد الإلكترونى",
+      "emailValidation": "البريد الإلكترونى غير صحيح ",
+      "phoneError": "تأكد من وجود الهاتف الجوال",
+      "passError": "تأكد من وجود كلمه المرور"
+    },
+    "login": {
+      "title": "أهلا بعودتك !",
+      "email": "البريد الالكترونى",
+      "password": "كلمه المرور",
+      "login": "تسجيل الدخول",
+      "anonymousLogin": "تسجيل الدخول مجهول الهويه",
+      "accountCheck": "ليس لديك حساب ؟ ",
+      "register": "إنشاء حساب"
+    },
+    "sidebar": {
+      "logout": "تسجيل خروج"
+    },
+    "chat": {
+      "name": "name",
+      "create": "إنشاء طلب جديد",
+      "endChat": "إنهاء المحادثه",
+      "typeMessage": "اكتب رسالتك هنا ...."
+    },
+    "user": {
+      "layout": {
+        "dashboard": "الرئيسيه",
+        "requestes": "الطلبات"
+      },
+      "home": {
+        "title": "اختار خدمه",
+        "desc": "اختر من بين الخدمات المختارة بعناية والمصممة لك.",
+        "createRequest": "إضافه طلب",
+        "checkServices": "ألا تستطيع إيجاد ما تبحث عنه؟",
+        "chat": "يمكنكم الدردشه معنا",
+        "whatsapp": "واتس اب"
+      },
+      "requests": {
+        "create": "إنشاء طلب جديد",
+        "chat": "الدردشه معنا"
+      }
     }
   }
 }

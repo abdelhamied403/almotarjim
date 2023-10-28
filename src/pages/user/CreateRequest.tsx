@@ -13,6 +13,7 @@ import Dropzone from "@/components/ui/dropzone";
 import UploadedFile from "@/interfaces/uploadedFile";
 import RequestService from "@/services/request.service";
 import useUser from "@/hooks/useUser";
+import { t } from "i18next";
 import { useToast } from "@/components/ui/use-toast";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { HiChevronDown, HiChevronLeft } from "react-icons/hi";
