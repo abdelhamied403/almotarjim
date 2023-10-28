@@ -13,10 +13,11 @@ import Dropzone from "@/components/ui/dropzone";
 import UploadedFile from "@/interfaces/uploadedFile";
 import RequestService from "@/services/request.service";
 import useUser from "@/hooks/useUser";
-import { t } from "i18next";
 import { useToast } from "@/components/ui/use-toast";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { HiChevronDown, HiChevronLeft } from "react-icons/hi";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import useI18n from "@/hooks/useI18n";
+import Spinner from "@/components/ui/Spinner";
 
 const createRequestSchema = z.object({
   title: z.string().min(1, { message: "title is required" }),
@@ -31,6 +32,8 @@ const CreateRequest = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const { serviceId } = useParams();
+  const { t, language } = useI18n();
+  const [createRequestLoading, setCreateRequestLoading] = useState(false);
 
   const {
     register,
@@ -48,13 +51,14 @@ const CreateRequest = () => {
   const onSubmit = async (data: CreateRequestSchema) => {
     if (files.length === 0) {
       toast({
-        title: "No files selected",
-        description: "Please choose some files",
-        className: "bg-red-500 text-white",
+        title: t("shared.noFilesSelected"),
+        description: t("shared.noFilesSelectedDescription"),
+        variant: "destructive",
       });
       return;
     }
 
+    setCreateRequestLoading(true);
     try {
       const res = await RequestService.createRequest({
         ...data,
@@ -63,15 +67,17 @@ const CreateRequest = () => {
         client_id: user?.id,
       });
       toast({
-        title: "Success",
+        title: t("shared.success"),
         description: res.message,
       });
       navigate("/request");
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Something went wrong",
+        title: t("shared.error"),
+        description: t("shared.unknownError"),
       });
+    } finally {
+      setCreateRequestLoading(false);
     }
   };
 
@@ -83,18 +89,21 @@ const CreateRequest = () => {
     <div className="flex flex-col flex-1 flex-wrap gap-6 items-start p-6 bg-white rounded-xl">
       <div className="flex items-center gap-2">
         <Link to="/request/create">
-          <HiChevronLeft />
+          {language.dir === "ltr" ? <HiChevronLeft /> : <HiChevronRight />}
         </Link>
         <img src={currentService?.image} alt={currentService?.title} />
         <h4>{currentService?.title}</h4>
       </div>
       <div className="form w-full">
         <div className="grid w-full items-center gap-2">
-          <Field label="Request Title" error={errors.title?.message}>
+          <Field
+            label={t("user.requests.createForm.title")}
+            error={errors.title?.message}
+          >
             <Input {...register("title")}></Input>
           </Field>
           <Field
-            label="Request Description"
+            label={t("user.requests.createForm.description")}
             error={errors.description?.message}
           >
             <Textarea {...register("description")}></Textarea>
@@ -102,7 +111,16 @@ const CreateRequest = () => {
           <Field label="">
             <Dropzone files={files} setFiles={setFiles} />
           </Field>
-          <Button onClick={handleSubmit(onSubmit)}>Create Request</Button>
+          <Button
+            onClick={handleSubmit(onSubmit)}
+            disabled={createRequestLoading}
+          >
+            {createRequestLoading ? (
+              <Spinner />
+            ) : (
+              t("user.requests.createForm.create")
+            )}
+          </Button>
         </div>
       </div>
     </div>

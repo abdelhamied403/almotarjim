@@ -2,13 +2,14 @@ import useUser from "@/hooks/useUser";
 import { Button } from "../components/ui/button";
 import { HiLogout } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
-import { t } from "i18next";
+import useI18n from "@/hooks/useI18n";
 
 export type SidebarProps = {
   children: JSX.Element | JSX.Element[];
 };
 const Sidebar = ({ children }: SidebarProps) => {
   const { role, user } = useUser();
+  const { t } = useI18n();
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -21,7 +22,7 @@ const Sidebar = ({ children }: SidebarProps) => {
         <div className="user flex flex-col gap-2 items-center">
           <img src={user?.image} alt="src" />
           <span className="details hidden lg:flex flex-col gap-1 items-center text-center">
-            <p className="text-sm">{role}</p>
+            <p className="text-sm">{t(`shared.roles.${role}`)}</p>
             <h3>{user?.name}</h3>
             <a
               className="text-sm text-primary-600"
@@ -35,7 +36,11 @@ const Sidebar = ({ children }: SidebarProps) => {
           {children}
         </div>
       </div>
-      <Button variant="outlineDanger" onClick={handleLogout}>
+      <Button
+        variant="outlineDanger"
+        onClick={handleLogout}
+        className="flex gap-2"
+      >
         <HiLogout />
         <span className="hidden lg:block">{t("sidebar.logout")}</span>
       </Button>

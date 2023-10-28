@@ -1,5 +1,25 @@
 {
   "translation": {
+    "shared": {
+      "error": "خطأ",
+      "noFilesSelected": "لم يتم تحديد أي ملفات",
+      "noFilesSelectedDescription": "الرجاء اختيار بعض الملفات",
+      "success": "نجاح",
+      "unknownError": "هناك خطأ ما",
+      "roles": {
+        "admin": "مسؤل",
+        "agent": "عامل",
+        "supervisor": "مشرف",
+        "translator": "مترجم",
+        "client": "عميل"
+      },
+      "dropzone": {
+        "clickToUpload": "انقر للتحميل",
+        "orDragAndDrop": "أو السحب والإفلات",
+        "max": "الأعلى",
+        "dropFilesToUpload": "قم بإسقاط الملفات للتحميل"
+      }
+    },
     "home": {
       "title": "مرحبا بكم في منصة المترجم",
       "content": "Lorem ipsum dolor sit amet consectetur Placerat vel turpis est morbi pharetra tortor quis. Aenean enim faucibus fringilla i elementum malesuada. Praesent turpis facilisis ornarescelerisque necs",
@@ -41,7 +61,7 @@
     "user": {
       "layout": {
         "dashboard": "الرئيسيه",
-        "requestes": "الطلبات"
+        "requests": "الطلبات"
       },
       "home": {
         "title": "اختار خدمه",
@@ -53,7 +73,23 @@
       },
       "requests": {
         "create": "إنشاء طلب جديد",
-        "chat": "الدردشه معنا"
+        "createForm": {
+          "title": "العنوان",
+          "description": "الوصف",
+          "create": "إنشاء طلب جديد",
+          "errors": {
+            "required": {
+              "title": "العنوان مطلوب",
+              "description": "الوصف مطلوب"
+            }
+          }
+        },
+        "chat": "الدردشه معنا",
+        "table": {
+          "title": "عنوان",
+          "status": "حالة",
+          "actions": "أجراءات"
+        }
       }
     }
   }

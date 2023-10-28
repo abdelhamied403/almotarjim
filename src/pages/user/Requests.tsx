@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import noRequestsImage from "@/assets/no-requests.svg";
 import RequestService from "@/services/request.service";
 import { useQuery } from "react-query";
-import { t } from "i18next";
+import useI18n from "@/hooks/useI18n";
 
 type Request = {
   id: string;
@@ -17,34 +17,35 @@ const statusColors = {
   PENDING: "text-[#FF6B00]",
 };
 
-const columns: ColumnDef<Request>[] = [
-  {
-    accessorKey: "title",
-    header: "Title",
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => (
-      <p className={statusColors[row.original.status]}>
-        <b>{row.original.status}</b>
-      </p>
-    ),
-  },
-  {
-    id: "actions",
-    header: "Actions",
-    cell: ({ row }) => (
-      <Link to={`/request/${row.original.id}`}>
-        <Button>
-          <HiEye />
-        </Button>
-      </Link>
-    ),
-  },
-];
-
 const Requests = () => {
+  const { t } = useI18n();
+  const columns: ColumnDef<Request>[] = [
+    {
+      accessorKey: "title",
+      header: t("user.requests.table.title"),
+    },
+    {
+      accessorKey: "status",
+      header: t("user.requests.table.status"),
+      cell: ({ row }) => (
+        <p className={statusColors[row.original.status]}>
+          <b>{row.original.status}</b>
+        </p>
+      ),
+    },
+    {
+      id: "actions",
+      header: t("user.requests.table.actions"),
+      cell: ({ row }) => (
+        <Link to={`/request/${row.original.id}`}>
+          <Button>
+            <HiEye />
+          </Button>
+        </Link>
+      ),
+    },
+  ];
+
   const { isLoading, data: requests } = useQuery(
     "requests",
     RequestService.getRequests

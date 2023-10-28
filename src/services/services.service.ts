@@ -7,7 +7,7 @@ const listServices = async () => {
 
 const getService = async (id?: string) => {
   // TODO: To be fixed later
-  const res = await api.get("/services");
+  const res = await api.get("/requests/get-request/21");
   return res.data.data.find((service) => service.id == id);
 };
 

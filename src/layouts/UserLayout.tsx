@@ -3,9 +3,10 @@ import { HiHome, HiReceiptTax } from "react-icons/hi";
 import Sidebar from "@/containers/Sidebar";
 import SidebarItem from "@/components/SidebarItem";
 import LanguageDropdown from "@/components/LanguageDropdown";
-import { t } from "i18next";
+import useI18n from "@/hooks/useI18n";
 
 const UserLayout = () => {
+  const { t } = useI18n();
   return (
     <div className="user-layout h-screen">
       <div className="flex h-full">
@@ -18,9 +19,7 @@ const UserLayout = () => {
           </SidebarItem>
           <SidebarItem to="/request">
             <HiReceiptTax />
-            <span className="hidden lg:block">
-              {t("user.layout.requestes")}
-            </span>
+            <span className="hidden lg:block">{t("user.layout.requests")}</span>
           </SidebarItem>
         </Sidebar>
 

@@ -8,6 +8,10 @@ const login = async (email: string, password: string) => {
   });
   return res.data;
 };
+const anonymousLogin = async () => {
+  const res = await api.get("/anonymous-login");
+  return res.data;
+};
 const register = async (data: RegistrationSchemaType) => {
   const res = await api.post("/register/client", {
     ...data,
@@ -33,6 +37,7 @@ const getIsValidToken = async () => {
 
 const AuthService = {
   login,
+  anonymousLogin,
   register,
   getUser,
   getIsValidToken,

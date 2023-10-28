@@ -4,6 +4,7 @@ import { Button } from "./button";
 import { HiTrash } from "react-icons/hi";
 import UploadedFileType from "@/interfaces/uploadedFile";
 import { Dispatch, SetStateAction } from "react";
+import useI18n from "@/hooks/useI18n";
 
 export type DropzoneContentProps = {
   children: JSX.Element | JSX.Element[];
@@ -37,6 +38,7 @@ export type DropzoneProps = {
 };
 
 const Dropzone = ({ files, setFiles }: DropzoneProps) => {
+  const { t } = useI18n();
   const onDrop: any = (files: File[]) => {
     setFiles(files.map((file, idx) => ({ file, id: idx })));
   };
@@ -61,18 +63,22 @@ const Dropzone = ({ files, setFiles }: DropzoneProps) => {
           {!isDragActive && (
             <DropzoneContent>
               <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                <span className="font-semibold">Click to upload</span> or drag
-                and drop
+                <span className="font-semibold">
+                  {t("shared.dropzone.clickToUpload")}
+                </span>{" "}
+                {t("shared.dropzone.orDragAndDrop")}
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                SVG, PNG, JPG or GIF (MAX. 800x400px)
+                SVG, PNG, JPG or GIF ({t("shared.dropzone.max")}. 800x400px)
               </p>
             </DropzoneContent>
           )}
           {isDragActive && (
             <DropzoneContent>
               <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                <span className="font-semibold">Drop files to upload</span>
+                <span className="font-semibold">
+                  {t("shared.dropzone.dropFilesToUpload")}
+                </span>
               </p>
             </DropzoneContent>
           )}

@@ -1,5 +1,25 @@
 {
   "translation": {
+    "shared": {
+      "error": "Error",
+      "noFilesSelected": "No files selected",
+      "noFilesSelectedDescription": "please choose some files",
+      "success": "Success",
+      "unknownError": "Something went wrong",
+      "roles": {
+        "admin": "admin",
+        "agent": "agent",
+        "supervisor": "supervisor",
+        "translator": "translator",
+        "client": "client"
+      },
+      "dropzone": {
+        "clickToUpload": "Click to upload",
+        "orDragAndDrop": "or drag and drop",
+        "max": "Max",
+        "dropFilesToUpload": "Drop files to upload"
+      }
+    },
     "home": {
       "title": "Welcome to Almotarjim",
       "content": "Lorem ipsum dolor sit amet consectetur Placerat vel turpis est morbi pharetra tortor quis. Aenean enim faucibus fringilla i elementum malesuada. Praesent turpis facilisis ornarescelerisque necs",
@@ -41,7 +61,7 @@
     "user": {
       "layout": {
         "dashboard": "Dashboard",
-        "requestes": "Requests"
+        "requests": "Requests"
       },
       "home": {
         "title": "Choose a service",
@@ -53,7 +73,23 @@
       },
       "requests": {
         "create": "Create Request",
-        "chat": "Chat with us"
+        "createForm": {
+          "title": "title",
+          "description": "description",
+          "create": "Create Request",
+          "errors": {
+            "required": {
+              "title": "title is required",
+              "description": "description is required"
+            }
+          }
+        },
+        "chat": "Chat with us",
+        "table": {
+          "title": "title",
+          "status": "status",
+          "actions": "actions"
+        }
       }
     }
   }
