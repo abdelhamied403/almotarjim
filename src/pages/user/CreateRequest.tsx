@@ -15,6 +15,8 @@ import UploadedFile from "@/interfaces/uploadedFile";
 import RequestService from "@/services/request.service";
 import useUser from "@/hooks/useUser";
 import { t } from "i18next";
+import { useToast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
 
 const createRequestSchema = z.object({
   title: z.string().min(1, { message: "title is required" }),
@@ -28,6 +30,8 @@ const CreateRequest = () => {
   const [currentService, setCurrentService] = useState<Service>();
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const { user } = useUser();
+  const { toast } = useToast();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -38,7 +42,7 @@ const CreateRequest = () => {
   });
 
   const { isLoading, data: services } = useQuery(
-    "requests",
+    "services",
     ServiceService.listServices
   );
 
@@ -52,13 +56,25 @@ const CreateRequest = () => {
       alert("No files selected");
       return;
     }
-    const res = await RequestService.createRequest({
-      ...data,
-      files,
-      service_id: currentService?.id || "",
-      client_id: user?.id,
-    });
-    console.log(res);
+
+    try {
+      const res = await RequestService.createRequest({
+        ...data,
+        files: files.map(({ file }) => file),
+        service_id: currentService?.id || "",
+        client_id: user?.id,
+      });
+      toast({
+        title: "Success",
+        description: res.message,
+      });
+      navigate("/request");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Something went wrong",
+      });
+    }
   };
 
   if (isLoading) {

@@ -10,29 +10,26 @@ import { t } from "i18next";
 
 type Request = {
   id: string;
+  status: "PENDING";
+};
+
+const statusColors = {
+  PENDING: "text-[#FF6B00]",
 };
 
 const columns: ColumnDef<Request>[] = [
   {
+    accessorKey: "title",
+    header: "Title",
+  },
+  {
     accessorKey: "status",
     header: "Status",
-  },
-  {
-    accessorKey: "email",
-    header: "Email",
-  },
-  {
-    accessorKey: "amount",
-    header: "Amount",
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-
-      return <div className="font-medium">{formatted}</div>;
-    },
+    cell: ({ row }) => (
+      <p className={statusColors[row.original.status]}>
+        <b>{row.original.status}</b>
+      </p>
+    ),
   },
   {
     id: "actions",

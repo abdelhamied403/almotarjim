@@ -106,7 +106,7 @@ const SingleRequest = () => {
 
       {/* Grid Item 2 */}
       <div className="h-full max-h-[500px] overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl">
-        <Chat />
+        <Chat messages={[]} />
       </div>
 
       {/* Grid Item 3 */}

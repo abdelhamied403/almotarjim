@@ -1,10 +1,19 @@
+import Service from "./service";
+import User from "./user";
+
 type Request = {
+  id?: string;
   title: string;
   description: string;
-  service_id: string;
-  files: any;
+  service?: Service;
+  translator?: User;
+  status: "pending" | "finished";
+  service_id?: string;
+  file: any[];
+  translations: any[];
   client_id?: string;
   agent_id?: string;
+  chat?: Chat;
 };
 
 export default Request;

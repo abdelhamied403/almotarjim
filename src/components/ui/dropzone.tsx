@@ -54,7 +54,7 @@ const Dropzone = ({ files, setFiles }: DropzoneProps) => {
   return (
     <div className="flex items-center w-full">
       {!files.length && (
-        <label
+        <div
           className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
           {...getRootProps()}
         >
@@ -78,7 +78,7 @@ const Dropzone = ({ files, setFiles }: DropzoneProps) => {
           )}
 
           <input type="file" className="hidden" {...getInputProps()} />
-        </label>
+        </div>
       )}
       {files.length > 0 && (
         <div className="flex flex-col gap-4 w-full">
