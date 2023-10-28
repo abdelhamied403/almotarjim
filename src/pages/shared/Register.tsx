@@ -17,8 +17,12 @@ import {
 import { useState } from "react";
 import Spinner from "@/components/ui/Spinner";
 
+import useI18n from "@/hooks/useI18n";
+
 const Register = () => {
   const navigate = useNavigate();
+  const { t } = useI18n();
+
   const { setUser } = useProfileStore();
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Partial<RegistrationSchemaType>>({});
@@ -47,14 +51,14 @@ const Register = () => {
   };
 
   return (
-    <div className="h-screen bg-gradient-to-l from-[#C6E1F1] from-50% to-white to-50%">
-      <div className="grid grid-cols-2 h-full items-center container mx-auto gap-52">
+    <div className="h-screen bg-gradient-to-l from-[#C6E1F1] from-50% lg:to-white lg:to-50%">
+      <div className="grid lg:grid-cols-2 h-full items-center container mx-auto gap-52">
         <div className="grid gap-5">
           <h1 className="text-3xl font-bold font-[Poppins] text-center">
-            Welcome to almotarjim!
+            {t("register.title")}
           </h1>
           <div className="grid w-full items-center gap-2">
-            <label htmlFor="name">Full Name</label>
+            <label htmlFor="name">{t("register.name")}</label>
             <div className="relative">
               <div className="absolute h-10 left-0 inset-y-0 flex items-center pl-3">
                 <FaUser />
@@ -72,7 +76,7 @@ const Register = () => {
             </div>
           </div>
           <div className="grid w-full items-center gap-2">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">{t("register.email")}</label>
             <div className="relative">
               <div className="absolute h-10 left-0 inset-y-0 flex items-center pl-3">
                 <MdEmail />
@@ -90,7 +94,7 @@ const Register = () => {
             </div>
           </div>
           <div className="grid w-full items-center gap-2">
-            <label htmlFor="phone">Phone</label>
+            <label htmlFor="phone">{t("register.phone")}</label>
             <div className="relative">
               <div className="absolute h-10 left-0 inset-y-0 flex items-center pl-3">
                 <FaPhone />
@@ -108,7 +112,7 @@ const Register = () => {
             </div>
           </div>
           <div className="grid w-full items-center gap-2">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{t("register.password")}</label>
             <div className="relative">
               <div className="absolute h-10 left-0 inset-y-0 flex items-center pl-3">
                 <HiMiniKey />
@@ -126,19 +130,19 @@ const Register = () => {
             </div>
           </div>
           <Button onClick={handleSubmit(handleRegister)}>
-            {loading ? <Spinner /> : "Register"}
+            {loading ? <Spinner /> : t("register.register")}
           </Button>
           <div className="flex flex-col gap-5">
             <p className="text-center">
-              Already have an account?{" "}
+              {t("register.check")}{" "}
               <Link to="/login" className="text-primary">
-                Login
+                {t("register.login")}
               </Link>
             </p>
             <SocialLinks />
           </div>
         </div>
-        <div>
+        <div className="hidden lg:flex">
           <img src={signup} alt="almotarjim-signup" />
         </div>
       </div>

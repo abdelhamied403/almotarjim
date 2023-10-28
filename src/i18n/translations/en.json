@@ -1,7 +1,60 @@
 {
   "translation": {
     "home": {
-      "title": "Welcome to Almotarjim"
+      "title": "Welcome to Almotarjim",
+      "content": "Lorem ipsum dolor sit amet consectetur Placerat vel turpis est morbi pharetra tortor quis. Aenean enim faucibus fringilla i elementum malesuada. Praesent turpis facilisis ornarescelerisque necs",
+      "button": "Get Started"
+    },
+    "register": {
+      "title": "Welcome to almotarjim!",
+      "name": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "password": "Password",
+      "register": "Register",
+      "check": " Already have an account?",
+      "login": "Login",
+      "nameError": "name is required",
+      "emailError": "email is required",
+      "emailValidation": "email is invalid",
+      "phoneError": "phone is required",
+      "passError": "password is required"
+    },
+    "login": {
+      "title": "Welcome back!",
+      "email": "Email",
+      "password": "Password",
+      "login": "Login",
+      "anonymousLogin": "Anonymous Login",
+      "accountCheck": "Don’t have an account?",
+      "register": "Register"
+    },
+    "sidebar": {
+      "logout": "Logout"
+    },
+    "chat": {
+      "name": "name",
+      "create": "Create Request",
+      "endChat": "End Chat",
+      "typeMessage": "Type a message ...."
+    },
+    "user": {
+      "layout": {
+        "dashboard": "Dashboard",
+        "requestes": "Requests"
+      },
+      "home": {
+        "title": "Choose a service",
+        "desc": "choose from hand picked services designed for you.",
+        "createRequest": "Create Request",
+        "checkServices": "can’t find what you’re looking for?",
+        "chat": "Chat with us",
+        "whatsapp": "Whatsapp"
+      },
+      "requests": {
+        "create": "Create Request",
+        "chat": "Chat with us"
+      }
     }
   }
 }

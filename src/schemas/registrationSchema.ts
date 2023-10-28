@@ -1,12 +1,34 @@
 import z from "zod";
 
-export const registrationSchema = z.object({
-  name: z.string().min(1, { message: "name is required" }),
+import i18n from "@/i18n";
+
+let registrationSchema = z.object({
+  name: z.string().min(1, { message: i18n.t("register.nameError") }),
   email: z
     .string()
-    .min(1, { message: "email is required" })
-    .email({ message: "email is invalid" }),
-  phone: z.string().min(1, { message: "phone is required" }),
-  password: z.string().min(1, { message: "password is required" }),
+    .min(1, { message: i18n.t("register.emailError") })
+    .email({ message: i18n.t("register.emailValidation") }),
+  phone: z.string().min(1, { message: i18n.t("register.phoneError") }),
+  password: z.string().min(1, { message: i18n.t("register.passError") }),
 });
+
+const initRegistrationSchema = () => {
+  registrationSchema = z.object({
+    name: z.string().min(1, { message: i18n.t("register.nameError") }),
+    email: z
+      .string()
+      .min(1, { message: i18n.t("register.emailError") })
+      .email({ message: i18n.t("register.emailValidation") }),
+    phone: z.string().min(1, { message: i18n.t("register.phoneError") }),
+    password: z.string().min(1, { message: i18n.t("register.passError") }),
+  });
+};
+
+initRegistrationSchema();
+
+i18n.on("languageChanged init", () => {
+  initRegistrationSchema();
+});
+
+export { registrationSchema };
 export type RegistrationSchemaType = z.infer<typeof registrationSchema>;

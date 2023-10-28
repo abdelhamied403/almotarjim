@@ -14,6 +14,7 @@ import Dropzone from "@/components/ui/dropzone";
 import UploadedFile from "@/interfaces/uploadedFile";
 import RequestService from "@/services/request.service";
 import useUser from "@/hooks/useUser";
+import { t } from "i18next";
 
 const createRequestSchema = z.object({
   title: z.string().min(1, { message: "title is required" }),
@@ -70,9 +71,9 @@ const CreateRequest = () => {
         {step === 0 && (
           <>
             <div className="flex flex-col gap-1">
-              <h1 className="font-bold text-2xl">Choose a service</h1>
+              <h1 className="font-bold text-2xl">{t("user.home.title")}</h1>
               <p className="font-normal text-gray-600 text-base">
-                choose from hand picked services designed for you.
+                {t("user.home.desc")}
               </p>
             </div>
             <div className="grid grid-cols-5 gap-2">
@@ -104,7 +105,9 @@ const CreateRequest = () => {
                 <Field label="">
                   <Dropzone files={files} setFiles={setFiles} />
                 </Field>
-                <Button onClick={handleSubmit(onSubmit)}>Create Request</Button>
+                <Button onClick={handleSubmit(onSubmit)}>
+                  {t("user.requests.create")}
+                </Button>
               </div>
             </div>
           </>

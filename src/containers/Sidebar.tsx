@@ -2,6 +2,7 @@ import useUser from "@/hooks/useUser";
 import { Button } from "../components/ui/button";
 import { HiLogout } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+import { t } from "i18next";
 
 export type SidebarProps = {
   children: JSX.Element | JSX.Element[];
@@ -36,7 +37,7 @@ const Sidebar = ({ children }: SidebarProps) => {
       </div>
       <Button variant="outlineDanger" onClick={handleLogout}>
         <HiLogout />
-        <span className="hidden lg:block">Logout</span>
+        <span className="hidden lg:block">{t("sidebar.logout")}</span>
       </Button>
     </div>
   );
