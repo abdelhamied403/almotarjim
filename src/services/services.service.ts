@@ -5,8 +5,15 @@ const listServices = async () => {
   return res.data.data;
 };
 
+const getService = async (id?: string) => {
+  // TODO: To be fixed later
+  const res = await api.get("/services");
+  return res.data.data.find((service) => service.id == id);
+};
+
 const ServiceService = {
   listServices,
+  getService,
 };
 
 export default ServiceService;

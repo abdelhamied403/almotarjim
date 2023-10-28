@@ -9,7 +9,7 @@ type Request = {
   translator?: User;
   status: "pending" | "finished";
   service_id?: string;
-  file: any[];
+  files: any[];
   translations: any[];
   client_id?: string;
   agent_id?: string;

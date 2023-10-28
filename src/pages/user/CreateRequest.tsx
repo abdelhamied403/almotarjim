@@ -1,4 +1,3 @@
-import RequestServiceComponent from "@/components/RequestService";
 import Service from "@/interfaces/requestServices";
 import ServiceService from "@/services/services.service";
 import { useState } from "react";
@@ -15,7 +14,8 @@ import UploadedFile from "@/interfaces/uploadedFile";
 import RequestService from "@/services/request.service";
 import useUser from "@/hooks/useUser";
 import { useToast } from "@/components/ui/use-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { HiChevronDown, HiChevronLeft } from "react-icons/hi";
 
 const createRequestSchema = z.object({
   title: z.string().min(1, { message: "title is required" }),
@@ -25,12 +25,11 @@ const createRequestSchema = z.object({
 type CreateRequestSchema = z.infer<typeof createRequestSchema>;
 
 const CreateRequest = () => {
-  const [step, setStep] = useState(0);
-  const [currentService, setCurrentService] = useState<Service>();
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const { user } = useUser();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { serviceId } = useParams();
 
   const {
     register,
@@ -40,19 +39,18 @@ const CreateRequest = () => {
     resolver: zodResolver(createRequestSchema),
   });
 
-  const { isLoading, data: services } = useQuery(
-    "services",
-    ServiceService.listServices
+  const { isLoading, data: currentService } = useQuery<Service>(
+    "service",
+    async () => await ServiceService.getService(serviceId)
   );
-
-  const onServiceClick = (service: Service) => {
-    setCurrentService(service);
-    setStep(1);
-  };
 
   const onSubmit = async (data: CreateRequestSchema) => {
     if (files.length === 0) {
-      alert("No files selected");
+      toast({
+        title: "No files selected",
+        description: "Please choose some files",
+        className: "bg-red-500 text-white",
+      });
       return;
     }
 
@@ -60,7 +58,7 @@ const CreateRequest = () => {
       const res = await RequestService.createRequest({
         ...data,
         files: files.map(({ file }) => file),
-        service_id: currentService?.id || "",
+        service_id: serviceId || "",
         client_id: user?.id,
       });
       toast({
@@ -81,52 +79,32 @@ const CreateRequest = () => {
   }
 
   return (
-    <>
-      <div className="flex flex-col flex-1 flex-wrap gap-6 items-start p-6 bg-white rounded-xl">
-        {step === 0 && (
-          <>
-            <div className="flex flex-col gap-1">
-              <h1 className="font-bold text-2xl">Choose a service</h1>
-              <p className="font-normal text-gray-600 text-base">
-                choose from hand picked services designed for you.
-              </p>
-            </div>
-            <div className="grid grid-cols-5 gap-2">
-              {services.map((service: Service) => (
-                <div key={service.id} onClick={() => onServiceClick(service)}>
-                  <RequestServiceComponent {...service} />
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-        {step === 1 && (
-          <>
-            <div className="flex items-center gap-2">
-              <img src={currentService?.image} alt={currentService?.title} />
-              <h4>{currentService?.title}</h4>
-            </div>
-            <div className="form w-full">
-              <div className="grid w-full items-center gap-2">
-                <Field label="Request Title" error={errors.title?.message}>
-                  <Input {...register("title")}></Input>
-                </Field>
-                <Field
-                  label="Request Description"
-                  error={errors.description?.message}
-                >
-                  <Textarea {...register("description")}></Textarea>
-                </Field>
-                <Field label="">
-                  <Dropzone files={files} setFiles={setFiles} />
-                </Field>
-                <Button onClick={handleSubmit(onSubmit)}>Create Request</Button>
-              </div>
-            </div>
-          </>
-        )}
+    <div className="flex flex-col flex-1 flex-wrap gap-6 items-start p-6 bg-white rounded-xl">
+      <div className="flex items-center gap-2">
+        <Link to="/request/create">
+          <HiChevronLeft />
+        </Link>
+        <img src={currentService?.image} alt={currentService?.title} />
+        <h4>{currentService?.title}</h4>
       </div>
-    </>
+      <div className="form w-full">
+        <div className="grid w-full items-center gap-2">
+          <Field label="Request Title" error={errors.title?.message}>
+            <Input {...register("title")}></Input>
+          </Field>
+          <Field
+            label="Request Description"
+            error={errors.description?.message}
+          >
+            <Textarea {...register("description")}></Textarea>
+          </Field>
+          <Field label="">
+            <Dropzone files={files} setFiles={setFiles} />
+          </Field>
+          <Button onClick={handleSubmit(onSubmit)}>Create Request</Button>
+        </div>
+      </div>
+    </div>
   );
 };
 

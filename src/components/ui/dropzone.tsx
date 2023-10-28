@@ -83,7 +83,7 @@ const Dropzone = ({ files, setFiles }: DropzoneProps) => {
       {files.length > 0 && (
         <div className="flex flex-col gap-4 w-full">
           {files.map(({ file, id }) => (
-            <UploadedFile fileName={file.name}>
+            <UploadedFile key={id} fileName={file.name}>
               <Button variant="danger" onClick={() => removeFile({ file, id })}>
                 <HiTrash />
               </Button>

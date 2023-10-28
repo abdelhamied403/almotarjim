@@ -9,7 +9,7 @@ const getRequest = async (id: string) => {
   const res = await api.get(`/requests/get-request/${id}`);
   return res.data;
 };
-const createRequest = async (request: Request) => {
+const createRequest = async (request: Partial<Request>) => {
   const headers = {
     "Content-Type":
       "multipart/form-data; charset=utf-8; boundary=" +

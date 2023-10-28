@@ -8,6 +8,7 @@ import Requests from "@/pages/user/Requests";
 import SingleChat from "@/pages/user/SingleChat";
 import SingleRequest from "@/pages/user/SingleRequest";
 import UserLayout from "@/layouts/UserLayout";
+import ChooseService from "@/pages/user/ChooseService";
 
 const userRoutes: RouteObject[] = [
   {
@@ -27,6 +28,10 @@ const userRoutes: RouteObject[] = [
           },
           {
             path: "create",
+            element: <ChooseService />,
+          },
+          {
+            path: "create/:serviceId",
             element: <CreateRequest />,
           },
           {
