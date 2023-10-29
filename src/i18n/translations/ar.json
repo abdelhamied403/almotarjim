@@ -102,6 +102,17 @@
         "downloadAll": "تنزيل جميع المرفقات",
         "translations": "الترجمات"
       }
+    },
+    "supervisor": {
+      "layout": {
+        "dashboard": "الرئيسيه",
+        "chats": "قائمه الدردشه",
+        "requests": "الطلبات"
+      },
+      "requests": {
+        "chatWithUs": "الدردشه معنا",
+        "createRequest": "إضافه طلب جديد"
+      }
     }
   }
 }

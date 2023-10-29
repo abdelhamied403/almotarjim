@@ -1,5 +1,6 @@
 import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
+import useI18n from "@/hooks/useI18n";
 import { ColumnDef } from "@tanstack/react-table";
 import { useState, useEffect } from "react";
 import { HiChat, HiEye, HiPlus } from "react-icons/hi";
@@ -55,6 +56,8 @@ const columns: ColumnDef<Request>[] = [
 ];
 
 const Requests = () => {
+  const { t } = useI18n();
+
   const [data, setData] = useState<Request[]>([]);
 
   useEffect(() => {
@@ -67,13 +70,13 @@ const Requests = () => {
         <Link to="/chat/123">
           <Button className="flex gap-2 items-center" variant="subtle">
             <HiChat />
-            Chat with us
+            {t("supervisor.requests.chatWithUs")}
           </Button>
         </Link>
         <Link to="/request/create">
           <Button className="flex gap-2 items-center">
             <HiPlus />
-            Create Request
+            {t("supervisor.requests.createRequest")}
           </Button>
         </Link>
       </div>

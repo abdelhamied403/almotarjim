@@ -102,6 +102,17 @@
         "downloadAll": "Download all",
         "translations": "Translations"
       }
+    },
+    "supervisor": {
+      "layout": {
+        "dashboard": "Dashboard",
+        "chats": "Chats",
+        "requests": "Requests"
+      },
+      "requests": {
+        "chatWithUs": "Chat with us",
+        "createRequest": "Create Request"
+      }
     }
   }
 }
