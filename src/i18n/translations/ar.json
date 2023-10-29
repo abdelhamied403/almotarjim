@@ -90,6 +90,17 @@
           "status": "حالة",
           "actions": "أجراءات"
         }
+      },
+      "singleRequest": {
+        "basicInfo": "المعلومات الأساسيه",
+        "requestId": "رقم الطلب:",
+        "service": "Service:",
+        "translator:": "المترجم:",
+        "status": "الحاله:",
+        "description": "الوصف:",
+        "attachments": "المرفقات",
+        "downloadAll": "تنزيل جميع المرفقات",
+        "translations": "الترجمات"
       }
     }
   }

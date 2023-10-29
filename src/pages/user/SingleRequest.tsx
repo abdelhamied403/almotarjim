@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Request from "@/interfaces/request";
 import RequestService from "@/services/request.service";
 import { useParams } from "react-router-dom";
+import useI18n from "@/hooks/useI18n";
 
 const requestStatusVariants: any = {
   PENDING: "warning",
@@ -15,6 +16,8 @@ const requestStatusVariants: any = {
 };
 
 const SingleRequest = () => {
+  const { t } = useI18n();
+
   const [request, setRequest] = useState<Request>();
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
@@ -41,21 +44,29 @@ const SingleRequest = () => {
           <div className="bg-white p-4 rounded-xl overflow-y-auto">
             {/* details */}
             <div className="flex flex-col gap-2">
-              <h2>Basic Information</h2>
+              <h2>{t("user.singleRequest.basicInfo")}</h2>
               <p>
-                <b className="text-primary">Request id: </b>
+                <b className="text-primary">
+                  {t("user.singleRequest.requestId")}{" "}
+                </b>
                 {request?.id}
               </p>
               <p>
-                <b className="text-primary">Service: </b>
+                <b className="text-primary">
+                  {t("user.singleRequest.service")}{" "}
+                </b>
                 {request?.service?.title}
               </p>
               <p>
-                <b className="text-primary">Translator: </b>
+                <b className="text-primary">
+                  {t("user.singleRequest.translator")}{" "}
+                </b>
                 {request?.translator?.name}
               </p>
               <p>
-                <b className="text-primary">Status: </b>
+                <b className="text-primary">
+                  {t("user.singleRequest.status")}{" "}
+                </b>
                 <Badge
                   variant={requestStatusVariants[request?.status || "default"]}
                 >
@@ -63,7 +74,9 @@ const SingleRequest = () => {
                 </Badge>
               </p>
               <p>
-                <b className="text-primary">Description: </b>
+                <b className="text-primary">
+                  {t("user.singleRequest.description")}{" "}
+                </b>
                 {request?.description}
               </p>
             </div>
@@ -78,10 +91,10 @@ const SingleRequest = () => {
           <div className="bg-white overflow-y-auto p-4 rounded-xl">
             <div className="flex flex-col gap-2">
               <div className="head flex flex-wrap justify-between mb-4">
-                <h2>Attachments</h2>
+                <h2>{t("user.singleRequest.attachments")}</h2>
                 <Button size="sm" variant="subtle">
                   <HiDownload />
-                  Download all
+                  {t("user.singleRequest.downloadAll")}
                 </Button>
               </div>
               {request?.file?.map((file) => (
@@ -95,10 +108,10 @@ const SingleRequest = () => {
             <div className="bg-white overflow-y-auto p-4 rounded-xl">
               <div className="flex flex-col gap-2">
                 <div className="head flex flex-wrap justify-between mb-4">
-                  <h2>Translations</h2>
+                  <h2>{t("user.singleRequest.translations")}</h2>
                   <Button size="sm" variant="subtle">
                     <HiDownload />
-                    Download all
+                    {t("user.singleRequest.downloadAll")}
                   </Button>
                 </div>
                 {request?.translations?.map((file) => (

@@ -1,9 +1,7 @@
-import CreateRequest from "@/containers/CreateRequest";
-
 const CreateRequests = () => {
   return (
     <>
-      <CreateRequest />
+      <div>Hello</div>
     </>
   );
 };
