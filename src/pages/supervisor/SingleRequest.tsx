@@ -101,28 +101,28 @@ const SingleRequest = () => {
           <div className="bg-white p-4 rounded-xl overflow-y-auto">
             {/* details */}
             <div className="flex flex-col gap-2">
-              <h2>{t("user.singleRequest.basicInfo")}</h2>
+              <h2>{t("supervisor.singleRequest.basicInfo")}</h2>
               <p>
                 <b className="text-primary">
-                  {t("user.singleRequest.requestId")}{" "}
+                  {t("supervisor.singleRequest.requestId")}{" "}
                 </b>
                 {request?.id}
               </p>
               <p>
                 <b className="text-primary">
-                  {t("user.singleRequest.service")}{" "}
+                  {t("supervisor.singleRequest.service")}{" "}
                 </b>
                 {request?.service?.title}
               </p>
               <p>
                 <b className="text-primary">
-                  {t("user.singleRequest.translator")}{" "}
+                  {t("supervisor.singleRequest.translator")}{" "}
                 </b>
                 {request?.translator?.name}
               </p>
               <p>
                 <b className="text-primary">
-                  {t("user.singleRequest.status")}{" "}
+                  {t("supervisor.singleRequest.status")}{" "}
                 </b>
                 <Badge
                   variant={requestStatusVariants[request?.status || "default"]}
@@ -132,7 +132,7 @@ const SingleRequest = () => {
               </p>
               <p>
                 <b className="text-primary">
-                  {t("user.singleRequest.description")}{" "}
+                  {t("supervisor.singleRequest.description")}{" "}
                 </b>
                 {request?.description}
               </p>
@@ -143,10 +143,10 @@ const SingleRequest = () => {
           <div className="h-full max-h-[500px] lg:max-h-none row-span-2 overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl">
             <div className="flex gap-2">
               <Button onClick={() => setIsApproveDialogOpen(true)}>
-                Approve
+                {t("supervisor.singleRequest.approve")}
               </Button>
               <Button onClick={() => setIsReassignDialogOpen(true)}>
-                Assign
+                {t("supervisor.singleRequest.assign")}
               </Button>
             </div>
             <Chat {...request?.chat} />
@@ -156,10 +156,10 @@ const SingleRequest = () => {
           <div className="bg-white overflow-y-auto p-4 rounded-xl">
             <div className="flex flex-col gap-2">
               <div className="head flex flex-wrap justify-between mb-4">
-                <h2>{t("user.singleRequest.attachments")}</h2>
+                <h2>{t("supervisor.singleRequest.attachments")}</h2>
                 <Button size="sm" variant="subtle">
                   <HiDownload />
-                  {t("user.singleRequest.downloadAll")}
+                  {t("supervisor.singleRequest.downloadAll")}
                 </Button>
               </div>
               {request?.files?.map((file) => (
@@ -173,10 +173,10 @@ const SingleRequest = () => {
             <div className="bg-white overflow-y-auto p-4 rounded-xl">
               <div className="flex flex-col gap-2">
                 <div className="head flex flex-wrap justify-between mb-4">
-                  <h2>{t("user.singleRequest.translations")}</h2>
+                  <h2>{t("supervisor.singleRequest.translations")}</h2>
                   <Button size="sm" variant="subtle">
                     <HiDownload />
-                    {t("user.singleRequest.downloadAll")}
+                    {t("supervisor.singleRequest.downloadAll")}
                   </Button>
                 </div>
                 {request?.translations?.map((file) => (
@@ -192,17 +192,21 @@ const SingleRequest = () => {
       <Dialog open={isReopenDialogOpen} onOpenChange={setIsReopenDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Are your sure to reopen this request?</DialogTitle>
+            <DialogTitle>
+              {t("supervisor.singleRequest.dialog.alert")}
+            </DialogTitle>
             <DialogDescription>
               <Textarea
-                placeholder="Any notes you want to attach..."
+                placeholder={t("supervisor.singleRequest.dialog.anyNotes")}
                 value={reopenNotes}
                 onChange={(e) => setReopenNotes(e.target.value)}
               />
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button onClick={onReopen}>Reopen</Button>
+            <Button onClick={onReopen}>
+              {t("supervisor.singleRequest.dialog.reopen")}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -214,16 +218,20 @@ const SingleRequest = () => {
       >
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Reassign to another translator?</DialogTitle>
+            <DialogTitle>
+              {t("supervisor.singleRequest.dialog.reassign.alert")}
+            </DialogTitle>
             <DialogDescription asChild>
               <>
-                <p>
-                  Are your sure to reassign this request to another translator
-                </p>
+                <p>{t("supervisor.singleRequest.dialog.reassign.desc")}</p>
 
                 <Select onValueChange={setReassignedTranslator}>
                   <SelectTrigger>
-                    <SelectValue placeholder="choose translator..." />
+                    <SelectValue
+                      placeholder={t(
+                        "supervisor.singleRequest.dialog.reassign.chooseTranslator"
+                      )}
+                    />
                   </SelectTrigger>
                   <SelectContent>
                     {translators?.data.map((translator) => (
@@ -237,7 +245,9 @@ const SingleRequest = () => {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button onClick={onReassign}>Reassign</Button>
+            <Button onClick={onReassign}>
+              {t("supervisor.singleRequest.dialog.reassign.reassign")}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -246,16 +256,22 @@ const SingleRequest = () => {
       <Dialog open={isApproveDialogOpen} onOpenChange={setIsApproveDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Are your sure to reopen this request?</DialogTitle>
+            <DialogTitle>
+              {t("supervisor.singleRequest.dialog.approve.alert")}
+            </DialogTitle>
             <DialogDescription>
-              Are you sure you want to approve note: this is permanent
+              {t("supervisor.singleRequest.dialog.approve.desc")}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogTrigger asChild>
-              <Button variant="subtle">Cancel</Button>
+              <Button variant="subtle">
+                {t("supervisor.singleRequest.dialog.approve.cancel")}
+              </Button>
             </DialogTrigger>
-            <Button onClick={onApprove}>Approve</Button>
+            <Button onClick={onApprove}>
+              {t("supervisor.singleRequest.dialog.approve.approve")}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

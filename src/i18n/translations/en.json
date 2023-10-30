@@ -133,7 +133,26 @@
         "description": "Description:",
         "attachments": "Attachments",
         "downloadAll": "Download all",
-        "translations": "Translations"
+        "translations": "Translations",
+        "approve": "Approve",
+        "assign": "Assign",
+        "dialog": {
+          "alert": "Are your sure to reopen this request?",
+          "reopen": "Reopen",
+          "anyNotes": "Any notes you want to attach...",
+          "reassign": {
+            "alert": "Reassign to another translator?",
+            "desc": "Are your sure to reassign this request to another translator",
+            "chooseTranslator": "choose translator...",
+            "reassign": "Reassign"
+          },
+          "approve": {
+            "alert": "Are your sure to reopen this request?",
+            "desc": "Are you sure you want to approve note: this is permanent",
+            "cancel": "Cancel",
+            "approve": "Approve"
+          }
+        }
       },
       "chats": {
         "all": "All",
