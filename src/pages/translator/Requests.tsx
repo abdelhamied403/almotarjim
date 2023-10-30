@@ -1,12 +1,12 @@
 import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
+import useI18n from "@/hooks/useI18n";
 import { ColumnDef } from "@tanstack/react-table";
 import { HiChat, HiEye, HiPlus } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import noRequestsImage from "@/assets/no-requests.svg";
 import RequestService from "@/services/request.service";
 import { useQuery } from "react-query";
-import useI18n from "@/hooks/useI18n";
 
 type Request = {
   id: string;
