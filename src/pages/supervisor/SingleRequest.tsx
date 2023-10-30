@@ -15,8 +15,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { HiDownload } from "react-icons/hi";
 import Chat from "@/containers/Chat";
+import useI18n from "@/hooks/useI18n";
 
 const SingleRequest = () => {
+  const { t } = useI18n();
   // reopen
   const [isReopenDialogOpen, setIsReopenDialogOpen] = useState(false);
   const [reopenNotes, setReopenNotes] = useState("");
@@ -73,29 +75,41 @@ const SingleRequest = () => {
       <div className="bg-white p-4 rounded-xl overflow-y-auto">
         {/* details */}
         <div className="flex flex-col gap-2">
-          <h2>Basic Information</h2>
+          <h2>{t("supervisor.singleRequest.basicInfo")}</h2>
           <p>
-            <b className="text-primary">Request id: </b>
+            <b className="text-primary">
+              {t("supervisor.singleRequest.requestId")}{" "}
+            </b>
             123587
           </p>
           <p>
-            <b className="text-primary">Service: </b>
+            <b className="text-primary">
+              {t("supervisor.singleRequest.service")}{" "}
+            </b>
             Translation
           </p>
           <p>
-            <b className="text-primary">Agent: </b>
+            <b className="text-primary">
+              {t("supervisor.singleRequest.agentName")}{" "}
+            </b>
             Agent Name
           </p>
           <p>
-            <b className="text-primary">Translator: </b>
+            <b className="text-primary">
+              {t("supervisor.singleRequest.translator")}{" "}
+            </b>
             Translator Name
           </p>
           <p>
-            <b className="text-primary">Status: </b>
+            <b className="text-primary">
+              {t("supervisor.singleRequest.status")}{" "}
+            </b>
             <Badge variant="success">Finished</Badge>
           </p>
           <p>
-            <b className="text-primary">Description: </b>
+            <b className="text-primary">
+              {t("supervisor.singleRequest.description")}{" "}
+            </b>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea,
             excepturi neque delectus, architecto aperiam velit quis reiciendis
             doloribus veniam tenetur saepe est veritatis aut explicabo! At
@@ -113,10 +127,10 @@ const SingleRequest = () => {
       <div className="bg-white overflow-y-auto p-4 rounded-xl">
         <div className="flex flex-col gap-2">
           <div className="head flex flex-wrap justify-between mb-4">
-            <h2>Attachments</h2>
+            <h2>{t("supervisor.singleRequest.attachments")}</h2>
             <Button size="sm" variant="subtle">
               <HiDownload />
-              Download all
+              {t("supervisor.singleRequest.downloadAll")}
             </Button>
           </div>
           <Attachment fileName="test.pdf"></Attachment>
@@ -129,10 +143,10 @@ const SingleRequest = () => {
       <div className="bg-white overflow-y-auto p-4 rounded-xl">
         <div className="flex flex-col gap-2">
           <div className="head flex flex-wrap justify-between mb-4">
-            <h2>Translations</h2>
+            <h2>{t("supervisor.singleRequest.translations")}</h2>
             <Button size="sm" variant="subtle">
               <HiDownload />
-              Download all
+              {t("supervisor.singleRequest.downloadAll")}
             </Button>
           </div>
           <Attachment fileName="test.pdf"></Attachment>

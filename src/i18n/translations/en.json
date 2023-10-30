@@ -111,7 +111,55 @@
       },
       "requests": {
         "chatWithUs": "Chat with us",
-        "createRequest": "Create Request"
+        "createRequest": "Create Request",
+        "table": {
+          "status": "Status",
+          "email": "Email",
+          "amount": "Amount",
+          "actions": "Actions"
+        }
+      },
+      "createRequest": {
+        "chooseService": "Choose a service",
+        "desc": "choose from hand picked services designed for you."
+      },
+      "singleRequest": {
+        "basicInfo": "Basic Information",
+        "requestId": "Request id:",
+        "service": "Service:",
+        "agentName": "Agent Name",
+        "translator:": "Translator:",
+        "status": "Status:",
+        "description": "Description:",
+        "attachments": "Attachments",
+        "downloadAll": "Download all",
+        "translations": "Translations"
+      },
+      "chats": {
+        "all": "All",
+        "opened": "Opened",
+        "closed": "Closed",
+        "lastMessage": "last message"
+      }
+    },
+    "translator": {
+      "layout": {
+        "dashboard": "Dashboard",
+        "requests": "Requests"
+      },
+      "requests": {
+        "table": {
+          "status": "Status",
+          "email": "Email",
+          "amount": "Amount",
+          "actions": "Actions"
+        }
+      },
+      "singleRequest": {
+        "notes": "Notes :",
+        "desc": " Lorem ipsum dolor sit amet consectetur. Placerat vel turpis est morbi pharetra tortor quis. Aenean enim faucibus fringilla id elementum malesuada. Praesent turpis facilisis ornare scelerisque nec elementum. Massa dignissim gravida euismod ullamcorper nulla scelerisque lectus lectus sed.Lorem ipsum dolor sit amet consectetur. Placerat vel turpis est morbi",
+        "attachments": "Attachments",
+        "submit": "Submit"
       }
     }
   }

@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import useI18n from "@/hooks/useI18n";
 import { useState } from "react";
 import { HiChat } from "react-icons/hi";
 import { Link } from "react-router-dom";
@@ -10,6 +11,8 @@ const chats = new Array(30).fill(0).map(() => ({
 }));
 
 const Chats = () => {
+  const { t } = useI18n();
+
   const [chatsFilter, setChatsFilter] = useState<string>("d");
   return (
     <div className="chats">
@@ -19,9 +22,15 @@ const Chats = () => {
           value={chatsFilter}
           onValueChange={setChatsFilter}
         >
-          <ToggleGroupItem value="d">All</ToggleGroupItem>
-          <ToggleGroupItem value="opened">Opened</ToggleGroupItem>
-          <ToggleGroupItem value="closed">Closed</ToggleGroupItem>
+          <ToggleGroupItem value="d">
+            {t("supervisor.chats.all")}
+          </ToggleGroupItem>
+          <ToggleGroupItem value="opened">
+            {t("supervisor.chats.opened")}
+          </ToggleGroupItem>
+          <ToggleGroupItem value="closed">
+            {t("supervisor.chats.closed")}
+          </ToggleGroupItem>
         </ToggleGroup>
       </div>
       <div className="flex flex-col gap-2">
@@ -48,7 +57,7 @@ const Chats = () => {
                     </Badge>
                   </div>
 
-                  <p>last message</p>
+                  <p>{t("supervisor.chats.lastMessage")}</p>
                 </div>
               </div>
               <Link to="/chat/1">

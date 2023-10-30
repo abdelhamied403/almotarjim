@@ -111,7 +111,55 @@
       },
       "requests": {
         "chatWithUs": "الدردشه معنا",
-        "createRequest": "إضافه طلب جديد"
+        "createRequest": "إضافه طلب جديد",
+        "table": {
+          "status": "حاله",
+          "email": "البريد الالكترونى",
+          "amount": "الكميه",
+          "actions": "اجراءات"
+        }
+      },
+      "createRequest": {
+        "chooseService": "اختار خدمه",
+        "desc": "اختر من بين الخدمات المختارة بعناية والمصممة لك."
+      },
+      "singleRequest": {
+        "basicInfo": "المعلومات الأساسيه",
+        "requestId": "رقم الطلب:",
+        "service": "الخدمه:",
+        "agentName": "اسم الموظف",
+        "translator": "المترجم:",
+        "status": "الحاله:",
+        "description": "الوصف:",
+        "attachments": "المرفقات",
+        "downloadAll": "تنزيل جميع المرفقات",
+        "translations": "الترجمات"
+      },
+      "chats": {
+        "all": "الجميع",
+        "opened": "افتتح",
+        "closed": "مغلق",
+        "lastMessage": "اخر رسالة"
+      }
+    },
+    "translator": {
+      "layout": {
+        "dashboard": "الرئيسيه",
+        "requests": "الطلبات"
+      },
+      "requests": {
+        "table": {
+          "status": "حاله",
+          "email": "البريد الالكترونى",
+          "amount": "الكميه",
+          "actions": "اجراءات"
+        }
+      },
+      "singleRequest": {
+        "notes": "ملاحظات : ",
+        "desc": " Lorem ipsum dolor sit amet consectetur. Placerat vel turpis est morbi pharetra tortor quis. Aenean enim faucibus fringilla id elementum malesuada. Praesent turpis facilisis ornare scelerisque nec elementum. Massa dignissim gravida euismod ullamcorper nulla scelerisque lectus lectus sed.Lorem ipsum dolor sit amet consectetur. Placerat vel turpis est morbi",
+        "attachments": "المرفقات",
+        "submit": "اضافه طلب"
       }
     }
   }

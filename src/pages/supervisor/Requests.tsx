@@ -20,43 +20,44 @@ type Request = {
   id: string;
 };
 
-const columns: ColumnDef<Request>[] = [
-  {
-    accessorKey: "status",
-    header: "Status",
-  },
-  {
-    accessorKey: "email",
-    header: "Email",
-  },
-  {
-    accessorKey: "amount",
-    header: "Amount",
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-
-      return <div className="font-medium">{formatted}</div>;
-    },
-  },
-  {
-    id: "actions",
-    header: "Actions",
-    cell: ({ row }) => (
-      <Link to={`/request/${row.original.id}`}>
-        <Button>
-          <HiEye />
-        </Button>
-      </Link>
-    ),
-  },
-];
-
 const Requests = () => {
   const { t } = useI18n();
+
+  const columns: ColumnDef<Request>[] = [
+    {
+      accessorKey: "status",
+      header: t("supervisor.requests.table.status"),
+    },
+    {
+      accessorKey: "email",
+      header: t("supervisor.requests.table.email"),
+    },
+    {
+      accessorKey: "amount",
+      header: t("supervisor.requests.table.amount"),
+
+      cell: ({ row }) => {
+        const amount = parseFloat(row.getValue("amount"));
+        const formatted = new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+        }).format(amount);
+
+        return <div className="font-medium">{formatted}</div>;
+      },
+    },
+    {
+      id: "actions",
+      header: t("supervisor.requests.table.actions"),
+      cell: ({ row }) => (
+        <Link to={`/request/${row.original.id}`}>
+          <Button>
+            <HiEye />
+          </Button>
+        </Link>
+      ),
+    },
+  ];
 
   const [data, setData] = useState<Request[]>([]);
 

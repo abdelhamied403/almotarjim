@@ -1,8 +1,9 @@
 import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
+import useI18n from "@/hooks/useI18n";
 import { ColumnDef } from "@tanstack/react-table";
 import { useState, useEffect } from "react";
-import { HiChat, HiEye, HiPlus } from "react-icons/hi";
+import { HiEye } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
 const getData = () => {
@@ -55,6 +56,43 @@ const columns: ColumnDef<Request>[] = [
 ];
 
 const Requests = () => {
+  const { t } = useI18n();
+
+  const columns: ColumnDef<Request>[] = [
+    {
+      accessorKey: "status",
+      header: t("translator.requests.table.status"),
+    },
+    {
+      accessorKey: "email",
+      header: t("translator.requests.table.email"),
+    },
+    {
+      accessorKey: "amount",
+      header: t("translator.requests.table.amount"),
+      cell: ({ row }) => {
+        const amount = parseFloat(row.getValue("amount"));
+        const formatted = new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+        }).format(amount);
+
+        return <div className="font-medium">{formatted}</div>;
+      },
+    },
+    {
+      id: "actions",
+      header: t("translator.requests.table.actions"),
+      cell: ({ row }) => (
+        <Link to={`/request/${row.original.id}`}>
+          <Button>
+            <HiEye />
+          </Button>
+        </Link>
+      ),
+    },
+  ];
+
   const [data, setData] = useState<Request[]>([]);
 
   useEffect(() => {

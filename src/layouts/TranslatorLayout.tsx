@@ -3,19 +3,25 @@ import { HiHome, HiReceiptTax } from "react-icons/hi";
 import Sidebar from "@/containers/Sidebar";
 import SidebarItem from "@/components/SidebarItem";
 import LanguageDropdown from "@/components/LanguageDropdown";
+import useI18n from "@/hooks/useI18n";
 
 const TranslatorLayout = () => {
+  const { t } = useI18n();
   return (
     <div className="translator-layout h-screen">
       <div className="flex h-full">
         <Sidebar>
           <SidebarItem to="/dashboard" end>
             <HiHome />
-            <span className="hidden lg:block">Dashboard</span>
+            <span className="hidden lg:block">
+              {t("translator.layout.dashboard")}
+            </span>
           </SidebarItem>
           <SidebarItem to="/request">
             <HiReceiptTax />
-            <span className="hidden lg:block">Requests</span>
+            <span className="hidden lg:block">
+              {t("translator.layout.requests")}
+            </span>
           </SidebarItem>
         </Sidebar>
 
