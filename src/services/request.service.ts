@@ -21,10 +21,19 @@ const createRequest = async (request: Partial<Request>) => {
   return res.data;
 };
 
+const assignRequest = async (request_id: string, translator_id: string) => {
+  const res = await api.post(`/requests/assign-request`, {
+    request_id,
+    translator_id,
+  });
+  return res.data;
+};
+
 const RequestService = {
   getRequests,
   getRequest,
   createRequest,
+  assignRequest,
 };
 
 export default RequestService;

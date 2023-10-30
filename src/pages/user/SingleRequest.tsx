@@ -97,7 +97,7 @@ const SingleRequest = () => {
                   {t("user.singleRequest.downloadAll")}
                 </Button>
               </div>
-              {request?.file?.map((file) => (
+              {request?.files?.map((file) => (
                 <Attachment {...file}></Attachment>
               ))}
             </div>

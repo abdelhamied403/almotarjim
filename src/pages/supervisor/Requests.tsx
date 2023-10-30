@@ -1,87 +1,103 @@
 import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
 import useI18n from "@/hooks/useI18n";
+import RequestService from "@/services/request.service";
 import { ColumnDef } from "@tanstack/react-table";
-import { useState, useEffect } from "react";
 import { HiChat, HiEye, HiPlus } from "react-icons/hi";
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-
-const getData = () => {
-  // Fetch data from your API here.
-  return new Array(123).fill({
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  });
-};
+import noRequestsImage from "@/assets/no-requests.svg";
 
 type Request = {
   id: string;
+  status: "PENDING";
 };
 
-const columns: ColumnDef<Request>[] = [
-  {
-    accessorKey: "status",
-    header: "Status",
-  },
-  {
-    accessorKey: "email",
-    header: "Email",
-  },
-  {
-    accessorKey: "amount",
-    header: "Amount",
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-
-      return <div className="font-medium">{formatted}</div>;
-    },
-  },
-  {
-    id: "actions",
-    header: "Actions",
-    cell: ({ row }) => (
-      <Link to={`/request/${row.original.id}`}>
-        <Button>
-          <HiEye />
-        </Button>
-      </Link>
-    ),
-  },
-];
+const statusColors = {
+  PENDING: "text-[#FF6B00]",
+};
 
 const Requests = () => {
   const { t } = useI18n();
+  const columns: ColumnDef<Request>[] = [
+    {
+      accessorKey: "title",
+      header: t("user.requests.table.title"),
+    },
+    {
+      accessorKey: "status",
+      header: t("user.requests.table.status"),
+      cell: ({ row }) => (
+        <p className={statusColors[row.original.status]}>
+          <b>{row.original.status}</b>
+        </p>
+      ),
+    },
+    {
+      id: "actions",
+      header: t("user.requests.table.actions"),
+      cell: ({ row }) => (
+        <Link to={`/request/${row.original.id}`}>
+          <Button>
+            <HiEye />
+          </Button>
+        </Link>
+      ),
+    },
+  ];
 
-  const [data, setData] = useState<Request[]>([]);
+  const { isLoading, data: requests } = useQuery(
+    "requests",
+    RequestService.getRequests
+  );
 
-  useEffect(() => {
-    setData(getData());
-  }, []);
+  if (isLoading) {
+    return <div className="">loading....</div>;
+  }
 
   return (
-    <>
-      <div className="flex justify-end gap-4">
-        <Link to="/chat/123">
-          <Button className="flex gap-2 items-center" variant="subtle">
-            <HiChat />
-            {t("supervisor.requests.chatWithUs")}
-          </Button>
-        </Link>
-        <Link to="/request/create">
-          <Button className="flex gap-2 items-center">
-            <HiPlus />
-            {t("supervisor.requests.createRequest")}
-          </Button>
-        </Link>
-      </div>
-      <DataTable columns={columns} data={data} />
-    </>
+    <div className="requests h-full">
+      {!requests.length && (
+        <>
+          <div className="flex flex-col gap-4 justify-center items-center h-full">
+            <img src={noRequestsImage} alt="" />
+            <div className="flex justify-center gap-4">
+              <Link to="/chat/123">
+                <Button className="flex gap-2 items-center" variant="subtle">
+                  <HiChat />
+                  {t("user.requests.chat")}
+                </Button>
+              </Link>
+              <Link to="/request/create">
+                <Button className="flex gap-2 items-center">
+                  <HiPlus />
+                  {t("user.requests.create")}
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </>
+      )}
+      {!!requests.length && (
+        <>
+          <div className="flex justify-end gap-4">
+            <Link to="/chat/123">
+              <Button className="flex gap-2 items-center" variant="subtle">
+                <HiChat />
+                {t("user.requests.chat")}
+              </Button>
+            </Link>
+            <Link to="/request/create">
+              <Button className="flex gap-2 items-center">
+                <HiPlus />
+                {t("user.requests.create")}
+              </Button>
+            </Link>
+          </div>
+          <DataTable columns={columns} data={requests} />
+        </>
+      )}
+    </div>
   );
 };
 

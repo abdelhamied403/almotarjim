@@ -1,5 +1,6 @@
 import { RegistrationSchemaType } from "@/schemas/registrationSchema";
 import { api } from "./api";
+import Role from "@/interfaces/role";
 
 const login = async (email: string, password: string) => {
   const res = await api.post("/login", {
@@ -35,12 +36,18 @@ const getIsValidToken = async () => {
   }
 };
 
+const getUsersByRole = async (role: Role) => {
+  const res = await api.get(`/users/${role}`);
+  return res.data;
+};
+
 const AuthService = {
   login,
   anonymousLogin,
   register,
   getUser,
   getIsValidToken,
+  getUsersByRole,
 };
 
 export default AuthService;
