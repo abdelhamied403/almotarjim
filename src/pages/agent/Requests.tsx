@@ -1,5 +1,6 @@
 import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
+import useI18n from "@/hooks/useI18n";
 import { ColumnDef } from "@tanstack/react-table";
 import { useState, useEffect } from "react";
 import { HiChat, HiEye, HiPlus } from "react-icons/hi";
@@ -19,43 +20,44 @@ type Request = {
   id: string;
 };
 
-const columns: ColumnDef<Request>[] = [
-  {
-    accessorKey: "status",
-    header: "Status",
-  },
-  {
-    accessorKey: "email",
-    header: "Email",
-  },
-  {
-    accessorKey: "amount",
-    header: "Amount",
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-
-      return <div className="font-medium">{formatted}</div>;
-    },
-  },
-  {
-    id: "actions",
-    header: "Actions",
-    cell: ({ row }) => (
-      <Link to={`/request/${row.original.id}`}>
-        <Button>
-          <HiEye />
-        </Button>
-      </Link>
-    ),
-  },
-];
-
 const Requests = () => {
+  const { t } = useI18n();
   const [data, setData] = useState<Request[]>([]);
+
+  const columns: ColumnDef<Request>[] = [
+    {
+      accessorKey: "status",
+      header: t("agent.requests.table.status"),
+    },
+    {
+      accessorKey: "email",
+      header: t("agent.requests.table.email"),
+    },
+    {
+      accessorKey: "amount",
+      header: t("agent.requests.table.amount"),
+      cell: ({ row }) => {
+        const amount = parseFloat(row.getValue("amount"));
+        const formatted = new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+        }).format(amount);
+
+        return <div className="font-medium">{formatted}</div>;
+      },
+    },
+    {
+      id: "actions",
+      header: t("agent.requests.table.actions"),
+      cell: ({ row }) => (
+        <Link to={`/request/${row.original.id}`}>
+          <Button>
+            <HiEye />
+          </Button>
+        </Link>
+      ),
+    },
+  ];
 
   useEffect(() => {
     setData(getData());
@@ -67,13 +69,13 @@ const Requests = () => {
         <Link to="/chat/123">
           <Button className="flex gap-2 items-center" variant="subtle">
             <HiChat />
-            Chat with us
+            {t("agent.requests.chatWithUs")}
           </Button>
         </Link>
         <Link to="/request/create">
           <Button className="flex gap-2 items-center">
             <HiPlus />
-            Create Request
+            {t("agent.requests.createRequest")}
           </Button>
         </Link>
       </div>

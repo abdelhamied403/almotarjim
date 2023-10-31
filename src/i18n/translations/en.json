@@ -195,6 +195,8 @@
         "lastMessage": "last message"
       },
       "requests": {
+        "chatWithUs": "Chat with us",
+        "createRequest": "Create Request",
         "table": {
           "status": "Status",
           "email": "Email",

@@ -195,6 +195,8 @@
         "lastMessage": "اخر رسالة"
       },
       "requests": {
+        "chatWithUs": "الدردشه معنا",
+        "createRequest": "إضافه طلب جديد",
         "table": {
           "status": "حاله",
           "email": "البريد الالكترونى",
