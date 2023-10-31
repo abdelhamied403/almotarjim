@@ -167,10 +167,11 @@
         "requests": "الطلبات"
       },
       "requests": {
+        "chatWithUs": "الدردشه معنا",
+        "createRequest": "إضافه طلب جديد",
         "table": {
-          "status": "حاله",
-          "email": "البريد الالكترونى",
-          "amount": "الكميه",
+          "title": "العنوان",
+          "status": "الحاله",
           "actions": "اجراءات"
         }
       },
@@ -179,6 +180,27 @@
         "desc": " Lorem ipsum dolor sit amet consectetur. Placerat vel turpis est morbi pharetra tortor quis. Aenean enim faucibus fringilla id elementum malesuada. Praesent turpis facilisis ornare scelerisque nec elementum. Massa dignissim gravida euismod ullamcorper nulla scelerisque lectus lectus sed.Lorem ipsum dolor sit amet consectetur. Placerat vel turpis est morbi",
         "attachments": "المرفقات",
         "submit": "اضافه طلب"
+      }
+    },
+    "agent": {
+      "layout": {
+        "dashboard": "الرئيسيه",
+        "chats": "قائمه الدردشه",
+        "requests": "الطلبات"
+      },
+      "chats": {
+        "all": "الجميع",
+        "opened": "افتتح",
+        "closed": "مغلق",
+        "lastMessage": "اخر رسالة"
+      },
+      "requests": {
+        "table": {
+          "status": "حاله",
+          "email": "البريد الالكترونى",
+          "amount": "الكميه",
+          "actions": "اجراءات"
+        }
       }
     }
   }

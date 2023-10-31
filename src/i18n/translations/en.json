@@ -167,10 +167,11 @@
         "requests": "Requests"
       },
       "requests": {
+        "chatWithUs": "Chat with us",
+        "createRequest": "Create Request",
         "table": {
+          "title": "Title",
           "status": "Status",
-          "email": "Email",
-          "amount": "Amount",
           "actions": "Actions"
         }
       },
@@ -179,6 +180,27 @@
         "desc": " Lorem ipsum dolor sit amet consectetur. Placerat vel turpis est morbi pharetra tortor quis. Aenean enim faucibus fringilla id elementum malesuada. Praesent turpis facilisis ornare scelerisque nec elementum. Massa dignissim gravida euismod ullamcorper nulla scelerisque lectus lectus sed.Lorem ipsum dolor sit amet consectetur. Placerat vel turpis est morbi",
         "attachments": "Attachments",
         "submit": "Submit"
+      }
+    },
+    "agent": {
+      "layout": {
+        "dashboard": "Dashboard",
+        "chats": "Chats",
+        "requests": "Requests"
+      },
+      "chats": {
+        "all": "All",
+        "opened": "Opened",
+        "closed": "Closed",
+        "lastMessage": "last message"
+      },
+      "requests": {
+        "table": {
+          "status": "Status",
+          "email": "Email",
+          "amount": "Amount",
+          "actions": "Actions"
+        }
       }
     }
   }
