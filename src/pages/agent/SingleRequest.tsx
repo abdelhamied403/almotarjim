@@ -15,8 +15,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { HiDownload } from "react-icons/hi";
 import Chat from "@/containers/Chat";
+import useI18n from "@/hooks/useI18n";
 
 const SingleRequest = () => {
+  const { t } = useI18n();
   // reopen
   const [isReopenDialogOpen, setIsReopenDialogOpen] = useState(false);
   const [reopenNotes, setReopenNotes] = useState("");
@@ -73,29 +75,37 @@ const SingleRequest = () => {
       <div className="bg-white p-4 rounded-xl overflow-y-auto">
         {/* details */}
         <div className="flex flex-col gap-2">
-          <h2>Basic Information</h2>
+          <h2>{t("agent.singleRequest.basicInfo")}</h2>
           <p>
-            <b className="text-primary">Request id: </b>
+            <b className="text-primary">
+              {t("agent.singleRequest.requestId")}{" "}
+            </b>
             123587
           </p>
           <p>
-            <b className="text-primary">Service: </b>
+            <b className="text-primary">{t("agent.singleRequest.service")} </b>
             Translation
           </p>
           <p>
-            <b className="text-primary">Agent: </b>
+            <b className="text-primary">
+              {t("agent.singleRequest.agentName")}{" "}
+            </b>
             Agent Name
           </p>
           <p>
-            <b className="text-primary">Translator: </b>
+            <b className="text-primary">
+              {t("agent.singleRequest.translator")}{" "}
+            </b>
             Translator Name
           </p>
           <p>
-            <b className="text-primary">Status: </b>
+            <b className="text-primary">{t("agent.singleRequest.status")} </b>
             <Badge variant="success">Finished</Badge>
           </p>
           <p>
-            <b className="text-primary">Description: </b>
+            <b className="text-primary">
+              {t("agent.singleRequest.description")}{" "}
+            </b>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea,
             excepturi neque delectus, architecto aperiam velit quis reiciendis
             doloribus veniam tenetur saepe est veritatis aut explicabo! At
@@ -113,10 +123,10 @@ const SingleRequest = () => {
       <div className="bg-white overflow-y-auto p-4 rounded-xl">
         <div className="flex flex-col gap-2">
           <div className="head flex flex-wrap justify-between mb-4">
-            <h2>Attachments</h2>
+            <h2>{t("agent.singleRequest.attachments")}</h2>
             <Button size="sm" variant="subtle">
               <HiDownload />
-              Download all
+              {t("agent.singleRequest.downloadAll")}
             </Button>
           </div>
           <Attachment fileName="test.pdf"></Attachment>
@@ -129,10 +139,10 @@ const SingleRequest = () => {
       <div className="bg-white overflow-y-auto p-4 rounded-xl">
         <div className="flex flex-col gap-2">
           <div className="head flex flex-wrap justify-between mb-4">
-            <h2>Translations</h2>
+            <h2>{t("agent.singleRequest.translations")}</h2>
             <Button size="sm" variant="subtle">
               <HiDownload />
-              Download all
+              {t("agent.singleRequest.downloadAll")}
             </Button>
           </div>
           <Attachment fileName="test.pdf"></Attachment>
@@ -145,17 +155,19 @@ const SingleRequest = () => {
       <Dialog open={isReopenDialogOpen} onOpenChange={setIsReopenDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Are your sure to reopen this request?</DialogTitle>
+            <DialogTitle>{t("agent.singleRequest.dialog.alert")}</DialogTitle>
             <DialogDescription>
               <Textarea
-                placeholder="Any notes you want to attach..."
+                placeholder={t("agent.singleRequest.dialog.anyNotes")}
                 value={reopenNotes}
                 onChange={(e) => setReopenNotes(e.target.value)}
               />
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button onClick={onReopen}>Reopen</Button>
+            <Button onClick={onReopen}>
+              {t("agent.singleRequest.dialog.reopen")}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -167,24 +179,28 @@ const SingleRequest = () => {
       >
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Reassign to another translator?</DialogTitle>
+            <DialogTitle>
+              {t("agent.singleRequest.dialog.reassign.alert")}
+            </DialogTitle>
             <DialogDescription asChild>
               <>
-                <p>
-                  Are your sure to reassign this request to another translator
-                </p>
+                <p>{t("agent.singleRequest.dialog.reassign.desc")}</p>
                 <Combobox
                   noItemsTemplate="no items"
                   onChange={setReassignedTranslator}
                   value={reassignedTranslator}
-                  placeholder="choose translator..."
+                  placeholder={t(
+                    "agent.singleRequest.dialog.reassign.chooseTranslator"
+                  )}
                   options={translators}
                 ></Combobox>
               </>
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button onClick={onReassign}>Reassign</Button>
+            <Button onClick={onReassign}>
+              {t("agent.singleRequest.dialog.reassign.reassign")}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -193,16 +209,22 @@ const SingleRequest = () => {
       <Dialog open={isApproveDialogOpen} onOpenChange={setIsApproveDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Are your sure to reopen this request?</DialogTitle>
+            <DialogTitle>
+              {t("agent.singleRequest.dialog.approve.alert")}
+            </DialogTitle>
             <DialogDescription>
-              Are you sure you want to approve note: this is permanent
+              {t("agent.singleRequest.dialog.reassign.desc")}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogTrigger asChild>
-              <Button variant="subtle">Cancel</Button>
+              <Button variant="subtle">
+                {t("agent.singleRequest.dialog.reassign.cancel")}
+              </Button>
             </DialogTrigger>
-            <Button onClick={onApprove}>Approve</Button>
+            <Button onClick={onApprove}>
+              {t("agent.singleRequest.dialog.reassign.approve")}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
