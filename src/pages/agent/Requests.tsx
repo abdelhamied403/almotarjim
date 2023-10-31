@@ -2,22 +2,16 @@ import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
 import useI18n from "@/hooks/useI18n";
 import { ColumnDef } from "@tanstack/react-table";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { HiChat, HiEye, HiPlus } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
-const getData = () => {
-  // Fetch data from your API here.
-  return new Array(123).fill({
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  });
-};
-
 type Request = {
   id: string;
+  status: "PENDING";
+};
+const statusColors = {
+  PENDING: "text-[#FF6B00]",
 };
 
 const Requests = () => {
@@ -26,25 +20,17 @@ const Requests = () => {
 
   const columns: ColumnDef<Request>[] = [
     {
+      accessorKey: "title",
+      header: t("agent.requests.table.title"),
+    },
+    {
       accessorKey: "status",
       header: t("agent.requests.table.status"),
-    },
-    {
-      accessorKey: "email",
-      header: t("agent.requests.table.email"),
-    },
-    {
-      accessorKey: "amount",
-      header: t("agent.requests.table.amount"),
-      cell: ({ row }) => {
-        const amount = parseFloat(row.getValue("amount"));
-        const formatted = new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: "USD",
-        }).format(amount);
-
-        return <div className="font-medium">{formatted}</div>;
-      },
+      cell: ({ row }) => (
+        <p className={statusColors[row.original.status]}>
+          <b>{row.original.status}</b>
+        </p>
+      ),
     },
     {
       id: "actions",
@@ -58,10 +44,6 @@ const Requests = () => {
       ),
     },
   ];
-
-  useEffect(() => {
-    setData(getData());
-  }, []);
 
   return (
     <>

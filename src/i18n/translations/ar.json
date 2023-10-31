@@ -198,9 +198,8 @@
         "chatWithUs": "الدردشه معنا",
         "createRequest": "إضافه طلب جديد",
         "table": {
-          "status": "حاله",
-          "email": "البريد الالكترونى",
-          "amount": "الكميه",
+          "title": "العنوان",
+          "status": "الحاله",
           "actions": "اجراءات"
         }
       },

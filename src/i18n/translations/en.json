@@ -198,9 +198,8 @@
         "chatWithUs": "Chat with us",
         "createRequest": "Create Request",
         "table": {
+          "title": "Title",
           "status": "Status",
-          "email": "Email",
-          "amount": "Amount",
           "actions": "Actions"
         }
       },

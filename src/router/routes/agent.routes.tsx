@@ -41,7 +41,7 @@ const agentRoutes: RouteObject[] = [
             element: <Requests />,
           },
           {
-            path: "submit",
+            path: "create",
             element: <CreateRequests />,
           },
           {

@@ -1,7 +1,13 @@
 import Attachment from "@/components/Attatchment";
-import Combobox from "@/components/Combobox";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { HiDownload } from "react-icons/hi";
+import Chat from "@/containers/Chat";
+import { useEffect, useState } from "react";
+import Request from "@/interfaces/request";
+import RequestService from "@/services/request.service";
+import { useParams } from "react-router-dom";
+import useI18n from "@/hooks/useI18n";
 import {
   Dialog,
   DialogContent,
@@ -11,41 +17,50 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import Combobox from "@/components/Combobox";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
-import { HiDownload } from "react-icons/hi";
-import Chat from "@/containers/Chat";
-import useI18n from "@/hooks/useI18n";
+import { useQuery } from "react-query";
+import User from "@/interfaces/user";
+import AuthService from "@/services/auth.service";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+const requestStatusVariants: any = {
+  PENDING: "warning",
+  FINISHED: "success",
+  default: "default",
+};
 
 const SingleRequest = () => {
   const { t } = useI18n();
+
+  const [request, setRequest] = useState<Request>();
+  const [loading, setLoading] = useState<boolean>(false);
+  const { id } = useParams();
+
+  const getRequest = async () => {
+    setLoading(true);
+    const request = await RequestService.getRequest(id || "").catch(
+      console.log
+    );
+    setRequest(request);
+    setLoading(false);
+  };
+
   // reopen
   const [isReopenDialogOpen, setIsReopenDialogOpen] = useState(false);
   const [reopenNotes, setReopenNotes] = useState("");
 
   // reassign
-  const translators = [
-    {
-      value: "next.js",
-      label: "Next.js",
-    },
-    {
-      value: "sveltekit",
-      label: "SvelteKit",
-    },
-    {
-      value: "nuxt.js",
-      label: "Nuxt.js",
-    },
-    {
-      value: "remix",
-      label: "Remix",
-    },
-    {
-      value: "astro",
-      label: "Astro",
-    },
-  ];
+  const { isLoading: isTranslatorsLoading, data: translators } = useQuery<
+    User[]
+  >("requestTranslators", () => AuthService.getUsersByRole("translator"), {});
+
   const [isReassignDialogOpen, setIsReassignDialogOpen] = useState(false);
   const [reassignedTranslator, setReassignedTranslator] = useState("");
 
@@ -58,8 +73,12 @@ const SingleRequest = () => {
     setIsReopenDialogOpen(false);
   };
 
-  const onReassign = () => {
-    console.log(reassignedTranslator);
+  const onReassign = async () => {
+    const res = await RequestService.assignRequest(
+      id || "",
+      reassignedTranslator
+    );
+    console.log(res);
     setReassignedTranslator("");
     setIsReassignDialogOpen(false);
   };
@@ -69,96 +88,116 @@ const SingleRequest = () => {
     setIsApproveDialogOpen(false);
   };
 
+  useEffect(() => {
+    getRequest();
+  }, []);
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 lg:overflow-hidden lg:auto-rows-fr">
-      {/* Grid Item 1 */}
-      <div className="bg-white p-4 rounded-xl overflow-y-auto">
-        {/* details */}
-        <div className="flex flex-col gap-2">
-          <h2>{t("agent.singleRequest.basicInfo")}</h2>
-          <p>
-            <b className="text-primary">
-              {t("agent.singleRequest.requestId")}{" "}
-            </b>
-            123587
-          </p>
-          <p>
-            <b className="text-primary">{t("agent.singleRequest.service")} </b>
-            Translation
-          </p>
-          <p>
-            <b className="text-primary">
-              {t("agent.singleRequest.agentName")}{" "}
-            </b>
-            Agent Name
-          </p>
-          <p>
-            <b className="text-primary">
-              {t("agent.singleRequest.translator")}{" "}
-            </b>
-            Translator Name
-          </p>
-          <p>
-            <b className="text-primary">{t("agent.singleRequest.status")} </b>
-            <Badge variant="success">Finished</Badge>
-          </p>
-          <p>
-            <b className="text-primary">
-              {t("agent.singleRequest.description")}{" "}
-            </b>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea,
-            excepturi neque delectus, architecto aperiam velit quis reiciendis
-            doloribus veniam tenetur saepe est veritatis aut explicabo! At
-            voluptatem a dolores nam!
-          </p>
-        </div>
-      </div>
-
-      {/* Grid Item 2 */}
-      <div className="h-full max-h-[500px] overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl">
-        <Chat messages={[]} />
-      </div>
-
-      {/* Grid Item 3 */}
-      <div className="bg-white overflow-y-auto p-4 rounded-xl">
-        <div className="flex flex-col gap-2">
-          <div className="head flex flex-wrap justify-between mb-4">
-            <h2>{t("agent.singleRequest.attachments")}</h2>
-            <Button size="sm" variant="subtle">
-              <HiDownload />
-              {t("agent.singleRequest.downloadAll")}
-            </Button>
+    <div className="page flex-1">
+      {loading && <p>loading...</p>}
+      {!loading && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full lg:overflow-hidden lg:auto-rows-fr">
+          {/* Grid Item 1 */}
+          <div className="bg-white p-4 rounded-xl overflow-y-auto">
+            {/* details */}
+            <div className="flex flex-col gap-2">
+              <h2>{t("supervisor.singleRequest.basicInfo")}</h2>
+              <p>
+                <b className="text-primary">
+                  {t("supervisor.singleRequest.requestId")}{" "}
+                </b>
+                {request?.id}
+              </p>
+              <p>
+                <b className="text-primary">
+                  {t("supervisor.singleRequest.service")}{" "}
+                </b>
+                {request?.service?.title}
+              </p>
+              <p>
+                <b className="text-primary">
+                  {t("supervisor.singleRequest.translator")}{" "}
+                </b>
+                {request?.translator?.name}
+              </p>
+              <p>
+                <b className="text-primary">
+                  {t("supervisor.singleRequest.status")}{" "}
+                </b>
+                <Badge
+                  variant={requestStatusVariants[request?.status || "default"]}
+                >
+                  {request?.status}
+                </Badge>
+              </p>
+              <p>
+                <b className="text-primary">
+                  {t("supervisor.singleRequest.description")}{" "}
+                </b>
+                {request?.description}
+              </p>
+            </div>
           </div>
-          <Attachment fileName="test.pdf"></Attachment>
-          <Attachment fileName="test.pdf"></Attachment>
-          <Attachment fileName="test.pdf"></Attachment>
-        </div>
-      </div>
 
-      {/* Grid Item 4 */}
-      <div className="bg-white overflow-y-auto p-4 rounded-xl">
-        <div className="flex flex-col gap-2">
-          <div className="head flex flex-wrap justify-between mb-4">
-            <h2>{t("agent.singleRequest.translations")}</h2>
-            <Button size="sm" variant="subtle">
-              <HiDownload />
-              {t("agent.singleRequest.downloadAll")}
-            </Button>
+          {/* Grid Item 2 */}
+          <div className="h-full max-h-[500px] lg:max-h-none row-span-2 overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl">
+            <div className="flex gap-2">
+              <Button onClick={() => setIsApproveDialogOpen(true)}>
+                {t("supervisor.singleRequest.approve")}
+              </Button>
+              <Button onClick={() => setIsReassignDialogOpen(true)}>
+                {t("supervisor.singleRequest.assign")}
+              </Button>
+            </div>
+            <Chat {...request?.chat} />
           </div>
-          <Attachment fileName="test.pdf"></Attachment>
-          <Attachment fileName="test.pdf"></Attachment>
-          <Attachment fileName="test.pdf"></Attachment>
+
+          {/* Grid Item 3 */}
+          <div className="bg-white overflow-y-auto p-4 rounded-xl">
+            <div className="flex flex-col gap-2">
+              <div className="head flex flex-wrap justify-between mb-4">
+                <h2>{t("supervisor.singleRequest.attachments")}</h2>
+                <Button size="sm" variant="subtle">
+                  <HiDownload />
+                  {t("supervisor.singleRequest.downloadAll")}
+                </Button>
+              </div>
+              {request?.files?.map((file) => (
+                <Attachment {...file}></Attachment>
+              ))}
+            </div>
+          </div>
+
+          {/* Grid Item 4 */}
+          {request?.translations?.length && (
+            <div className="bg-white overflow-y-auto p-4 rounded-xl">
+              <div className="flex flex-col gap-2">
+                <div className="head flex flex-wrap justify-between mb-4">
+                  <h2>{t("supervisor.singleRequest.translations")}</h2>
+                  <Button size="sm" variant="subtle">
+                    <HiDownload />
+                    {t("supervisor.singleRequest.downloadAll")}
+                  </Button>
+                </div>
+                {request?.translations?.map((file) => (
+                  <Attachment {...file}></Attachment>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
-      </div>
+      )}
 
       {/* reopen dialog */}
       <Dialog open={isReopenDialogOpen} onOpenChange={setIsReopenDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{t("agent.singleRequest.dialog.alert")}</DialogTitle>
+            <DialogTitle>
+              {t("supervisor.singleRequest.dialog.alert")}
+            </DialogTitle>
             <DialogDescription>
               <Textarea
-                placeholder={t("agent.singleRequest.dialog.anyNotes")}
+                placeholder={t("supervisor.singleRequest.dialog.anyNotes")}
                 value={reopenNotes}
                 onChange={(e) => setReopenNotes(e.target.value)}
               />
@@ -166,7 +205,7 @@ const SingleRequest = () => {
           </DialogHeader>
           <DialogFooter>
             <Button onClick={onReopen}>
-              {t("agent.singleRequest.dialog.reopen")}
+              {t("supervisor.singleRequest.dialog.reopen")}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -180,26 +219,34 @@ const SingleRequest = () => {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {t("agent.singleRequest.dialog.reassign.alert")}
+              {t("supervisor.singleRequest.dialog.reassign.alert")}
             </DialogTitle>
             <DialogDescription asChild>
               <>
-                <p>{t("agent.singleRequest.dialog.reassign.desc")}</p>
-                <Combobox
-                  noItemsTemplate="no items"
-                  onChange={setReassignedTranslator}
-                  value={reassignedTranslator}
-                  placeholder={t(
-                    "agent.singleRequest.dialog.reassign.chooseTranslator"
-                  )}
-                  options={translators}
-                ></Combobox>
+                <p>{t("supervisor.singleRequest.dialog.reassign.desc")}</p>
+
+                <Select onValueChange={setReassignedTranslator}>
+                  <SelectTrigger>
+                    <SelectValue
+                      placeholder={t(
+                        "supervisor.singleRequest.dialog.reassign.chooseTranslator"
+                      )}
+                    />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {translators?.data.map((translator) => (
+                      <SelectItem value={translator.id}>
+                        {translator.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </>
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button onClick={onReassign}>
-              {t("agent.singleRequest.dialog.reassign.reassign")}
+              {t("supervisor.singleRequest.dialog.reassign.reassign")}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -210,20 +257,20 @@ const SingleRequest = () => {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {t("agent.singleRequest.dialog.approve.alert")}
+              {t("supervisor.singleRequest.dialog.approve.alert")}
             </DialogTitle>
             <DialogDescription>
-              {t("agent.singleRequest.dialog.reassign.desc")}
+              {t("supervisor.singleRequest.dialog.approve.desc")}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogTrigger asChild>
               <Button variant="subtle">
-                {t("agent.singleRequest.dialog.reassign.cancel")}
+                {t("supervisor.singleRequest.dialog.approve.cancel")}
               </Button>
             </DialogTrigger>
             <Button onClick={onApprove}>
-              {t("agent.singleRequest.dialog.reassign.approve")}
+              {t("supervisor.singleRequest.dialog.approve.approve")}
             </Button>
           </DialogFooter>
         </DialogContent>
