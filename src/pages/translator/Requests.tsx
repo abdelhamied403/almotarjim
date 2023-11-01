@@ -20,11 +20,11 @@ const Requests = () => {
   const columns: ColumnDef<Request>[] = [
     {
       accessorKey: "title",
-      header: t("user.requests.table.title"),
+      header: t("translator.requests.table.title"),
     },
     {
       accessorKey: "status",
-      header: t("user.requests.table.status"),
+      header: t("translator.requests.table.status"),
       cell: ({ row }) => (
         <p className={requestStatusColors[row.original.status]}>
           <b>{t(`shared.requestStatus.${row.original.status}`)}</b>
@@ -33,7 +33,7 @@ const Requests = () => {
     },
     {
       id: "actions",
-      header: t("user.requests.table.actions"),
+      header: t("translator.requests.table.actions"),
       cell: ({ row }) => (
         <Link to={`/request/${row.original.id}`}>
           <Button>
@@ -63,13 +63,13 @@ const Requests = () => {
               <Link to="/chat/123">
                 <Button className="flex gap-2 items-center" variant="subtle">
                   <HiChat />
-                  {t("user.requests.chat")}
+                  {t("translator.requests.chatWithUs")}
                 </Button>
               </Link>
               <Link to="/request/create">
                 <Button className="flex gap-2 items-center">
                   <HiPlus />
-                  {t("user.requests.create")}
+                  {t("translator.requests.createRequest")}
                 </Button>
               </Link>
             </div>

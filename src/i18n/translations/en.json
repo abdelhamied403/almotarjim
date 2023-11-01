@@ -172,10 +172,11 @@
         "requests": "Requests"
       },
       "requests": {
+        "chatWithUs": "Chat with us",
+        "createRequest": "Create Request",
         "table": {
+          "title": "Title",
           "status": "Status",
-          "email": "Email",
-          "amount": "Amount",
           "actions": "Actions"
         }
       },
@@ -184,6 +185,59 @@
         "desc": " Lorem ipsum dolor sit amet consectetur. Placerat vel turpis est morbi pharetra tortor quis. Aenean enim faucibus fringilla id elementum malesuada. Praesent turpis facilisis ornare scelerisque nec elementum. Massa dignissim gravida euismod ullamcorper nulla scelerisque lectus lectus sed.Lorem ipsum dolor sit amet consectetur. Placerat vel turpis est morbi",
         "attachments": "Attachments",
         "submit": "Submit"
+      }
+    },
+    "agent": {
+      "layout": {
+        "dashboard": "Dashboard",
+        "chats": "Chats",
+        "requests": "Requests"
+      },
+      "chats": {
+        "all": "All",
+        "opened": "Opened",
+        "closed": "Closed",
+        "lastMessage": "last message"
+      },
+      "requests": {
+        "chatWithUs": "Chat with us",
+        "createRequest": "Create Request",
+        "table": {
+          "title": "Title",
+          "status": "Status",
+          "actions": "Actions"
+        }
+      },
+      "singleRequest": {
+        "basicInfo": "Basic Information",
+        "requestId": "Request id:",
+        "service": "Service:",
+        "agentName": "Agent Name",
+        "translator": "Translator:",
+        "status": "Status:",
+        "description": "Description:",
+        "attachments": "Attachments",
+        "downloadAll": "Download all",
+        "translations": "Translations",
+        "approve": "Approve",
+        "assign": "Assign",
+        "dialog": {
+          "alert": "Are your sure to reopen this request?",
+          "reopen": "Reopen",
+          "anyNotes": "Any notes you want to attach...",
+          "reassign": {
+            "alert": "Reassign to another translator?",
+            "desc": "Are your sure to reassign this request to another translator",
+            "chooseTranslator": "choose translator...",
+            "reassign": "Reassign"
+          },
+          "approve": {
+            "alert": "Are your sure to reopen this request?",
+            "desc": "Are you sure you want to approve note: this is permanent",
+            "cancel": "Cancel",
+            "approve": "Approve"
+          }
+        }
       }
     }
   }

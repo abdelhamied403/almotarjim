@@ -1,65 +1,49 @@
 import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
+import useI18n from "@/hooks/useI18n";
 import { ColumnDef } from "@tanstack/react-table";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { HiChat, HiEye, HiPlus } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
-const getData = () => {
-  // Fetch data from your API here.
-  return new Array(123).fill({
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  });
-};
-
 type Request = {
   id: string;
+  status: "PENDING";
+};
+const statusColors = {
+  PENDING: "text-[#FF6B00]",
 };
 
-const columns: ColumnDef<Request>[] = [
-  {
-    accessorKey: "status",
-    header: "Status",
-  },
-  {
-    accessorKey: "email",
-    header: "Email",
-  },
-  {
-    accessorKey: "amount",
-    header: "Amount",
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-
-      return <div className="font-medium">{formatted}</div>;
-    },
-  },
-  {
-    id: "actions",
-    header: "Actions",
-    cell: ({ row }) => (
-      <Link to={`/request/${row.original.id}`}>
-        <Button>
-          <HiEye />
-        </Button>
-      </Link>
-    ),
-  },
-];
-
 const Requests = () => {
+  const { t } = useI18n();
   const [data, setData] = useState<Request[]>([]);
 
-  useEffect(() => {
-    setData(getData());
-  }, []);
+  const columns: ColumnDef<Request>[] = [
+    {
+      accessorKey: "title",
+      header: t("agent.requests.table.title"),
+    },
+    {
+      accessorKey: "status",
+      header: t("agent.requests.table.status"),
+      cell: ({ row }) => (
+        <p className={statusColors[row.original.status]}>
+          <b>{row.original.status}</b>
+        </p>
+      ),
+    },
+    {
+      id: "actions",
+      header: t("agent.requests.table.actions"),
+      cell: ({ row }) => (
+        <Link to={`/request/${row.original.id}`}>
+          <Button>
+            <HiEye />
+          </Button>
+        </Link>
+      ),
+    },
+  ];
 
   return (
     <>
@@ -67,13 +51,13 @@ const Requests = () => {
         <Link to="/chat/123">
           <Button className="flex gap-2 items-center" variant="subtle">
             <HiChat />
-            Chat with us
+            {t("agent.requests.chatWithUs")}
           </Button>
         </Link>
         <Link to="/request/create">
           <Button className="flex gap-2 items-center">
             <HiPlus />
-            Create Request
+            {t("agent.requests.createRequest")}
           </Button>
         </Link>
       </div>

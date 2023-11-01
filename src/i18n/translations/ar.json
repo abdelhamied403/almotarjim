@@ -172,10 +172,11 @@
         "requests": "الطلبات"
       },
       "requests": {
+        "chatWithUs": "الدردشه معنا",
+        "createRequest": "إضافه طلب جديد",
         "table": {
-          "status": "حاله",
-          "email": "البريد الالكترونى",
-          "amount": "الكميه",
+          "title": "العنوان",
+          "status": "الحاله",
           "actions": "اجراءات"
         }
       },
@@ -184,6 +185,59 @@
         "desc": " Lorem ipsum dolor sit amet consectetur. Placerat vel turpis est morbi pharetra tortor quis. Aenean enim faucibus fringilla id elementum malesuada. Praesent turpis facilisis ornare scelerisque nec elementum. Massa dignissim gravida euismod ullamcorper nulla scelerisque lectus lectus sed.Lorem ipsum dolor sit amet consectetur. Placerat vel turpis est morbi",
         "attachments": "المرفقات",
         "submit": "اضافه طلب"
+      }
+    },
+    "agent": {
+      "layout": {
+        "dashboard": "الرئيسيه",
+        "chats": "قائمه الدردشه",
+        "requests": "الطلبات"
+      },
+      "chats": {
+        "all": "الجميع",
+        "opened": "افتتح",
+        "closed": "مغلق",
+        "lastMessage": "اخر رسالة"
+      },
+      "requests": {
+        "chatWithUs": "الدردشه معنا",
+        "createRequest": "إضافه طلب جديد",
+        "table": {
+          "title": "العنوان",
+          "status": "الحاله",
+          "actions": "اجراءات"
+        }
+      },
+      "singleRequest": {
+        "basicInfo": "المعلومات الأساسيه",
+        "requestId": "رقم الطلب:",
+        "service": "الخدمه:",
+        "agentName": "اسم الموظف",
+        "translator": "المترجم:",
+        "status": "الحاله:",
+        "description": "الوصف:",
+        "attachments": "المرفقات",
+        "downloadAll": "تنزيل جميع المرفقات",
+        "translations": "الترجمات",
+        "approve": "موافقة",
+        "assign": "تعيين",
+        "dialog": {
+          "alert": "هل أنت متأكد من إعادة فتح هذا الطلب؟",
+          "reopen": "إعادة فتح",
+          "anyNotes": "أى ملا حظات تريد اضافتها...",
+          "reassign": {
+            "alert": "هل تريد إعادة التعيين إلى مترجم آخر؟",
+            "desc": "هل أنت متأكد من إعادة تعيين هذا الطلب إلى مترجم آخر",
+            "chooseTranslator": "اختار المترجم...",
+            "reassign": "إعادة التعيين"
+          },
+          "approve": {
+            "alert": "هل أنت متأكد من إعادة فتح هذا الطلب؟",
+            "desc": "هل أنت متأكد من رغبتك في الموافقة على الملاحظة: هذا أمر دائم",
+            "cancel": "الغاء",
+            "approve": "موافقه"
+          }
+        }
       }
     }
   }
