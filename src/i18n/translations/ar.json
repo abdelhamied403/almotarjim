@@ -13,6 +13,11 @@
         "translator": "مترجم",
         "client": "عميل"
       },
+      "requestStatus": {
+        "PENDING": "قيد الانتظار",
+        "IN_PROGRESS": "في تَقَدم",
+        "FINISHED": "انتهى"
+      },
       "dropzone": {
         "clickToUpload": "انقر للتحميل",
         "orDragAndDrop": "أو السحب والإفلات",

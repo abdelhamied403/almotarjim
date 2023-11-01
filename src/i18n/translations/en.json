@@ -13,6 +13,11 @@
         "translator": "translator",
         "client": "client"
       },
+      "requestStatus": {
+        "PENDING": "Pending",
+        "IN_PROGRESS": "In progress",
+        "FINISHED": "Finished"
+      },
       "dropzone": {
         "clickToUpload": "Click to upload",
         "orDragAndDrop": "or drag and drop",

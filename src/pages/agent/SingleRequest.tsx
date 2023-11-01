@@ -1,4 +1,4 @@
-import Attachment from "@/components/Attatchment";
+import Attachment from "@/components/Attachment";
 import Combobox from "@/components/Combobox";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";

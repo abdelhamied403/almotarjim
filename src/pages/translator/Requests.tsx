@@ -7,14 +7,12 @@ import { Link } from "react-router-dom";
 import noRequestsImage from "@/assets/no-requests.svg";
 import RequestService from "@/services/request.service";
 import { useQuery } from "react-query";
+import { RequestStatus } from "@/interfaces/request";
+import { requestStatusColors } from "@/constants/requestStatus";
 
 type Request = {
   id: string;
-  status: "PENDING";
-};
-
-const statusColors = {
-  PENDING: "text-[#FF6B00]",
+  status: RequestStatus;
 };
 
 const Requests = () => {
@@ -28,8 +26,8 @@ const Requests = () => {
       accessorKey: "status",
       header: t("user.requests.table.status"),
       cell: ({ row }) => (
-        <p className={statusColors[row.original.status]}>
-          <b>{row.original.status}</b>
+        <p className={requestStatusColors[row.original.status]}>
+          <b>{t(`shared.requestStatus.${row.original.status}`)}</b>
         </p>
       ),
     },
@@ -80,20 +78,6 @@ const Requests = () => {
       )}
       {!!requests.length && (
         <>
-          <div className="flex justify-end gap-4">
-            <Link to="/chat/123">
-              <Button className="flex gap-2 items-center" variant="subtle">
-                <HiChat />
-                {t("user.requests.chat")}
-              </Button>
-            </Link>
-            <Link to="/request/create">
-              <Button className="flex gap-2 items-center">
-                <HiPlus />
-                {t("user.requests.create")}
-              </Button>
-            </Link>
-          </div>
           <DataTable columns={columns} data={requests} />
         </>
       )}

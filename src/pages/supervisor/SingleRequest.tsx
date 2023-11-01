@@ -1,4 +1,4 @@
-import Attachment from "@/components/Attatchment";
+import Attachment from "@/components/Attachment";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { HiDownload } from "react-icons/hi";
@@ -17,7 +17,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import Combobox from "@/components/Combobox";
 import { Textarea } from "@/components/ui/textarea";
 import { useQuery } from "react-query";
 import User from "@/interfaces/user";
@@ -29,19 +28,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-const requestStatusVariants: any = {
-  PENDING: "warning",
-  FINISHED: "success",
-  default: "default",
-};
+import { requestStatusVariants } from "@/constants/requestStatus";
+import { cn } from "@/lib/utils";
 
 const SingleRequest = () => {
   const { t } = useI18n();
 
   const [request, setRequest] = useState<Request>();
   const [loading, setLoading] = useState<boolean>(false);
-  const { id } = useParams();
+  const { id = "" } = useParams();
 
   const getRequest = async () => {
     setLoading(true);
@@ -74,17 +69,15 @@ const SingleRequest = () => {
   };
 
   const onReassign = async () => {
-    const res = await RequestService.assignRequest(
-      id || "",
-      reassignedTranslator
-    );
-    console.log(res);
+    await RequestService.assignRequest(id, reassignedTranslator);
+    getRequest();
     setReassignedTranslator("");
     setIsReassignDialogOpen(false);
   };
 
-  const onApprove = () => {
-    console.log("approve");
+  const onApprove = async () => {
+    await RequestService.approveRequest(id);
+    getRequest();
     setIsApproveDialogOpen(false);
   };
 
@@ -125,7 +118,7 @@ const SingleRequest = () => {
                   {t("supervisor.singleRequest.status")}{" "}
                 </b>
                 <Badge
-                  variant={requestStatusVariants[request?.status || "default"]}
+                  variant={requestStatusVariants[request?.status || "PENDING"]}
                 >
                   {request?.status}
                 </Badge>
@@ -140,7 +133,12 @@ const SingleRequest = () => {
           </div>
 
           {/* Grid Item 2 */}
-          <div className="h-full max-h-[500px] lg:max-h-none row-span-2 overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl">
+          <div
+            className={cn(
+              "h-full max-h-[500px] lg:max-h-none overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl",
+              !request?.translations && "row-span-2"
+            )}
+          >
             <div className="flex gap-2">
               <Button onClick={() => setIsApproveDialogOpen(true)}>
                 {t("supervisor.singleRequest.approve")}
@@ -169,7 +167,7 @@ const SingleRequest = () => {
           </div>
 
           {/* Grid Item 4 */}
-          {request?.translations?.length && (
+          {!!request?.translations && (
             <div className="bg-white overflow-y-auto p-4 rounded-xl">
               <div className="flex flex-col gap-2">
                 <div className="head flex flex-wrap justify-between mb-4">
@@ -179,7 +177,7 @@ const SingleRequest = () => {
                     {t("supervisor.singleRequest.downloadAll")}
                   </Button>
                 </div>
-                {request?.translations?.map((file) => (
+                {request?.translations.files?.map((file) => (
                   <Attachment {...file}></Attachment>
                 ))}
               </div>

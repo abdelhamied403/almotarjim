@@ -29,11 +29,34 @@ const assignRequest = async (request_id: string, translator_id: string) => {
   return res.data;
 };
 
+const approveRequest = async (request_id: string) => {
+  const res = await api.get(`/supervisor/done/${request_id}`);
+  return res.data;
+};
+
+const submitRequest = async (request_id: string, files: File[]) => {
+  const config = {
+    headers: {
+      "Content-Type":
+        "multipart/form-data; charset=utf-8; boundary=" +
+        Math.random().toString().substr(2),
+    },
+  };
+  const data = {
+    request_id,
+    files,
+  };
+  const res = await formAxios.post("/translations/create", data, config);
+  return res.data;
+};
+
 const RequestService = {
   getRequests,
   getRequest,
   createRequest,
   assignRequest,
+  approveRequest,
+  submitRequest,
 };
 
 export default RequestService;

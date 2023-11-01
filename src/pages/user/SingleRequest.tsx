@@ -1,4 +1,4 @@
-import Attachment from "@/components/Attatchment";
+import Attachment from "@/components/Attachment";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { HiDownload } from "react-icons/hi";
