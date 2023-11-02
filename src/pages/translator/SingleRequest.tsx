@@ -8,6 +8,7 @@ import RequestService from "@/services/request.service";
 import { Link, useParams } from "react-router-dom";
 import useI18n from "@/hooks/useI18n";
 import { requestStatusVariants } from "@/constants/requestStatus";
+import { downloadURI } from "@/lib/file";
 
 const SingleRequest = () => {
   const { t } = useI18n();
@@ -21,6 +22,15 @@ const SingleRequest = () => {
     const request = await RequestService.getRequest(id).catch(console.log);
     setRequest(request);
     setLoading(false);
+  };
+
+  //download all attachments
+  const handleDownloadAll = (files) => {
+    files.forEach((file) => {
+      const nameParts = file.path.split("/");
+      const name = nameParts[nameParts.length - 1];
+      downloadURI(file.path, name);
+    });
   };
 
   useEffect(() => {
@@ -82,7 +92,11 @@ const SingleRequest = () => {
               <div className="flex flex-col gap-2">
                 <div className="head flex flex-wrap justify-between mb-4">
                   <h2>{t("user.singleRequest.attachments")}</h2>
-                  <Button size="sm" variant="subtle">
+                  <Button
+                    size="sm"
+                    variant="subtle"
+                    onClick={() => handleDownloadAll(request?.files)}
+                  >
                     <HiDownload />
                     {t("user.singleRequest.downloadAll")}
                   </Button>
@@ -95,7 +109,7 @@ const SingleRequest = () => {
           </div>
           <div className="bg-white p-4 rounded-xl mt-4 flex justify-center">
             <Link to="submit">
-              <Button>Submit</Button>
+              <Button>{t("translator.singleRequest.submit")}</Button>
             </Link>
           </div>
         </>

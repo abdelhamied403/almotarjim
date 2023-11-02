@@ -1,40 +1,37 @@
 import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
+import { requestStatusColors } from "@/constants/requestStatus";
 import useI18n from "@/hooks/useI18n";
+import RequestService from "@/services/request.service";
 import { ColumnDef } from "@tanstack/react-table";
-import { useState } from "react";
 import { HiChat, HiEye, HiPlus } from "react-icons/hi";
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 
 type Request = {
   id: string;
   status: "PENDING";
 };
-const statusColors = {
-  PENDING: "text-[#FF6B00]",
-};
 
 const Requests = () => {
   const { t } = useI18n();
-  const [data, setData] = useState<Request[]>([]);
-
   const columns: ColumnDef<Request>[] = [
     {
       accessorKey: "title",
-      header: t("agent.requests.table.title"),
+      header: t("supervisor.requests.table.title"),
     },
     {
       accessorKey: "status",
-      header: t("agent.requests.table.status"),
+      header: t("supervisor.requests.table.status"),
       cell: ({ row }) => (
-        <p className={statusColors[row.original.status]}>
-          <b>{row.original.status}</b>
+        <p className={requestStatusColors[row.original.status]}>
+          <b>{t(`shared.requestStatus.${row.original.status}`)}</b>
         </p>
       ),
     },
     {
       id: "actions",
-      header: t("agent.requests.table.actions"),
+      header: t("supervisor.requests.table.actions"),
       cell: ({ row }) => (
         <Link to={`/request/${row.original.id}`}>
           <Button>
@@ -44,6 +41,15 @@ const Requests = () => {
       ),
     },
   ];
+
+  const { isLoading, data: requests } = useQuery(
+    "requests",
+    RequestService.getRequests
+  );
+
+  if (isLoading) {
+    return <div className="">loading....</div>;
+  }
 
   return (
     <>
@@ -61,7 +67,7 @@ const Requests = () => {
           </Button>
         </Link>
       </div>
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={requests} />
     </>
   );
 };

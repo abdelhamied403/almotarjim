@@ -16,7 +16,7 @@
       "requestStatus": {
         "PENDING": "قيد الانتظار",
         "IN_PROGRESS": "في تَقَدم",
-        "FINISHED": "انتهى"
+        "DONE": "تم"
       },
       "dropzone": {
         "clickToUpload": "انقر للتحميل",
@@ -99,8 +99,8 @@
       "singleRequest": {
         "basicInfo": "المعلومات الأساسيه",
         "requestId": "رقم الطلب:",
-        "service": "Service:",
-        "translator:": "المترجم:",
+        "service": "الخدمه:",
+        "translator": "المترجم:",
         "status": "الحاله:",
         "description": "الوصف:",
         "attachments": "المرفقات",
@@ -118,9 +118,8 @@
         "chatWithUs": "الدردشه معنا",
         "createRequest": "إضافه طلب جديد",
         "table": {
-          "status": "حاله",
-          "email": "البريد الالكترونى",
-          "amount": "الكميه",
+          "title": "العنوان",
+          "status": "الحاله",
           "actions": "اجراءات"
         }
       },
@@ -157,6 +156,10 @@
             "cancel": "الغاء",
             "approve": "موافقه"
           }
+        },
+        "toast": {
+          "title": "لقد تم اضافه الترجمه بنجاح",
+          "error": "حدث خطأ"
         }
       },
       "chats": {
@@ -185,6 +188,13 @@
         "desc": " Lorem ipsum dolor sit amet consectetur. Placerat vel turpis est morbi pharetra tortor quis. Aenean enim faucibus fringilla id elementum malesuada. Praesent turpis facilisis ornare scelerisque nec elementum. Massa dignissim gravida euismod ullamcorper nulla scelerisque lectus lectus sed.Lorem ipsum dolor sit amet consectetur. Placerat vel turpis est morbi",
         "attachments": "المرفقات",
         "submit": "اضافه طلب"
+      },
+      "submitRequest": {
+        "submitYourFiles": "اضف ملفاتك",
+        "toast": {
+          "title": "لقد تم اضافه الترجمه بنجاح",
+          "error": "حدث خطأ"
+        }
       }
     },
     "agent": {

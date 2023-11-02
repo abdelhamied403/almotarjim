@@ -16,7 +16,7 @@
       "requestStatus": {
         "PENDING": "Pending",
         "IN_PROGRESS": "In progress",
-        "FINISHED": "Finished"
+        "DONE": "Done"
       },
       "dropzone": {
         "clickToUpload": "Click to upload",
@@ -100,7 +100,7 @@
         "basicInfo": "Basic Information",
         "requestId": "Request id:",
         "service": "Service:",
-        "translator:": "Translator:",
+        "translator": "Translator:",
         "status": "Status:",
         "description": "Description:",
         "attachments": "Attachments",
@@ -118,9 +118,8 @@
         "chatWithUs": "Chat with us",
         "createRequest": "Create Request",
         "table": {
+          "title": "Title",
           "status": "Status",
-          "email": "Email",
-          "amount": "Amount",
           "actions": "Actions"
         }
       },
@@ -157,6 +156,10 @@
             "cancel": "Cancel",
             "approve": "Approve"
           }
+        },
+        "toast": {
+          "title": "Translation submitted successfully",
+          "error": "Something Went Wrong"
         }
       },
       "chats": {
@@ -185,6 +188,13 @@
         "desc": " Lorem ipsum dolor sit amet consectetur. Placerat vel turpis est morbi pharetra tortor quis. Aenean enim faucibus fringilla id elementum malesuada. Praesent turpis facilisis ornare scelerisque nec elementum. Massa dignissim gravida euismod ullamcorper nulla scelerisque lectus lectus sed.Lorem ipsum dolor sit amet consectetur. Placerat vel turpis est morbi",
         "attachments": "Attachments",
         "submit": "Submit"
+      },
+      "submitRequest": {
+        "submitYourFiles": "Submit your files",
+        "toast": {
+          "title": "Translation submitted successfully",
+          "error": "Something Went Wrong"
+        }
       }
     },
     "agent": {

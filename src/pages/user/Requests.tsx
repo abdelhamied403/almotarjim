@@ -7,14 +7,11 @@ import noRequestsImage from "@/assets/no-requests.svg";
 import RequestService from "@/services/request.service";
 import { useQuery } from "react-query";
 import useI18n from "@/hooks/useI18n";
+import { requestStatusColors } from "@/constants/requestStatus";
 
 type Request = {
   id: string;
   status: "PENDING";
-};
-
-const statusColors = {
-  PENDING: "text-[#FF6B00]",
 };
 
 const Requests = () => {
@@ -22,20 +19,20 @@ const Requests = () => {
   const columns: ColumnDef<Request>[] = [
     {
       accessorKey: "title",
-      header: t("user.requests.table.title"),
+      header: t("translator.requests.table.title"),
     },
     {
       accessorKey: "status",
-      header: t("user.requests.table.status"),
+      header: t("translator.requests.table.status"),
       cell: ({ row }) => (
-        <p className={statusColors[row.original.status]}>
-          <b>{row.original.status}</b>
+        <p className={requestStatusColors[row.original.status]}>
+          <b>{t(`shared.requestStatus.${row.original.status}`)}</b>
         </p>
       ),
     },
     {
       id: "actions",
-      header: t("user.requests.table.actions"),
+      header: t("translator.requests.table.actions"),
       cell: ({ row }) => (
         <Link to={`/request/${row.original.id}`}>
           <Button>

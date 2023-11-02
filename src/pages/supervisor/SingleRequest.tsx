@@ -30,6 +30,8 @@ import {
 } from "@/components/ui/select";
 import { requestStatusVariants } from "@/constants/requestStatus";
 import { cn } from "@/lib/utils";
+import { downloadURI } from "@/lib/file";
+import { useToast } from "@/components/ui/use-toast";
 
 const SingleRequest = () => {
   const { t } = useI18n();
@@ -37,6 +39,7 @@ const SingleRequest = () => {
   const [request, setRequest] = useState<Request>();
   const [loading, setLoading] = useState<boolean>(false);
   const { id = "" } = useParams();
+  const { toast } = useToast();
 
   const getRequest = async () => {
     setLoading(true);
@@ -47,6 +50,14 @@ const SingleRequest = () => {
     setLoading(false);
   };
 
+  //download all attachments
+  const handleDownloadAll = (files) => {
+    files.forEach((file) => {
+      const nameParts = file.path.split("/");
+      const name = nameParts[nameParts.length - 1];
+      downloadURI(file.path, name);
+    });
+  };
   // reopen
   const [isReopenDialogOpen, setIsReopenDialogOpen] = useState(false);
   const [reopenNotes, setReopenNotes] = useState("");
@@ -70,6 +81,9 @@ const SingleRequest = () => {
 
   const onReassign = async () => {
     await RequestService.assignRequest(id, reassignedTranslator);
+    toast({
+      title: t("supervisor.singleRequest.toast.title"),
+    });
     getRequest();
     setReassignedTranslator("");
     setIsReassignDialogOpen(false);
@@ -77,6 +91,9 @@ const SingleRequest = () => {
 
   const onApprove = async () => {
     await RequestService.approveRequest(id);
+    toast({
+      title: t("supervisor.singleRequest.toast.title"),
+    });
     getRequest();
     setIsApproveDialogOpen(false);
   };
@@ -120,7 +137,7 @@ const SingleRequest = () => {
                 <Badge
                   variant={requestStatusVariants[request?.status || "PENDING"]}
                 >
-                  {request?.status}
+                  {t(`shared.requestStatus.${request?.status}`)}
                 </Badge>
               </p>
               <p>
@@ -155,7 +172,11 @@ const SingleRequest = () => {
             <div className="flex flex-col gap-2">
               <div className="head flex flex-wrap justify-between mb-4">
                 <h2>{t("supervisor.singleRequest.attachments")}</h2>
-                <Button size="sm" variant="subtle">
+                <Button
+                  size="sm"
+                  variant="subtle"
+                  onClick={() => handleDownloadAll(request?.files)}
+                >
                   <HiDownload />
                   {t("supervisor.singleRequest.downloadAll")}
                 </Button>
@@ -172,7 +193,13 @@ const SingleRequest = () => {
               <div className="flex flex-col gap-2">
                 <div className="head flex flex-wrap justify-between mb-4">
                   <h2>{t("supervisor.singleRequest.translations")}</h2>
-                  <Button size="sm" variant="subtle">
+                  <Button
+                    size="sm"
+                    variant="subtle"
+                    onClick={() =>
+                      handleDownloadAll(request?.translations.files)
+                    }
+                  >
                     <HiDownload />
                     {t("supervisor.singleRequest.downloadAll")}
                   </Button>
