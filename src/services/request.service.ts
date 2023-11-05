@@ -50,6 +50,11 @@ const submitRequest = async (request_id: string, files: File[]) => {
   return res.data;
 };
 
+const getChat = async (requestId: string) => {
+  const res = await api.get(`/messages/get-chat-by-request/${requestId}`);
+  return res.data;
+};
+
 const RequestService = {
   getRequests,
   getRequest,
@@ -57,6 +62,7 @@ const RequestService = {
   assignRequest,
   approveRequest,
   submitRequest,
+  getChat,
 };
 
 export default RequestService;

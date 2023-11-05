@@ -1,7 +1,7 @@
 import Chat from "@/containers/Chat";
 
 const SingleChat = () => {
-  return <Chat messages={[]} />;
+  return <Chat status="open" messages={[]} />;
 };
 
 export default SingleChat;

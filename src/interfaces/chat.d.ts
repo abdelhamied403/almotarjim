@@ -1,12 +1,11 @@
-import Request from "./request";
 import User from "./user";
 
 type Chat = {
   messages: string[];
-  id: 8;
-  owner_id: User;
-  receiver_id: User;
-  request_id: Request;
+  id: number;
+  owner: User;
+  receiver: User;
+  request_id: number;
   status: "open" | "closed";
 };
 
