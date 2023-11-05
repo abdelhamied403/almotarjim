@@ -9,6 +9,7 @@ import { Link, useParams } from "react-router-dom";
 import useI18n from "@/hooks/useI18n";
 import { requestStatusVariants } from "@/constants/requestStatus";
 import { downloadURI } from "@/lib/file";
+import Spinner from "@/components/ui/Spinner";
 
 const SingleRequest = () => {
   const { t } = useI18n();
@@ -39,7 +40,11 @@ const SingleRequest = () => {
 
   return (
     <div className="page flex-1">
-      {loading && <p>loading...</p>}
+      {loading && (
+        <p className="flex items-center justify-center">
+          <Spinner />
+        </p>
+      )}
       {!loading && (
         <>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:overflow-hidden lg:auto-rows-fr">

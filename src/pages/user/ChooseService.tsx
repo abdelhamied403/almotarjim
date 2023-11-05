@@ -1,4 +1,5 @@
 import RequestService from "@/components/RequestService";
+import Spinner from "@/components/ui/Spinner";
 import useI18n from "@/hooks/useI18n";
 import Service from "@/interfaces/service";
 import ServiceService from "@/services/services.service";
@@ -13,7 +14,11 @@ const ChooseService = () => {
   );
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-end">
+        <Spinner />
+      </div>
+    );
   }
 
   return (

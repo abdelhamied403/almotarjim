@@ -6,14 +6,14 @@ type RequestStatusType = {
 
 const requestStatusVariants: RequestStatusType = {
   PENDING: "warning",
-  IN_PROGRESS: "warning",
+  IN_PROGRESS: "default",
   DONE: "success",
   DEFAULT: "slate",
 };
 
 const requestStatusColors: RequestStatusType = {
   PENDING: "text-[#FF6B00]",
-  IN_PROGRESS: "text-[#FF6B00]",
+  IN_PROGRESS: "text-primary-600",
   DONE: "text-[#19c710]",
   DEFAULT: "text-[#999]",
 };

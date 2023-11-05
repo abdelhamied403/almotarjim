@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { BsFillChatDotsFill } from "react-icons/bs";
 import useI18n from "@/hooks/useI18n";
 import { Link } from "react-router-dom";
+import Spinner from "@/components/ui/Spinner";
 
 const Home = () => {
   const { t } = useI18n();
@@ -16,7 +17,11 @@ const Home = () => {
   );
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center">
+        <Spinner />
+      </div>
+    );
   }
   return (
     <>

@@ -8,6 +8,7 @@ import RequestService from "@/services/request.service";
 import { useQuery } from "react-query";
 import useI18n from "@/hooks/useI18n";
 import { requestStatusColors } from "@/constants/requestStatus";
+import Spinner from "@/components/ui/Spinner";
 
 type Request = {
   id: string;
@@ -49,7 +50,11 @@ const Requests = () => {
   );
 
   if (isLoading) {
-    return <div className="">loading....</div>;
+    return (
+      <div className="flex items-center justify-center">
+        <Spinner />
+      </div>
+    );
   }
 
   return (

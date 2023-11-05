@@ -5,6 +5,7 @@ import LanguageProvider from "./providers/LanguageProvider";
 import MainRouter from "./router/MainRouter";
 import AuthService from "./services/auth.service";
 import useProfileStore from "./store/profile.slice";
+import Spinner from "./components/ui/Spinner";
 
 const queryClient = new QueryClient();
 
@@ -27,7 +28,7 @@ const App = () => {
     <>
       <LanguageProvider defaultLocale="en">
         <QueryClientProvider client={queryClient}>
-          {loading ? <p>loading...</p> : <MainRouter></MainRouter>}
+          {loading ? <Spinner /> : <MainRouter></MainRouter>}
         </QueryClientProvider>
       </LanguageProvider>
     </>

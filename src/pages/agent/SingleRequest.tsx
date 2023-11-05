@@ -28,6 +28,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Spinner from "@/components/ui/Spinner";
 
 const requestStatusVariants: any = {
   PENDING: "warning",
@@ -92,8 +93,12 @@ const SingleRequest = () => {
   }, []);
 
   return (
-    <div className="page flex-1">
-      {loading && <p>loading...</p>}
+    <div className="flex-1 items-center justify-center">
+      {loading && (
+        <p>
+          <Spinner />
+        </p>
+      )}
       {!loading && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full lg:overflow-hidden lg:auto-rows-fr">
           {/* Grid Item 1 */}

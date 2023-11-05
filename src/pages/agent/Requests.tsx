@@ -1,4 +1,5 @@
 import { DataTable } from "@/components/Datatable";
+import Spinner from "@/components/ui/Spinner";
 import { Button } from "@/components/ui/button";
 import { requestStatusColors } from "@/constants/requestStatus";
 import useI18n from "@/hooks/useI18n";
@@ -48,7 +49,11 @@ const Requests = () => {
   );
 
   if (isLoading) {
-    return <div className="">loading....</div>;
+    return (
+      <div className="flex items-center justify-center">
+        <Spinner />
+      </div>
+    );
   }
 
   return (
