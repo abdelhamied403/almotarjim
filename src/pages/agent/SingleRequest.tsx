@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { HiDownload } from "react-icons/hi";
 import Chat from "@/containers/Chat";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Request from "@/interfaces/request";
 import RequestService from "@/services/request.service";
 import { useParams } from "react-router-dom";
@@ -41,25 +41,16 @@ const SingleRequest = () => {
 
   const [request, setRequest] = useState<Request>();
   const [loading, setLoading] = useState<boolean>(false);
-  const { id } = useParams();
-
-  const getRequest = async () => {
-    setLoading(true);
-    const request = await RequestService.getRequest(id || "").catch(
-      console.log
-    );
-    setRequest(request);
-    setLoading(false);
-  };
+  const { id = "" } = useParams();
 
   // reopen
   const [isReopenDialogOpen, setIsReopenDialogOpen] = useState(false);
   const [reopenNotes, setReopenNotes] = useState("");
 
   // reassign
-  const { isLoading: isTranslatorsLoading, data: translators } = useQuery<
-    User[]
-  >("requestTranslators", () => AuthService.getUsersByRole("translator"), {});
+  const { isLoading: isTranslatorsLoading, data: translators } = useQuery<{
+    data: User[];
+  }>("requestTranslators", () => AuthService.getUsersByRole("translator"), {});
 
   const [isReassignDialogOpen, setIsReassignDialogOpen] = useState(false);
   const [reassignedTranslator, setReassignedTranslator] = useState("");
@@ -74,11 +65,7 @@ const SingleRequest = () => {
   };
 
   const onReassign = async () => {
-    const res = await RequestService.assignRequest(
-      id || "",
-      reassignedTranslator
-    );
-    console.log(res);
+    await RequestService.assignRequest(id, reassignedTranslator);
     setReassignedTranslator("");
     setIsReassignDialogOpen(false);
   };
@@ -88,9 +75,16 @@ const SingleRequest = () => {
     setIsApproveDialogOpen(false);
   };
 
+  const getRequest = useCallback(async () => {
+    setLoading(true);
+    const request = await RequestService.getRequest(id).catch(console.log);
+    setRequest(request);
+    setLoading(false);
+  }, [id]);
+
   useEffect(() => {
     getRequest();
-  }, []);
+  }, [getRequest]);
 
   return (
     <div className="flex-1 items-center justify-center">
@@ -173,7 +167,7 @@ const SingleRequest = () => {
           </div>
 
           {/* Grid Item 4 */}
-          {request?.translations?.length && (
+          {request?.translations && (
             <div className="bg-white overflow-y-auto p-4 rounded-xl">
               <div className="flex flex-col gap-2">
                 <div className="head flex flex-wrap justify-between mb-4">
@@ -183,7 +177,7 @@ const SingleRequest = () => {
                     {t("supervisor.singleRequest.downloadAll")}
                   </Button>
                 </div>
-                {request?.translations?.map((file) => (
+                {request?.translations?.files.map((file) => (
                   <Attachment {...file}></Attachment>
                 ))}
               </div>
@@ -226,9 +220,9 @@ const SingleRequest = () => {
               {t("supervisor.singleRequest.dialog.reassign.alert")}
             </DialogTitle>
             <DialogDescription asChild>
-              <>
-                <p>{t("supervisor.singleRequest.dialog.reassign.desc")}</p>
-
+              <p>{t("supervisor.singleRequest.dialog.reassign.desc")}</p>
+              {isTranslatorsLoading && <Spinner />}
+              {!isTranslatorsLoading && (
                 <Select onValueChange={setReassignedTranslator}>
                   <SelectTrigger>
                     <SelectValue
@@ -245,7 +239,7 @@ const SingleRequest = () => {
                     ))}
                   </SelectContent>
                 </Select>
-              </>
+              )}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
