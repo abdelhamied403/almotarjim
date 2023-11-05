@@ -88,39 +88,35 @@ const SingleRequest = () => {
 
   return (
     <div className="flex-1 items-center justify-center">
-      {loading && (
-        <p>
-          <Spinner />
-        </p>
-      )}
+      {loading && <Spinner />}
       {!loading && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full lg:overflow-hidden lg:auto-rows-fr">
           {/* Grid Item 1 */}
           <div className="bg-white p-4 rounded-xl overflow-y-auto">
             {/* details */}
             <div className="flex flex-col gap-2">
-              <h2>{t("supervisor.singleRequest.basicInfo")}</h2>
+              <h2>{t("agent.singleRequest.basicInfo")}</h2>
               <p>
                 <b className="text-primary">
-                  {t("supervisor.singleRequest.requestId")}{" "}
+                  {t("agent.singleRequest.requestId")}{" "}
                 </b>
                 {request?.id}
               </p>
               <p>
                 <b className="text-primary">
-                  {t("supervisor.singleRequest.service")}{" "}
+                  {t("agent.singleRequest.service")}{" "}
                 </b>
                 {request?.service?.title}
               </p>
               <p>
                 <b className="text-primary">
-                  {t("supervisor.singleRequest.translator")}{" "}
+                  {t("agent.singleRequest.translator")}{" "}
                 </b>
                 {request?.translator?.name}
               </p>
               <p>
                 <b className="text-primary">
-                  {t("supervisor.singleRequest.status")}{" "}
+                  {t("agent.singleRequest.status")}{" "}
                 </b>
                 <Badge
                   variant={requestStatusVariants[request?.status || "default"]}
@@ -130,7 +126,7 @@ const SingleRequest = () => {
               </p>
               <p>
                 <b className="text-primary">
-                  {t("supervisor.singleRequest.description")}{" "}
+                  {t("agent.singleRequest.description")}{" "}
                 </b>
                 {request?.description}
               </p>
@@ -141,10 +137,10 @@ const SingleRequest = () => {
           <div className="h-full max-h-[500px] lg:max-h-none row-span-2 overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl">
             <div className="flex gap-2">
               <Button onClick={() => setIsApproveDialogOpen(true)}>
-                {t("supervisor.singleRequest.approve")}
+                {t("agent.singleRequest.approve")}
               </Button>
               <Button onClick={() => setIsReassignDialogOpen(true)}>
-                {t("supervisor.singleRequest.assign")}
+                {t("agent.singleRequest.assign")}
               </Button>
             </div>
             <Chat {...request?.chat} />
@@ -154,10 +150,10 @@ const SingleRequest = () => {
           <div className="bg-white overflow-y-auto p-4 rounded-xl">
             <div className="flex flex-col gap-2">
               <div className="head flex flex-wrap justify-between mb-4">
-                <h2>{t("supervisor.singleRequest.attachments")}</h2>
+                <h2>{t("agent.singleRequest.attachments")}</h2>
                 <Button size="sm" variant="subtle">
                   <HiDownload />
-                  {t("supervisor.singleRequest.downloadAll")}
+                  {t("agent.singleRequest.downloadAll")}
                 </Button>
               </div>
               {request?.files?.map((file) => (
@@ -171,10 +167,10 @@ const SingleRequest = () => {
             <div className="bg-white overflow-y-auto p-4 rounded-xl">
               <div className="flex flex-col gap-2">
                 <div className="head flex flex-wrap justify-between mb-4">
-                  <h2>{t("supervisor.singleRequest.translations")}</h2>
+                  <h2>{t("agent.singleRequest.translations")}</h2>
                   <Button size="sm" variant="subtle">
                     <HiDownload />
-                    {t("supervisor.singleRequest.downloadAll")}
+                    {t("agent.singleRequest.downloadAll")}
                   </Button>
                 </div>
                 {request?.translations?.files.map((file) => (
@@ -190,12 +186,10 @@ const SingleRequest = () => {
       <Dialog open={isReopenDialogOpen} onOpenChange={setIsReopenDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>
-              {t("supervisor.singleRequest.dialog.alert")}
-            </DialogTitle>
+            <DialogTitle>{t("agent.singleRequest.dialog.alert")}</DialogTitle>
             <DialogDescription>
               <Textarea
-                placeholder={t("supervisor.singleRequest.dialog.anyNotes")}
+                placeholder={t("agent.singleRequest.dialog.anyNotes")}
                 value={reopenNotes}
                 onChange={(e) => setReopenNotes(e.target.value)}
               />
@@ -203,7 +197,7 @@ const SingleRequest = () => {
           </DialogHeader>
           <DialogFooter>
             <Button onClick={onReopen}>
-              {t("supervisor.singleRequest.dialog.reopen")}
+              {t("agent.singleRequest.dialog.reopen")}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -217,17 +211,17 @@ const SingleRequest = () => {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {t("supervisor.singleRequest.dialog.reassign.alert")}
+              {t("agent.singleRequest.dialog.reassign.alert")}
             </DialogTitle>
             <DialogDescription asChild>
-              <p>{t("supervisor.singleRequest.dialog.reassign.desc")}</p>
+              <p>{t("agent.singleRequest.dialog.reassign.desc")}</p>
               {isTranslatorsLoading && <Spinner />}
               {!isTranslatorsLoading && (
                 <Select onValueChange={setReassignedTranslator}>
                   <SelectTrigger>
                     <SelectValue
                       placeholder={t(
-                        "supervisor.singleRequest.dialog.reassign.chooseTranslator"
+                        "agent.singleRequest.dialog.reassign.chooseTranslator"
                       )}
                     />
                   </SelectTrigger>
@@ -244,7 +238,7 @@ const SingleRequest = () => {
           </DialogHeader>
           <DialogFooter>
             <Button onClick={onReassign}>
-              {t("supervisor.singleRequest.dialog.reassign.reassign")}
+              {t("agent.singleRequest.dialog.reassign.reassign")}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -255,20 +249,20 @@ const SingleRequest = () => {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {t("supervisor.singleRequest.dialog.approve.alert")}
+              {t("agent.singleRequest.dialog.approve.alert")}
             </DialogTitle>
             <DialogDescription>
-              {t("supervisor.singleRequest.dialog.approve.desc")}
+              {t("agent.singleRequest.dialog.approve.desc")}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogTrigger asChild>
               <Button variant="subtle">
-                {t("supervisor.singleRequest.dialog.approve.cancel")}
+                {t("agent.singleRequest.dialog.approve.cancel")}
               </Button>
             </DialogTrigger>
             <Button onClick={onApprove}>
-              {t("supervisor.singleRequest.dialog.approve.approve")}
+              {t("agent.singleRequest.dialog.approve.approve")}
             </Button>
           </DialogFooter>
         </DialogContent>
