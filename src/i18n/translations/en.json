@@ -23,6 +23,9 @@
         "orDragAndDrop": "or drag and drop",
         "max": "Max",
         "dropFilesToUpload": "Drop files to upload"
+      },
+      "table": {
+        "noResults": "No Results"
       }
     },
     "home": {

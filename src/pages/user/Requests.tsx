@@ -44,10 +44,13 @@ const Requests = () => {
     },
   ];
 
-  const { isLoading, data: requests } = useQuery(
-    "requests",
-    RequestService.getRequests
-  );
+  const {
+    isLoading,
+    data: requests,
+    isError,
+  } = useQuery("requests", RequestService.getRequests, {
+    retry: false,
+  });
 
   if (isLoading) {
     return (
@@ -57,32 +60,34 @@ const Requests = () => {
     );
   }
 
-  return (
-    <div className="requests h-full">
-      {!requests.length && (
-        <>
-          <div className="flex flex-col gap-4 justify-center items-center h-full">
-            <img src={noRequestsImage} alt="" />
-            <div className="flex justify-center gap-4">
-              <Link to="/chat/123">
-                <Button className="flex gap-2 items-center" variant="subtle">
-                  <HiChat />
-                  {t("user.requests.chat")}
-                </Button>
-              </Link>
-              <Link to="/request/create">
-                <Button className="flex gap-2 items-center">
-                  <HiPlus />
-                  {t("user.requests.create")}
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </>
-      )}
-      {!!requests.length && (
-        <>
-          <div className="flex justify-end gap-4">
+  if (isError) {
+    return (
+      <div className="requests h-full">
+        <div className="flex justify-end gap-4">
+          <Link to="/chat/123">
+            <Button className="flex gap-2 items-center" variant="subtle">
+              <HiChat />
+              {t("user.requests.chat")}
+            </Button>
+          </Link>
+          <Link to="/request/create">
+            <Button className="flex gap-2 items-center">
+              <HiPlus />
+              {t("user.requests.create")}
+            </Button>
+          </Link>
+        </div>
+        <DataTable columns={columns} data={[]} />
+      </div>
+    );
+  }
+
+  if (!requests?.length) {
+    return (
+      <>
+        <div className="flex flex-col gap-4 justify-center items-center h-full">
+          <img src={noRequestsImage} alt="" />
+          <div className="flex justify-center gap-4">
             <Link to="/chat/123">
               <Button className="flex gap-2 items-center" variant="subtle">
                 <HiChat />
@@ -96,9 +101,28 @@ const Requests = () => {
               </Button>
             </Link>
           </div>
-          <DataTable columns={columns} data={requests} />
-        </>
-      )}
+        </div>
+      </>
+    );
+  }
+
+  return (
+    <div className="requests h-full">
+      <div className="flex justify-end gap-4">
+        <Link to="/chat/123">
+          <Button className="flex gap-2 items-center" variant="subtle">
+            <HiChat />
+            {t("user.requests.chat")}
+          </Button>
+        </Link>
+        <Link to="/request/create">
+          <Button className="flex gap-2 items-center">
+            <HiPlus />
+            {t("user.requests.create")}
+          </Button>
+        </Link>
+      </div>
+      <DataTable columns={columns} data={requests} />
     </div>
   );
 };

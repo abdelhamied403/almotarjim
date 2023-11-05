@@ -1,14 +1,5 @@
-import useUser from "@/hooks/useUser";
-
 const Error404 = () => {
-  const user = useUser();
-
-  return (
-    <>
-      <p>{JSON.stringify(user)}</p>
-      <p>Error404 page</p>
-    </>
-  );
+  return <>Hello abdelhamied this page is not available</>;
 };
 
 export default Error404;

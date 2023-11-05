@@ -23,6 +23,9 @@
         "orDragAndDrop": "أو السحب والإفلات",
         "max": "الأعلى",
         "dropFilesToUpload": "قم بإسقاط الملفات للتحميل"
+      },
+      "table": {
+        "noResults": "لا يوجد نتائج"
       }
     },
     "home": {
