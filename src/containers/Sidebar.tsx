@@ -3,6 +3,7 @@ import { Button } from "../components/ui/button";
 import { HiLogout } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import useI18n from "@/hooks/useI18n";
+import { useQueryClient } from "react-query";
 
 export type SidebarProps = {
   children: JSX.Element | JSX.Element[];
@@ -11,9 +12,12 @@ const Sidebar = ({ children }: SidebarProps) => {
   const { role, user } = useUser();
   const { t } = useI18n();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
+    queryClient.clear();
   };
 
   return (
