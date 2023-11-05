@@ -246,26 +246,28 @@ const SingleRequest = () => {
               {t("supervisor.singleRequest.dialog.reassign.alert")}
             </DialogTitle>
             <DialogDescription asChild>
-              <p>{t("supervisor.singleRequest.dialog.reassign.desc")}</p>
-              {isTranslatorsLoading && <Spinner />}
-              {!isTranslatorsLoading && (
-                <Select onValueChange={setReassignedTranslator}>
-                  <SelectTrigger>
-                    <SelectValue
-                      placeholder={t(
-                        "supervisor.singleRequest.dialog.reassign.chooseTranslator"
-                      )}
-                    />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {translators?.data.map((translator) => (
-                      <SelectItem value={translator.id}>
-                        {translator.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              )}
+              <>
+                <p>{t("supervisor.singleRequest.dialog.reassign.desc")}</p>
+                {isTranslatorsLoading && <Spinner />}
+                {!isTranslatorsLoading && (
+                  <Select onValueChange={setReassignedTranslator}>
+                    <SelectTrigger>
+                      <SelectValue
+                        placeholder={t(
+                          "supervisor.singleRequest.dialog.reassign.chooseTranslator"
+                        )}
+                      />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {translators?.data.map((translator) => (
+                        <SelectItem value={translator.id}>
+                          {translator.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
+              </>
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
