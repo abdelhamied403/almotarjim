@@ -13,7 +13,7 @@ const Error404 = () => {
               <Button variant={"error"}>Go To Home Page</Button>
             </Link>
           </div>
-          <div>
+          <div className="order-first">
             <img src={error} alt="404 not found" />
           </div>
         </div>
