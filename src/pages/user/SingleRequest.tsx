@@ -3,46 +3,45 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { HiDownload } from "react-icons/hi";
 import Chat from "@/containers/Chat";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Request from "@/interfaces/request";
 import RequestService from "@/services/request.service";
 import { useParams } from "react-router-dom";
 import useI18n from "@/hooks/useI18n";
 import Spinner from "@/components/ui/Spinner";
-
-const requestStatusVariants: any = {
-  PENDING: "warning",
-  FINISHED: "success",
-  default: "default",
-};
+import { requestStatusVariants } from "@/constants/requestStatus";
+import { downloadURI } from "@/lib/file";
 
 const SingleRequest = () => {
   const { t } = useI18n();
 
   const [request, setRequest] = useState<Request>();
   const [loading, setLoading] = useState<boolean>(false);
-  const { id } = useParams();
+  const { id = "" } = useParams();
 
-  const getRequest = async () => {
+  const getRequest = useCallback(async () => {
     setLoading(true);
-    const request = await RequestService.getRequest(id || "").catch(
-      console.log
-    );
+    const request = await RequestService.getRequest(id).catch(console.log);
     setRequest(request);
     setLoading(false);
+  }, [id]);
+
+  //download all attachments
+  const handleDownloadAll = (files: Request["files"] = []) => {
+    files.forEach((file) => {
+      const nameParts = file.path.split("/");
+      const name = nameParts[nameParts.length - 1];
+      downloadURI(file.path, name);
+    });
   };
 
   useEffect(() => {
     getRequest();
-  }, []);
+  }, [getRequest]);
 
   return (
     <div className="page flex-1">
-      {loading && (
-        <p className="flex items-center justify-center">
-          <Spinner />
-        </p>
-      )}
+      {loading && <Spinner />}
       {!loading && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full lg:overflow-hidden lg:auto-rows-fr">
           {/* Grid Item 1 */}
@@ -73,7 +72,7 @@ const SingleRequest = () => {
                   {t("user.singleRequest.status")}{" "}
                 </b>
                 <Badge
-                  variant={requestStatusVariants[request?.status || "default"]}
+                  variant={requestStatusVariants[request?.status || "DEFAULT"]}
                 >
                   <b>{t(`shared.requestStatus.${request?.status}`)}</b>
                 </Badge>
@@ -97,7 +96,11 @@ const SingleRequest = () => {
             <div className="flex flex-col gap-2">
               <div className="head flex flex-wrap justify-between mb-4">
                 <h2>{t("user.singleRequest.attachments")}</h2>
-                <Button size="sm" variant="subtle">
+                <Button
+                  size="sm"
+                  variant="subtle"
+                  onClick={() => handleDownloadAll(request?.files)}
+                >
                   <HiDownload />
                   {t("user.singleRequest.downloadAll")}
                 </Button>
@@ -109,17 +112,23 @@ const SingleRequest = () => {
           </div>
 
           {/* Grid Item 4 */}
-          {request?.translations?.length && (
+          {request?.translations?.files.length && (
             <div className="bg-white overflow-y-auto p-4 rounded-xl">
               <div className="flex flex-col gap-2">
                 <div className="head flex flex-wrap justify-between mb-4">
                   <h2>{t("user.singleRequest.translations")}</h2>
-                  <Button size="sm" variant="subtle">
+                  <Button
+                    size="sm"
+                    variant="subtle"
+                    onClick={() =>
+                      handleDownloadAll(request?.translations?.files)
+                    }
+                  >
                     <HiDownload />
                     {t("user.singleRequest.downloadAll")}
                   </Button>
                 </div>
-                {request?.translations?.map((file) => (
+                {request?.translations?.files.map((file) => (
                   <Attachment {...file}></Attachment>
                 ))}
               </div>

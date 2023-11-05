@@ -1,7 +1,7 @@
 import Service from "./service";
 import User from "./user";
 
-type RequestTranslationFile = {
+type RequestFile = {
   id: string;
   mood: string;
   name: string;
@@ -17,9 +17,9 @@ type Request = {
   translator?: User;
   status: RequestStatus;
   service_id?: string;
-  files: any[];
+  files: RequestFile[];
   translations: {
-    files: RequestTranslationFile[];
+    files: RequestFile[];
     id: number;
     status: string;
     translator: User;

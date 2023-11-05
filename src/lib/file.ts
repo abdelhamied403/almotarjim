@@ -1,7 +1,11 @@
-export const downloadURI = (uri: string, name: string) => {
+export const downloadURI = async (uri: string, name: string) => {
+  const file = await fetch(uri);
+  const fileBlob = await file.blob();
+  const fileUrl = URL.createObjectURL(fileBlob);
+
   const link = document.createElement("a");
+  link.href = fileUrl;
   link.download = name;
-  link.href = uri;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

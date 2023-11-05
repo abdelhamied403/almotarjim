@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { HiDownload } from "react-icons/hi";
 import Chat from "@/containers/Chat";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Request from "@/interfaces/request";
 import RequestService from "@/services/request.service";
 import { useParams } from "react-router-dom";
@@ -42,17 +42,8 @@ const SingleRequest = () => {
   const { id = "" } = useParams();
   const { toast } = useToast();
 
-  const getRequest = async () => {
-    setLoading(true);
-    const request = await RequestService.getRequest(id || "").catch(
-      console.log
-    );
-    setRequest(request);
-    setLoading(false);
-  };
-
   //download all attachments
-  const handleDownloadAll = (files) => {
+  const handleDownloadAll = (files: Request["files"]) => {
     files.forEach((file) => {
       const nameParts = file.path.split("/");
       const name = nameParts[nameParts.length - 1];
@@ -64,9 +55,9 @@ const SingleRequest = () => {
   const [reopenNotes, setReopenNotes] = useState("");
 
   // reassign
-  const { isLoading: isTranslatorsLoading, data: translators } = useQuery<
-    User[]
-  >("requestTranslators", () => AuthService.getUsersByRole("translator"), {});
+  const { isLoading: isTranslatorsLoading, data: translators } = useQuery<{
+    data: User[];
+  }>("requestTranslators", () => AuthService.getUsersByRole("translator"), {});
 
   const [isReassignDialogOpen, setIsReassignDialogOpen] = useState(false);
   const [reassignedTranslator, setReassignedTranslator] = useState("");
@@ -99,17 +90,20 @@ const SingleRequest = () => {
     setIsApproveDialogOpen(false);
   };
 
+  const getRequest = useCallback(async () => {
+    setLoading(true);
+    const request = await RequestService.getRequest(id).catch(console.log);
+    setRequest(request);
+    setLoading(false);
+  }, [id]);
+
   useEffect(() => {
     getRequest();
-  }, []);
+  }, [getRequest]);
 
   return (
     <div className="flex-1 items-center justify-center">
-      {loading && (
-        <p>
-          <Spinner />
-        </p>
-      )}
+      {loading && <Spinner />}
       {!loading && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full lg:overflow-hidden lg:auto-rows-fr">
           {/* Grid Item 1 */}
@@ -180,7 +174,7 @@ const SingleRequest = () => {
                 <Button
                   size="sm"
                   variant="subtle"
-                  onClick={() => handleDownloadAll(request?.files)}
+                  onClick={() => handleDownloadAll(request?.files || [])}
                 >
                   <HiDownload />
                   {t("supervisor.singleRequest.downloadAll")}
@@ -254,23 +248,25 @@ const SingleRequest = () => {
             <DialogDescription asChild>
               <>
                 <p>{t("supervisor.singleRequest.dialog.reassign.desc")}</p>
-
-                <Select onValueChange={setReassignedTranslator}>
-                  <SelectTrigger>
-                    <SelectValue
-                      placeholder={t(
-                        "supervisor.singleRequest.dialog.reassign.chooseTranslator"
-                      )}
-                    />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {translators?.data.map((translator) => (
-                      <SelectItem value={translator.id}>
-                        {translator.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                {isTranslatorsLoading && <Spinner />}
+                {!isTranslatorsLoading && (
+                  <Select onValueChange={setReassignedTranslator}>
+                    <SelectTrigger>
+                      <SelectValue
+                        placeholder={t(
+                          "supervisor.singleRequest.dialog.reassign.chooseTranslator"
+                        )}
+                      />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {translators?.data.map((translator) => (
+                        <SelectItem value={translator.id}>
+                          {translator.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
               </>
             </DialogDescription>
           </DialogHeader>
