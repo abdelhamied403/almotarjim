@@ -25,6 +25,7 @@ const buttonVariants = cva(
         link: "text-primary-900 underline-offset-4 hover:underline dark:text-primary-50",
         success:
           "bg-green-600 text-primary-50 hover:bg-green-600/90 dark:bg-green-50 dark:text-primary-900 dark:hover:bg-green-50/90",
+        error: "border border-primary-100 text-white",
       },
       size: {
         default: "px-4 py-3",
