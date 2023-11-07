@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import useUser from "@/hooks/useUser";
 import MessageType from "@/interfaces/message";
 import { t } from "i18next";
+import { useState } from "react";
 import { HiLogout, HiMicrophone, HiPaperClip } from "react-icons/hi";
 import { IoSend } from "react-icons/io5";
 import { Link } from "react-router-dom";
@@ -12,8 +13,10 @@ import { Link } from "react-router-dom";
 type ChatProps = {
   messages: MessageType[];
   status: "open" | "closed";
+  onSend: (message: string) => void;
 };
-const Chat = ({ status, messages = [] }: ChatProps) => {
+const Chat = ({ status, messages = [], onSend }: ChatProps) => {
+  const [message, setMessage] = useState("");
   const { role } = useUser();
   return (
     <>
@@ -49,10 +52,18 @@ const Chat = ({ status, messages = [] }: ChatProps) => {
             alt="almotarjim"
             className="w-14 h-14 rounded-full"
           />
-          <Input placeholder={t("chat.typeMessage")} className=""></Input>
+          <Input
+            placeholder={t("chat.typeMessage")}
+            className=""
+            onChange={(e) => setMessage(e.target.value)}
+          ></Input>
         </div>
         <div className="flex gap-3 justify-end items-end ">
-          <Button variant={"outline"} size={"icon"}>
+          <Button
+            variant={"outline"}
+            size={"icon"}
+            onClick={() => onSend(message)}
+          >
             <HiMicrophone />
           </Button>
           <Button variant={"outline"} size={"icon"}>
