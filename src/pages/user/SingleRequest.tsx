@@ -11,6 +11,7 @@ import useI18n from "@/hooks/useI18n";
 import Spinner from "@/components/ui/Spinner";
 import { requestStatusVariants } from "@/constants/requestStatus";
 import { downloadURI } from "@/lib/file";
+import ChatService from "@/services/chat.service";
 
 const SingleRequest = () => {
   const { t } = useI18n();
@@ -33,6 +34,11 @@ const SingleRequest = () => {
       const name = nameParts[nameParts.length - 1];
       downloadURI(file.path, name);
     });
+  };
+
+  //handle send message
+  const handleSend = (message: string) => {
+    ChatService.sendMessage(message);
   };
 
   useEffect(() => {
@@ -88,7 +94,7 @@ const SingleRequest = () => {
 
           {/* Grid Item 2 */}
           <div className="h-full max-h-[500px] lg:max-h-none row-span-2 overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl">
-            <Chat {...request?.chat} />
+            <Chat status="open" messages={[]} onSend={handleSend} />
           </div>
 
           {/* Grid Item 3 */}

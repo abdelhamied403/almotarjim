@@ -1,8 +1,9 @@
 import Chat from "@/containers/Chat";
+import ChatService from "@/services/chat.service";
 
 const SingleChat = () => {
   const handleSend = (message: string) => {
-    console.log(message);
+    ChatService.sendMessage(message);
   };
   return <Chat status="open" messages={[]} onSend={handleSend} />;
 };

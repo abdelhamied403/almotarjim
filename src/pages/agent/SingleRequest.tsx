@@ -29,6 +29,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import Spinner from "@/components/ui/Spinner";
+import ChatService from "@/services/chat.service";
 
 const requestStatusVariants: any = {
   PENDING: "warning",
@@ -81,6 +82,11 @@ const SingleRequest = () => {
     setRequest(request);
     setLoading(false);
   }, [id]);
+
+  //handle send message
+  const handleSend = (message: string) => {
+    ChatService.sendMessage(message);
+  };
 
   useEffect(() => {
     getRequest();
@@ -143,7 +149,7 @@ const SingleRequest = () => {
                 {t("agent.singleRequest.assign")}
               </Button>
             </div>
-            <Chat {...request?.chat} />
+            <Chat status="open" messages={[]} onSend={handleSend} />
           </div>
 
           {/* Grid Item 3 */}

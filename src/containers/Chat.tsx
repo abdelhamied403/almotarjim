@@ -59,17 +59,13 @@ const Chat = ({ status, messages = [], onSend }: ChatProps) => {
           ></Input>
         </div>
         <div className="flex gap-3 justify-end items-end ">
-          <Button
-            variant={"outline"}
-            size={"icon"}
-            onClick={() => onSend(message)}
-          >
+          <Button variant={"outline"} size={"icon"}>
             <HiMicrophone />
           </Button>
           <Button variant={"outline"} size={"icon"}>
             <HiPaperClip />
           </Button>
-          <Button size={"icon"}>
+          <Button size={"icon"} onClick={() => onSend(message)}>
             <IoSend />
           </Button>
         </div>

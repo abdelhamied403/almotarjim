@@ -1,6 +1,5 @@
 import Chat from "@/interfaces/chat";
 import { api } from "./api";
-import Message from "@/interfaces/message";
 
 const getAllChats = async () => {
   const res = await api.get("/messages/chats");
@@ -19,7 +18,7 @@ const closeChat = async (id?: string) => {
   const res = await api.get(`/messages/close-chat/${id}`);
   return res.data.data;
 };
-const sendMessage = async (data: Partial<Message>) => {
+const sendMessage = async (data: string) => {
   const res = await api.post(`/messages/chat/send`, data);
   return res.data.data;
 };
