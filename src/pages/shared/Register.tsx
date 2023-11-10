@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link, useNavigate } from "react-router-dom";
 import signup from "../../assets/auth/signup.svg";
-import SocialLinks from "./social_links/SocialLinks";
+import SocialLinks from "@/components/SocialLinks";
 import AuthService from "@/services/auth.service";
 import useProfileStore from "@/store/profile.slice";
 import { useForm } from "react-hook-form";

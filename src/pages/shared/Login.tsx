@@ -2,7 +2,7 @@ import { Input } from "@/components/ui/input";
 import login from "../../assets/auth/login.svg";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
-import SocialLinks from "./social_links/SocialLinks";
+import SocialLinks from "@/components/SocialLinks";
 import { useState } from "react";
 import AuthService from "@/services/auth.service";
 import useProfileStore from "@/store/profile.slice";
