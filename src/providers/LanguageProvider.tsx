@@ -1,6 +1,9 @@
 import useI18n from "@/hooks/useI18n";
 import { Locale } from "@/i18n/locales";
 import { useEffect } from "react";
+import moment from "moment";
+import "moment/locale/ar"; // without this line it didn't work
+moment.locale("ar");
 
 export type LanguageProviderProps = {
   children: JSX.Element;
@@ -16,6 +19,7 @@ const LanguageProvider = ({
     const storeLocale = (localStorage.getItem("locale") ||
       defaultLocale) as Locale;
     changeLocale(storeLocale);
+    console.log(moment().fromNow());
   }, [changeLocale, defaultLocale]);
 
   return <div dir={language.dir}>{children}</div>;

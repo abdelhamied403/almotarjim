@@ -1,27 +1,45 @@
+import useUser from "@/hooks/useUser";
 import MessageType from "@/interfaces/message";
 import { cn } from "@/lib/utils";
+import { useMemo } from "react";
+import moment from "moment";
 
-export type MessageProps = MessageType & {};
+const Message = (props: MessageType) => {
+  const { user } = useUser();
+  const isOwner = useMemo(
+    () => props.sender?.id == user?.id,
+    [props.sender?.id, user?.id]
+  );
 
-const Message = (props: MessageProps) => {
   return (
-    <div
-      className={cn(
-        "flex gap-3 items-end",
-        props.provider === true ? "" : "flex-row-reverse"
-      )}
-    >
-      <img src={props.img} alt="almotarjim" className="w-5 h-5 rounded-full" />
-      <p
+    <div className="message">
+      <div
         className={cn(
-          "flex gap-3 items-center rounded-xl p-4",
-          props.provider === true
-            ? "bg-primary-100 text-primary-600"
-            : "bg-primary-600 text-primary-100"
+          "flex gap-3 items-end",
+          isOwner ? "flex-row-reverse" : ""
         )}
       >
-        {props.message}
-      </p>
+        <img
+          src={props.sender?.image}
+          alt="almotarjim"
+          className="w-5 h-5 rounded-full mb-6"
+        />
+        <div className="">
+          <p
+            className={cn(
+              "flex gap-3 items-center rounded-xl p-4",
+              isOwner
+                ? "bg-primary-600 text-primary-100"
+                : "bg-primary-100 text-primary-600"
+            )}
+          >
+            {props.content}
+          </p>
+          <p className="text-slate-500 text-sm">
+            {moment(props.created_at, "YYYYMMDDHH").fromNow()}
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

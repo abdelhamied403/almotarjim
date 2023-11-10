@@ -11,9 +11,12 @@ import useI18n from "@/hooks/useI18n";
 import Spinner from "@/components/ui/Spinner";
 import { requestStatusVariants } from "@/constants/requestStatus";
 import { downloadURI } from "@/lib/file";
+import ChatService from "@/services/chat.service";
+import usePusher from "@/hooks/usePusher";
 
 const SingleRequest = () => {
   const { t } = useI18n();
+  const pusher = usePusher();
 
   const [request, setRequest] = useState<Request>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -35,9 +38,33 @@ const SingleRequest = () => {
     });
   };
 
+  const handleSend = useCallback(
+    async (message: string) => {
+      await ChatService.sendMessage(message, id);
+    },
+    [id]
+  );
+
   useEffect(() => {
     getRequest();
   }, [getRequest]);
+
+  useEffect(() => {
+    const channel = pusher.subscribe(`chat.${id}`);
+    channel.bind("message-sent", (data: any) => {
+      setRequest((prev: any) => ({
+        ...prev,
+        chat: {
+          ...prev.chat,
+          messages: [...prev.chat.messages, data],
+        },
+      }));
+    });
+
+    return () => {
+      channel.unbind("message-sent");
+    };
+  }, [id, pusher]);
 
   return (
     <div className="page flex-1">
@@ -88,7 +115,7 @@ const SingleRequest = () => {
 
           {/* Grid Item 2 */}
           <div className="h-full max-h-[500px] lg:max-h-none row-span-2 overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl">
-            <Chat {...request?.chat} />
+            <Chat {...request?.chat} onSend={handleSend} />
           </div>
 
           {/* Grid Item 3 */}

@@ -25,14 +25,14 @@ const Home = () => {
   }
   return (
     <>
-      <div className="flex flex-col flex-1 flex-wrap gap-6 items-start p-6 bg-white rounded-xl h-full">
+      <div className="flex flex-col flex-1 flex-wrap gap-6 items-start p-6 bg-white rounded-xl ">
         <div className="flex flex-col gap-1">
           <h1 className="font-bold text-2xl">{t("user.home.title")}</h1>
           <p className="font-normal text-gray-600 text-base">
             {t("user.home.desc")}
           </p>
         </div>
-        <div className="grid grid-cols-5 gap-2">
+        <div className="grid gird-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2">
           {services.map((service: Service) => (
             <Link to={`/request/create/${service.id}`}>
               <RequestService {...service} />
@@ -43,14 +43,17 @@ const Home = () => {
           <div>
             <span>{t("user.home.checkServices")}</span>
           </div>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-6">
             <div>
               <Button className="flex gap-2">
                 <span>{t("user.home.chat")}</span> <BsFillChatDotsFill />
               </Button>
             </div>
             <div>
-              <a href={`https://wa.me/+201060126809`} target="_blank">
+              <a
+                href={`https://wa.me/+${import.meta.env.VITE_WHATSAPP_NUMBER}`}
+                target="_blank"
+              >
                 <Button className="flex gap-2" variant={"success"}>
                   <span>{t("user.home.whatsapp")}</span>
                   <BsFillChatDotsFill />

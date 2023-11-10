@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 const Chats = () => {
   const { t } = useI18n();
 
-  const [chatStatus, setChatStatus] = useState<string>("d");
+  const [chatStatus, setChatStatus] = useState<string>("");
 
   const {
     data: chats,
@@ -78,7 +78,7 @@ const Chats = () => {
                 <p>{t("agent.chats.lastMessage")}</p>
               </div>
             </div>
-            <Link to="/chat/1">
+            <Link to={`/chat/${chat.id}`}>
               <Button size="icon">
                 <HiChat />
               </Button>

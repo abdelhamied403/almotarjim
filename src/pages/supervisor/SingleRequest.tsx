@@ -33,9 +33,12 @@ import { cn } from "@/lib/utils";
 import { downloadURI } from "@/lib/file";
 import { useToast } from "@/components/ui/use-toast";
 import Spinner from "@/components/ui/Spinner";
+import usePusher from "@/hooks/usePusher";
+import ChatService from "@/services/chat.service";
 
 const SingleRequest = () => {
   const { t } = useI18n();
+  const pusher = usePusher();
 
   const [request, setRequest] = useState<Request>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -97,9 +100,28 @@ const SingleRequest = () => {
     setLoading(false);
   }, [id]);
 
+  const listenToMessages = useCallback(() => {
+    if (request) {
+      const channel = pusher.subscribe(`chat-${request?.chat?.id}`);
+      channel.bind("message-sent", (data: any) => {
+        console.log(data);
+      });
+    }
+  }, [pusher, request]);
+
+  const onMessageSend = async (message: string) => {
+    if (request?.chat) {
+      await ChatService.sendMessage(message, request?.chat?.id);
+    }
+  };
+
   useEffect(() => {
     getRequest();
   }, [getRequest]);
+
+  useEffect(() => {
+    listenToMessages();
+  }, [listenToMessages]);
 
   return (
     <div className="flex-1 items-center justify-center">
@@ -163,7 +185,11 @@ const SingleRequest = () => {
                 {t("supervisor.singleRequest.assign")}
               </Button>
             </div>
-            <Chat {...request?.chat} />
+            <Chat
+              messages={request?.chat?.messages || []}
+              status="open"
+              onSend={onMessageSend}
+            />
           </div>
 
           {/* Grid Item 3 */}
