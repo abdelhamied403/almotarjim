@@ -1,4 +1,3 @@
-import Request from "@/interfaces/request";
 import { api, formAxios } from "./api";
 
 const getRequests = async () => {
@@ -9,7 +8,8 @@ const getRequest = async (id: string) => {
   const res = await api.get(`/requests/get-request/${id}`);
   return res.data;
 };
-const createRequest = async (request: Partial<Request>) => {
+
+const createRequest = async (request: any) => {
   const headers = {
     "Content-Type":
       "multipart/form-data; charset=utf-8; boundary=" +

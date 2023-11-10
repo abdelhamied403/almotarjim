@@ -43,7 +43,7 @@ const CreateRequest = () => {
     resolver: zodResolver(createRequestSchema),
   });
 
-  const { isLoading, data: currentService } = useQuery<Service>(
+  const { isFetching, data: currentService } = useQuery<Service>(
     "service",
     async () => await ServiceService.getService(serviceId)
   );
@@ -81,7 +81,7 @@ const CreateRequest = () => {
     }
   };
 
-  if (isLoading) {
+  if (isFetching) {
     return (
       <div className="flex items-center justify-center">
         <Spinner />
@@ -95,7 +95,11 @@ const CreateRequest = () => {
         <Link to="/request/create">
           {language.dir === "ltr" ? <HiChevronLeft /> : <HiChevronRight />}
         </Link>
-        <img src={currentService?.image} alt={currentService?.title} />
+        <img
+          className="w-12 h-12 rounded-full object-cover"
+          src={currentService?.image}
+          alt={currentService?.title}
+        />
         <h4>{currentService?.title}</h4>
       </div>
       <div className="form w-full">

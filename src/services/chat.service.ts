@@ -18,8 +18,11 @@ const closeChat = async (id?: string) => {
   const res = await api.get(`/messages/close-chat/${id}`);
   return res.data.data;
 };
-const sendMessage = async (data: string) => {
-  const res = await api.post(`/messages/chat/send`, data);
+const sendMessage = async (message: string, chatId: string) => {
+  const res = await api.post(`/messages/chat/send`, {
+    content: message,
+    chat_id: chatId,
+  });
   return res.data.data;
 };
 
