@@ -23,9 +23,9 @@ const Login = () => {
     try {
       const res = await AuthService.login(email, password);
       localStorage.setItem("token", res.access_token);
-      navigate("/dashboard");
       const userData = await AuthService.getUser();
       setUser(userData.data);
+      navigate("/dashboard");
     } catch (error: any) {
       toast({
         title: t("shared.error"),
@@ -38,9 +38,9 @@ const Login = () => {
     try {
       const res = await AuthService.anonymousLogin();
       localStorage.setItem("token", res.token);
-      navigate("/dashboard");
       const userData = await AuthService.getUser();
       setUser(userData.data);
+      navigate("/dashboard");
     } catch (error: any) {
       toast({
         title: t("shared.error"),

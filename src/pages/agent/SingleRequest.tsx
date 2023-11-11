@@ -84,8 +84,8 @@ const SingleRequest = () => {
   }, [id]);
 
   //handle send message
-  const handleSend = (message: string) => {
-    ChatService.sendMessage(message);
+  const handleSend = (message: { type: string; content: any }) => {
+    ChatService.sendMessage(message, request?.chat?.id || "");
   };
 
   useEffect(() => {
@@ -149,7 +149,7 @@ const SingleRequest = () => {
                 {t("agent.singleRequest.assign")}
               </Button>
             </div>
-            <Chat status="open" messages={[]} onSend={handleSend} />
+            <Chat status="open" {...request?.chat} onSend={handleSend} />
           </div>
 
           {/* Grid Item 3 */}

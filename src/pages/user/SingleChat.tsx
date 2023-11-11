@@ -16,7 +16,7 @@ const SingleChat = () => {
   }, [id]);
 
   const handleSend = useCallback(
-    async (message: string) => {
+    async (message: { type: string; content: any }) => {
       await ChatService.sendMessage(message, id);
     },
     [id]

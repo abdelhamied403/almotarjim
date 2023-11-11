@@ -1,17 +1,20 @@
 import Message from "@/components/Message";
+import Spinner from "@/components/ui/Spinner";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import useMic from "@/hooks/useMic";
 import useUser from "@/hooks/useUser";
 import ChatType from "@/interfaces/chat";
 import { t } from "i18next";
-import { useEffect, useRef, useState } from "react";
-import { HiLogout, HiMicrophone, HiPaperClip } from "react-icons/hi";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { HiLogout, HiMicrophone, HiPaperClip, HiTrash } from "react-icons/hi";
+import { HiPause } from "react-icons/hi2";
 import { IoSend } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 type ChatProps = Partial<ChatType> & {
-  onSend: (message: string) => void;
+  onSend: (message: { type: string; content: any }) => Promise<any>;
 };
 const Chat = ({
   status = "closed",
@@ -21,8 +24,18 @@ const Chat = ({
   owner,
 }: ChatProps) => {
   const [message, setMessage] = useState("");
+  const [sendMessageLoading, setSendMessageLoading] = useState(false);
   const { role } = useUser();
   const messagesContainer = useRef<HTMLDivElement>(null);
+  const {
+    status: recordingStatus,
+    startRecording,
+    stopRecording,
+    pauseRecording,
+    resumeRecording,
+    resetRecording,
+    audioBlob,
+  } = useMic();
 
   const handleEnterToSendMessage = (e: any) => {
     if (e.key === "Enter") {
@@ -30,9 +43,44 @@ const Chat = ({
     }
   };
 
-  const handleSendMessage = () => {
-    onSend(message);
-    setMessage("");
+  const handleSendMessage = async () => {
+    console.log(message);
+    setSendMessageLoading(true);
+    try {
+      await onSend({
+        type: "text",
+        content: message,
+      });
+      setMessage("");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSendMessageLoading(false);
+    }
+  };
+  const handleSendVoiceMessage = useCallback(async () => {
+    pauseRecording();
+    setSendMessageLoading(true);
+    try {
+      await onSend({
+        type: "voice",
+        content: audioBlob,
+      });
+      resetRecording();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSendMessageLoading(false);
+    }
+  }, [audioBlob, onSend, pauseRecording, resetRecording]);
+
+  const handleMicClick = () => {
+    if (recordingStatus === "recording") {
+      stopRecording();
+    }
+    if (recordingStatus === "idle") {
+      startRecording();
+    }
   };
 
   useEffect(() => {
@@ -80,31 +128,82 @@ const Chat = ({
         ))}
       </div>
       <div className="flex items-center p-6 bg-primary-100 rounded-xl gap-3">
-        <div className="flex gap-3 items-center flex-1">
-          <img
-            src={owner?.image}
-            alt="almotarjim"
-            className="w-14 h-14 rounded-full"
-          />
-          <Input
-            placeholder={t("chat.typeMessage")}
-            className=""
-            value={message}
-            onKeyDown={handleEnterToSendMessage}
-            onChange={(e) => setMessage(e.target.value)}
-          ></Input>
-        </div>
-        <div className="flex gap-3 justify-end items-end ">
-          <Button variant={"outline"} size={"icon"}>
-            <HiMicrophone />
-          </Button>
-          <Button variant={"outline"} size={"icon"}>
-            <HiPaperClip />
-          </Button>
-          <Button size={"icon"} onClick={handleSendMessage}>
-            <IoSend />
-          </Button>
-        </div>
+        <img
+          src={owner?.image}
+          alt="almotarjim"
+          className="w-14 h-14 rounded-full"
+        />
+
+        {/* recording state */}
+        {recordingStatus !== "idle" && (
+          <div className="flex-1 flex justify-end items-center gap-4">
+            <Button variant={"outline"} size={"icon"} onClick={resetRecording}>
+              <HiTrash />
+            </Button>
+            {audioBlob && (
+              <audio controls>
+                <source src={URL.createObjectURL(audioBlob)} type="audio/wav" />
+              </audio>
+            )}
+
+            {recordingStatus === "paused" && (
+              <Button
+                variant={"outline"}
+                size={"icon"}
+                onClick={resumeRecording}
+              >
+                <HiMicrophone />
+              </Button>
+            )}
+
+            {recordingStatus === "recording" && (
+              <Button
+                variant={"outline"}
+                size={"icon"}
+                onClick={pauseRecording}
+              >
+                <HiPause />
+              </Button>
+            )}
+
+            <Button
+              className="flex"
+              size={"icon"}
+              onClick={handleSendVoiceMessage}
+              disabled={recordingStatus === "recording"}
+            >
+              {sendMessageLoading ? <Spinner /> : <IoSend />}
+            </Button>
+          </div>
+        )}
+        {recordingStatus === "idle" && (
+          <>
+            <Input
+              placeholder={t("chat.typeMessage")}
+              className=""
+              value={message}
+              onKeyDown={handleEnterToSendMessage}
+              onChange={(e) => setMessage(e.target.value)}
+            ></Input>
+            <div className="flex gap-3 justify-end items-end ">
+              <Button
+                variant={"outline"}
+                size={"icon"}
+                onClick={handleMicClick}
+              >
+                <HiMicrophone />
+              </Button>
+              <Button variant={"outline"} size={"icon"}>
+                <HiPaperClip />
+              </Button>
+              {!!message && (
+                <Button size={"icon"} onClick={handleSendMessage}>
+                  {sendMessageLoading ? <Spinner /> : <IoSend />}
+                </Button>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </>
   );

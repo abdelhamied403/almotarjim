@@ -5,16 +5,23 @@ import { useQuery } from "react-query";
 import { Button } from "@/components/ui/button";
 import { BsFillChatDotsFill } from "react-icons/bs";
 import useI18n from "@/hooks/useI18n";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Spinner from "@/components/ui/Spinner";
+import ChatService from "@/services/chat.service";
 
 const Home = () => {
   const { t } = useI18n();
+  const navigate = useNavigate();
 
   const { isLoading, data: services } = useQuery(
     "services",
     ServiceService.listServices
   );
+
+  const handleCreateChat = async () => {
+    const chat = await ChatService.createChat({});
+    navigate(`/chat/${chat.id}`);
+  };
 
   if (isLoading) {
     return (
@@ -45,7 +52,7 @@ const Home = () => {
           </div>
           <div className="flex flex-wrap gap-6">
             <div>
-              <Button className="flex gap-2">
+              <Button className="flex gap-2" onClick={handleCreateChat}>
                 <span>{t("user.home.chat")}</span> <BsFillChatDotsFill />
               </Button>
             </div>

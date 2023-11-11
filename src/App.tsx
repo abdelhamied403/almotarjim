@@ -15,9 +15,14 @@ const App = () => {
 
   const getUser = useCallback(async () => {
     setLoading(true);
-    const res = await AuthService.getUser().catch(console.log);
-    setLoading(false);
-    setUser(res.data);
+    try {
+      const res = await AuthService.getUser();
+      setUser(res.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   }, [setUser]);
 
   useEffect(() => {

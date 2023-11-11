@@ -27,7 +27,7 @@ const Message = (props: MessageType) => {
         <div className="">
           <p
             className={cn(
-              "flex gap-3 items-center rounded-xl p-4",
+              "flex gap-3 items-center rounded-xl p-4 break-all",
               isOwner
                 ? "bg-primary-600 text-primary-100"
                 : "bg-primary-100 text-primary-600"
@@ -36,7 +36,7 @@ const Message = (props: MessageType) => {
             {props.content}
           </p>
           <p className="text-slate-500 text-sm">
-            {moment(props.created_at, "YYYYMMDDHH").fromNow()}
+            {moment(props.created_at).fromNow(true)}
           </p>
         </div>
       </div>
