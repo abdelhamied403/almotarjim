@@ -8,11 +8,12 @@ import useI18n from "@/hooks/useI18n";
 import useMic from "@/hooks/useMic";
 import useUser from "@/hooks/useUser";
 import ChatType from "@/interfaces/chat";
+import ChatService from "@/services/chat.service";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { HiLogout, HiMicrophone, HiPaperClip, HiTrash } from "react-icons/hi";
 import { HiPause } from "react-icons/hi2";
 import { IoSend } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 type ChatProps = Partial<ChatType> & {
   onSend: (message: { type: string; content: any }) => Promise<any>;
@@ -38,6 +39,7 @@ const Chat = ({
     audioBlob,
   } = useMic();
   const { toast } = useToast();
+  const { id = "" } = useParams();
 
   const { t } = useI18n();
   const inputFile = useRef<HTMLInputElement>(null);
@@ -49,7 +51,6 @@ const Chat = ({
   };
 
   const handleSendMessage = async () => {
-    console.log(message);
     setSendMessageLoading(true);
     try {
       await onSend({
@@ -91,7 +92,6 @@ const Chat = ({
     if (!inputFile.current) return;
     inputFile.current.click();
   };
-
   const handleFileSend = async (e: any) => {
     const fileSize = e.target.files[0].size / 1000;
 
@@ -108,6 +108,22 @@ const Chat = ({
       type: "file",
       content: e.target.files[0],
     });
+  };
+
+  const handleEndChat = async () => {
+    try {
+      await ChatService.closeChat(id);
+      toast({
+        title: t("shared.error"),
+        description: "chat closed successfully",
+      });
+    } catch (error) {
+      toast({
+        title: t("shared.error"),
+        description: "can't close this chat",
+        variant: "destructive",
+      });
+    }
   };
 
   useEffect(() => {
@@ -140,7 +156,11 @@ const Chat = ({
             <Link to="/request/create">
               <Button className="">{t("chat.create")}</Button>
             </Link>
-            <Button variant={"danger"} className="flex gap-2 items-center">
+            <Button
+              variant={"danger"}
+              className="flex gap-2 items-center"
+              onClick={handleEndChat}
+            >
               {t("chat.endChat")} <HiLogout />
             </Button>
           </div>
@@ -154,96 +174,105 @@ const Chat = ({
           <Message {...msg} />
         ))}
       </div>
-      <div className="flex items-center p-6 bg-primary-100 rounded-xl gap-3">
-        <img
-          src={owner?.image}
-          alt="almotarjim"
-          className="w-14 h-14 rounded-full"
-        />
+      {status === "open" && (
+        <div className="flex items-center p-6 bg-primary-100 rounded-xl gap-3">
+          <img
+            src={owner?.image}
+            alt="almotarjim"
+            className="w-14 h-14 rounded-full"
+          />
 
-        {/* recording state */}
-        {recordingStatus !== "idle" && (
-          <div className="flex-1 flex justify-end items-center gap-4">
-            <Button variant={"outline"} size={"icon"} onClick={resetRecording}>
-              <HiTrash />
-            </Button>
-            {audioBlob && (
-              <audio controls>
-                <source src={URL.createObjectURL(audioBlob)} type="audio/wav" />
-              </audio>
-            )}
-
-            {recordingStatus === "paused" && (
+          {/* recording state */}
+          {recordingStatus !== "idle" && (
+            <div className="flex-1 flex justify-end items-center gap-4">
               <Button
                 variant={"outline"}
                 size={"icon"}
-                onClick={resumeRecording}
+                onClick={resetRecording}
               >
-                <HiMicrophone />
+                <HiTrash />
               </Button>
-            )}
+              {audioBlob && (
+                <audio controls>
+                  <source
+                    src={URL.createObjectURL(audioBlob)}
+                    type="audio/wav"
+                  />
+                </audio>
+              )}
 
-            {recordingStatus === "recording" && (
-              <Button
-                variant={"outline"}
-                size={"icon"}
-                onClick={pauseRecording}
-              >
-                <HiPause />
-              </Button>
-            )}
-
-            <Button
-              className="flex"
-              size={"icon"}
-              onClick={handleSendVoiceMessage}
-              disabled={recordingStatus === "recording"}
-            >
-              {sendMessageLoading ? <Spinner /> : <IoSend />}
-            </Button>
-          </div>
-        )}
-        {recordingStatus === "idle" && (
-          <>
-            <Input
-              placeholder={t("chat.typeMessage")}
-              className=""
-              value={message}
-              onKeyDown={handleEnterToSendMessage}
-              onChange={(e) => setMessage(e.target.value)}
-            ></Input>
-            <div className="flex gap-3 justify-end items-end ">
-              <Button
-                variant={"outline"}
-                size={"icon"}
-                onClick={handleMicClick}
-              >
-                <HiMicrophone />
-              </Button>
-              <Button
-                variant={"outline"}
-                size={"icon"}
-                onClick={handleFileClick}
-              >
-                <HiPaperClip />
-              </Button>
-              <input
-                type="file"
-                id="file"
-                ref={inputFile}
-                className="hidden"
-                onChange={handleFileSend}
-              />
-
-              {!!message && (
-                <Button size={"icon"} onClick={handleSendMessage}>
-                  {sendMessageLoading ? <Spinner /> : <IoSend />}
+              {recordingStatus === "paused" && (
+                <Button
+                  variant={"outline"}
+                  size={"icon"}
+                  onClick={resumeRecording}
+                >
+                  <HiMicrophone />
                 </Button>
               )}
+
+              {recordingStatus === "recording" && (
+                <Button
+                  variant={"outline"}
+                  size={"icon"}
+                  onClick={pauseRecording}
+                >
+                  <HiPause />
+                </Button>
+              )}
+
+              <Button
+                className="flex"
+                size={"icon"}
+                onClick={handleSendVoiceMessage}
+                disabled={recordingStatus === "recording"}
+              >
+                {sendMessageLoading ? <Spinner /> : <IoSend />}
+              </Button>
             </div>
-          </>
-        )}
-      </div>
+          )}
+          {recordingStatus === "idle" && (
+            <>
+              <Input
+                placeholder={t("chat.typeMessage")}
+                className=""
+                value={message}
+                onKeyDown={handleEnterToSendMessage}
+                onChange={(e) => setMessage(e.target.value)}
+              ></Input>
+              <div className="flex gap-3 justify-end items-end ">
+                <Button
+                  variant={"outline"}
+                  size={"icon"}
+                  onClick={handleMicClick}
+                >
+                  <HiMicrophone />
+                </Button>
+                <Button
+                  variant={"outline"}
+                  size={"icon"}
+                  onClick={handleFileClick}
+                >
+                  <HiPaperClip />
+                </Button>
+                <input
+                  type="file"
+                  id="file"
+                  ref={inputFile}
+                  className="hidden"
+                  onChange={handleFileSend}
+                />
+
+                {!!message && (
+                  <Button size={"icon"} onClick={handleSendMessage}>
+                    {sendMessageLoading ? <Spinner /> : <IoSend />}
+                  </Button>
+                )}
+              </div>
+            </>
+          )}
+        </div>
+      )}
     </>
   );
 };
