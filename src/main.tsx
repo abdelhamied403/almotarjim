@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.scss";
 import "./i18n";
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/toaster";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

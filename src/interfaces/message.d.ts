@@ -1,7 +1,12 @@
+import User from "./user";
+
 type Message = {
-  provider: boolean;
-  img: string;
-  message: string;
+  id: string;
+  content: string;
+  sender: User;
+  type: "text" | "file" | "voice";
+  created_at: string;
+  updated_at: string;
 };
 
 export default Message;

@@ -5,16 +5,23 @@ import { useQuery } from "react-query";
 import { Button } from "@/components/ui/button";
 import { BsFillChatDotsFill } from "react-icons/bs";
 import useI18n from "@/hooks/useI18n";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Spinner from "@/components/ui/Spinner";
+import ChatService from "@/services/chat.service";
 
 const Home = () => {
   const { t } = useI18n();
+  const navigate = useNavigate();
 
   const { isLoading, data: services } = useQuery(
     "services",
     ServiceService.listServices
   );
+
+  const handleCreateChat = async () => {
+    const chat = await ChatService.createChat({});
+    navigate(`/chat/${chat.id}`);
+  };
 
   if (isLoading) {
     return (
@@ -25,14 +32,14 @@ const Home = () => {
   }
   return (
     <>
-      <div className="flex flex-col flex-1 flex-wrap gap-6 items-start p-6 bg-white rounded-xl h-full">
+      <div className="flex flex-col flex-1 flex-wrap gap-6 items-start p-6 bg-white rounded-xl ">
         <div className="flex flex-col gap-1">
           <h1 className="font-bold text-2xl">{t("user.home.title")}</h1>
           <p className="font-normal text-gray-600 text-base">
             {t("user.home.desc")}
           </p>
         </div>
-        <div className="grid grid-cols-5 gap-2">
+        <div className="grid gird-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2">
           {services.map((service: Service) => (
             <Link to={`/request/create/${service.id}`}>
               <RequestService {...service} />
@@ -43,14 +50,17 @@ const Home = () => {
           <div>
             <span>{t("user.home.checkServices")}</span>
           </div>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-6">
             <div>
-              <Button className="flex gap-2">
+              <Button className="flex gap-2" onClick={handleCreateChat}>
                 <span>{t("user.home.chat")}</span> <BsFillChatDotsFill />
               </Button>
             </div>
             <div>
-              <a href={`https://wa.me/+201060126809`} target="_blank">
+              <a
+                href={`https://wa.me/+${import.meta.env.VITE_WHATSAPP_NUMBER}`}
+                target="_blank"
+              >
                 <Button className="flex gap-2" variant={"success"}>
                   <span>{t("user.home.whatsapp")}</span>
                   <BsFillChatDotsFill />

@@ -1,6 +1,6 @@
-import facebook from "../../../assets/auth/Facebook.svg";
-import google from "../../../assets/auth/Google.svg";
-import apple from "../../../assets/auth/Apple.svg";
+import facebook from "@/assets/auth/Facebook.svg";
+import google from "@/assets/auth/Google.svg";
+import apple from "@/assets/auth/Apple.svg";
 import { Link } from "react-router-dom";
 
 const SocialLinks = () => {

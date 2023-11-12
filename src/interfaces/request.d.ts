@@ -1,3 +1,4 @@
+import Chat from "./chat";
 import Service from "./service";
 import User from "./user";
 

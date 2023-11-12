@@ -1,5 +1,5 @@
 import Chat from "@/interfaces/chat";
-import { api } from "./api";
+import { api, formAxios } from "./api";
 
 const getAllChats = async () => {
   const res = await api.get("/messages/chats");
@@ -18,9 +18,35 @@ const closeChat = async (id?: string) => {
   const res = await api.get(`/messages/close-chat/${id}`);
   return res.data.data;
 };
-const sendMessage = async (data: string) => {
-  const res = await api.post(`/messages/chat/send`, data);
-  return res.data.data;
+const sendMessage = async (
+  message: { type: string; content: any },
+  chatId: string
+) => {
+  if (message.type === "voice") {
+    const config = {
+      headers: {
+        "Content-Type":
+          "multipart/form-data; charset=utf-8; boundary=" +
+          Math.random().toString().substr(2),
+      },
+    };
+
+    const res = await formAxios.post(
+      `/messages/chat/send`,
+      {
+        ...message,
+        chat_id: chatId,
+      },
+      config
+    );
+    return res.data.data;
+  } else {
+    const res = await api.post(`/messages/chat/send`, {
+      ...message,
+      chat_id: chatId,
+    });
+    return res.data.data;
+  }
 };
 
 const ChatService = {
