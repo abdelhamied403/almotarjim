@@ -109,7 +109,7 @@ const SingleRequest = () => {
     }
   }, [pusher, request]);
 
-  const onMessageSend = async (message: string) => {
+  const onMessageSend = async (message: { type: string; content: any }) => {
     if (request?.chat) {
       await ChatService.sendMessage(message, request?.chat?.id);
     }
@@ -132,38 +132,38 @@ const SingleRequest = () => {
           <div className="bg-white p-4 rounded-xl overflow-y-auto">
             {/* details */}
             <div className="flex flex-col gap-2">
-              <h2>{t("supervisor.singleRequest.basicInfo")}</h2>
+              <h2>{t("user.singleRequest.basicInfo")}</h2>
               <p>
                 <b className="text-primary">
-                  {t("supervisor.singleRequest.requestId")}{" "}
+                  {t("user.singleRequest.requestId")}{" "}
                 </b>
                 {request?.id}
               </p>
               <p>
                 <b className="text-primary">
-                  {t("supervisor.singleRequest.service")}{" "}
+                  {t("user.singleRequest.service")}{" "}
                 </b>
                 {request?.service?.title}
               </p>
               <p>
                 <b className="text-primary">
-                  {t("supervisor.singleRequest.translator")}{" "}
+                  {t("user.singleRequest.translator")}{" "}
                 </b>
                 {request?.translator?.name}
               </p>
               <p>
                 <b className="text-primary">
-                  {t("supervisor.singleRequest.status")}{" "}
+                  {t("user.singleRequest.status")}{" "}
                 </b>
                 <Badge
-                  variant={requestStatusVariants[request?.status || "PENDING"]}
+                  variant={requestStatusVariants[request?.status || "DEFAULT"]}
                 >
-                  {t(`shared.requestStatus.${request?.status}`)}
+                  <b>{t(`shared.requestStatus.${request?.status}`)}</b>
                 </Badge>
               </p>
               <p>
                 <b className="text-primary">
-                  {t("supervisor.singleRequest.description")}{" "}
+                  {t("user.singleRequest.description")}{" "}
                 </b>
                 {request?.description}
               </p>
@@ -173,7 +173,7 @@ const SingleRequest = () => {
           {/* Grid Item 2 */}
           <div
             className={cn(
-              "h-full max-h-[500px] lg:max-h-none overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl",
+              "h-full max-h-[800px] lg:max-h-none overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl",
               !request?.translations && "row-span-2"
             )}
           >
