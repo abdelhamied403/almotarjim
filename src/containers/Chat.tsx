@@ -3,6 +3,7 @@ import Spinner from "@/components/ui/Spinner";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
 import useMic from "@/hooks/useMic";
 import useUser from "@/hooks/useUser";
 import ChatType from "@/interfaces/chat";
@@ -36,6 +37,9 @@ const Chat = ({
     resetRecording,
     audioBlob,
   } = useMic();
+  const { toast } = useToast();
+
+  const inputFile = useRef<HTMLInputElement>(null);
 
   const handleEnterToSendMessage = (e: any) => {
     if (e.key === "Enter") {
@@ -81,6 +85,28 @@ const Chat = ({
     if (recordingStatus === "idle") {
       startRecording();
     }
+  };
+  const handleFileClick = () => {
+    if (!inputFile.current) return;
+    inputFile.current.click();
+  };
+
+  const handleFileSend = async (e: any) => {
+    const fileSize = e.target.files[0].size / 1000;
+
+    if (fileSize > 2000) {
+      toast({
+        title: t("shared.error"),
+        description: "file is large",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    await onSend({
+      type: "file",
+      content: e.target.files[0],
+    });
   };
 
   useEffect(() => {
@@ -193,9 +219,21 @@ const Chat = ({
               >
                 <HiMicrophone />
               </Button>
-              <Button variant={"outline"} size={"icon"}>
+              <Button
+                variant={"outline"}
+                size={"icon"}
+                onClick={handleFileClick}
+              >
                 <HiPaperClip />
               </Button>
+              <input
+                type="file"
+                id="file"
+                ref={inputFile}
+                className="hidden"
+                onChange={handleFileSend}
+              />
+
               {!!message && (
                 <Button size={"icon"} onClick={handleSendMessage}>
                   {sendMessageLoading ? <Spinner /> : <IoSend />}

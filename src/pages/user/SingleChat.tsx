@@ -27,7 +27,7 @@ const SingleChat = () => {
     channel.bind("message-sent", (data: any) => {
       setChat((prev: any) => ({
         ...prev,
-        messages: [...prev.messages, data],
+        messages: [...(prev.messages ? [...prev.messages] : []), data],
       }));
     });
 

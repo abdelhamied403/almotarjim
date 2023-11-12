@@ -120,12 +120,14 @@ const Requests = () => {
   return (
     <div className="requests h-full">
       <div className="flex justify-end gap-4">
-        <Link to="/chat/123">
-          <Button className="flex gap-2 items-center" variant="subtle">
-            <HiChat />
-            {t("user.requests.chat")}
-          </Button>
-        </Link>
+        <Button
+          className="flex gap-2 items-center"
+          variant="subtle"
+          onClick={handleCreateChat}
+        >
+          <HiChat />
+          {t("user.requests.chat")}
+        </Button>
         <Link to="/request/create">
           <Button className="flex gap-2 items-center">
             <HiPlus />

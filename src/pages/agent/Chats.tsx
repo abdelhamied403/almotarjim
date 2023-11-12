@@ -75,7 +75,7 @@ const Chats = () => {
                   </Badge>
                 </div>
 
-                <p>{t("agent.chats.lastMessage")}</p>
+                <p>{chat.messages.slice(-1)[0].content}</p>
               </div>
             </div>
             <Link to={`/chat/${chat.id}`}>
