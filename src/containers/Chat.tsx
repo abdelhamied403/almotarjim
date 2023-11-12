@@ -4,10 +4,10 @@ import Spinner from "@/components/ui/Spinner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import useI18n from "@/hooks/useI18n";
 import useMic from "@/hooks/useMic";
 import useUser from "@/hooks/useUser";
 import ChatType from "@/interfaces/chat";
-import { t } from "i18next";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { HiLogout, HiMicrophone, HiPaperClip, HiTrash } from "react-icons/hi";
 import { HiPause } from "react-icons/hi2";
@@ -39,6 +39,7 @@ const Chat = ({
   } = useMic();
   const { toast } = useToast();
 
+  const { t } = useI18n();
   const inputFile = useRef<HTMLInputElement>(null);
 
   const handleEnterToSendMessage = (e: any) => {
@@ -121,7 +122,7 @@ const Chat = ({
       <div className="flex flex-wrap items-center justify-between gap-4 p-6 bg-primary-100 rounded-xl">
         {!receiver && (
           <div className="flex gap-3 items-center">
-            <h3>you are still in queue...</h3>
+            <h3>{t("chat.youAreStillInQueue")}</h3>
           </div>
         )}
         {receiver && (

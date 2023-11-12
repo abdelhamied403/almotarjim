@@ -88,12 +88,7 @@ const SingleRequest = () => {
                 </b>
                 {request?.service?.title}
               </p>
-              <p>
-                <b className="text-primary">
-                  {t("user.singleRequest.translator")}{" "}
-                </b>
-                {request?.translator?.name}
-              </p>
+
               <p>
                 <b className="text-primary">
                   {t("user.singleRequest.status")}{" "}

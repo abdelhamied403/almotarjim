@@ -64,7 +64,8 @@
       "name": "name",
       "create": "إنشاء طلب جديد",
       "endChat": "إنهاء المحادثه",
-      "typeMessage": "اكتب رسالتك هنا ...."
+      "typeMessage": "اكتب رسالتك هنا ....",
+      "youAreStillInQueue": "مازلت قيد الانتظار..."
     },
     "user": {
       "layout": {

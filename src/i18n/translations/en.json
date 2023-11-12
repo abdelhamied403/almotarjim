@@ -26,6 +26,9 @@
       },
       "table": {
         "noResults": "No Results"
+      },
+      "chat": {
+        "youAreStillInQueue": "you are still in queue..."
       }
     },
     "home": {
@@ -64,7 +67,8 @@
       "name": "name",
       "create": "Create Request",
       "endChat": "End Chat",
-      "typeMessage": "Type a message ...."
+      "typeMessage": "Type a message ....",
+      "youAreStillInQueue": "you are still in queue..."
     },
     "user": {
       "layout": {
