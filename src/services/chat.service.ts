@@ -22,7 +22,7 @@ const sendMessage = async (
   message: { type: string; content: any },
   chatId: string
 ) => {
-  if (message.type === "voice") {
+  if (["voice", "file"].includes(message.type)) {
     const config = {
       headers: {
         "Content-Type":
