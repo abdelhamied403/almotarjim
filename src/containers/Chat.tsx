@@ -10,7 +10,13 @@ import useUser from "@/hooks/useUser";
 import ChatType from "@/interfaces/chat";
 import ChatService from "@/services/chat.service";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { HiLogout, HiMicrophone, HiPaperClip, HiTrash } from "react-icons/hi";
+import {
+  HiEye,
+  HiLogout,
+  HiMicrophone,
+  HiPaperClip,
+  HiTrash,
+} from "react-icons/hi";
 import { HiPause } from "react-icons/hi2";
 import { IoSend } from "react-icons/io5";
 import { Link, useParams } from "react-router-dom";
@@ -23,6 +29,7 @@ const Chat = ({
   messages = [],
   onSend,
   receiver,
+  id: chatId,
   owner,
 }: ChatProps) => {
   const [message, setMessage] = useState("");
@@ -151,11 +158,16 @@ const Chat = ({
             <h3>{receiver?.name}</h3>
           </div>
         )}
-        {status === "open" && role !== "client" && (
-          <div className="flex gap-3">
-            <Link to="/request/create">
-              <Button className="">{t("chat.create")}</Button>
-            </Link>
+        <div className="flex gap-3">
+          <Link to={`/chat/${chatId}`}>
+            <Button size="icon">
+              <HiEye></HiEye>
+            </Button>
+          </Link>
+          <Link to="/request/create">
+            <Button className="">{t("chat.create")}</Button>
+          </Link>
+          {status === "open" && role !== "client" && (
             <Button
               variant={"danger"}
               className="flex gap-2 items-center"
@@ -163,8 +175,8 @@ const Chat = ({
             >
               {t("chat.endChat")} <HiLogout />
             </Button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
       <div
         className="flex-1 h-full flex flex-col gap-4 p-8 bg-white rounded-2xl overflow-y-auto space-y-8"

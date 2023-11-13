@@ -10,20 +10,62 @@ import { HiChat } from "react-icons/hi";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 
+const ChatRow = (chat: Chat) => {
+  const lastMessage = useMemo(
+    () => chat.messages.slice(-1)[0],
+    [chat.messages]
+  );
+  return (
+    <div className="flex justify-between items-center bg-white p-4 rounded-xl">
+      <div className="flex items-center gap-4">
+        <img
+          className="w-12 h-12 rounded-full"
+          src="https://placehold.co/400x400/EEE/31343C"
+          alt=""
+        />
+        <div className="details">
+          <div className="flex items-center gap-2">
+            <h4>{chat.receiver?.name}</h4>
+            <Badge variant={chat.status === "closed" ? "success" : "warning"}>
+              {chat.status}
+            </Badge>
+          </div>
+          {!lastMessage && (
+            <p className="text-slate-400">there is not messages</p>
+          )}
+          {!!lastMessage &&
+            (lastMessage.type === "text" ? (
+              <p>{lastMessage.content}</p>
+            ) : (
+              <p>file</p>
+            ))}
+        </div>
+      </div>
+      <Link to={`/chat/${chat.id}`}>
+        <Button size="icon">
+          <HiChat />
+        </Button>
+      </Link>
+    </div>
+  );
+};
+
 const Chats = () => {
   const { t } = useI18n();
 
-  const [chatStatus, setChatStatus] = useState<string>("");
+  const [chatStatus, setChatStatus] = useState<string>("all");
 
   const {
     data: chats,
     isLoading,
     isError,
   } = useQuery<Chat[]>("chats", ChatService.getAllChats);
-  const filteredChats = useMemo(
-    () => chats?.filter((chat) => chat.status.includes(chatStatus)) || [],
-    [chatStatus, chats]
-  );
+  const filteredChats = useMemo(() => {
+    if (chatStatus === "all") return chats;
+    const result =
+      chats?.filter((chat) => chat.status.includes(chatStatus)) || [];
+    return result;
+  }, [chatStatus, chats]);
 
   if (isLoading) {
     return <Spinner></Spinner>;
@@ -44,7 +86,7 @@ const Chats = () => {
           value={chatStatus}
           onValueChange={setChatStatus}
         >
-          <ToggleGroupItem value="">{t("agent.chats.all")}</ToggleGroupItem>
+          <ToggleGroupItem value="all">{t("agent.chats.all")}</ToggleGroupItem>
           <ToggleGroupItem value="open">
             {t("agent.chats.opened")}
           </ToggleGroupItem>
@@ -54,36 +96,8 @@ const Chats = () => {
         </ToggleGroup>
       </div>
       <div className="flex flex-col gap-2">
-        {filteredChats.map((chat, idx) => (
-          <div
-            className="flex justify-between items-center bg-white p-4 rounded-xl"
-            key={`chat-${idx}`}
-          >
-            <div className="flex items-center gap-4">
-              <img
-                className="w-12 h-12 rounded-full"
-                src={chat.receiver?.image}
-                alt=""
-              />
-              <div className="details">
-                <div className="flex items-center gap-2">
-                  <h4>{chat.owner.name}</h4>
-                  <Badge
-                    variant={chat.status === "closed" ? "success" : "warning"}
-                  >
-                    {chat.status}
-                  </Badge>
-                </div>
-
-                <p>{chat.messages.slice(-1)}</p>
-              </div>
-            </div>
-            <Link to="/chat/1">
-              <Button size="icon">
-                <HiChat />
-              </Button>
-            </Link>
-          </div>
+        {filteredChats?.map((chat, idx) => (
+          <ChatRow {...chat} key={`chat-${idx}`} />
         ))}
       </div>
     </div>

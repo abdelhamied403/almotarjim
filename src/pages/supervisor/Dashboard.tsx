@@ -1,8 +1,10 @@
+import BarChart from "@/components/BarChart";
+
 const Dashboard = () => {
   return (
-    <>
-      <p>Supervisor Dashboard Page</p>
-    </>
+    <div>
+      <BarChart />
+    </div>
   );
 };
 
