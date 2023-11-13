@@ -27,7 +27,6 @@ const MainRouter = () => {
   const { isLoggedIn, role } = useUser();
   const router = useMemo(() => {
     const routes: RouteObject[] = isLoggedIn && role ? routesLookup[role] : [];
-    console.log([...routes, ...publicRoutes]);
     return createBrowserRouter([...publicRoutes, ...routes]);
   }, [isLoggedIn, role]);
 

@@ -33,6 +33,7 @@ import { cn } from "@/lib/utils";
 import { downloadURI } from "@/lib/file";
 import { useToast } from "@/components/ui/use-toast";
 import Spinner from "@/components/ui/Spinner";
+import ChatService from "@/services/chat.service";
 
 const SingleRequest = () => {
   const { t } = useI18n();
@@ -96,6 +97,13 @@ const SingleRequest = () => {
     setRequest(request);
     setLoading(false);
   }, [id]);
+
+  //handle send message
+  const handleSend = async (message: { type: string; content: any }) => {
+    if (request?.chat) {
+      await ChatService.sendMessage(message, request?.chat?.id);
+    }
+  };
 
   useEffect(() => {
     getRequest();
@@ -163,7 +171,14 @@ const SingleRequest = () => {
                 {t("supervisor.singleRequest.assign")}
               </Button>
             </div>
-            <Chat {...request?.chat} />
+            <Chat {...request?.chat} onSend={handleSend}>
+              <Chat.Header>
+                <Chat.Header.Title></Chat.Header.Title>
+                <Chat.Header.Actions></Chat.Header.Actions>
+              </Chat.Header>
+              <Chat.Body />
+              <Chat.Footer />
+            </Chat>
           </div>
 
           {/* Grid Item 3 */}

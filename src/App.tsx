@@ -11,10 +11,9 @@ const queryClient = new QueryClient();
 
 const App = () => {
   const { setUser } = useProfileStore();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const getUser = useCallback(async () => {
-    setLoading(true);
     try {
       const res = await AuthService.getUser();
       setUser(res.data);

@@ -19,7 +19,6 @@ const LanguageProvider = ({
     const storeLocale = (localStorage.getItem("locale") ||
       defaultLocale) as Locale;
     changeLocale(storeLocale);
-    console.log(moment().fromNow());
   }, [changeLocale, defaultLocale]);
 
   return <div dir={language.dir}>{children}</div>;

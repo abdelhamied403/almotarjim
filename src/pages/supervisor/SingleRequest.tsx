@@ -185,11 +185,14 @@ const SingleRequest = () => {
                 {t("supervisor.singleRequest.assign")}
               </Button>
             </div>
-            <Chat
-              messages={request?.chat?.messages || []}
-              status="open"
-              onSend={onMessageSend}
-            />
+            <Chat {...request?.chat} onSend={onMessageSend}>
+              <Chat.Header>
+                <Chat.Header.Title></Chat.Header.Title>
+                <Chat.Header.Actions></Chat.Header.Actions>
+              </Chat.Header>
+              <Chat.Body />
+              <Chat.Footer />
+            </Chat>
           </div>
 
           {/* Grid Item 3 */}

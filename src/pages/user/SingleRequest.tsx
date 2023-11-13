@@ -22,13 +22,6 @@ const SingleRequest = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const { id = "" } = useParams();
 
-  const getRequest = useCallback(async () => {
-    setLoading(true);
-    const request = await RequestService.getRequest(id).catch(console.log);
-    setRequest(request);
-    setLoading(false);
-  }, [id]);
-
   //download all attachments
   const handleDownloadAll = (files: Request["files"] = []) => {
     files.forEach((file) => {
@@ -38,33 +31,41 @@ const SingleRequest = () => {
     });
   };
 
-  const handleSend = useCallback(
-    async (message: { type: string; content: any }) => {
-      await ChatService.sendMessage(message, id);
-    },
-    [id]
-  );
+  const getRequest = useCallback(async () => {
+    setLoading(true);
+    const request = await RequestService.getRequest(id).catch(console.log);
+    setRequest(request);
+    setLoading(false);
+  }, [id]);
+
+  const listenToMessages = useCallback(() => {
+    if (request) {
+      const channel = pusher.subscribe(`chat.${request?.chat?.id}`);
+      channel.bind("message-sent", (data: any) => {
+        setRequest((prev: any) => ({
+          ...prev,
+          chat: {
+            ...prev.chat,
+            messages: [...prev.chat.messages, data],
+          },
+        }));
+      });
+    }
+  }, [pusher, request]);
+
+  const onMessageSend = async (message: { type: string; content: any }) => {
+    if (request?.chat) {
+      await ChatService.sendMessage(message, request?.chat?.id);
+    }
+  };
 
   useEffect(() => {
     getRequest();
   }, [getRequest]);
 
   useEffect(() => {
-    const channel = pusher.subscribe(`chat.${id}`);
-    channel.bind("message-sent", (data: any) => {
-      setRequest((prev: any) => ({
-        ...prev,
-        chat: {
-          ...prev.chat,
-          messages: [...prev.chat.messages, data],
-        },
-      }));
-    });
-
-    return () => {
-      channel.unbind("message-sent");
-    };
-  }, [id, pusher]);
+    listenToMessages();
+  }, [listenToMessages]);
 
   return (
     <div className="page flex-1">
@@ -110,7 +111,14 @@ const SingleRequest = () => {
 
           {/* Grid Item 2 */}
           <div className="h-full max-h-[500px] lg:max-h-none row-span-2 overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl">
-            <Chat {...request?.chat} onSend={handleSend} />
+            <Chat {...request?.chat} onSend={onMessageSend}>
+              <Chat.Header>
+                <Chat.Header.Title></Chat.Header.Title>
+                <Chat.Header.Actions></Chat.Header.Actions>
+              </Chat.Header>
+              <Chat.Body />
+              <Chat.Footer />
+            </Chat>
           </div>
 
           {/* Grid Item 3 */}

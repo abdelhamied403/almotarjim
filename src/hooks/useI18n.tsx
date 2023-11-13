@@ -14,7 +14,6 @@ const useI18n = () => {
     (locale: Locale) => {
       changeLanguage(locale);
       setLocale(locale);
-      console.log(locale);
       localStorage.setItem("locale", locale);
     },
     [changeLanguage, setLocale]

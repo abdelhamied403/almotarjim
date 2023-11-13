@@ -40,7 +40,16 @@ const SingleChat = () => {
     getChat();
   }, [getChat]);
 
-  return <Chat {...chat} onSend={handleSend} />;
+  return (
+    <Chat {...chat} onSend={handleSend}>
+      <Chat.Header>
+        <Chat.Header.Title></Chat.Header.Title>
+        <Chat.Header.Actions></Chat.Header.Actions>
+      </Chat.Header>
+      <Chat.Body />
+      <Chat.Footer />
+    </Chat>
+  );
 };
 
 export default SingleChat;
