@@ -27,14 +27,11 @@ const Translators = () => {
     {
       accessorKey: "status",
       header: "Status",
+      cell: ({ row }) => (row.original.status ? "online" : "Offline"),
     },
     {
-      accessorKey: "chats",
-      header: "Chats",
-    },
-    {
-      accessorKey: "requests",
-      header: "Requests",
+      accessorKey: "translations_number",
+      header: "Number Of Translations",
     },
     {
       id: "actions",

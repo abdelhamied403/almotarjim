@@ -12,6 +12,7 @@ import Agents from "@/pages/admin/Agents";
 import Translators from "@/pages/admin/Translators";
 import Supervisors from "@/pages/admin/Supervisors";
 import Users from "@/pages/admin/Users";
+import CreateAgent from "@/pages/admin/create/CreateAgent";
 
 const adminRoutes: RouteObject[] = [
   {
@@ -58,6 +59,10 @@ const adminRoutes: RouteObject[] = [
           {
             path: "",
             element: <Agents />,
+          },
+          {
+            path: "create",
+            element: <CreateAgent />,
           },
         ],
       },

@@ -1,6 +1,5 @@
 import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
-import useI18n from "@/hooks/useI18n";
 import { ColumnDef } from "@tanstack/react-table";
 import { HiPlus } from "react-icons/hi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
@@ -11,7 +10,6 @@ import AdminService from "@/services/admin.service";
 import User from "@/interfaces/user";
 
 const Agents = () => {
-  const { t } = useI18n();
   const columns: ColumnDef<User>[] = [
     {
       accessorKey: "id",
@@ -32,18 +30,15 @@ const Agents = () => {
     {
       accessorKey: "status",
       header: "Status",
+      cell: ({ row }) => (row.original.status ? "online" : "Offline"),
     },
     {
-      accessorKey: "chats",
-      header: "Chats",
-    },
-    {
-      accessorKey: "requests",
-      header: "Requests",
+      accessorKey: "number_of_clients",
+      header: "Number Of Clients",
     },
     {
       id: "actions",
-      header: t("supervisor.requests.table.actions"),
+      header: "Actions",
       cell: ({ row }) => (
         <Link to={`/request/${row.original.id}`}>
           <Button variant={"danger"}>
@@ -70,10 +65,10 @@ const Agents = () => {
   return (
     <div className="requests h-full">
       <div className="flex justify-end gap-4">
-        <Link to="/agent/create">
+        <Link to="/agents/create">
           <Button className="flex gap-2 items-center">
             <HiPlus />
-            {t("user.requests.create")}
+            Create Agent
           </Button>
         </Link>
       </div>

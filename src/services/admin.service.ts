@@ -2,22 +2,22 @@ import { api } from "./api";
 
 const getUsers = async () => {
   const res = await api.get("/users/client");
-  return res.data.data;
+  return res.data.data.data;
 };
 
 const getAgents = async () => {
   const res = await api.get("/users/agent");
-  return res.data.data;
+  return res.data.data.data;
 };
 
 const getTranslators = async () => {
   const res = await api.get("/users/translator");
-  return res.data.data;
+  return res.data.data.data;
 };
 
 const getSupervisors = async () => {
   const res = await api.get("/users/supervisor");
-  return res.data.data;
+  return res.data.data.data;
 };
 
 const AdminService = {
