@@ -2,7 +2,7 @@ import Attachment from "@/components/Attachment";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { HiDownload } from "react-icons/hi";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Request from "@/interfaces/request";
 import RequestService from "@/services/request.service";
 import { Link, useParams } from "react-router-dom";
@@ -18,15 +18,15 @@ const SingleRequest = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const { id = "" } = useParams();
 
-  const getRequest = async () => {
+  const getRequest = useCallback(async () => {
     setLoading(true);
     const request = await RequestService.getRequest(id).catch(console.log);
     setRequest(request);
     setLoading(false);
-  };
+  }, [id]);
 
   //download all attachments
-  const handleDownloadAll = (files) => {
+  const handleDownloadAll = (files: Request["files"] = []) => {
     files.forEach((file) => {
       const nameParts = file.path.split("/");
       const name = nameParts[nameParts.length - 1];
@@ -36,7 +36,7 @@ const SingleRequest = () => {
 
   useEffect(() => {
     getRequest();
-  }, []);
+  }, [getRequest]);
 
   return (
     <div className="page flex-1">
