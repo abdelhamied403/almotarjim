@@ -2,7 +2,7 @@ import { api, formAxios } from "./api";
 
 const getRequests = async () => {
   const res = await api.get("/requests");
-  return res.data.data;
+  return res.data.data.data;
 };
 const getRequest = async (id: string) => {
   const res = await api.get(`/requests/get-request/${id}`);

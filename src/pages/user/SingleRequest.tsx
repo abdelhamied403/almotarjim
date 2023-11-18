@@ -38,21 +38,6 @@ const SingleRequest = () => {
     setLoading(false);
   }, [id]);
 
-  const listenToMessages = useCallback(() => {
-    if (request) {
-      const channel = pusher.subscribe(`chat.${request?.chat?.id}`);
-      channel.bind("message-sent", (data: any) => {
-        setRequest((prev: any) => ({
-          ...prev,
-          chat: {
-            ...prev.chat,
-            messages: [...prev.chat.messages, data],
-          },
-        }));
-      });
-    }
-  }, [pusher, request]);
-
   const onMessageSend = async (message: { type: string; content: any }) => {
     if (request?.chat) {
       await ChatService.sendMessage(message, request?.chat?.id);
@@ -64,13 +49,28 @@ const SingleRequest = () => {
   }, [getRequest]);
 
   useEffect(() => {
-    listenToMessages();
-  }, [listenToMessages]);
+    if (request) {
+      const channel = pusher.subscribe(`chat.${request?.chat?.id}`);
+      channel.bind("message-sent", (data: any) => {
+        setRequest((prev: any) => ({
+          ...prev,
+          chat: {
+            ...prev.chat,
+            messages: [...prev.chat.messages, data],
+          },
+        }));
+      });
+
+      return () => {
+        channel.unbind("message-sent");
+      };
+    }
+  }, [pusher, request]);
 
   return (
     <div className="page flex-1">
       {loading && <Spinner />}
-      {!loading && (
+      {!loading && !!request && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full lg:overflow-hidden lg:auto-rows-fr">
           {/* Grid Item 1 */}
           <div className="bg-white p-4 rounded-xl overflow-y-auto">

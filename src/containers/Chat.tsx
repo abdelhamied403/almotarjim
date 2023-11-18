@@ -35,9 +35,18 @@ type ChatProps = Partial<ChatType> & {
 };
 
 const ChatProvider = createContext<any>({});
-const Chat = ({ owner, receiver, status, children, onSend }: ChatProps) => {
+const Chat = ({
+  owner,
+  receiver,
+  status,
+  children,
+  onSend,
+  messages,
+}: ChatProps) => {
   return (
-    <ChatProvider.Provider value={{ onSend, owner, receiver, status }}>
+    <ChatProvider.Provider
+      value={{ onSend, owner, receiver, status, messages }}
+    >
       {children}
     </ChatProvider.Provider>
   );

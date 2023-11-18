@@ -29,7 +29,7 @@ const ChooseService = () => {
           {t("user.home.desc")}
         </p>
       </div>
-      <div className="grid grid-cols-5 gap-2">
+      <div className="grid gird-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2">
         {services.map((service: Service) => (
           <Link to={`/request/create/${service.id}`}>
             <RequestService {...service} />
