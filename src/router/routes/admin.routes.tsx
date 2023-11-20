@@ -13,6 +13,8 @@ import Translators from "@/pages/admin/Translators";
 import Supervisors from "@/pages/admin/Supervisors";
 import Users from "@/pages/admin/Users";
 import CreateAgent from "@/pages/admin/create/CreateAgent";
+import CreateTranslator from "@/pages/admin/create/CreateTranslator";
+import CreateSupervisor from "@/pages/admin/create/CreateSupervisor";
 
 const adminRoutes: RouteObject[] = [
   {
@@ -73,6 +75,10 @@ const adminRoutes: RouteObject[] = [
             path: "",
             element: <Translators />,
           },
+          {
+            path: "create",
+            element: <CreateTranslator />,
+          },
         ],
       },
       {
@@ -81,6 +87,10 @@ const adminRoutes: RouteObject[] = [
           {
             path: "",
             element: <Supervisors />,
+          },
+          {
+            path: "create",
+            element: <CreateSupervisor />,
           },
         ],
       },

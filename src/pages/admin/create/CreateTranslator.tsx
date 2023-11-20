@@ -15,7 +15,7 @@ import Field from "@/components/Field";
 import { useToast } from "@/components/ui/use-toast";
 import AdminService from "@/services/admin.service";
 
-const CreateSupervisor = () => {
+const CreateTranslator = () => {
   const navigate = useNavigate();
   const { t } = useI18n();
 
@@ -34,10 +34,10 @@ const CreateSupervisor = () => {
   const handleRegister = async (data: RegistrationSchemaType) => {
     try {
       setLoading(true);
-      await AdminService.createSupervisor(data);
+      await AdminService.createTranslator(data);
       toast({
         title: "Created",
-        description: "Supervisor Created Succefully",
+        description: "Translator Created Succefully",
       });
 
       navigate("/dashboard");
@@ -58,7 +58,7 @@ const CreateSupervisor = () => {
       <div className="grid  h-full items-center container mx-auto gap-52">
         <div className="grid gap-5">
           <h1 className="text-3xl font-bold text-center">
-            Create New Supervisor
+            Create New Translator
           </h1>
           <Field
             label={t("register.name")}
@@ -109,4 +109,4 @@ const CreateSupervisor = () => {
   );
 };
 
-export default CreateSupervisor;
+export default CreateTranslator;
