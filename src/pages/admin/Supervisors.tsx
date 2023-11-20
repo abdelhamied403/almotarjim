@@ -61,10 +61,10 @@ const Supervisors = () => {
   return (
     <div className="requests h-full">
       <div className="flex justify-end gap-4">
-        <Link to="/supervisor/create">
+        <Link to="/supervisors/create">
           <Button className="flex gap-2 items-center">
             <HiPlus />
-            {t("user.requests.create")}
+            Create Supervisor
           </Button>
         </Link>
       </div>

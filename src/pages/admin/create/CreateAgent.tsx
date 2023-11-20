@@ -1,8 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
-import AuthService from "@/services/auth.service";
-import useProfileStore from "@/store/profile.slice";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -15,12 +13,12 @@ import Spinner from "@/components/ui/Spinner";
 import useI18n from "@/hooks/useI18n";
 import Field from "@/components/Field";
 import { useToast } from "@/components/ui/use-toast";
+import AdminService from "@/services/admin.service";
 
 const CreateAgent = () => {
   const navigate = useNavigate();
   const { t } = useI18n();
 
-  const { setUser } = useProfileStore();
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Partial<RegistrationSchemaType>>({});
   const { toast } = useToast();
@@ -36,15 +34,18 @@ const CreateAgent = () => {
   const handleRegister = async (data: RegistrationSchemaType) => {
     try {
       setLoading(true);
-      const res = await AuthService.register(data);
-      localStorage.setItem("token", res.access_token);
+      await AdminService.createAgent(data);
+      toast({
+        title: "Created",
+        description: "Agent Created Succefully",
+      });
+
       navigate("/dashboard");
-      const userData = await AuthService.getUser();
-      setUser(userData.data);
     } catch (error: any) {
       setErrors(error.response.data.error);
       toast({
         title: "Error",
+        variant: "destructive",
         description: "Some fields are invalid",
       });
     } finally {
@@ -53,12 +54,10 @@ const CreateAgent = () => {
   };
 
   return (
-    <div className="h-screen bg-primary-200 lg:bg-gradient-to-l from-[#C6E1F1] from-50%  lg:to-white lg:to-50%">
+    <div className="h-screen bg-primary-200 lg:bg-gradient-to-l from-white from-20%  lg:to-[#C6E1F1] lg:to-50%">
       <div className="grid  h-full items-center container mx-auto gap-52">
         <div className="grid gap-5">
-          <h1 className="text-3xl font-bold text-center">
-            {t("register.title")}
-          </h1>
+          <h1 className="text-3xl font-bold text-center">Create New Agent</h1>
           <Field
             label={t("register.name")}
             error={errors.name || validationErrors?.name?.message}
@@ -100,7 +99,7 @@ const CreateAgent = () => {
             />
           </Field>
           <Button onClick={handleSubmit(handleRegister)}>
-            {loading ? <Spinner /> : "Create Agent Account"}
+            {loading ? <Spinner /> : "Create"}
           </Button>
         </div>
       </div>
