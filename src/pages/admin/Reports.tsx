@@ -49,13 +49,13 @@ const Reports = () => {
           ],
         });
         setRequestData({
-          labels: ["Open", "Pending", "closed"],
+          labels: ["Pending", "InProgress", "Closed"],
           datasets: [
             {
               label: "Requests",
               data: [
                 data.numberOfPendingRequests,
-                data.numberOfInPRogressRequests,
+                data.numberOfInProgressRequests,
                 data.numberOfDoneRequests,
               ],
               backgroundColor: [
@@ -114,7 +114,11 @@ const Reports = () => {
             <DoughnutChart data={chatData} />
           </CardContent>
           <CardFooter>
-            <p>Total Chats: {reports.numberOfChats}</p>
+            <div className="flex flex-col">
+              <p>Total Chats: {reports.numberOfChats}</p>
+              <p>Open Chats: {reports.numberOfOpenChats}</p>
+              <p>Closed Chats: {reports.numberOfClosedChats}</p>
+            </div>
           </CardFooter>
         </Card>
         <Card>
@@ -125,7 +129,12 @@ const Reports = () => {
             <DoughnutChart data={requestData} />
           </CardContent>
           <CardFooter>
-            <p>Total Requests: {reports.numberOfRequests}</p>
+            <div className="flex flex-col">
+              <p>Total Requests: {reports.numberOfRequests}</p>
+              <p>Pending Requests: {reports.numberOfPendingRequests}</p>
+              <p>InProgress Requests: {reports.numberOfRequests}</p>
+              <p>Closed Requests: {reports.numberOfDoneRequests}</p>
+            </div>
           </CardFooter>
         </Card>
         <Card>
@@ -136,7 +145,9 @@ const Reports = () => {
             <DoughnutChart data={availableAgents} />
           </CardContent>
           <CardFooter>
-            <p>Total Agents: 8</p>
+            <div className="flex flex-col">
+              <p>Total Agents: 8</p>
+            </div>
           </CardFooter>
         </Card>
       </div>
