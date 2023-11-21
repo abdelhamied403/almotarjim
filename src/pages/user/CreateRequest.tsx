@@ -49,15 +49,6 @@ const CreateRequest = () => {
   );
 
   const onSubmit = async (data: CreateRequestSchema) => {
-    if (files.length === 0) {
-      toast({
-        title: t("shared.noFilesSelected"),
-        description: t("shared.noFilesSelectedDescription"),
-        variant: "destructive",
-      });
-      return;
-    }
-
     setCreateRequestLoading(true);
     try {
       const res = await RequestService.createRequest({
