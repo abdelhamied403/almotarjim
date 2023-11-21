@@ -49,6 +49,7 @@ const Login = () => {
       });
     }
   };
+
   return (
     <div className="h-screen bg-primary-200 lg:bg-gradient-to-l from-[#C6E1F1] from-50%  lg:to-white lg:to-50%">
       <div className="grid lg:grid-cols-2 container mx-auto gap-52 items-center h-full">

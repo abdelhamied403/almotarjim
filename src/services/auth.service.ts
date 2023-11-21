@@ -13,6 +13,14 @@ const anonymousLogin = async () => {
   const res = await api.get("/anonymous-login");
   return res.data;
 };
+const facebookLogin = async () => {
+  const res = await api.get("/facebook/auth");
+  return res.data;
+};
+const googleLogin = async () => {
+  const res = await api.get("/google/auth");
+  return res.data;
+};
 const register = async (data: RegistrationSchemaType) => {
   const res = await api.post("/register/client", {
     ...data,
@@ -48,6 +56,8 @@ const AuthService = {
   getUser,
   getIsValidToken,
   getUsersByRole,
+  facebookLogin,
+  googleLogin,
 };
 
 export default AuthService;
