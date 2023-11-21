@@ -18,7 +18,7 @@ const getTranslators = async () => {
 
 const getSupervisors = async () => {
   const res = await api.get("/users/supervisor");
-  return res.data.data.data;
+  return res.data.data;
 };
 
 const getReports = async () => {
