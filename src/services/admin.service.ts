@@ -1,4 +1,4 @@
-import { RegistrationSchemaType } from "@/schemas/registrationSchema";
+import User from "@/interfaces/user";
 import { api } from "./api";
 
 const getUsers = async () => {
@@ -18,7 +18,7 @@ const getTranslators = async () => {
 
 const getSupervisors = async () => {
   const res = await api.get("/users/supervisor");
-  return res.data.data;
+  return res.data.data.data;
 };
 
 const getReports = async () => {
@@ -26,7 +26,7 @@ const getReports = async () => {
   return res.data.data;
 };
 
-const createAgent = async (data: RegistrationSchemaType) => {
+const createAgent = async (data: Partial<User>) => {
   const res = await api.post("/users/register/agent", {
     ...data,
     role: "agent",
@@ -35,7 +35,7 @@ const createAgent = async (data: RegistrationSchemaType) => {
   return res.data;
 };
 
-const createTranslator = async (data: RegistrationSchemaType) => {
+const createTranslator = async (data: Partial<User>) => {
   const res = await api.post("/users/register/translator", {
     ...data,
     role: "translator",
@@ -44,12 +44,17 @@ const createTranslator = async (data: RegistrationSchemaType) => {
   return res.data;
 };
 
-const createSupervisor = async (data: RegistrationSchemaType) => {
+const createSupervisor = async (data: Partial<User>) => {
   const res = await api.post("/users/register/supervisor", {
     ...data,
     role: "supervisor",
   });
 
+  return res.data;
+};
+
+const deleteUser = async (id: string) => {
+  const res = await api.delete(`/users/delete-user/${id}`);
   return res.data;
 };
 
@@ -62,6 +67,7 @@ const AdminService = {
   createAgent,
   createTranslator,
   createSupervisor,
+  deleteUser,
 };
 
 export default AdminService;

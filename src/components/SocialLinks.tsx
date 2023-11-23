@@ -1,12 +1,15 @@
 import facebook from "@/assets/auth/Facebook.svg";
 import google from "@/assets/auth/Google.svg";
-import apple from "@/assets/auth/Apple.svg";
 import AuthService from "@/services/auth.service";
 import { Button } from "./ui/button";
 
 const SocialLinks = () => {
   const handleFacebookLogin = async () => {
     const res = await AuthService.facebookLogin();
+    console.log(res);
+  };
+  const handleGoogleLogin = async () => {
+    const res = await AuthService.googleLogin();
     console.log(res);
   };
 
@@ -19,11 +22,8 @@ const SocialLinks = () => {
       >
         <img src={facebook} alt="almotarjim-facebook" />
       </Button>
-      <Button variant="link">
+      <Button variant="link" onClick={handleGoogleLogin}>
         <img src={google} alt="almotarjim-google" />
-      </Button>
-      <Button variant="link">
-        <img src={apple} alt="almotarjim-apple" />
       </Button>
     </div>
   );

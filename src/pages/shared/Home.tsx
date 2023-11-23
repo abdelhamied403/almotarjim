@@ -8,6 +8,9 @@ import LanguageDropdown from "@/components/LanguageDropdown";
 import AuthService from "@/services/auth.service";
 import { useNavigate } from "react-router-dom";
 
+import about from "@/assets/about.jpg";
+import logo from "@/assets/logo.png";
+
 import useI18n from "@/hooks/useI18n";
 
 const Home = () => {
@@ -28,30 +31,29 @@ const Home = () => {
   };
 
   return (
-    <div className="relative h-screen">
-      <div className="absolute top-0 right-0">
-        <img
-          src={ellipse}
-          alt="ellipse"
-          className="w-[100px] h-[100px] md:h-auto md:w-auto"
-        />
-      </div>
-      <div className="absolute top-0 left-0">
-        <img
-          src={ellipse2}
-          alt="ellipse"
-          className="w-[100px] h-[100px] md:h-auto md:w-auto"
-        />
-      </div>
-      <div className="absolute bottom-0 left-0">
-        <img
-          src={ellipse3}
-          alt="ellipse"
-          className="w-[100px] h-[100px] md:h-auto md:w-auto"
-        />
-      </div>
-
-      <div className="flex flex-col h-full justify-center relative z-10">
+    <div className="relative min-h-screen">
+      <div className="flex flex-col h-screen justify-center relative z-10">
+        <div className="absolute top-0 right-0">
+          <img
+            src={ellipse}
+            alt="ellipse"
+            className="w-[100px] h-[100px] md:h-auto md:w-auto"
+          />
+        </div>
+        <div className="absolute top-0 left-0">
+          <img
+            src={ellipse2}
+            alt="ellipse"
+            className="w-[100px] h-[100px] md:h-auto md:w-auto"
+          />
+        </div>
+        <div className="absolute bottom-0 left-0">
+          <img
+            src={ellipse3}
+            alt="ellipse"
+            className="w-[100px] h-[100px] md:h-auto md:w-auto"
+          />
+        </div>
         <div className="container mx-auto">
           <div className="flex justify-end">
             <LanguageDropdown />
@@ -84,6 +86,36 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      <section className="my-24" id="about">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="preview">
+              <img className="rounded-xl" src={about} alt="" />
+            </div>
+            <div className="details py-8">
+              <h1 className="text-2xl lg:text-5xl mb-8">
+                {t("home.aboutUs.title")}
+              </h1>
+              <p>{t("home.aboutUs.description")}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer className="bg-primary-100 py-8">
+        <div className="container mx-auto">
+          <div className="flex items-center gap-4">
+            <img className="w-12" src={logo} alt="" />
+            <p>
+              {t("shared.footer.copyright").replace(
+                "{{year}}",
+                new Date().getFullYear().toString()
+              )}
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

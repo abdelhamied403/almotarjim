@@ -8,6 +8,38 @@ import { useQuery } from "react-query";
 import Spinner from "@/components/ui/Spinner";
 import AdminService from "@/services/admin.service";
 import User from "@/interfaces/user";
+import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
+
+const AgentsActions = ({ row, refetch }: any) => {
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+
+  const handleDeleteAgent = async (id: string) => {
+    setLoading(true);
+    try {
+      await AdminService.deleteUser(id);
+      refetch();
+      toast({
+        title: "Deleted",
+        description: "Agent Deleted Successfully",
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(true);
+    }
+  };
+
+  return (
+    <Button
+      variant={"danger"}
+      onClick={() => handleDeleteAgent(row.original.id)}
+    >
+      {loading ? <Spinner /> : <RiDeleteBin5Fill />}
+    </Button>
+  );
+};
 
 const Agents = () => {
   const columns: ColumnDef<User>[] = [
@@ -39,20 +71,15 @@ const Agents = () => {
     {
       id: "actions",
       header: "Actions",
-      cell: ({ row }) => (
-        <Link to={`/request/${row.original.id}`}>
-          <Button variant={"danger"}>
-            <RiDeleteBin5Fill />
-          </Button>
-        </Link>
-      ),
+      cell: ({ row }) => <AgentsActions row={row} refetch={refetch} />,
     },
   ];
 
-  const { isLoading, data: agents } = useQuery(
-    "agents",
-    AdminService.getAgents
-  );
+  const {
+    isLoading,
+    data: agents,
+    refetch,
+  } = useQuery("agents", AdminService.getAgents);
 
   if (isLoading) {
     return (

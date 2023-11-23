@@ -3,10 +3,6 @@ import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  RegistrationSchemaType,
-  registrationSchema,
-} from "@/schemas/registrationSchema";
 import { useState } from "react";
 import Spinner from "@/components/ui/Spinner";
 
@@ -14,10 +10,15 @@ import useI18n from "@/hooks/useI18n";
 import Field from "@/components/Field";
 import { useToast } from "@/components/ui/use-toast";
 import AdminService from "@/services/admin.service";
+import { z } from "zod";
+import useRegistrationSchema from "@/schemas/useRegistrationSchema";
 
 const CreateTranslator = () => {
   const navigate = useNavigate();
   const { t } = useI18n();
+
+  const { registrationSchema } = useRegistrationSchema();
+  type RegistrationSchemaType = z.infer<typeof registrationSchema>;
 
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Partial<RegistrationSchemaType>>({});
@@ -40,7 +41,7 @@ const CreateTranslator = () => {
         description: "Translator Created Succefully",
       });
 
-      navigate("/dashboard");
+      navigate("/translators");
     } catch (error: any) {
       setErrors(error.response.data.error);
       toast({

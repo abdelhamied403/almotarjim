@@ -22,7 +22,13 @@ const LanguageDropdown = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {Object.values(locales).map(({ locale, code }) => (
-          <DropdownMenuItem key={code} onClick={() => changeLocale(code)}>
+          <DropdownMenuItem
+            key={code}
+            onClick={() => {
+              changeLocale(code);
+              location.reload();
+            }}
+          >
             {locale}
           </DropdownMenuItem>
         ))}

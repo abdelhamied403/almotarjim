@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import Field from "@/components/Field";
 import { Input } from "@/components/ui/input";
 import Dropzone from "@/components/ui/dropzone";
@@ -18,13 +17,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import useI18n from "@/hooks/useI18n";
 import Spinner from "@/components/ui/Spinner";
-
-const createRequestSchema = z.object({
-  title: z.string().min(1, { message: "title is required" }),
-  description: z.string().min(1, { message: "description is required" }),
-});
-
-type CreateRequestSchema = z.infer<typeof createRequestSchema>;
+import useCreateRequestSchema from "@/schemas/useCreateRequestSchema";
+import { z } from "zod";
 
 const CreateRequest = () => {
   const [files, setFiles] = useState<UploadedFile[]>([]);
@@ -33,22 +27,30 @@ const CreateRequest = () => {
   const navigate = useNavigate();
   const { serviceId } = useParams();
   const { t, language } = useI18n();
+
+  const { createRequestSchema } = useCreateRequestSchema();
+  type CreateRequestSchemaType = z.infer<typeof createRequestSchema>;
+
   const [createRequestLoading, setCreateRequestLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CreateRequestSchema>({
+  } = useForm<CreateRequestSchemaType>({
     resolver: zodResolver(createRequestSchema),
   });
 
   const { isFetching, data: currentService } = useQuery<Service>(
     "service",
-    async () => await ServiceService.getService(serviceId)
+    async () => await ServiceService.getService(serviceId),
+    {
+      staleTime: Infinity,
+      cacheTime: Infinity,
+    }
   );
 
-  const onSubmit = async (data: CreateRequestSchema) => {
+  const onSubmit = async (data: CreateRequestSchemaType) => {
     setCreateRequestLoading(true);
     try {
       const res = await RequestService.createRequest({
