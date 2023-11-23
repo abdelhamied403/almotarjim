@@ -47,28 +47,31 @@ const Translators = () => {
   const columns: ColumnDef<User>[] = [
     {
       accessorKey: "id",
-      header: "ID",
+      header: t("admin.translators.id"),
     },
     {
       accessorKey: "name",
-      header: "Name",
+      header: t("admin.translators.name"),
     },
     {
       accessorKey: "email",
-      header: "Email",
+      header: t("admin.translators.email"),
     },
     {
       accessorKey: "status",
-      header: "Status",
-      cell: ({ row }) => (row.original.status ? "online" : "Offline"),
+      header: t("admin.translators.status"),
+      cell: ({ row }) =>
+        row.original.status
+          ? t("admin.translators.online")
+          : t("admin.translators.offline"),
     },
     {
       accessorKey: "translations_number",
-      header: "Number Of Translations",
+      header: t("admin.translators.numberOfTranslations"),
     },
     {
       id: "actions",
-      header: t("supervisor.requests.table.actions"),
+      header: t("admin.translators.actions"),
       cell: ({ row }) => <TranslatorsActions row={row} refetch={refetch} />,
     },
   ];
@@ -93,7 +96,7 @@ const Translators = () => {
         <Link to="/translators/create">
           <Button className="flex gap-2 items-center">
             <HiPlus />
-            Create Translator
+            {t("admin.translators.createTranslator")}
           </Button>
         </Link>
       </div>

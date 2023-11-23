@@ -14,27 +14,27 @@ const Users = () => {
   const columns: ColumnDef<User>[] = [
     {
       accessorKey: "id",
-      header: "ID",
+      header: t("admin.users.id"),
     },
     {
       accessorKey: "name",
-      header: "Name",
+      header: t("admin.users.name"),
     },
     {
       accessorKey: "status",
-      header: "Status",
+      header: t("admin.users.status"),
     },
     {
       accessorKey: "chats",
-      header: "Chats",
+      header: t("admin.users.chats"),
     },
     {
       accessorKey: "requests",
-      header: "Requests",
+      header: t("admin.users.requests"),
     },
     {
       id: "actions",
-      header: t("supervisor.requests.table.actions"),
+      header: t("admin.users.actions"),
       // cell: ({ row }) => (
       //   <Link to={`/request/${row.original.id}`}>
       //     <Button>

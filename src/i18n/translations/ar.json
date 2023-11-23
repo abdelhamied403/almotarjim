@@ -263,6 +263,78 @@
           }
         }
       }
+    },
+    "admin": {
+      "layout": {
+        "dashboard": "الرئيسيه ",
+        "services": "الخدمات",
+        "chats": "قائمه الدردشه",
+        "requests": "قائمه الطلبات",
+        "agents": "الموظفين",
+        "tanslators": "المترجمين",
+        "supervisors": "المشرفين",
+        "users": "المستخدمين",
+        "reports": "التقارير"
+      },
+      "dashboard": {
+        "welcomeToAlmotarjim": "مرحبا بك فى منصه المترجم",
+        "description": "لوحه التحكم الخاصه بالتقارير",
+        "chats": "الدردشه",
+        "requests": "الطلبات",
+        "agents": "الموظفين",
+        "open": "المتاح",
+        "closed": "المغلقه",
+        "pending": "قيد الانتظار",
+        "inProgress": "فى تَقَدم",
+        "online": "أونلاين",
+        "offline": "أوفلاين"
+      },
+      "chooseService": {
+        "id": "التسلسل",
+        "title": "العنوان",
+        "image": "الصوره",
+        "actions": "اجراءات"
+      },
+      "agents": {
+        "id": "التسلسل",
+        "name": "الاسم",
+        "email": "البريد الالكترونى",
+        "phone": "الهاتف الجوال",
+        "status": "الحاله",
+        "online": "أونلاين",
+        "Offline": "أوفلاين",
+        "numberOfClients": "عدد المستخدمين ",
+        "actions": "اجراءات",
+        "createAgent": "اضافه موظف"
+      },
+      "translators": {
+        "id": "التسلسل",
+        "name": "الاسم",
+        "email": "البريد الالكترونى",
+        "status": "الحاله",
+        "online": "أونلاين",
+        "Offline": "أوفلاين",
+        "numberOfTranslations": "عدد الترجمات",
+        "actions": "اجراءات",
+        "createTranslator": "اضافه مترجم"
+      },
+      "supervisors": {
+        "id": "التسلسل",
+        "name": "الاسم",
+        "status": "الحاله",
+        "chats": "الدردشه",
+        "requests": "الطلبات",
+        "actions": "اجراءات",
+        "createSupervisor": "اضافه مشرف"
+      },
+      "users": {
+        "id": "التسلسل",
+        "name": "الاسم",
+        "status": "الحاله",
+        "chats": "الدردشه",
+        "requests": "الطلبات",
+        "actions": "اجراءات"
+      }
     }
   }
 }

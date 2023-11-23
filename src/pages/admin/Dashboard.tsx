@@ -6,12 +6,14 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
+import useI18n from "@/hooks/useI18n";
 import AdminService from "@/services/admin.service";
 import { ChartData } from "chart.js";
 import { useState } from "react";
 import { useQuery } from "react-query";
 
-const Reports = () => {
+const Dashboard = () => {
+  const { t } = useI18n();
   const [chatData, setChatData] = useState<
     ChartData<"doughnut", number[], unknown>
   >({
@@ -34,10 +36,10 @@ const Reports = () => {
     {
       onSuccess: (data) => {
         setChatData({
-          labels: ["Open", "Closed"],
+          labels: [t("admin.dashboard.open"), t("admin.dashboard.closed")],
           datasets: [
             {
-              label: "Chats",
+              label: t("admin.dashboard.chats"),
               data: [data.numberOfOpenChats, data.numberOfClosedChats],
               backgroundColor: [
                 "rgba(54, 162, 235, 0.2)",
@@ -49,10 +51,14 @@ const Reports = () => {
           ],
         });
         setRequestData({
-          labels: ["Pending", "InProgress", "Closed"],
+          labels: [
+            t("admin.dashboard.pending"),
+            t("admin.dashboard.inProgress"),
+            t("admin.dashboard.closed"),
+          ],
           datasets: [
             {
-              label: "Requests",
+              label: t("admin.dashboard.requests"),
               data: [
                 data.numberOfPendingRequests,
                 data.numberOfInProgressRequests,
@@ -73,10 +79,10 @@ const Reports = () => {
           ],
         });
         setAvailableAgents({
-          labels: ["Online", "Offline"],
+          labels: [t("admin.dashboard.online"), t("admin.dashboard.offline")],
           datasets: [
             {
-              label: "Agents",
+              label: t("admin.dashboard.agents"),
               data: [data.numberOfAvailableAgents, 15],
               backgroundColor: [
                 "rgba(54, 162, 235, 0.2)",
@@ -102,13 +108,13 @@ const Reports = () => {
   return (
     <div className="flex flex-col gap-10">
       <div>
-        <h1>Welcome To Almotarjim</h1>
-        <p>Almotarjim Admin Dashboard Reports</p>
+        <h1>{t("admin.dashboard.welcomeToAlmotarjim")}</h1>
+        <p>{t("admin.dashboard.description")}</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <Card>
           <CardHeader>
-            <h1>Chats</h1>
+            <h1>{t("admin.dashboard.chats")}</h1>
           </CardHeader>
           <CardContent>
             <DoughnutChart data={chatData} />
@@ -123,7 +129,7 @@ const Reports = () => {
         </Card>
         <Card>
           <CardHeader>
-            <h1>Requests</h1>
+            <h1>{t("admin.dashboard.requests")}</h1>
           </CardHeader>
           <CardContent>
             <DoughnutChart data={requestData} />
@@ -139,7 +145,7 @@ const Reports = () => {
         </Card>
         <Card>
           <CardHeader>
-            <h1>Agents</h1>
+            <h1>{t("admin.dashboard.agents")}</h1>
           </CardHeader>
           <CardContent>
             <DoughnutChart data={availableAgents} />
@@ -155,4 +161,4 @@ const Reports = () => {
   );
 };
 
-export default Reports;
+export default Dashboard;

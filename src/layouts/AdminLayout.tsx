@@ -5,47 +5,59 @@ import SidebarItem from "@/components/SidebarItem";
 import LanguageDropdown from "@/components/LanguageDropdown";
 import { Button } from "@/components/ui/button";
 import { RiNotification2Fill } from "react-icons/ri";
+import useI18n from "@/hooks/useI18n";
 
 const AdminLayout = () => {
+  const { t } = useI18n();
   return (
     <div className="admin-layout h-screen">
       <div className="flex h-full">
         <Sidebar>
           <SidebarItem to="/dashboard" end>
             <HiHome />
-            <span className="hidden lg:block">Dashboard</span>
+            <span className="hidden lg:block">
+              {t("admin.layout.dashboard")}
+            </span>
           </SidebarItem>
           <SidebarItem to="/services" end>
             <HiHome />
-            <span className="hidden lg:block">Services</span>
+            <span className="hidden lg:block">
+              {t("admin.layout.services")}
+            </span>
           </SidebarItem>
           <SidebarItem to="/chat">
             <HiChat />
-            <span className="hidden lg:block">Chats</span>
+            <span className="hidden lg:block">{t("admin.layout.chats")}</span>
           </SidebarItem>
           <SidebarItem to="/request">
             <HiReceiptTax />
-            <span className="hidden lg:block">Requests</span>
+            <span className="hidden lg:block">
+              {t("admin.layout.requests")}
+            </span>
           </SidebarItem>
           <SidebarItem to="/agents">
             <HiReceiptTax />
-            <span className="hidden lg:block">Agents</span>
+            <span className="hidden lg:block">{t("admin.layout.agents")}</span>
           </SidebarItem>
           <SidebarItem to="/translators">
             <HiReceiptTax />
-            <span className="hidden lg:block">Translators</span>
+            <span className="hidden lg:block">
+              {t("admin.layout.tanslators")}
+            </span>
           </SidebarItem>
           <SidebarItem to="/supervisors">
             <HiReceiptTax />
-            <span className="hidden lg:block">Supervisors</span>
+            <span className="hidden lg:block">
+              {t("admin.layout.supervisors")}
+            </span>
           </SidebarItem>
           <SidebarItem to="/users">
             <HiReceiptTax />
-            <span className="hidden lg:block">Users</span>
+            <span className="hidden lg:block">{t("admin.layout.users")}</span>
           </SidebarItem>
           <SidebarItem to="/reports">
             <HiReceiptTax />
-            <span className="hidden lg:block">Reports</span>
+            <span className="hidden lg:block">{t("admin.layout.reports")}</span>
           </SidebarItem>
         </Sidebar>
 

@@ -8,26 +8,28 @@ import { useQuery } from "react-query";
 import Spinner from "@/components/ui/Spinner";
 import Admin from "@/interfaces/admin";
 import ServiceService from "@/services/services.service";
+import useI18n from "@/hooks/useI18n";
 
 const ChooseService = () => {
+  const { t } = useI18n();
   const columns: ColumnDef<Admin>[] = [
     {
       accessorKey: "id",
-      header: "ID",
+      header: t("admin.chooseService.id"),
     },
     {
       accessorKey: "title",
-      header: "Title",
+      header: t("admin.chooseService.title"),
     },
     {
-      header: "Image",
+      header: t("admin.chooseService.image"),
       cell: ({ row }) => (
         <img src={`${row.original.image}`} className="w-10 h-10" />
       ),
     },
     {
       id: "actions",
-      header: "Actions",
+      header: t("admin.chooseService.actions"),
       cell: ({ row }) => (
         <div className="flex gap-3">
           <Link to="/services/create">

@@ -47,27 +47,27 @@ const Supervisors = () => {
   const columns: ColumnDef<User>[] = [
     {
       accessorKey: "id",
-      header: "ID",
+      header: t("admin.supervisors.id"),
     },
     {
       accessorKey: "name",
-      header: "Name",
+      header: t("admin.supervisors.name"),
     },
     {
       accessorKey: "status",
-      header: "Status",
+      header: t("admin.supervisors.status"),
     },
     {
       accessorKey: "chats",
-      header: "Chats",
+      header: t("admin.supervisors.chats"),
     },
     {
       accessorKey: "requests",
-      header: "Requests",
+      header: t("admin.supervisors.requests"),
     },
     {
       id: "actions",
-      header: t("supervisor.requests.table.actions"),
+      header: t("admin.supervisors.actions"),
       cell: ({ row }) => <SupervisorsActions row={row} refetch={refetch} />,
     },
   ];
@@ -92,7 +92,7 @@ const Supervisors = () => {
         <Link to="/supervisors/create">
           <Button className="flex gap-2 items-center">
             <HiPlus />
-            Create Supervisor
+            {t("admin.supervisors.createSupervisor")}
           </Button>
         </Link>
       </div>

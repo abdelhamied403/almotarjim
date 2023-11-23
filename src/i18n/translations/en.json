@@ -263,6 +263,78 @@
           }
         }
       }
+    },
+    "admin": {
+      "layout": {
+        "dashboard": "Dashboard",
+        "services": "Services",
+        "chats": "Chats",
+        "requests": "Requests",
+        "agents": "Agents",
+        "tanslators": "Translators",
+        "supervisors": "Supervisors",
+        "users": "Users",
+        "reports": "Reports"
+      },
+      "dashboard": {
+        "welcomeToAlmotarjim": "Welcome To Almotarjim",
+        "description": "Almotarjim Admin Dashboard Reports",
+        "chats": "Chats",
+        "requests": "Requests",
+        "agents": "Agents",
+        "open": "Open",
+        "closed": "Closed",
+        "pending": "Pending",
+        "inProgress": "InProgress",
+        "online": "Online",
+        "offline": "Offline"
+      },
+      "chooseService": {
+        "id": "ID",
+        "title": "Title",
+        "image": "Image",
+        "actions": "Actions"
+      },
+      "agents": {
+        "id": "ID",
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "status": "Status",
+        "online": "online",
+        "Offline": "Offline",
+        "numberOfClients": "Number Of Clients",
+        "actions": "Actions",
+        "createAgent": "Create Agent"
+      },
+      "translators": {
+        "id": "ID",
+        "name": "Name",
+        "email": "Email",
+        "status": "Status",
+        "online": "online",
+        "Offline": "Offline",
+        "numberOfTranslations": "Number Of Translations",
+        "actions": "Actions",
+        "createTranslator": "Create Translator"
+      },
+      "supervisors": {
+        "id": "ID",
+        "name": "Name",
+        "status": "Status",
+        "chats": "Chats",
+        "requests": "Requests",
+        "actions": "Actions",
+        "createSupervisor": "Create Supervisor"
+      },
+      "users": {
+        "id": "ID",
+        "name": "Name",
+        "status": "Status",
+        "chats": "Chats",
+        "requests": "Requests",
+        "actions": "Actions"
+      }
     }
   }
 }

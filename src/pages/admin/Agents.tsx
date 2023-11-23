@@ -10,6 +10,7 @@ import AdminService from "@/services/admin.service";
 import User from "@/interfaces/user";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
+import useI18n from "@/hooks/useI18n";
 
 const AgentsActions = ({ row, refetch }: any) => {
   const [loading, setLoading] = useState(false);
@@ -42,35 +43,37 @@ const AgentsActions = ({ row, refetch }: any) => {
 };
 
 const Agents = () => {
+  const { t } = useI18n();
+
   const columns: ColumnDef<User>[] = [
     {
       accessorKey: "id",
-      header: "ID",
+      header: t("admin.agents.id"),
     },
     {
       accessorKey: "name",
-      header: "Name",
+      header: t("admin.agents.name"),
     },
     {
       accessorKey: "email",
-      header: "Email",
+      header: t("admin.agents.email"),
     },
     {
       accessorKey: "phone",
-      header: "Phone",
+      header: t("admin.agents.phone"),
     },
     {
       accessorKey: "status",
-      header: "Status",
+      header: t("admin.agents.status"),
       cell: ({ row }) => (row.original.status ? "online" : "Offline"),
     },
     {
       accessorKey: "number_of_clients",
-      header: "Number Of Clients",
+      header: t("admin.agents.numberOfClients"),
     },
     {
       id: "actions",
-      header: "Actions",
+      header: t("admin.agents.actions"),
       cell: ({ row }) => <AgentsActions row={row} refetch={refetch} />,
     },
   ];
@@ -95,7 +98,7 @@ const Agents = () => {
         <Link to="/agents/create">
           <Button className="flex gap-2 items-center">
             <HiPlus />
-            Create Agent
+            {t("admin.agents.createAgent")}
           </Button>
         </Link>
       </div>
