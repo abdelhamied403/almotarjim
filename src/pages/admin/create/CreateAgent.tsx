@@ -37,17 +37,17 @@ const CreateAgent = () => {
       setLoading(true);
       await AdminService.createAgent(data);
       toast({
-        title: "Created",
-        description: "Agent Created Succefully",
+        title: t("admin.createAgent.created"),
+        description: t("admin.createAgent.agentCreatedSuccessfully"),
       });
 
       navigate("/agents");
     } catch (error: any) {
       setErrors(error.response.data.error);
       toast({
-        title: "Error",
+        title: t("admin.createAgent.error"),
         variant: "destructive",
-        description: "Some fields are invalid",
+        description: t("admin.createAgent.someFieldsAreInvalid"),
       });
     } finally {
       setLoading(false);
@@ -58,7 +58,9 @@ const CreateAgent = () => {
     <div className="h-screen bg-primary-200 lg:bg-gradient-to-l from-white from-20%  lg:to-[#C6E1F1] lg:to-50%">
       <div className="grid  h-full items-center container mx-auto gap-52">
         <div className="grid gap-5">
-          <h1 className="text-3xl font-bold text-center">Create New Agent</h1>
+          <h1 className="text-3xl font-bold text-center">
+            {t("admin.createAgent.createNewAgent")}
+          </h1>
           <Field
             label={t("register.name")}
             error={errors.name || validationErrors?.name?.message}

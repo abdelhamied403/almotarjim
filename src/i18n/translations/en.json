@@ -334,6 +334,13 @@
         "chats": "Chats",
         "requests": "Requests",
         "actions": "Actions"
+      },
+      "createAgent": {
+        "created": "Created",
+        "agentCreatedSuccessfully": "Agent Created Successfully",
+        "error": "Error",
+        "someFieldsAreInvalid": "Some fields are invalid",
+        "createNewAgent": "Create New Agent"
       }
     }
   }

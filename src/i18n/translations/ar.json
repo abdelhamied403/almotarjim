@@ -334,6 +334,13 @@
         "chats": "الدردشه",
         "requests": "الطلبات",
         "actions": "اجراءات"
+      },
+      "createAgent": {
+        "created": "تم الاضافه",
+        "agentCreatedSuccessfully": "لقد تم اضافه موظف جديد بنجاح",
+        "error": "خطأ",
+        "someFieldsAreInvalid": "بعض البيانات خاطئه",
+        "createNewAgent": "إضافه موظف جديد"
       }
     }
   }
