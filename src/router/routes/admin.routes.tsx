@@ -15,6 +15,8 @@ import Users from "@/pages/admin/Users";
 import CreateAgent from "@/pages/admin/create/CreateAgent";
 import CreateTranslator from "@/pages/admin/create/CreateTranslator";
 import CreateSupervisor from "@/pages/admin/create/CreateSupervisor";
+import ChooseService from "@/pages/admin/ChooseService";
+import CreateService from "@/pages/admin/create/CreateService";
 
 const adminRoutes: RouteObject[] = [
   {
@@ -24,6 +26,13 @@ const adminRoutes: RouteObject[] = [
       {
         path: "dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "services",
+        children: [
+          { path: "", element: <ChooseService /> },
+          { path: "create", element: <CreateService /> },
+        ],
       },
       {
         path: "request",

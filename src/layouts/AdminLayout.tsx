@@ -15,6 +15,10 @@ const AdminLayout = () => {
             <HiHome />
             <span className="hidden lg:block">Dashboard</span>
           </SidebarItem>
+          <SidebarItem to="/services" end>
+            <HiHome />
+            <span className="hidden lg:block">Services</span>
+          </SidebarItem>
           <SidebarItem to="/chat">
             <HiChat />
             <span className="hidden lg:block">Chats</span>
