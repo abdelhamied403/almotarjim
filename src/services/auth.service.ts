@@ -1,4 +1,4 @@
-import { RegistrationSchemaType } from "@/schemas/registrationSchema";
+import User from "@/interfaces/user";
 import { api } from "./api";
 import Role from "@/interfaces/role";
 
@@ -13,7 +13,15 @@ const anonymousLogin = async () => {
   const res = await api.get("/anonymous-login");
   return res.data;
 };
-const register = async (data: RegistrationSchemaType) => {
+const facebookLogin = async () => {
+  const res = await api.get("/facebook/auth");
+  return res.data;
+};
+const googleLogin = async () => {
+  const res = await api.get("/google/login");
+  return res.data;
+};
+const register = async (data: Partial<User>) => {
   const res = await api.post("/register/client", {
     ...data,
     role: "client",
@@ -38,7 +46,7 @@ const getIsValidToken = async () => {
 
 const getUsersByRole = async (role: Role) => {
   const res = await api.get(`/users/${role}`);
-  return res.data;
+  return res.data.data.data;
 };
 
 const AuthService = {
@@ -48,6 +56,8 @@ const AuthService = {
   getUser,
   getIsValidToken,
   getUsersByRole,
+  facebookLogin,
+  googleLogin,
 };
 
 export default AuthService;

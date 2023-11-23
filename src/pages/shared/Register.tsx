@@ -7,22 +7,23 @@ import AuthService from "@/services/auth.service";
 import useProfileStore from "@/store/profile.slice";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  RegistrationSchemaType,
-  registrationSchema,
-} from "@/schemas/registrationSchema";
 import { useState } from "react";
 import Spinner from "@/components/ui/Spinner";
 
 import useI18n from "@/hooks/useI18n";
 import Field from "@/components/Field";
 import { useToast } from "@/components/ui/use-toast";
+import useRegistrationSchema from "@/schemas/useRegistrationSchema";
+import { z } from "zod";
 
 const Register = () => {
   const navigate = useNavigate();
   const { t } = useI18n();
-
   const { setUser } = useProfileStore();
+
+  const { registrationSchema } = useRegistrationSchema();
+  type RegistrationSchemaType = z.infer<typeof registrationSchema>;
+
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Partial<RegistrationSchemaType>>({});
   const { toast } = useToast();

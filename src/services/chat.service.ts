@@ -3,7 +3,7 @@ import { api, formAxios } from "./api";
 
 const getAllChats = async () => {
   const res = await api.get("/messages/chats");
-  return res.data.data;
+  return res.data.data.data;
 };
 
 const getSingleChat = async (id?: string) => {

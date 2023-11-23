@@ -29,12 +29,19 @@
       },
       "chat": {
         "youAreStillInQueue": "you are still in queue..."
+      },
+      "footer": {
+        "copyright": "© {{year}}-Almotarjim. All rights reserved."
       }
     },
     "home": {
       "title": "Welcome to Almotarjim",
-      "content": "Lorem ipsum dolor sit amet consectetur Placerat vel turpis est morbi pharetra tortor quis. Aenean enim faucibus fringilla i elementum malesuada. Praesent turpis facilisis ornarescelerisque necs",
-      "button": "Get Started"
+      "content": "Welcome to The Modern Translator Foundation for Copying and Imaging! 🌐📚 We're not just a project; we're a dynamic force in translation services, providing advanced solutions accessible anytime, anywhere. Join us in shaping the future of translation!",
+      "button": "Get Started",
+      "aboutUs": {
+        "title": "About Almotarjim",
+        "description": "The Modern Translator Foundation for Copying and Imaging, affiliated with Commercial Register Number 5855339388, is an established project through which we contribute by providing our advanced services to the largest possible number of students. Due to the tremendous digital progress witnessed globally at the present time, our services have become available remotely and at any time."
+      }
     },
     "register": {
       "title": "Welcome to almotarjim!",

@@ -274,7 +274,7 @@ const SingleRequest = () => {
                       />
                     </SelectTrigger>
                     <SelectContent>
-                      {translators?.data.map((translator) => (
+                      {translators?.data?.map((translator) => (
                         <SelectItem value={translator.id}>
                           {translator.name}
                         </SelectItem>

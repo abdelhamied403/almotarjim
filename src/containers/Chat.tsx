@@ -181,7 +181,7 @@ const ChatBody = ({ children }: ChatBodyProps) => {
       className="flex-1 h-full flex flex-col gap-4 p-8 bg-white rounded-2xl overflow-y-auto space-y-8"
       ref={messagesContainer}
     >
-      {messages.map((msg: any) => (
+      {messages?.map((msg: any) => (
         <Message {...msg} />
       ))}
     </div>

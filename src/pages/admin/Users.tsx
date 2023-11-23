@@ -2,7 +2,7 @@ import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
 import useI18n from "@/hooks/useI18n";
 import { ColumnDef } from "@tanstack/react-table";
-import { HiEye, HiPlus } from "react-icons/hi";
+import { HiPlus } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import Spinner from "@/components/ui/Spinner";
@@ -35,13 +35,13 @@ const Users = () => {
     {
       id: "actions",
       header: t("supervisor.requests.table.actions"),
-      cell: ({ row }) => (
-        <Link to={`/request/${row.original.id}`}>
-          <Button>
-            <HiEye />
-          </Button>
-        </Link>
-      ),
+      // cell: ({ row }) => (
+      //   <Link to={`/request/${row.original.id}`}>
+      //     <Button>
+      //       <HiEye />
+      //     </Button>
+      //   </Link>
+      // ),
     },
   ];
 

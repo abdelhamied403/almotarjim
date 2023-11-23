@@ -2,12 +2,45 @@ import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
 import useI18n from "@/hooks/useI18n";
 import { ColumnDef } from "@tanstack/react-table";
-import { HiEye, HiPlus } from "react-icons/hi";
+import { HiPlus } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import Spinner from "@/components/ui/Spinner";
 import AdminService from "@/services/admin.service";
 import User from "@/interfaces/user";
+import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
+import { RiDeleteBin5Fill } from "react-icons/ri";
+
+const SupervisorsActions = ({ row, refetch }: any) => {
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+
+  const handleDeleteSupervisor = async (id: string) => {
+    setLoading(true);
+    try {
+      await AdminService.deleteUser(id);
+      refetch();
+      toast({
+        title: "Deleted",
+        description: "Supervisor Deleted Successfully",
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(true);
+    }
+  };
+
+  return (
+    <Button
+      variant={"danger"}
+      onClick={() => handleDeleteSupervisor(row.original.id)}
+    >
+      {loading ? <Spinner /> : <RiDeleteBin5Fill />}
+    </Button>
+  );
+};
 
 const Supervisors = () => {
   const { t } = useI18n();
@@ -35,20 +68,15 @@ const Supervisors = () => {
     {
       id: "actions",
       header: t("supervisor.requests.table.actions"),
-      cell: ({ row }) => (
-        <Link to={`/request/${row.original.id}`}>
-          <Button>
-            <HiEye />
-          </Button>
-        </Link>
-      ),
+      cell: ({ row }) => <SupervisorsActions row={row} refetch={refetch} />,
     },
   ];
 
-  const { isLoading, data: supervisors } = useQuery(
-    "supervisors",
-    AdminService.getSupervisors
-  );
+  const {
+    isLoading,
+    data: supervisors,
+    refetch,
+  } = useQuery("supervisors", AdminService.getSupervisors);
 
   if (isLoading) {
     return (
