@@ -48,6 +48,10 @@ const getUsersByRole = async (role: Role) => {
   const res = await api.get(`/users/${role}`);
   return res.data.data.data;
 };
+const logout = async () => {
+  const res = await api.get(`/users/toggle-user`);
+  return res.data;
+};
 
 const AuthService = {
   login,
@@ -58,6 +62,7 @@ const AuthService = {
   getUsersByRole,
   facebookLogin,
   googleLogin,
+  logout,
 };
 
 export default AuthService;

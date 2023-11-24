@@ -302,7 +302,7 @@
         "phone": "الهاتف الجوال",
         "status": "الحاله",
         "online": "أونلاين",
-        "Offline": "أوفلاين",
+        "offline": "أوفلاين",
         "numberOfClients": "عدد المستخدمين ",
         "actions": "اجراءات",
         "createAgent": "اضافه موظف"
@@ -313,7 +313,7 @@
         "email": "البريد الالكترونى",
         "status": "الحاله",
         "online": "أونلاين",
-        "Offline": "أوفلاين",
+        "offline": "أوفلاين",
         "numberOfTranslations": "عدد الترجمات",
         "actions": "اجراءات",
         "createTranslator": "اضافه مترجم"
@@ -321,7 +321,10 @@
       "supervisors": {
         "id": "التسلسل",
         "name": "الاسم",
+        "email": "البريد الالكترونى",
         "status": "الحاله",
+        "online": "أونلاين",
+        "offline": "أوفلاين",
         "chats": "الدردشه",
         "requests": "الطلبات",
         "actions": "اجراءات",
@@ -330,6 +333,7 @@
       "users": {
         "id": "التسلسل",
         "name": "الاسم",
+        "email": "البريد الالكترونى",
         "status": "الحاله",
         "chats": "الدردشه",
         "requests": "الطلبات",

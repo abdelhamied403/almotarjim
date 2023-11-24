@@ -65,7 +65,10 @@ const Agents = () => {
     {
       accessorKey: "status",
       header: t("admin.agents.status"),
-      cell: ({ row }) => (row.original.status ? "online" : "Offline"),
+      cell: ({ row }) =>
+        row.original.status
+          ? t("admin.agents.online")
+          : t("admin.agents.offline"),
     },
     {
       accessorKey: "number_of_clients",

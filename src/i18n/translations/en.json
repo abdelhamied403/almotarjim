@@ -321,7 +321,10 @@
       "supervisors": {
         "id": "ID",
         "name": "Name",
+        "email": "Email",
         "status": "Status",
+        "online": "online",
+        "Offline": "Offline",
         "chats": "Chats",
         "requests": "Requests",
         "actions": "Actions",
@@ -330,6 +333,7 @@
       "users": {
         "id": "ID",
         "name": "Name",
+        "email": "Email",
         "status": "Status",
         "chats": "Chats",
         "requests": "Requests",
