@@ -31,4 +31,4 @@ i18n.on("languageChanged init", () => {
 });
 
 export { registrationSchema };
-export type RegistrationSchemaType = z.infer<typeof registrationSchema>;
+export type AddServiceSchemaType = z.infer<typeof registrationSchema>;

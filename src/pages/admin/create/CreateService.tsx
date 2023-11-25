@@ -3,41 +3,41 @@ import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  RegistrationSchemaType,
-  registrationSchema,
-} from "@/schemas/registrationSchema";
 import { useState } from "react";
 import Spinner from "@/components/ui/Spinner";
 
-import useI18n from "@/hooks/useI18n";
 import Field from "@/components/Field";
 import { useToast } from "@/components/ui/use-toast";
 import AdminService from "@/services/admin.service";
+import { Textarea } from "@/components/ui/textarea";
+import useAddServiceSchema from "@/schemas/useAddServiceSchema";
+import { z } from "zod";
 
-const CreateSupervisor = () => {
+const CreateService = () => {
+  const { addServiceSchema } = useAddServiceSchema();
+  type AddServiceSchemaType = z.infer<typeof addServiceSchema>;
+
   const navigate = useNavigate();
-  const { t } = useI18n();
 
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<Partial<RegistrationSchemaType>>({});
+  const [errors, setErrors] = useState<Partial<AddServiceSchemaType>>({});
   const { toast } = useToast();
 
   const {
     register,
     handleSubmit,
     formState: { errors: validationErrors },
-  } = useForm<RegistrationSchemaType>({
-    resolver: zodResolver(registrationSchema),
+  } = useForm<AddServiceSchemaType>({
+    resolver: zodResolver(addServiceSchema),
   });
 
-  const handleRegister = async (data: RegistrationSchemaType) => {
+  const handleAddService = async (data: AddServiceSchemaType) => {
     try {
       setLoading(true);
-      await AdminService.createSupervisor(data);
+      await AdminService.createService(data);
       toast({
         title: "Created",
-        description: "Supervisor Created Succefully",
+        description: "Service Created Succefully",
       });
 
       navigate("/dashboard");
@@ -57,51 +57,66 @@ const CreateSupervisor = () => {
     <div className="h-screen bg-primary-200 lg:bg-gradient-to-l from-white from-20%  lg:to-[#C6E1F1] lg:to-50%">
       <div className="grid  h-full items-center container mx-auto gap-52">
         <div className="grid gap-5">
-          <h1 className="text-3xl font-bold text-center">
-            Create New Supervisor
-          </h1>
+          <h1 className="text-3xl font-bold text-center">Add New Service</h1>
+          <div className="flex gap-3">
+            <Field
+              label="English Title"
+              error={errors.title || validationErrors?.title?.message}
+              className="basis-1/2"
+            >
+              <Input
+                type="text"
+                placeholder="Translation Services "
+                {...register("title")}
+              />
+            </Field>
+            <Field
+              label="Arabic Title"
+              error={errors.title || validationErrors?.title?.message}
+              className="basis-1/2"
+            >
+              <Input
+                type="text"
+                placeholder="خدمات الترجمه"
+                {...register("title")}
+              />
+            </Field>
+          </div>
           <Field
-            label={t("register.name")}
-            error={errors.name || validationErrors?.name?.message}
+            label="Arabic Description"
+            error={errors.description || validationErrors?.description?.message}
+            className="basis-1/2"
           >
-            <Input
-              type="text"
-              placeholder="Ahmed Mohamed"
-              {...register("name")}
-            />
+            <Textarea
+              placeholder="أدخل وصف الخدمه بالغه العربيه هنا "
+              {...register("description")}
+            ></Textarea>
           </Field>
           <Field
-            label={t("register.email")}
-            error={errors.email || validationErrors?.email?.message}
+            label="English Description"
+            error={errors.description || validationErrors?.description?.message}
+            className="basis-1/2"
           >
-            <Input
-              type="email"
-              placeholder="olivia@untitledui.com"
-              {...register("email")}
-            />
+            <Textarea
+              placeholder="Type service English description here "
+              {...register("description")}
+            ></Textarea>
           </Field>
           <Field
-            label={t("register.phone")}
-            error={errors.phone || validationErrors?.phone?.message}
+            label="Service Price"
+            error={errors.price || validationErrors?.price?.message}
+            className="basis-1/2"
           >
-            <Input
-              type="text"
-              placeholder="+96612216454844"
-              {...register("phone")}
-            />
+            <Input type="text" placeholder="...96" {...register("price")} />
           </Field>
           <Field
-            label={t("register.password")}
-            error={errors.password || validationErrors?.password?.message}
+            label="Choose Service Image"
+            error={errors.image || validationErrors?.image?.message}
           >
-            <Input
-              type="password"
-              placeholder="*********"
-              {...register("password")}
-            />
+            <Input placeholder="choose image" type="file" />
           </Field>
-          <Button onClick={handleSubmit(handleRegister)}>
-            {loading ? <Spinner /> : "Create"}
+          <Button onClick={handleSubmit(handleAddService)}>
+            {loading ? <Spinner /> : "Add New Service"}
           </Button>
         </div>
       </div>
@@ -109,4 +124,4 @@ const CreateSupervisor = () => {
   );
 };
 
-export default CreateSupervisor;
+export default CreateService;

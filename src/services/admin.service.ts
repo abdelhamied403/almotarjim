@@ -1,4 +1,6 @@
 import User from "@/interfaces/user";
+import Admin from "@/interfaces/admin";
+
 import { api } from "./api";
 
 const getUsers = async () => {
@@ -58,6 +60,14 @@ const deleteUser = async (id: string) => {
   return res.data;
 };
 
+const createService = async (data: Partial<Admin>) => {
+  const res = await api.post("/services/create", {
+    ...data,
+  });
+
+  return res.data;
+};
+
 const deleteService = async (id: string) => {
   const res = await api.delete(`/services/delete/${id}`);
   return res.data;
@@ -73,6 +83,7 @@ const AdminService = {
   createTranslator,
   createSupervisor,
   deleteUser,
+  createService,
   deleteService,
 };
 

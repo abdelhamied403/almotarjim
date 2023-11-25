@@ -1,7 +1,8 @@
 import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
-import { HiEye, HiPlus } from "react-icons/hi";
+import { HiPlus } from "react-icons/hi";
+import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
@@ -14,6 +15,8 @@ import { useToast } from "@/components/ui/use-toast";
 import AdminService from "@/services/admin.service";
 
 const AgentsActions = ({ row, refetch }: any) => {
+  const { t } = useI18n();
+
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
@@ -23,8 +26,8 @@ const AgentsActions = ({ row, refetch }: any) => {
       await AdminService.deleteService(id);
       refetch();
       toast({
-        title: "Deleted",
-        description: "Service Deleted Successfully",
+        title: t("admin.chooseService.deleted"),
+        description: t("admin.chooseService.serviceDeletedSuccess"),
       });
     } catch (error) {
       console.log(error);
@@ -35,11 +38,6 @@ const AgentsActions = ({ row, refetch }: any) => {
 
   return (
     <div className="flex gap-3">
-      <Link to="/services/create">
-        <Button>
-          <HiPlus />
-        </Button>
-      </Link>
       <Button
         variant={"danger"}
         onClick={() => handleDeleteService(row.original.id)}
@@ -48,7 +46,7 @@ const AgentsActions = ({ row, refetch }: any) => {
       </Button>
       <Link to={`/request/${row.original.id}`}>
         <Button>
-          <HiEye />
+          <FiEdit />
         </Button>
       </Link>
     </div>
@@ -73,6 +71,10 @@ const ChooseService = () => {
       ),
     },
     {
+      accessorKey: "price",
+      header: t("admin.chooseService.price"),
+    },
+    {
       id: "actions",
       header: t("admin.chooseService.actions"),
       cell: ({ row }) => <AgentsActions row={row} refetch={refetch} />,
@@ -95,6 +97,14 @@ const ChooseService = () => {
 
   return (
     <div className="requests h-full">
+      <div className="flex justify-end gap-4">
+        <Link to="/services/create">
+          <Button className="flex gap-2 items-center">
+            <HiPlus />
+            {t("admin.chooseService.createService")}
+          </Button>
+        </Link>
+      </div>
       <DataTable columns={columns} data={chooseServices} />
     </div>
   );

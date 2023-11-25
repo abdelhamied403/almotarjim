@@ -1,9 +1,7 @@
-import Role from "./role";
-
-type User = {
+type Admin = {
   id: string;
   title: string;
-  role: Role;
+  description: string;
   image: string;
 };
 

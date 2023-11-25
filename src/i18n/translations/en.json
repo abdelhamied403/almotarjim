@@ -293,7 +293,11 @@
         "id": "ID",
         "title": "Title",
         "image": "Image",
-        "actions": "Actions"
+        "price": "Price",
+        "actions": "Actions",
+        "deleted": "Deleted",
+        "serviceDeletedSuccess": "Service Deleted Successfully",
+        "createService": "Add New Service"
       },
       "agents": {
         "id": "ID",
