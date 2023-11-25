@@ -9,6 +9,51 @@ import Spinner from "@/components/ui/Spinner";
 import Admin from "@/interfaces/admin";
 import ServiceService from "@/services/services.service";
 import useI18n from "@/hooks/useI18n";
+import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
+import AdminService from "@/services/admin.service";
+
+const AgentsActions = ({ row, refetch }: any) => {
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+
+  const handleDeleteService = async (id: string) => {
+    setLoading(true);
+    try {
+      await AdminService.deleteService(id);
+      refetch();
+      toast({
+        title: "Deleted",
+        description: "Service Deleted Successfully",
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(true);
+    }
+  };
+
+  return (
+    <div className="flex gap-3">
+      <Link to="/services/create">
+        <Button>
+          <HiPlus />
+        </Button>
+      </Link>
+      <Button
+        variant={"danger"}
+        onClick={() => handleDeleteService(row.original.id)}
+      >
+        {loading ? <Spinner /> : <RiDeleteBin5Fill />}
+      </Button>
+      <Link to={`/request/${row.original.id}`}>
+        <Button>
+          <HiEye />
+        </Button>
+      </Link>
+    </div>
+  );
+};
 
 const ChooseService = () => {
   const { t } = useI18n();
@@ -30,32 +75,15 @@ const ChooseService = () => {
     {
       id: "actions",
       header: t("admin.chooseService.actions"),
-      cell: ({ row }) => (
-        <div className="flex gap-3">
-          <Link to="/services/create">
-            <Button>
-              <HiPlus />
-            </Button>
-          </Link>
-          <Link to={`/request/${row.original.id}`}>
-            <Button variant={"danger"}>
-              <RiDeleteBin5Fill />
-            </Button>
-          </Link>
-          <Link to={`/request/${row.original.id}`}>
-            <Button>
-              <HiEye />
-            </Button>
-          </Link>
-        </div>
-      ),
+      cell: ({ row }) => <AgentsActions row={row} refetch={refetch} />,
     },
   ];
 
-  const { isLoading, data: chooseServices } = useQuery(
-    "chooseServices",
-    ServiceService.listServices
-  );
+  const {
+    isLoading,
+    data: chooseServices,
+    refetch,
+  } = useQuery("chooseServices", ServiceService.listServices);
 
   if (isLoading) {
     return (

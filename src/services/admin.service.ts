@@ -58,6 +58,11 @@ const deleteUser = async (id: string) => {
   return res.data;
 };
 
+const deleteService = async (id: string) => {
+  const res = await api.delete(`/services/delete/${id}`);
+  return res.data;
+};
+
 const AdminService = {
   getUsers,
   getAgents,
@@ -68,6 +73,7 @@ const AdminService = {
   createTranslator,
   createSupervisor,
   deleteUser,
+  deleteService,
 };
 
 export default AdminService;
