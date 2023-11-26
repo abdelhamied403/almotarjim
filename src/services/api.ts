@@ -10,7 +10,7 @@ api.interceptors.request.use(
     const token = localStorage.getItem("token");
     const locale = localStorage.getItem("locale");
     config.headers.Authorization = `Bearer ${token}`;
-    config.headers["Accept-Language"] = locale;
+    config.headers["App-Language"] = locale;
     return config;
   },
   function (error) {

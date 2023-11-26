@@ -21,6 +21,10 @@ const googleLogin = async () => {
   const res = await api.get("/google/login");
   return res.data;
 };
+const googleLoginCallback = async (credential: any) => {
+  const res = await api.post("/google/callback", { credential });
+  return res.data;
+};
 const register = async (data: Partial<User>) => {
   const res = await api.post("/register/client", {
     ...data,
@@ -58,6 +62,7 @@ const AuthService = {
   getUsersByRole,
   facebookLogin,
   googleLogin,
+  googleLoginCallback,
 };
 
 export default AuthService;
