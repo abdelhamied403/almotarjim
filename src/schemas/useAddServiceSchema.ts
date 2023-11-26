@@ -4,16 +4,19 @@ import { z } from "zod";
 const useAddServiceSchema = () => {
   const { t } = useI18n();
   const addServiceSchema = z.object({
-    title: z.string().min(1, {
+    enTitle: z.string().min(1, {
       message: t("user.requests.createForm.errors.required.title"),
     }),
-    description: z.string().min(1, {
+    arTitle: z.string().min(1, {
+      message: t("user.requests.createForm.errors.required.title"),
+    }),
+    enDescription: z.string().min(1, {
+      message: t("user.requests.createForm.errors.required.description"),
+    }),
+    arDescription: z.string().min(1, {
       message: t("user.requests.createForm.errors.required.description"),
     }),
     price: z.string().min(1, {
-      message: t("user.requests.createForm.errors.required.description"),
-    }),
-    image: z.string().min(1, {
       message: t("user.requests.createForm.errors.required.description"),
     }),
   });

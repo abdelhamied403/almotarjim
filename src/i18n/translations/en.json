@@ -299,6 +299,20 @@
         "serviceDeletedSuccess": "Service Deleted Successfully",
         "createService": "Add New Service"
       },
+      "createService": {
+        "created": "Created",
+        "serviceCreatedSuccess": "Service Created Succefully",
+        "error": "Error",
+        "someFieldsAreInvalid": "Some fields are invalid",
+        "addNewService": "Add New Service",
+        "englishTitle": "English Title",
+        "arabicTitle": "Arabic Title",
+        "englishDesc": "English Description",
+        "arabicDesc": "Arabic Description",
+        "price": "Service Price",
+        "uploadServiceImage": "Upload Service Image",
+        "uploadImage": "upload image"
+      },
       "agents": {
         "id": "ID",
         "name": "Name",

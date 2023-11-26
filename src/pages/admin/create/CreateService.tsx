@@ -12,8 +12,10 @@ import AdminService from "@/services/admin.service";
 import { Textarea } from "@/components/ui/textarea";
 import useAddServiceSchema from "@/schemas/useAddServiceSchema";
 import { z } from "zod";
+import useI18n from "@/hooks/useI18n";
 
 const CreateService = () => {
+  const { t } = useI18n();
   const { addServiceSchema } = useAddServiceSchema();
   type AddServiceSchemaType = z.infer<typeof addServiceSchema>;
 
@@ -36,17 +38,17 @@ const CreateService = () => {
       setLoading(true);
       await AdminService.createService(data);
       toast({
-        title: "Created",
-        description: "Service Created Succefully",
+        title: t("admin.createService.created"),
+        description: t("admin.createService.serviceCreatedSuccess"),
       });
 
       navigate("/dashboard");
     } catch (error: any) {
       setErrors(error.response.data.error);
       toast({
-        title: "Error",
+        title: t("admin.createService.error"),
         variant: "destructive",
-        description: "Some fields are invalid",
+        description: t("admin.createService.someFieldsAreInvalid"),
       });
     } finally {
       setLoading(false);
@@ -57,66 +59,76 @@ const CreateService = () => {
     <div className="h-screen bg-primary-200 lg:bg-gradient-to-l from-white from-20%  lg:to-[#C6E1F1] lg:to-50%">
       <div className="grid  h-full items-center container mx-auto gap-52">
         <div className="grid gap-5">
-          <h1 className="text-3xl font-bold text-center">Add New Service</h1>
+          <h1 className="text-3xl font-bold text-center">
+            {t("admin.createService.addNewService")}
+          </h1>
           <div className="flex gap-3">
             <Field
-              label="English Title"
-              error={errors.title || validationErrors?.title?.message}
+              label={t("admin.createService.englishTitle")}
+              error={errors.enTitle || validationErrors?.enTitle?.message}
               className="basis-1/2"
             >
               <Input
                 type="text"
                 placeholder="Translation Services "
-                {...register("title")}
+                {...register("enTitle")}
               />
             </Field>
             <Field
-              label="Arabic Title"
-              error={errors.title || validationErrors?.title?.message}
+              label={t("admin.createService.arabicTitle")}
+              error={errors.arTitle || validationErrors?.arTitle?.message}
               className="basis-1/2"
             >
               <Input
                 type="text"
                 placeholder="خدمات الترجمه"
-                {...register("title")}
+                {...register("arTitle")}
               />
             </Field>
           </div>
           <Field
-            label="Arabic Description"
-            error={errors.description || validationErrors?.description?.message}
-            className="basis-1/2"
-          >
-            <Textarea
-              placeholder="أدخل وصف الخدمه بالغه العربيه هنا "
-              {...register("description")}
-            ></Textarea>
-          </Field>
-          <Field
-            label="English Description"
-            error={errors.description || validationErrors?.description?.message}
+            label={t("admin.createService.englishDesc")}
+            error={
+              errors.enDescription || validationErrors?.enDescription?.message
+            }
             className="basis-1/2"
           >
             <Textarea
               placeholder="Type service English description here "
-              {...register("description")}
+              {...register("enDescription")}
             ></Textarea>
           </Field>
           <Field
-            label="Service Price"
+            label={t("admin.createService.arabicDesc")}
+            error={
+              errors.arDescription || validationErrors?.arDescription?.message
+            }
+            className="basis-1/2"
+          >
+            <Textarea
+              placeholder="أدخل وصف الخدمه بالغه العربيه هنا "
+              {...register("arDescription")}
+            ></Textarea>
+          </Field>
+
+          <Field
+            label={t("admin.createService.price")}
             error={errors.price || validationErrors?.price?.message}
             className="basis-1/2"
           >
             <Input type="text" placeholder="...96" {...register("price")} />
           </Field>
           <Field
-            label="Choose Service Image"
-            error={errors.image || validationErrors?.image?.message}
+            label={t("admin.createService.uploadServiceImage")}
+            // error={errors.image || validationErrors?.image?.message}
           >
-            <Input placeholder="choose image" type="file" />
+            <Input
+              placeholder={t("admin.createService.uploadImage")}
+              type="file"
+            />
           </Field>
           <Button onClick={handleSubmit(handleAddService)}>
-            {loading ? <Spinner /> : "Add New Service"}
+            {loading ? <Spinner /> : t("admin.createService.addNewService")}
           </Button>
         </div>
       </div>

@@ -299,6 +299,20 @@
         "serviceDeletedSuccess": "تم حذف الخدمه بنجاح",
         "createService": "اضافه خدمه جديده"
       },
+      "createService": {
+        "created": "تم الاضافه",
+        "serviceCreatedSuccess": "تم اضافه الخدمه بنجاح",
+        "error": "خطأ",
+        "someFieldsAreInvalid": "بعض البيانات خاطئه",
+        "addNewService": "اضافه خدمه جديده",
+        "englishTitle": "العنوان بالغه الانجليزيه",
+        "arabicTitle": "العنوان بالغه العربيه",
+        "englishDesc": "الوصف باللغه الانجليزيه",
+        "arabicDesc": "الوصف باللغه العرببه",
+        "price": "سعر الخدمه",
+        "uploadServiceImage": "اضافه صوره الخدمه",
+        "uploadImage": "اضف الصوره"
+      },
       "agents": {
         "id": "التسلسل",
         "name": "الاسم",
