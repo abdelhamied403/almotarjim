@@ -22,11 +22,11 @@ const Requests = () => {
   const columns: ColumnDef<Request>[] = [
     {
       accessorKey: "title",
-      header: t("translator.requests.table.title"),
+      header: t("user.requests.table.title"),
     },
     {
       accessorKey: "status",
-      header: t("translator.requests.table.status"),
+      header: t("user.requests.table.status"),
       cell: ({ row }) => (
         <p className={requestStatusColors[row.original.status]}>
           <b>{t(`shared.requestStatus.${row.original.status}`)}</b>
@@ -35,7 +35,7 @@ const Requests = () => {
     },
     {
       id: "actions",
-      header: t("translator.requests.table.actions"),
+      header: t("user.requests.table.actions"),
       cell: ({ row }) => (
         <Link to={`/request/${row.original.id}`}>
           <Button>

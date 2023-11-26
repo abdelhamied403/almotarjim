@@ -95,6 +95,7 @@ const CreateRequest = () => {
         />
         <h4>{currentService?.title}</h4>
       </div>
+      <p>{currentService?.description}</p>
       <div className="form w-full">
         <div className="grid w-full items-center gap-2">
           <Field

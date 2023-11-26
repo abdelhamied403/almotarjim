@@ -34,9 +34,11 @@ import { downloadURI } from "@/lib/file";
 import { useToast } from "@/components/ui/use-toast";
 import Spinner from "@/components/ui/Spinner";
 import ChatService from "@/services/chat.service";
+import usePusher from "@/hooks/usePusher";
 
 const SingleRequest = () => {
   const { t } = useI18n();
+  const pusher = usePusher();
 
   const [request, setRequest] = useState<Request>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -56,9 +58,11 @@ const SingleRequest = () => {
   const [reopenNotes, setReopenNotes] = useState("");
 
   // reassign
-  const { isLoading: isTranslatorsLoading, data: translators } = useQuery<{
-    data: User[];
-  }>("requestTranslators", () => AuthService.getUsersByRole("translator"), {});
+  const { isLoading: isTranslatorsLoading, data: translators } = useQuery<
+    User[]
+  >("requestTranslators", () => AuthService.getUsersByRole("translator"), {});
+
+  console.log(translators);
 
   const [isReassignDialogOpen, setIsReassignDialogOpen] = useState(false);
   const [reassignedTranslator, setReassignedTranslator] = useState("");
@@ -109,8 +113,27 @@ const SingleRequest = () => {
     getRequest();
   }, [getRequest]);
 
+  useEffect(() => {
+    if (request) {
+      const channel = pusher.subscribe(`chat.${request?.chat?.id}`);
+      channel.bind("message-sent", (data: any) => {
+        setRequest((prev: any) => ({
+          ...prev,
+          chat: {
+            ...prev.chat,
+            messages: [...prev.chat.messages, data],
+          },
+        }));
+      });
+
+      return () => {
+        channel.unbind("message-sent");
+      };
+    }
+  }, [pusher, request]);
+
   return (
-    <div className="flex-1 items-center justify-center">
+    <div className="flex-1 items-center justify-center h-full">
       {loading && <Spinner />}
       {!loading && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full lg:overflow-hidden lg:auto-rows-fr">
@@ -274,7 +297,7 @@ const SingleRequest = () => {
                       />
                     </SelectTrigger>
                     <SelectContent>
-                      {translators?.data?.map((translator) => (
+                      {translators?.map((translator) => (
                         <SelectItem value={translator.id}>
                           {translator.name}
                         </SelectItem>

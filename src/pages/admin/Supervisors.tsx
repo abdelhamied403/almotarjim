@@ -56,10 +56,14 @@ const Supervisors = () => {
     {
       accessorKey: "status",
       header: t("admin.supervisors.status"),
+      cell: ({ row }) =>
+        row.original.status
+          ? t("admin.supervisors.online")
+          : t("admin.supervisors.offline"),
     },
     {
-      accessorKey: "chats",
-      header: t("admin.supervisors.chats"),
+      accessorKey: "email",
+      header: t("admin.supervisors.email"),
     },
     {
       accessorKey: "requests",

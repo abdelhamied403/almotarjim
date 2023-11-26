@@ -58,9 +58,9 @@ const SingleRequest = () => {
   const [reopenNotes, setReopenNotes] = useState("");
 
   // reassign
-  const { isLoading: isTranslatorsLoading, data: translators } = useQuery<{
-    data: { data: User[] };
-  }>("requestTranslators", () => AuthService.getUsersByRole("translator"), {});
+  const { isLoading: isTranslatorsLoading, data: translators } = useQuery<
+    User[]
+  >("requestTranslators", () => AuthService.getUsersByRole("translator"), {});
 
   const [isReassignDialogOpen, setIsReassignDialogOpen] = useState(false);
   const [reassignedTranslator, setReassignedTranslator] = useState("");
@@ -130,7 +130,7 @@ const SingleRequest = () => {
   }, [pusher, request]);
 
   return (
-    <div className="flex-1 items-center justify-center">
+    <div className="flex-1 items-center justify-center h-full">
       {loading && <Spinner />}
       {!loading && !!request && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full lg:overflow-hidden lg:auto-rows-fr">
@@ -294,7 +294,7 @@ const SingleRequest = () => {
                       />
                     </SelectTrigger>
                     <SelectContent>
-                      {translators?.data?.data.map((translator) => (
+                      {translators?.map((translator) => (
                         <SelectItem value={translator.id}>
                           {translator.name}
                         </SelectItem>

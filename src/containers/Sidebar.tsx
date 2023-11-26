@@ -4,6 +4,7 @@ import { HiLogout } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import useI18n from "@/hooks/useI18n";
 import { useQueryClient } from "react-query";
+import AuthService from "@/services/auth.service";
 
 export type SidebarProps = {
   children: JSX.Element | JSX.Element[];
@@ -14,7 +15,8 @@ const Sidebar = ({ children }: SidebarProps) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    if (role !== "client") await AuthService.logout();
     localStorage.removeItem("token");
     navigate("/login");
     queryClient.clear();

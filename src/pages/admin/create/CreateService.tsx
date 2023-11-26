@@ -3,50 +3,52 @@ import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  RegistrationSchemaType,
-  registrationSchema,
-} from "@/schemas/registrationSchema";
 import { useState } from "react";
 import Spinner from "@/components/ui/Spinner";
 
-import useI18n from "@/hooks/useI18n";
 import Field from "@/components/Field";
 import { useToast } from "@/components/ui/use-toast";
 import AdminService from "@/services/admin.service";
+import { Textarea } from "@/components/ui/textarea";
+import useAddServiceSchema from "@/schemas/useAddServiceSchema";
+import { z } from "zod";
+import useI18n from "@/hooks/useI18n";
 
-const CreateSupervisor = () => {
-  const navigate = useNavigate();
+const CreateService = () => {
   const { t } = useI18n();
+  const { addServiceSchema } = useAddServiceSchema();
+  type AddServiceSchemaType = z.infer<typeof addServiceSchema>;
+
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<Partial<RegistrationSchemaType>>({});
+  const [errors, setErrors] = useState<Partial<AddServiceSchemaType>>({});
   const { toast } = useToast();
 
   const {
     register,
     handleSubmit,
     formState: { errors: validationErrors },
-  } = useForm<RegistrationSchemaType>({
-    resolver: zodResolver(registrationSchema),
+  } = useForm<AddServiceSchemaType>({
+    resolver: zodResolver(addServiceSchema),
   });
 
-  const handleRegister = async (data: RegistrationSchemaType) => {
+  const handleAddService = async (data: AddServiceSchemaType) => {
     try {
       setLoading(true);
-      await AdminService.createSupervisor(data);
+      await AdminService.createService(data);
       toast({
-        title: "Created",
-        description: "Supervisor Created Succefully",
+        title: t("admin.createService.created"),
+        description: t("admin.createService.serviceCreatedSuccess"),
       });
 
       navigate("/dashboard");
     } catch (error: any) {
       setErrors(error.response.data.error);
       toast({
-        title: "Error",
+        title: t("admin.createService.error"),
         variant: "destructive",
-        description: "Some fields are invalid",
+        description: t("admin.createService.someFieldsAreInvalid"),
       });
     } finally {
       setLoading(false);
@@ -58,50 +60,75 @@ const CreateSupervisor = () => {
       <div className="grid  h-full items-center container mx-auto gap-52">
         <div className="grid gap-5">
           <h1 className="text-3xl font-bold text-center">
-            Create New Supervisor
+            {t("admin.createService.addNewService")}
           </h1>
+          <div className="flex gap-3">
+            <Field
+              label={t("admin.createService.englishTitle")}
+              error={errors.enTitle || validationErrors?.enTitle?.message}
+              className="basis-1/2"
+            >
+              <Input
+                type="text"
+                placeholder="Translation Services "
+                {...register("enTitle")}
+              />
+            </Field>
+            <Field
+              label={t("admin.createService.arabicTitle")}
+              error={errors.arTitle || validationErrors?.arTitle?.message}
+              className="basis-1/2"
+            >
+              <Input
+                type="text"
+                placeholder="خدمات الترجمه"
+                {...register("arTitle")}
+              />
+            </Field>
+          </div>
           <Field
-            label={t("register.name")}
-            error={errors.name || validationErrors?.name?.message}
+            label={t("admin.createService.englishDesc")}
+            error={
+              errors.enDescription || validationErrors?.enDescription?.message
+            }
+            className="basis-1/2"
           >
-            <Input
-              type="text"
-              placeholder="Ahmed Mohamed"
-              {...register("name")}
-            />
+            <Textarea
+              placeholder="Type service English description here "
+              {...register("enDescription")}
+            ></Textarea>
           </Field>
           <Field
-            label={t("register.email")}
-            error={errors.email || validationErrors?.email?.message}
+            label={t("admin.createService.arabicDesc")}
+            error={
+              errors.arDescription || validationErrors?.arDescription?.message
+            }
+            className="basis-1/2"
           >
-            <Input
-              type="email"
-              placeholder="olivia@untitledui.com"
-              {...register("email")}
-            />
+            <Textarea
+              placeholder="أدخل وصف الخدمه بالغه العربيه هنا "
+              {...register("arDescription")}
+            ></Textarea>
+          </Field>
+
+          <Field
+            label={t("admin.createService.price")}
+            error={errors.price || validationErrors?.price?.message}
+            className="basis-1/2"
+          >
+            <Input type="text" placeholder="...96" {...register("price")} />
           </Field>
           <Field
-            label={t("register.phone")}
-            error={errors.phone || validationErrors?.phone?.message}
+            label={t("admin.createService.uploadServiceImage")}
+            // error={errors.image || validationErrors?.image?.message}
           >
             <Input
-              type="text"
-              placeholder="+96612216454844"
-              {...register("phone")}
+              placeholder={t("admin.createService.uploadImage")}
+              type="file"
             />
           </Field>
-          <Field
-            label={t("register.password")}
-            error={errors.password || validationErrors?.password?.message}
-          >
-            <Input
-              type="password"
-              placeholder="*********"
-              {...register("password")}
-            />
-          </Field>
-          <Button onClick={handleSubmit(handleRegister)}>
-            {loading ? <Spinner /> : "Create"}
+          <Button onClick={handleSubmit(handleAddService)}>
+            {loading ? <Spinner /> : t("admin.createService.addNewService")}
           </Button>
         </div>
       </div>
@@ -109,4 +136,4 @@ const CreateSupervisor = () => {
   );
 };
 
-export default CreateSupervisor;
+export default CreateService;
