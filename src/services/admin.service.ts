@@ -1,5 +1,4 @@
 import User from "@/interfaces/user";
-import Admin from "@/interfaces/admin";
 
 import { api } from "./api";
 
@@ -60,7 +59,7 @@ const deleteUser = async (id: string) => {
   return res.data;
 };
 
-const createService = async (data: Partial<Admin>) => {
+const createService = async (data: any) => {
   const res = await api.post("/services/create", {
     ...data,
   });
