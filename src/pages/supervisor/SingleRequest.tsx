@@ -57,13 +57,13 @@ const SingleRequest = () => {
   const [isReopenDialogOpen, setIsReopenDialogOpen] = useState(false);
   const [reopenNotes, setReopenNotes] = useState("");
 
-  // reassign
+  // assign
   const { isLoading: isTranslatorsLoading, data: translators } = useQuery<
     User[]
   >("requestTranslators", () => AuthService.getUsersByRole("translator"), {});
 
-  const [isReassignDialogOpen, setIsReassignDialogOpen] = useState(false);
-  const [reassignedTranslator, setReassignedTranslator] = useState("");
+  const [isAssignDialogOpen, setIsAssignDialogOpen] = useState(false);
+  const [assignedTranslator, setAssignedTranslator] = useState("");
 
   // approve
   const [isApproveDialogOpen, setIsApproveDialogOpen] = useState(false);
@@ -74,14 +74,14 @@ const SingleRequest = () => {
     setIsReopenDialogOpen(false);
   };
 
-  const onReassign = async () => {
-    await RequestService.assignRequest(id, reassignedTranslator);
+  const onAssign = async () => {
+    await RequestService.assignRequest(id, assignedTranslator);
     toast({
       title: t("supervisor.singleRequest.toast.title"),
     });
     getRequest();
-    setReassignedTranslator("");
-    setIsReassignDialogOpen(false);
+    setAssignedTranslator("");
+    setIsAssignDialogOpen(false);
   };
 
   const onApprove = async () => {
@@ -179,15 +179,14 @@ const SingleRequest = () => {
           {/* Grid Item 2 */}
           <div
             className={cn(
-              "h-full max-h-[800px] lg:max-h-none overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl",
-              !request?.translations && "row-span-2"
+              "h-full max-h-[900px] lg:max-h-none overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl row-span-3"
             )}
           >
             <div className="flex gap-2">
               <Button onClick={() => setIsApproveDialogOpen(true)}>
                 {t("supervisor.singleRequest.approve")}
               </Button>
-              <Button onClick={() => setIsReassignDialogOpen(true)}>
+              <Button onClick={() => setIsAssignDialogOpen(true)}>
                 {t("supervisor.singleRequest.assign")}
               </Button>
             </div>
@@ -270,26 +269,23 @@ const SingleRequest = () => {
         </DialogContent>
       </Dialog>
 
-      {/* reassign dialog */}
-      <Dialog
-        open={isReassignDialogOpen}
-        onOpenChange={setIsReassignDialogOpen}
-      >
+      {/* assign dialog */}
+      <Dialog open={isAssignDialogOpen} onOpenChange={setIsAssignDialogOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {t("supervisor.singleRequest.dialog.reassign.alert")}
+              {t("supervisor.singleRequest.dialog.assign.alert")}
             </DialogTitle>
             <DialogDescription asChild>
               <>
-                <p>{t("supervisor.singleRequest.dialog.reassign.desc")}</p>
+                <p>{t("supervisor.singleRequest.dialog.assign.desc")}</p>
                 {isTranslatorsLoading && <Spinner />}
                 {!isTranslatorsLoading && (
-                  <Select onValueChange={setReassignedTranslator}>
+                  <Select onValueChange={setAssignedTranslator}>
                     <SelectTrigger>
                       <SelectValue
                         placeholder={t(
-                          "supervisor.singleRequest.dialog.reassign.chooseTranslator"
+                          "supervisor.singleRequest.dialog.assign.chooseTranslator"
                         )}
                       />
                     </SelectTrigger>
@@ -306,8 +302,8 @@ const SingleRequest = () => {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button onClick={onReassign}>
-              {t("supervisor.singleRequest.dialog.reassign.reassign")}
+            <Button onClick={onAssign}>
+              {t("supervisor.singleRequest.dialog.assign.assign")}
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -2,7 +2,7 @@ import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
 import useI18n from "@/hooks/useI18n";
 import { ColumnDef } from "@tanstack/react-table";
-import { HiEye, HiPlus } from "react-icons/hi";
+import { HiEye } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import noRequestsImage from "@/assets/no-requests.svg";
 import RequestService from "@/services/request.service";
@@ -64,27 +64,11 @@ const Requests = () => {
         <>
           <div className="flex flex-col gap-4 justify-center items-center h-full">
             <img src={noRequestsImage} alt="" />
-            <div className="flex justify-center gap-4">
-              <Link to="/request/create">
-                <Button className="flex gap-2 items-center">
-                  <HiPlus />
-                  {t("user.requests.create")}
-                </Button>
-              </Link>
-            </div>
           </div>
         </>
       )}
       {!!requests.length && (
         <>
-          <div className="flex justify-end gap-4">
-            <Link to="/request/create">
-              <Button className="flex gap-2 items-center">
-                <HiPlus />
-                {t("user.requests.create")}
-              </Button>
-            </Link>
-          </div>
           <DataTable columns={columns} data={requests} />
         </>
       )}

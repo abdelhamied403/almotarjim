@@ -13,6 +13,7 @@ import { requestStatusVariants } from "@/constants/requestStatus";
 import { downloadURI } from "@/lib/file";
 import ChatService from "@/services/chat.service";
 import usePusher from "@/hooks/usePusher";
+import { cn } from "@/lib/utils";
 
 const SingleRequest = () => {
   const { t } = useI18n();
@@ -68,7 +69,8 @@ const SingleRequest = () => {
   }, [pusher, request]);
 
   return (
-    <div className="page flex-1">
+    <div className="flex-1 items-center justify-center h-full">
+      <div className="flex gap-2"></div>
       {loading && <Spinner />}
       {!loading && !!request && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full lg:overflow-hidden lg:auto-rows-fr">
@@ -110,7 +112,11 @@ const SingleRequest = () => {
           </div>
 
           {/* Grid Item 2 */}
-          <div className="h-full max-h-[500px] lg:max-h-none row-span-2 overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl">
+          <div
+            className={cn(
+              "h-full max-h-[900px] lg:max-h-none overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl row-span-3"
+            )}
+          >
             <Chat {...request?.chat} onSend={onMessageSend}>
               <Chat.Header>
                 <Chat.Header.Title></Chat.Header.Title>

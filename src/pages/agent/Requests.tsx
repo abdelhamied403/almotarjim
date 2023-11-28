@@ -5,7 +5,7 @@ import { requestStatusColors } from "@/constants/requestStatus";
 import useI18n from "@/hooks/useI18n";
 import RequestService from "@/services/request.service";
 import { ColumnDef } from "@tanstack/react-table";
-import { HiChat, HiEye, HiPlus } from "react-icons/hi";
+import { HiEye } from "react-icons/hi";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 
@@ -58,20 +58,6 @@ const Requests = () => {
 
   return (
     <>
-      <div className="flex justify-end gap-4">
-        <Link to="/chat/123">
-          <Button className="flex gap-2 items-center" variant="subtle">
-            <HiChat />
-            {t("agent.requests.chatWithUs")}
-          </Button>
-        </Link>
-        <Link to="/request/create">
-          <Button className="flex gap-2 items-center">
-            <HiPlus />
-            {t("agent.requests.createRequest")}
-          </Button>
-        </Link>
-      </div>
       <DataTable columns={columns} data={requests} />
     </>
   );

@@ -102,7 +102,7 @@ const CreateAgent = () => {
             />
           </Field>
           <Button onClick={handleSubmit(handleRegister)}>
-            {loading ? <Spinner /> : "Create"}
+            {loading ? <Spinner /> : t("admin.createAgent.createNewAgent")}
           </Button>
         </div>
       </div>

@@ -59,7 +59,7 @@ const CreateSupervisor = () => {
       <div className="grid  h-full items-center container mx-auto gap-52">
         <div className="grid gap-5">
           <h1 className="text-3xl font-bold text-center">
-            Create New Supervisor
+            {t("admin.supervisors.createSupervisor")}
           </h1>
           <Field
             label={t("register.name")}
@@ -102,7 +102,7 @@ const CreateSupervisor = () => {
             />
           </Field>
           <Button onClick={handleSubmit(handleRegister)}>
-            {loading ? <Spinner /> : "Create"}
+            {loading ? <Spinner /> : t("admin.supervisors.createSupervisor")}
           </Button>
         </div>
       </div>

@@ -31,6 +31,7 @@ import {
 import Spinner from "@/components/ui/Spinner";
 import ChatService from "@/services/chat.service";
 import usePusher from "@/hooks/usePusher";
+import { cn } from "@/lib/utils";
 
 const requestStatusVariants: any = {
   PENDING: "warning",
@@ -50,13 +51,13 @@ const SingleRequest = () => {
   const [isReopenDialogOpen, setIsReopenDialogOpen] = useState(false);
   const [reopenNotes, setReopenNotes] = useState("");
 
-  // reassign
+  // assign
   const { isLoading: isTranslatorsLoading, data: translators } = useQuery<
     User[]
   >("requestTranslators", () => AuthService.getUsersByRole("translator"), {});
 
-  const [isReassignDialogOpen, setIsReassignDialogOpen] = useState(false);
-  const [reassignedTranslator, setReassignedTranslator] = useState("");
+  const [isAssignDialogOpen, setIsAssignDialogOpen] = useState(false);
+  const [assignedTranslator, setAssignedTranslator] = useState("");
 
   // approve
   const [isApproveDialogOpen, setIsApproveDialogOpen] = useState(false);
@@ -67,10 +68,10 @@ const SingleRequest = () => {
     setIsReopenDialogOpen(false);
   };
 
-  const onReassign = async () => {
-    await RequestService.assignRequest(id, reassignedTranslator);
-    setReassignedTranslator("");
-    setIsReassignDialogOpen(false);
+  const onAssign = async () => {
+    await RequestService.assignRequest(id, assignedTranslator);
+    setAssignedTranslator("");
+    setIsAssignDialogOpen(false);
   };
 
   const onApprove = () => {
@@ -163,12 +164,16 @@ const SingleRequest = () => {
           </div>
 
           {/* Grid Item 2 */}
-          <div className="h-full max-h-[500px] lg:max-h-none row-span-2 overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl">
+          <div
+            className={cn(
+              "h-full max-h-[900px] lg:max-h-none overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl row-span-3"
+            )}
+          >
             <div className="flex gap-2">
               <Button onClick={() => setIsApproveDialogOpen(true)}>
                 {t("agent.singleRequest.approve")}
               </Button>
-              <Button onClick={() => setIsReassignDialogOpen(true)}>
+              <Button onClick={() => setIsAssignDialogOpen(true)}>
                 {t("agent.singleRequest.assign")}
               </Button>
             </div>
@@ -239,28 +244,25 @@ const SingleRequest = () => {
         </DialogContent>
       </Dialog>
 
-      {/* reassign dialog */}
-      <Dialog
-        open={isReassignDialogOpen}
-        onOpenChange={setIsReassignDialogOpen}
-      >
+      {/* assign dialog */}
+      <Dialog open={isAssignDialogOpen} onOpenChange={setIsAssignDialogOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {t("agent.singleRequest.dialog.reassign.alert")}
+              {t("agent.singleRequest.dialog.assign.alert")}
             </DialogTitle>
             <DialogDescription asChild>
               <div className="">
                 <p className="mb-2">
-                  {t("agent.singleRequest.dialog.reassign.desc")}
+                  {t("agent.singleRequest.dialog.assign.desc")}
                 </p>
                 {isTranslatorsLoading && <Spinner />}
                 {!isTranslatorsLoading && (
-                  <Select onValueChange={setReassignedTranslator}>
+                  <Select onValueChange={setAssignedTranslator}>
                     <SelectTrigger>
                       <SelectValue
                         placeholder={t(
-                          "agent.singleRequest.dialog.reassign.chooseTranslator"
+                          "agent.singleRequest.dialog.assign.chooseTranslator"
                         )}
                       />
                     </SelectTrigger>
@@ -277,8 +279,8 @@ const SingleRequest = () => {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button onClick={onReassign}>
-              {t("agent.singleRequest.dialog.reassign.reassign")}
+            <Button onClick={onAssign}>
+              {t("agent.singleRequest.dialog.assign.assign")}
             </Button>
           </DialogFooter>
         </DialogContent>

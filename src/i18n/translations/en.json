@@ -158,11 +158,11 @@
           "alert": "Are your sure to reopen this request?",
           "reopen": "Reopen",
           "anyNotes": "Any notes you want to attach...",
-          "reassign": {
+          "assign": {
             "alert": "assign to translator?",
             "desc": "Are your sure to assign this request to translator",
             "chooseTranslator": "choose translator...",
-            "reassign": "Reassign"
+            "assign": "Assign"
           },
           "approve": {
             "alert": "Are your sure to reopen this request?",
@@ -249,11 +249,11 @@
           "alert": "Are your sure to reopen this request?",
           "reopen": "Reopen",
           "anyNotes": "Any notes you want to attach...",
-          "reassign": {
+          "assign": {
             "alert": "assign to translator?",
             "desc": "Are your sure to assign this request to translator",
             "chooseTranslator": "choose translator...",
-            "reassign": "Reassign"
+            "assign": "Assign"
           },
           "approve": {
             "alert": "Are your sure to reopen this request?",
