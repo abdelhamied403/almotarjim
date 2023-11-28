@@ -64,7 +64,7 @@ const Login = () => {
           </Field>
           <Field label={t("login.password")}>
             <Input
-              // type="password"
+              type="password"
               placeholder="*********"
               onChange={(e) => setPassword(e.target.value)}
             />

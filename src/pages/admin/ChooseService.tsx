@@ -2,7 +2,6 @@ import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { HiPlus } from "react-icons/hi";
-import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
@@ -44,11 +43,6 @@ const AgentsActions = ({ row, refetch }: any) => {
       >
         {loading ? <Spinner /> : <RiDeleteBin5Fill />}
       </Button>
-      <Link to={`/request/${row.original.id}`}>
-        <Button>
-          <FiEdit />
-        </Button>
-      </Link>
     </div>
   );
 };
@@ -69,10 +63,6 @@ const ChooseService = () => {
       cell: ({ row }) => (
         <img src={`${row.original.image}`} className="w-10 h-10" />
       ),
-    },
-    {
-      accessorKey: "price",
-      header: t("admin.chooseService.price"),
     },
     {
       id: "actions",

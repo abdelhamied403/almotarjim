@@ -146,7 +146,7 @@
         "requestId": "Request id:",
         "service": "Service:",
         "agentName": "Agent Name",
-        "translator:": "Translator:",
+        "translator": "Translator:",
         "status": "Status:",
         "description": "Description:",
         "attachments": "Attachments",
@@ -159,8 +159,8 @@
           "reopen": "Reopen",
           "anyNotes": "Any notes you want to attach...",
           "reassign": {
-            "alert": "Reassign to another translator?",
-            "desc": "Are your sure to reassign this request to another translator",
+            "alert": "assign to translator?",
+            "desc": "Are your sure to assign this request to translator",
             "chooseTranslator": "choose translator...",
             "reassign": "Reassign"
           },
@@ -250,8 +250,8 @@
           "reopen": "Reopen",
           "anyNotes": "Any notes you want to attach...",
           "reassign": {
-            "alert": "Reassign to another translator?",
-            "desc": "Are your sure to reassign this request to another translator",
+            "alert": "assign to translator?",
+            "desc": "Are your sure to assign this request to translator",
             "chooseTranslator": "choose translator...",
             "reassign": "Reassign"
           },

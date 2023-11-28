@@ -134,6 +134,14 @@ const SingleRequest = () => {
 
   return (
     <div className="flex-1 items-center justify-center h-full">
+      <div className="flex gap-2">
+        <Button onClick={() => setIsApproveDialogOpen(true)}>
+          {t("supervisor.singleRequest.approve")}
+        </Button>
+        <Button onClick={() => setIsReassignDialogOpen(true)}>
+          {t("supervisor.singleRequest.assign")}
+        </Button>
+      </div>
       {loading && <Spinner />}
       {!loading && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full lg:overflow-hidden lg:auto-rows-fr">
@@ -182,22 +190,13 @@ const SingleRequest = () => {
           {/* Grid Item 2 */}
           <div
             className={cn(
-              "h-full max-h-[500px] lg:max-h-none overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl",
-              !request?.translations && "row-span-2"
+              "h-full max-h-[500px] lg:max-h-none overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl row-span-3"
             )}
           >
-            <div className="flex gap-2">
-              <Button onClick={() => setIsApproveDialogOpen(true)}>
-                {t("supervisor.singleRequest.approve")}
-              </Button>
-              <Button onClick={() => setIsReassignDialogOpen(true)}>
-                {t("supervisor.singleRequest.assign")}
-              </Button>
-            </div>
             <Chat {...request?.chat} onSend={handleSend}>
               <Chat.Header>
                 <Chat.Header.Title></Chat.Header.Title>
-                <Chat.Header.Actions></Chat.Header.Actions>
+                {/* <Chat.Header.Actions></Chat.Header.Actions> */}
               </Chat.Header>
               <Chat.Body />
               <Chat.Footer />
