@@ -214,7 +214,7 @@ const SingleRequest = () => {
                     {t("agent.singleRequest.downloadAll")}
                   </Button>
                 </div>
-                {request?.translations?.files.map((file) => (
+                {request?.translations?.files?.map((file) => (
                   <Attachment {...file}></Attachment>
                 ))}
               </div>
