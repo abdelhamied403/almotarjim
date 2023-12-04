@@ -8,7 +8,7 @@ export type AttachmentProps = {
 };
 const Attachment = ({ name, path }: AttachmentProps) => {
   const downloadFile = () => {
-    downloadURI(path, name);
+    downloadURI(path);
   };
   return (
     <div className="flex flex-wrap gap-2 justify-between items-center bg-primary-50 hover:bg-primary-100 p-3 rounded-md">

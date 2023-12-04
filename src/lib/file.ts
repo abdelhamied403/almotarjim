@@ -1,11 +1,11 @@
-export const downloadURI = async (uri: string, name: string) => {
+export const downloadURI = async (uri: string, name?: string) => {
   const file = await fetch(import.meta.env.VITE_API_ORIGIN + uri);
   const fileBlob = await file.blob();
   const fileUrl = URL.createObjectURL(fileBlob);
 
   const link = document.createElement("a");
   link.href = fileUrl;
-  link.download = name;
+  link.download = name || uri.split("/")[uri.split("/").length - 1];
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
