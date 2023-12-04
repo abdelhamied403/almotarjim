@@ -148,7 +148,7 @@ const SingleRequest = () => {
           </div>
 
           {/* Grid Item 4 */}
-          {request?.translations?.files.length && (
+          {request?.translations?.files?.length && (
             <div className="bg-white overflow-y-auto p-4 rounded-xl">
               <div className="flex flex-col gap-2">
                 <div className="head flex flex-wrap justify-between mb-4">
