@@ -65,49 +65,49 @@ const CreateService = () => {
           <div className="flex gap-3">
             <Field
               label={t("admin.createService.englishTitle")}
-              error={errors.enTitle || validationErrors?.enTitle?.message}
+              error={errors.title_ar || validationErrors?.title_ar?.message}
               className="basis-1/2"
             >
               <Input
                 type="text"
                 placeholder="Translation Services "
-                {...register("enTitle")}
+                {...register("title_ar")}
               />
             </Field>
             <Field
               label={t("admin.createService.arabicTitle")}
-              error={errors.arTitle || validationErrors?.arTitle?.message}
+              error={errors.title_ar || validationErrors?.title_ar?.message}
               className="basis-1/2"
             >
               <Input
                 type="text"
                 placeholder="خدمات الترجمه"
-                {...register("arTitle")}
+                {...register("title_ar")}
               />
             </Field>
           </div>
           <Field
             label={t("admin.createService.englishDesc")}
             error={
-              errors.enDescription || validationErrors?.enDescription?.message
+              errors.description_en || validationErrors?.description_en?.message
             }
             className="basis-1/2"
           >
             <Textarea
               placeholder="Type service English description here "
-              {...register("enDescription")}
+              {...register("description_en")}
             ></Textarea>
           </Field>
           <Field
             label={t("admin.createService.arabicDesc")}
             error={
-              errors.arDescription || validationErrors?.arDescription?.message
+              errors.description_ar || validationErrors?.description_ar?.message
             }
             className="basis-1/2"
           >
             <Textarea
               placeholder="أدخل وصف الخدمه بالغه العربيه هنا "
-              {...register("arDescription")}
+              {...register("description_ar")}
             ></Textarea>
           </Field>
 

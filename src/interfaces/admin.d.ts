@@ -1,7 +1,10 @@
 type Admin = {
   id: string;
-  title: string;
-  description: string;
+  enTitle: string;
+  arTitle: string;
+  enDescription: string;
+  arDescription: string;
+  price: string;
   image: string;
 };
 
