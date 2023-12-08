@@ -110,7 +110,7 @@ const Agents = () => {
       <DataTable columns={columns} data={agents?.data} />
       <Pagination
         page={page}
-        totalPages={agents.last_page}
+        totalPages={agents?.last_page}
         onPageChange={(page) => setPage(page)}
       ></Pagination>
     </div>

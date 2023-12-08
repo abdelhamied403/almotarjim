@@ -105,7 +105,7 @@ const Translators = () => {
       <DataTable columns={columns} data={translators?.data} />
       <Pagination
         page={page}
-        totalPages={translators.last_page}
+        totalPages={translators?.last_page}
         onPageChange={(page) => setPage(page)}
       ></Pagination>
     </div>

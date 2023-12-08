@@ -22,13 +22,13 @@ const SubmitRequest = () => {
         files.map(({ file }) => file)
       );
       toast({
-        title: t("translator.singleRequest.toast.title"),
+        title: t("shared.success"),
         description: res.message,
       });
       navigate("/request");
     } catch (error: any) {
       toast({
-        title: t("translator.singleRequest.toast.error"),
+        title: t("shared.error"),
         description: error.response.data.message,
         variant: "destructive",
       });

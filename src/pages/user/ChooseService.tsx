@@ -8,9 +8,8 @@ import { Link } from "react-router-dom";
 
 const ChooseService = () => {
   const { t } = useI18n();
-  const { isLoading, data: services } = useQuery(
-    "services",
-    ServiceService.listServices
+  const { isLoading, data: services } = useQuery("services", () =>
+    ServiceService.listServices(1)
   );
 
   if (isLoading) {
@@ -30,7 +29,7 @@ const ChooseService = () => {
         </p>
       </div>
       <div className="grid gird-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2">
-        {services.map((service: Service) => (
+        {services.data.map((service: Service) => (
           <Link to={`/request/create/${service.id}`}>
             <RequestService {...service} />
           </Link>

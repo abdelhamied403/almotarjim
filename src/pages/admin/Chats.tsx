@@ -110,7 +110,7 @@ const Chats = () => {
       </div>
       <Pagination
         page={page}
-        totalPages={chats.last_page}
+        totalPages={chats?.last_page}
         onPageChange={(page) => setPage(page)}
       ></Pagination>
     </div>

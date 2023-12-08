@@ -13,9 +13,8 @@ const Home = () => {
   const { t } = useI18n();
   const navigate = useNavigate();
 
-  const { isLoading, data: services } = useQuery(
-    "services",
-    ServiceService.listServices
+  const { isLoading, data: services } = useQuery("services", () =>
+    ServiceService.listServices(1)
   );
 
   const handleCreateChat = async () => {
@@ -40,7 +39,7 @@ const Home = () => {
           </p>
         </div>
         <div className="grid gird-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2">
-          {services.map((service: Service) => (
+          {services?.data.map((service: Service) => (
             <Link key={service.id} to={`/request/create/${service.id}`}>
               <RequestService {...service} />
             </Link>

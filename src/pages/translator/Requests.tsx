@@ -2,14 +2,15 @@ import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
 import useI18n from "@/hooks/useI18n";
 import { ColumnDef } from "@tanstack/react-table";
-import { HiChat, HiEye, HiPlus } from "react-icons/hi";
+import { HiEye } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import noRequestsImage from "@/assets/no-requests.svg";
 import RequestService from "@/services/request.service";
 import { useQuery } from "react-query";
 import { RequestStatus } from "@/interfaces/request";
 import { requestStatusColors } from "@/constants/requestStatus";
 import Spinner from "@/components/ui/Spinner";
+import { useState } from "react";
+import Pagination from "@/components/Pagination";
 
 type Request = {
   id: string;
@@ -18,6 +19,7 @@ type Request = {
 
 const Requests = () => {
   const { t } = useI18n();
+  const [page, setPage] = useState(1);
   const columns: ColumnDef<Request>[] = [
     {
       accessorKey: "title",
@@ -45,9 +47,8 @@ const Requests = () => {
     },
   ];
 
-  const { isLoading, data: requests } = useQuery(
-    "requests",
-    RequestService.getRequests
+  const { isLoading, data: requests } = useQuery(["requests", page], () =>
+    RequestService.getRequests(page)
   );
 
   if (isLoading) {
@@ -60,32 +61,12 @@ const Requests = () => {
 
   return (
     <div className="requests h-full">
-      {!requests.length && (
-        <>
-          <div className="flex flex-col gap-4 justify-center items-center h-full">
-            <img src={noRequestsImage} alt="" />
-            <div className="flex justify-center gap-4">
-              <Link to="/chat/123">
-                <Button className="flex gap-2 items-center" variant="subtle">
-                  <HiChat />
-                  {t("translator.requests.chatWithUs")}
-                </Button>
-              </Link>
-              <Link to="/request/create">
-                <Button className="flex gap-2 items-center">
-                  <HiPlus />
-                  {t("translator.requests.createRequest")}
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </>
-      )}
-      {!!requests.length && (
-        <>
-          <DataTable columns={columns} data={requests} />
-        </>
-      )}
+      <DataTable columns={columns} data={requests?.data} />
+      <Pagination
+        page={page}
+        totalPages={requests?.last_page}
+        onPageChange={(page) => setPage(page)}
+      ></Pagination>
     </div>
   );
 };

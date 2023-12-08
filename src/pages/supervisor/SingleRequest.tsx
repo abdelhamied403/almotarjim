@@ -85,7 +85,7 @@ const SingleRequest = () => {
   };
 
   const onApprove = async () => {
-    await RequestService.approveRequest(id);
+    await RequestService.approveRequest(request?.translations.id || 0);
     toast({
       title: t("supervisor.singleRequest.toast.title"),
     });

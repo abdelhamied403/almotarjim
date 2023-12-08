@@ -1,10 +1,12 @@
 import { DataTable } from "@/components/Datatable";
+import Pagination from "@/components/Pagination";
 import Spinner from "@/components/ui/Spinner";
 import { Button } from "@/components/ui/button";
 import { requestStatusColors } from "@/constants/requestStatus";
 import useI18n from "@/hooks/useI18n";
 import RequestService from "@/services/request.service";
 import { ColumnDef } from "@tanstack/react-table";
+import { useState } from "react";
 import { HiEye } from "react-icons/hi";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
@@ -16,6 +18,7 @@ type Request = {
 
 const Requests = () => {
   const { t } = useI18n();
+  const [page, setPage] = useState(1);
   const columns: ColumnDef<Request>[] = [
     {
       accessorKey: "title",
@@ -43,9 +46,8 @@ const Requests = () => {
     },
   ];
 
-  const { isLoading, data: requests } = useQuery(
-    "requests",
-    RequestService.getRequests
+  const { isLoading, data: requests } = useQuery(["requests", page], () =>
+    RequestService.getRequests(page)
   );
 
   if (isLoading) {
@@ -58,7 +60,12 @@ const Requests = () => {
 
   return (
     <>
-      <DataTable columns={columns} data={requests} />
+      <DataTable columns={columns} data={requests?.data} />
+      <Pagination
+        page={page}
+        totalPages={requests?.last_page}
+        onPageChange={(page) => setPage(page)}
+      ></Pagination>
     </>
   );
 };

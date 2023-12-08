@@ -62,8 +62,6 @@ const SingleRequest = () => {
     User[]
   >("requestTranslators", () => AuthService.getUsersByRole("translator"), {});
 
-  console.log(translators);
-
   const [isAssignDialogOpen, setIsAssignDialogOpen] = useState(false);
   const [assignedTranslator, setAssignedTranslator] = useState("");
 
@@ -87,7 +85,7 @@ const SingleRequest = () => {
   };
 
   const onApprove = async () => {
-    await RequestService.approveRequest(id);
+    await RequestService.approveRequest(request?.translations.id || 0);
     toast({
       title: t("supervisor.singleRequest.toast.title"),
     });
@@ -134,119 +132,126 @@ const SingleRequest = () => {
 
   return (
     <div className="flex-1 items-center justify-center h-full">
-      <div className="flex gap-2">
-        <Button onClick={() => setIsApproveDialogOpen(true)}>
-          {t("supervisor.singleRequest.approve")}
-        </Button>
-        <Button onClick={() => setIsAssignDialogOpen(true)}>
-          {t("supervisor.singleRequest.assign")}
-        </Button>
-      </div>
       {loading && <Spinner />}
       {!loading && !!request && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full lg:overflow-hidden lg:auto-rows-fr">
-          {/* Grid Item 1 */}
-          <div className="bg-white p-4 rounded-xl overflow-y-auto">
-            {/* details */}
-            <div className="flex flex-col gap-2">
-              <h2>{t("supervisor.singleRequest.basicInfo")}</h2>
-              <p>
-                <b className="text-primary">
-                  {t("supervisor.singleRequest.requestId")}{" "}
-                </b>
-                {request?.id}
-              </p>
-              <p>
-                <b className="text-primary">
-                  {t("supervisor.singleRequest.service")}{" "}
-                </b>
-                {request?.service?.title}
-              </p>
-              <p>
-                <b className="text-primary">
-                  {t("supervisor.singleRequest.translator")}{" "}
-                </b>
-                {request?.translator?.name}
-              </p>
-              <p>
-                <b className="text-primary">
-                  {t("supervisor.singleRequest.status")}{" "}
-                </b>
-                <Badge
-                  variant={requestStatusVariants[request?.status || "PENDING"]}
-                >
-                  {t(`shared.requestStatus.${request?.status}`)}
-                </Badge>
-              </p>
-              <p>
-                <b className="text-primary">
-                  {t("supervisor.singleRequest.description")}{" "}
-                </b>
-                {request?.description}
-              </p>
+        <>
+          {request.status !== "DONE" && (
+            <div className="flex gap-2">
+              <Button onClick={() => setIsApproveDialogOpen(true)}>
+                {t("supervisor.singleRequest.approve")}
+              </Button>
+              <Button onClick={() => setIsAssignDialogOpen(true)}>
+                {t("supervisor.singleRequest.assign")}
+              </Button>
             </div>
-          </div>
+          )}
 
-          {/* Grid Item 2 */}
-          <div
-            className={cn(
-              "h-full max-h-[900px] lg:max-h-none overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl row-span-3"
-            )}
-          >
-            <Chat {...request?.chat} onSend={handleSend}>
-              <Chat.Header>
-                <Chat.Header.Title></Chat.Header.Title>
-                {/* <Chat.Header.Actions></Chat.Header.Actions> */}
-              </Chat.Header>
-              <Chat.Body />
-              <Chat.Footer />
-            </Chat>
-          </div>
-
-          {/* Grid Item 3 */}
-          <div className="bg-white overflow-y-auto p-4 rounded-xl">
-            <div className="flex flex-col gap-2">
-              <div className="head flex flex-wrap justify-between mb-4">
-                <h2>{t("supervisor.singleRequest.attachments")}</h2>
-                <Button
-                  size="sm"
-                  variant="subtle"
-                  onClick={() => handleDownloadAll(request?.files || [])}
-                >
-                  <HiDownload />
-                  {t("supervisor.singleRequest.downloadAll")}
-                </Button>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full lg:overflow-hidden lg:auto-rows-fr">
+            {/* Grid Item 1 */}
+            <div className="bg-white p-4 rounded-xl overflow-y-auto">
+              {/* details */}
+              <div className="flex flex-col gap-2">
+                <h2>{t("supervisor.singleRequest.basicInfo")}</h2>
+                <p>
+                  <b className="text-primary">
+                    {t("supervisor.singleRequest.requestId")}{" "}
+                  </b>
+                  {request?.id}
+                </p>
+                <p>
+                  <b className="text-primary">
+                    {t("supervisor.singleRequest.service")}{" "}
+                  </b>
+                  {request?.service?.title}
+                </p>
+                <p>
+                  <b className="text-primary">
+                    {t("supervisor.singleRequest.translator")}{" "}
+                  </b>
+                  {request?.translator?.name}
+                </p>
+                <p>
+                  <b className="text-primary">
+                    {t("supervisor.singleRequest.status")}{" "}
+                  </b>
+                  <Badge
+                    variant={
+                      requestStatusVariants[request?.status || "PENDING"]
+                    }
+                  >
+                    {t(`shared.requestStatus.${request?.status}`)}
+                  </Badge>
+                </p>
+                <p>
+                  <b className="text-primary">
+                    {t("supervisor.singleRequest.description")}{" "}
+                  </b>
+                  {request?.description}
+                </p>
               </div>
-              {request?.files?.map((file) => (
-                <Attachment {...file}></Attachment>
-              ))}
             </div>
-          </div>
 
-          {/* Grid Item 4 */}
-          {!!request?.translations && (
+            {/* Grid Item 2 */}
+            <div
+              className={cn(
+                "h-full max-h-[900px] lg:max-h-none overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl row-span-3"
+              )}
+            >
+              <Chat {...request?.chat} onSend={handleSend}>
+                <Chat.Header>
+                  <Chat.Header.Title></Chat.Header.Title>
+                  {/* <Chat.Header.Actions></Chat.Header.Actions> */}
+                </Chat.Header>
+                <Chat.Body />
+                <Chat.Footer />
+              </Chat>
+            </div>
+
+            {/* Grid Item 3 */}
             <div className="bg-white overflow-y-auto p-4 rounded-xl">
               <div className="flex flex-col gap-2">
                 <div className="head flex flex-wrap justify-between mb-4">
-                  <h2>{t("supervisor.singleRequest.translations")}</h2>
+                  <h2>{t("supervisor.singleRequest.attachments")}</h2>
                   <Button
                     size="sm"
                     variant="subtle"
-                    onClick={() =>
-                      handleDownloadAll(request?.translations.files)
-                    }
+                    onClick={() => handleDownloadAll(request?.files || [])}
                   >
                     <HiDownload />
                     {t("supervisor.singleRequest.downloadAll")}
                   </Button>
                 </div>
-                {request?.translations.files?.map((file) => (
+                {request?.files?.map((file) => (
                   <Attachment {...file}></Attachment>
                 ))}
               </div>
             </div>
-          )}
-        </div>
+
+            {/* Grid Item 4 */}
+            {!!request?.translations && (
+              <div className="bg-white overflow-y-auto p-4 rounded-xl">
+                <div className="flex flex-col gap-2">
+                  <div className="head flex flex-wrap justify-between mb-4">
+                    <h2>{t("supervisor.singleRequest.translations")}</h2>
+                    <Button
+                      size="sm"
+                      variant="subtle"
+                      onClick={() =>
+                        handleDownloadAll(request?.translations.files)
+                      }
+                    >
+                      <HiDownload />
+                      {t("supervisor.singleRequest.downloadAll")}
+                    </Button>
+                  </div>
+                  {request?.translations.files?.map((file) => (
+                    <Attachment {...file}></Attachment>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </>
       )}
 
       {/* reopen dialog */}

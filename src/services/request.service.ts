@@ -29,7 +29,7 @@ const assignRequest = async (request_id: string, translator_id: string) => {
   return res.data;
 };
 
-const approveRequest = async (request_id: string) => {
+const approveRequest = async (request_id: number) => {
   const res = await api.get(`/supervisor/done/${request_id}`);
   return res.data;
 };

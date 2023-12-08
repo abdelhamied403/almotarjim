@@ -10,6 +10,8 @@ import useI18n from "@/hooks/useI18n";
 import { requestStatusColors } from "@/constants/requestStatus";
 import Spinner from "@/components/ui/Spinner";
 import ChatService from "@/services/chat.service";
+import { useState } from "react";
+import Pagination from "@/components/Pagination";
 
 type Request = {
   id: string;
@@ -18,6 +20,7 @@ type Request = {
 
 const Requests = () => {
   const { t } = useI18n();
+  const [page, setPage] = useState(1);
   const navigate = useNavigate();
   const columns: ColumnDef<Request>[] = [
     {
@@ -50,7 +53,7 @@ const Requests = () => {
     isLoading,
     data: requests,
     isError,
-  } = useQuery("requests", RequestService.getRequests, {
+  } = useQuery(["requests", page], () => RequestService.getRequests(page), {
     retry: false,
   });
 
@@ -91,7 +94,7 @@ const Requests = () => {
     );
   }
 
-  if (!requests?.length) {
+  if (!requests?.data.length) {
     return (
       <>
         <div className="flex flex-col gap-4 justify-center items-center h-full">
@@ -135,7 +138,12 @@ const Requests = () => {
           </Button>
         </Link>
       </div>
-      <DataTable columns={columns} data={requests} />
+      <DataTable columns={columns} data={requests?.data} />
+      <Pagination
+        page={page}
+        totalPages={requests?.last_page}
+        onPageChange={(page) => setPage(page)}
+      ></Pagination>
     </div>
   );
 };
