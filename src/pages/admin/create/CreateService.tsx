@@ -34,6 +34,7 @@ const CreateService = () => {
   });
 
   const handleAddService = async (data: AddServiceSchemaType) => {
+    console.log(data);
     try {
       setLoading(true);
       await AdminService.createService(data);
@@ -42,7 +43,7 @@ const CreateService = () => {
         description: t("admin.createService.serviceCreatedSuccess"),
       });
 
-      navigate("/dashboard");
+      navigate("/services");
     } catch (error: any) {
       setErrors(error.response.data.error);
       toast({
@@ -65,13 +66,13 @@ const CreateService = () => {
           <div className="flex gap-3">
             <Field
               label={t("admin.createService.englishTitle")}
-              error={errors.title_ar || validationErrors?.title_ar?.message}
+              error={errors.title_en || validationErrors?.title_en?.message}
               className="basis-1/2"
             >
               <Input
                 type="text"
                 placeholder="Translation Services "
-                {...register("title_ar")}
+                {...register("title_en")}
               />
             </Field>
             <Field
@@ -89,25 +90,25 @@ const CreateService = () => {
           <Field
             label={t("admin.createService.englishDesc")}
             error={
-              errors.description_en || validationErrors?.description_en?.message
+              errors.en_description || validationErrors?.en_description?.message
             }
             className="basis-1/2"
           >
             <Textarea
               placeholder="Type service English description here "
-              {...register("description_en")}
+              {...register("en_description")}
             ></Textarea>
           </Field>
           <Field
             label={t("admin.createService.arabicDesc")}
             error={
-              errors.description_ar || validationErrors?.description_ar?.message
+              errors.ar_description || validationErrors?.ar_description?.message
             }
             className="basis-1/2"
           >
             <Textarea
               placeholder="أدخل وصف الخدمه بالغه العربيه هنا "
-              {...register("description_ar")}
+              {...register("ar_description")}
             ></Textarea>
           </Field>
 

@@ -99,7 +99,8 @@
           "errors": {
             "required": {
               "title": "title is required",
-              "description": "description is required"
+              "description": "description is required",
+              "price": "price is required"
             }
           }
         },
@@ -320,7 +321,7 @@
         "phone": "Phone",
         "status": "Status",
         "online": "online",
-        "Offline": "Offline",
+        "offline": "Offline",
         "numberOfClients": "Number Of Clients",
         "actions": "Actions",
         "createAgent": "Create Agent"
@@ -331,7 +332,7 @@
         "email": "Email",
         "status": "Status",
         "online": "online",
-        "Offline": "Offline",
+        "offline": "Offline",
         "numberOfTranslations": "Number Of Translations",
         "actions": "Actions",
         "createTranslator": "Create Translator"
@@ -342,7 +343,7 @@
         "email": "Email",
         "status": "Status",
         "online": "online",
-        "Offline": "Offline",
+        "offline": "Offline",
         "chats": "Chats",
         "requests": "Requests",
         "actions": "Actions",
@@ -353,6 +354,7 @@
         "name": "Name",
         "email": "Email",
         "status": "Status",
+        "image": "Image",
         "chats": "Chats",
         "requests": "Requests",
         "actions": "Actions"

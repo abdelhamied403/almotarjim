@@ -1,8 +1,8 @@
 import { api, formAxios } from "./api";
 
-const getRequests = async () => {
-  const res = await api.get("/requests");
-  return res.data.data.data;
+const getRequests = async (page: number) => {
+  const res = await api.get(`/requests?page=${page}`);
+  return res.data.data;
 };
 const getRequest = async (id: string) => {
   const res = await api.get(`/requests/get-request/${id}`);

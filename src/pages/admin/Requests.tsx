@@ -10,6 +10,8 @@ import { useQuery } from "react-query";
 import { RequestStatus } from "@/interfaces/request";
 import { requestStatusColors } from "@/constants/requestStatus";
 import Spinner from "@/components/ui/Spinner";
+import Pagination from "@/components/Pagination";
+import { useState } from "react";
 
 type Request = {
   id: string;
@@ -18,6 +20,7 @@ type Request = {
 
 const Requests = () => {
   const { t } = useI18n();
+  const [page, setPage] = useState(1);
   const columns: ColumnDef<Request>[] = [
     {
       accessorKey: "title",
@@ -45,9 +48,8 @@ const Requests = () => {
     },
   ];
 
-  const { isLoading, data: requests } = useQuery(
-    "requests",
-    RequestService.getRequests
+  const { isLoading, data: requests } = useQuery(["requests", page], () =>
+    RequestService.getRequests(page)
   );
 
   if (isLoading) {
@@ -60,16 +62,21 @@ const Requests = () => {
 
   return (
     <div className="requests h-full">
-      {!requests.length && (
+      {!requests?.data.length && (
         <>
           <div className="flex flex-col gap-4 justify-center items-center h-full">
             <img src={noRequestsImage} alt="" />
           </div>
         </>
       )}
-      {!!requests.length && (
+      {!!requests?.data.length && (
         <>
-          <DataTable columns={columns} data={requests} />
+          <DataTable columns={columns} data={requests?.data} />
+          <Pagination
+            page={page}
+            totalPages={requests.last_page}
+            onPageChange={(page) => setPage(page)}
+          ></Pagination>
         </>
       )}
     </div>

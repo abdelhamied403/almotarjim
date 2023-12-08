@@ -10,14 +10,14 @@ const useAddServiceSchema = () => {
     title_ar: z.string().min(1, {
       message: t("user.requests.createForm.errors.required.title"),
     }),
-    description_en: z.string().min(1, {
+    en_description: z.string().min(1, {
       message: t("user.requests.createForm.errors.required.description"),
     }),
-    description_ar: z.string().min(1, {
+    ar_description: z.string().min(1, {
       message: t("user.requests.createForm.errors.required.description"),
     }),
     price: z.string().min(1, {
-      message: t("user.requests.createForm.errors.required.description"),
+      message: t("user.requests.createForm.errors.required.price"),
     }),
   });
 

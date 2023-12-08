@@ -79,16 +79,13 @@ const Dashboard = () => {
           ],
         });
         setAvailableAgents({
-          labels: [t("admin.dashboard.online"), t("admin.dashboard.offline")],
+          labels: [t("admin.dashboard.online")],
           datasets: [
             {
               label: t("admin.dashboard.agents"),
-              data: [data.numberOfAvailableAgents, 15],
-              backgroundColor: [
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(255, 99, 132, 0.2)",
-              ],
-              borderColor: ["rgba(54, 162, 235, 1)", "rgba(255, 99, 132, 1)"],
+              data: [data.numberOfAvailableAgents],
+              backgroundColor: ["rgba(54, 162, 235, 0.2)"],
+              borderColor: ["rgba(54, 162, 235, 1)"],
               borderWidth: 1,
             },
           ],
@@ -138,7 +135,7 @@ const Dashboard = () => {
             <div className="flex flex-col">
               <p>Total Requests: {reports.numberOfRequests}</p>
               <p>Pending Requests: {reports.numberOfPendingRequests}</p>
-              <p>InProgress Requests: {reports.numberOfRequests}</p>
+              <p>InProgress Requests: {reports.numberOfInProgressRequests}</p>
               <p>Closed Requests: {reports.numberOfDoneRequests}</p>
             </div>
           </CardFooter>
@@ -152,7 +149,7 @@ const Dashboard = () => {
           </CardContent>
           <CardFooter>
             <div className="flex flex-col">
-              <p>Total Agents: 8</p>
+              <p>Available Agents: {reports.numberOfAvailableAgents}</p>
             </div>
           </CardFooter>
         </Card>

@@ -11,6 +11,7 @@ import User from "@/interfaces/user";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import useI18n from "@/hooks/useI18n";
+import Pagination from "@/components/Pagination";
 
 const AgentsActions = ({ row, refetch }: any) => {
   const [loading, setLoading] = useState(false);
@@ -44,6 +45,7 @@ const AgentsActions = ({ row, refetch }: any) => {
 
 const Agents = () => {
   const { t } = useI18n();
+  const [page, setPage] = useState(1);
 
   const columns: ColumnDef<User>[] = [
     {
@@ -85,7 +87,7 @@ const Agents = () => {
     isLoading,
     data: agents,
     refetch,
-  } = useQuery("agents", AdminService.getAgents);
+  } = useQuery(["agents", page], () => AdminService.getAgents(page));
 
   if (isLoading) {
     return (
@@ -105,7 +107,12 @@ const Agents = () => {
           </Button>
         </Link>
       </div>
-      <DataTable columns={columns} data={agents} />
+      <DataTable columns={columns} data={agents?.data} />
+      <Pagination
+        page={page}
+        totalPages={agents.last_page}
+        onPageChange={(page) => setPage(page)}
+      ></Pagination>
     </div>
   );
 };

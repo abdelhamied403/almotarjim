@@ -1,8 +1,8 @@
 import { api } from "./api";
 
-const listServices = async () => {
-  const res = await api.get("/services");
-  return res.data.data.data;
+const listServices = async (page: number) => {
+  const res = await api.get(`/services?page=${page}`);
+  return res.data.data;
 };
 
 const getService = async (id?: string) => {

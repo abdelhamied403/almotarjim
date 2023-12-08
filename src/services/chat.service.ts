@@ -1,9 +1,9 @@
 import Chat from "@/interfaces/chat";
 import { api, formAxios } from "./api";
 
-const getAllChats = async () => {
-  const res = await api.get("/messages/chats");
-  return res.data.data.data;
+const getAllChats = async (page: number) => {
+  const res = await api.get(`/messages/chats?page=${page}`);
+  return res.data.data;
 };
 
 const getSingleChat = async (id?: string) => {

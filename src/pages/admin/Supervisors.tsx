@@ -11,6 +11,7 @@ import User from "@/interfaces/user";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { RiDeleteBin5Fill } from "react-icons/ri";
+import Pagination from "@/components/Pagination";
 
 const SupervisorsActions = ({ row, refetch }: any) => {
   const [loading, setLoading] = useState(false);
@@ -44,6 +45,7 @@ const SupervisorsActions = ({ row, refetch }: any) => {
 
 const Supervisors = () => {
   const { t } = useI18n();
+  const [page, setPage] = useState(1);
   const columns: ColumnDef<User>[] = [
     {
       accessorKey: "id",
@@ -66,10 +68,6 @@ const Supervisors = () => {
       header: t("admin.supervisors.email"),
     },
     {
-      accessorKey: "requests",
-      header: t("admin.supervisors.requests"),
-    },
-    {
       id: "actions",
       header: t("admin.supervisors.actions"),
       cell: ({ row }) => <SupervisorsActions row={row} refetch={refetch} />,
@@ -80,7 +78,7 @@ const Supervisors = () => {
     isLoading,
     data: supervisors,
     refetch,
-  } = useQuery("supervisors", AdminService.getSupervisors);
+  } = useQuery(["supervisors", page], () => AdminService.getSupervisors(page));
 
   if (isLoading) {
     return (
@@ -100,7 +98,12 @@ const Supervisors = () => {
           </Button>
         </Link>
       </div>
-      <DataTable columns={columns} data={supervisors} />
+      <DataTable columns={columns} data={supervisors?.data} />
+      <Pagination
+        page={page}
+        totalPages={supervisors.last_page}
+        onPageChange={(page) => setPage(page)}
+      ></Pagination>
     </div>
   );
 };

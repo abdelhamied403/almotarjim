@@ -11,6 +11,7 @@ import User from "@/interfaces/user";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { RiDeleteBin5Fill } from "react-icons/ri";
+import Pagination from "@/components/Pagination";
 
 const TranslatorsActions = ({ row, refetch }: any) => {
   const [loading, setLoading] = useState(false);
@@ -44,6 +45,7 @@ const TranslatorsActions = ({ row, refetch }: any) => {
 
 const Translators = () => {
   const { t } = useI18n();
+  const [page, setPage] = useState(1);
   const columns: ColumnDef<User>[] = [
     {
       accessorKey: "id",
@@ -80,7 +82,7 @@ const Translators = () => {
     isLoading,
     data: translators,
     refetch,
-  } = useQuery("translators", AdminService.getTranslators);
+  } = useQuery(["translators", page], () => AdminService.getTranslators(page));
 
   if (isLoading) {
     return (
@@ -100,7 +102,12 @@ const Translators = () => {
           </Button>
         </Link>
       </div>
-      <DataTable columns={columns} data={translators} />
+      <DataTable columns={columns} data={translators?.data} />
+      <Pagination
+        page={page}
+        totalPages={translators.last_page}
+        onPageChange={(page) => setPage(page)}
+      ></Pagination>
     </div>
   );
 };

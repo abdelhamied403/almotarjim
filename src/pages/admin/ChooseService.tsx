@@ -12,6 +12,7 @@ import useI18n from "@/hooks/useI18n";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import AdminService from "@/services/admin.service";
+import Pagination from "@/components/Pagination";
 
 const AgentsActions = ({ row, refetch }: any) => {
   const { t } = useI18n();
@@ -49,6 +50,7 @@ const AgentsActions = ({ row, refetch }: any) => {
 
 const ChooseService = () => {
   const { t } = useI18n();
+  const [page, setPage] = useState(1);
   const columns: ColumnDef<Admin>[] = [
     {
       accessorKey: "id",
@@ -75,7 +77,9 @@ const ChooseService = () => {
     isLoading,
     data: chooseServices,
     refetch,
-  } = useQuery("chooseServices", ServiceService.listServices);
+  } = useQuery(["chooseServices", page], () =>
+    ServiceService.listServices(page)
+  );
 
   if (isLoading) {
     return (
@@ -95,7 +99,12 @@ const ChooseService = () => {
           </Button>
         </Link>
       </div>
-      <DataTable columns={columns} data={chooseServices} />
+      <DataTable columns={columns} data={chooseServices.data} />
+      <Pagination
+        page={page}
+        totalPages={chooseServices.last_page}
+        onPageChange={(page) => setPage(page)}
+      ></Pagination>
     </div>
   );
 };

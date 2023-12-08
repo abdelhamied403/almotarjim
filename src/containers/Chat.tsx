@@ -115,7 +115,7 @@ const ChatHeaderActions = ({ children }: ChatHeaderActionsProps) => {
     try {
       await ChatService.closeChat(id);
       toast({
-        title: t("shared.error"),
+        title: t("shared.success"),
         description: "chat closed successfully",
       });
     } catch (error) {
@@ -192,7 +192,7 @@ export type ChatFooterProps = {
   children?: JSX.Element | JSX.Element[];
 };
 const ChatFooter = ({ children }: ChatFooterProps) => {
-  const { owner, onSend } = useContext(ChatProvider);
+  const { owner, onSend, status } = useContext(ChatProvider);
 
   const {
     status: recordingStatus,
@@ -277,6 +277,10 @@ const ChatFooter = ({ children }: ChatFooterProps) => {
       content: e.target.files[0],
     });
   };
+
+  if (status !== "open") {
+    return null;
+  }
 
   if (children)
     return (
