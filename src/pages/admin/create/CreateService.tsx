@@ -34,7 +34,6 @@ const CreateService = () => {
   });
 
   const handleAddService = async (data: AddServiceSchemaType) => {
-    console.log(data);
     try {
       setLoading(true);
       await AdminService.createService(data);
@@ -126,6 +125,7 @@ const CreateService = () => {
             <Input
               placeholder={t("admin.createService.uploadImage")}
               type="file"
+              {...register("image")}
             />
           </Field>
           <Button onClick={handleSubmit(handleAddService)}>

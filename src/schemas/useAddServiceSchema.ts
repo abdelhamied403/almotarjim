@@ -19,6 +19,7 @@ const useAddServiceSchema = () => {
     price: z.string().min(1, {
       message: t("user.requests.createForm.errors.required.price"),
     }),
+    image: z.any(),
   });
 
   return {

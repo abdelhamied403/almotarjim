@@ -1,6 +1,6 @@
 import User from "@/interfaces/user";
 
-import { api } from "./api";
+import { api, formAxios } from "./api";
 
 const getUsers = async (page: number) => {
   const res = await api.get(`/users/client?page=${page}`);
@@ -60,9 +60,22 @@ const deleteUser = async (id: string) => {
 };
 
 const createService = async (data: any) => {
-  const res = await api.post("/services/create", {
-    ...data,
-  });
+  const config = {
+    headers: {
+      "Content-Type":
+        "multipart/form-data; charset=utf-8; boundary=" +
+        Math.random().toString().substr(2),
+    },
+  };
+
+  const res = await formAxios.post(
+    "/services/create",
+    {
+      ...data,
+      image: data.image[0],
+    },
+    config
+  );
 
   return res.data;
 };
