@@ -4,11 +4,12 @@ import { downloadURI } from "@/lib/file";
 
 export type AttachmentProps = {
   name: string;
-  path: string;
+  type: "request" | "translation";
+  id: string;
 };
-const Attachment = ({ name, path }: AttachmentProps) => {
+const Attachment = ({ name, type, id }: AttachmentProps) => {
   const downloadFile = () => {
-    downloadURI(path);
+    downloadURI(`https://api.almotarjim.net/api/file/${type}/${id}`);
   };
   return (
     <div className="flex flex-wrap gap-2 justify-between items-center bg-primary-50 hover:bg-primary-100 p-3 rounded-md">

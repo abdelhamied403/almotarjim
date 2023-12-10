@@ -198,7 +198,7 @@ const SingleRequest = () => {
                 </Button>
               </div>
               {request?.files?.map((file) => (
-                <Attachment {...file}></Attachment>
+                <Attachment type="request" {...file}></Attachment>
               ))}
             </div>
           </div>
@@ -215,7 +215,7 @@ const SingleRequest = () => {
                   </Button>
                 </div>
                 {request?.translations?.files?.map((file) => (
-                  <Attachment {...file}></Attachment>
+                  <Attachment type="translation" {...file}></Attachment>
                 ))}
               </div>
             </div>
