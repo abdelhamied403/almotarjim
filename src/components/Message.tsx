@@ -16,7 +16,10 @@ const Message = (props: MessageType) => {
   );
 
   const downloadFile = () => {
-    downloadURI(props.content, `file-${new Date().getTime()}`);
+    downloadURI(
+      `https://api.almotarjim.net/api/file/message/${props.id}`,
+      `file-${new Date().getTime()}`
+    );
   };
 
   if (props.type === "voice") {
