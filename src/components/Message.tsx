@@ -17,7 +17,7 @@ const Message = (props: MessageType) => {
 
   const downloadFile = () => {
     downloadURI(
-      `https://api.almotarjim.net/api/file/message/${props.id}`,
+      `${import.meta.env.VITE_API_HOST}/file/message/${props.id}`,
       `file-${new Date().getTime()}`
     );
   };
@@ -91,7 +91,11 @@ const Message = (props: MessageType) => {
                     : "bg-primary-100 text-primary-600"
                 )}
               >
-                {isImage && <img src={props.content}></img>}
+                {isImage && (
+                  <img
+                    src={`${import.meta.env.VITE_API_ORIGIN}/${props.content}`}
+                  ></img>
+                )}
                 {!isImage && (
                   <div className="flex items-center gap-4">
                     <p>
