@@ -29,7 +29,7 @@ const Requests = () => {
       header: t("user.requests.table.title"),
     },
     {
-      accessorKey: "createdAt",
+      accessorKey: "created_at",
       header: t("user.requests.table.createdAt"),
       cell: ({ row }) => <p>{row.original.createdAt}</p>,
     },
