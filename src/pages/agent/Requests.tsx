@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 type Request = {
   id: string;
   status: "PENDING";
+  createdAt: string;
 };
 
 const Requests = () => {
@@ -25,6 +26,11 @@ const Requests = () => {
       header: t("supervisor.requests.table.title"),
     },
     {
+      accessorKey: "createdAt",
+      header: t("user.requests.table.createdAt"),
+      cell: ({ row }) => <p>{row.original.createdAt}</p>,
+    },
+    {
       accessorKey: "status",
       header: t("supervisor.requests.table.status"),
       cell: ({ row }) => (
@@ -33,6 +39,7 @@ const Requests = () => {
         </p>
       ),
     },
+
     {
       id: "actions",
       header: t("supervisor.requests.table.actions"),

@@ -108,6 +108,7 @@
         "table": {
           "title": "title",
           "status": "status",
+          "createdAt": "Created At",
           "actions": "actions"
         }
       },
@@ -135,6 +136,7 @@
         "table": {
           "title": "Title",
           "status": "Status",
+          "createdAt": "Created At",
           "actions": "Actions"
         }
       },
@@ -195,6 +197,7 @@
         "table": {
           "title": "Title",
           "status": "Status",
+          "createdAt": "Created At",
           "actions": "Actions"
         }
       },
@@ -230,6 +233,7 @@
         "table": {
           "title": "Title",
           "status": "Status",
+          "createdAt": "Created At",
           "actions": "Actions"
         }
       },

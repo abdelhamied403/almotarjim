@@ -16,6 +16,7 @@ import Pagination from "@/components/Pagination";
 type Request = {
   id: string;
   status: "PENDING";
+  createdAt: string;
 };
 
 const Requests = () => {
@@ -26,6 +27,11 @@ const Requests = () => {
     {
       accessorKey: "title",
       header: t("user.requests.table.title"),
+    },
+    {
+      accessorKey: "createdAt",
+      header: t("user.requests.table.createdAt"),
+      cell: ({ row }) => <p>{row.original.createdAt}</p>,
     },
     {
       accessorKey: "status",

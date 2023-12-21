@@ -108,6 +108,7 @@
         "table": {
           "title": "عنوان",
           "status": "حالة",
+          "createdAt": "انشئ في",
           "actions": "أجراءات"
         }
       },
@@ -135,6 +136,7 @@
         "table": {
           "title": "عنوان",
           "status": "حالة",
+          "createdAt": "انشئ في",
           "actions": "أجراءات"
         }
       },
@@ -195,6 +197,7 @@
         "table": {
           "title": "عنوان",
           "status": "حالة",
+          "createdAt": "انشئ في",
           "actions": "أجراءات"
         }
       },
@@ -230,6 +233,7 @@
         "table": {
           "title": "عنوان",
           "status": "حالة",
+          "createdAt": "انشئ في",
           "actions": "أجراءات"
         }
       },
