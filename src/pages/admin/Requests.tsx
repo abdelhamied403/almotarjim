@@ -16,7 +16,7 @@ import { useState } from "react";
 type Request = {
   id: string;
   status: RequestStatus;
-  createdAt: string;
+  created_at: string;
 };
 
 const Requests = () => {
@@ -30,7 +30,7 @@ const Requests = () => {
     {
       accessorKey: "created_at",
       header: t("user.requests.table.createdAt"),
-      cell: ({ row }) => <p>{row.original.createdAt}</p>,
+      cell: ({ row }) => <p>{row.original.created_at}</p>,
     },
     {
       accessorKey: "status",
