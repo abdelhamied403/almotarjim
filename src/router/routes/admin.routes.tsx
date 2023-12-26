@@ -17,6 +17,9 @@ import CreateTranslator from "@/pages/admin/create/CreateTranslator";
 import CreateSupervisor from "@/pages/admin/create/CreateSupervisor";
 import ChooseService from "@/pages/admin/ChooseService";
 import CreateService from "@/pages/admin/create/CreateService";
+import UpdateAgent from "@/pages/admin/update/UpdateAgent";
+import UpdateSupervisor from "@/pages/admin/update/UpdateSupervisor";
+import UpdateTranslator from "@/pages/admin/update/UpdateTranslator";
 
 const adminRoutes: RouteObject[] = [
   {
@@ -75,6 +78,10 @@ const adminRoutes: RouteObject[] = [
             path: "create",
             element: <CreateAgent />,
           },
+          {
+            path: "update/:id",
+            element: <UpdateAgent />,
+          },
         ],
       },
       {
@@ -88,6 +95,10 @@ const adminRoutes: RouteObject[] = [
             path: "create",
             element: <CreateTranslator />,
           },
+          {
+            path: "update/:id",
+            element: <UpdateTranslator />,
+          },
         ],
       },
       {
@@ -100,6 +111,10 @@ const adminRoutes: RouteObject[] = [
           {
             path: "create",
             element: <CreateSupervisor />,
+          },
+          {
+            path: "update/:id",
+            element: <UpdateSupervisor />,
           },
         ],
       },

@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import Pagination from "@/components/Pagination";
+import { HiPencil } from "react-icons/hi2";
 
 const TranslatorsActions = ({ row, refetch }: any) => {
   const [loading, setLoading] = useState(false);
@@ -34,12 +35,17 @@ const TranslatorsActions = ({ row, refetch }: any) => {
   };
 
   return (
-    <Button
-      variant={"danger"}
-      onClick={() => handleDeleteTranslator(row.original.id)}
-    >
-      {loading ? <Spinner /> : <RiDeleteBin5Fill />}
-    </Button>
+    <div className="flex gap-4">
+      <Link to={`/translators/update/${row.original.id}`}>
+        <Button>{loading ? <Spinner /> : <HiPencil />}</Button>
+      </Link>
+      <Button
+        variant={"danger"}
+        onClick={() => handleDeleteTranslator(row.original.id)}
+      >
+        {loading ? <Spinner /> : <RiDeleteBin5Fill />}
+      </Button>
+    </div>
   );
 };
 

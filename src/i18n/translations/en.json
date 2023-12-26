@@ -369,6 +369,41 @@
         "error": "Error",
         "someFieldsAreInvalid": "Some fields are invalid",
         "createNewAgent": "Create New Agent"
+      },
+      "updateAgent": {
+        "updated": "Updated",
+        "agentUpdatedSuccessfully": "Agent Updated Successfully",
+        "error": "Error",
+        "someFieldsAreInvalid": "Some fields are invalid",
+        "updateNewAgent": "Update New Agent"
+      },
+      "createSupervisor": {
+        "created": "Created",
+        "supervisorCreatedSuccessfully": "supervisor Created Successfully",
+        "error": "Error",
+        "someFieldsAreInvalid": "Some fields are invalid",
+        "createNewSupervisor": "Create New supervisor"
+      },
+      "updateSupervisor": {
+        "updated": "Updated",
+        "supervisorUpdatedSuccessfully": "supervisor Updated Successfully",
+        "error": "Error",
+        "someFieldsAreInvalid": "Some fields are invalid",
+        "updateNewSupervisor": "Update New supervisor"
+      },
+      "createTranslator": {
+        "created": "Created",
+        "translatorCreatedSuccessfully": "translator Created Successfully",
+        "error": "Error",
+        "someFieldsAreInvalid": "Some fields are invalid",
+        "createNewTranslator": "Create New translator"
+      },
+      "updateTranslator": {
+        "updated": "Updated",
+        "translatorUpdatedSuccessfully": "translator Updated Successfully",
+        "error": "Error",
+        "someFieldsAreInvalid": "Some fields are invalid",
+        "updateNewTranslator": "Update New translator"
       }
     }
   }

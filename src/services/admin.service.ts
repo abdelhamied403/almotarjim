@@ -54,6 +54,15 @@ const createSupervisor = async (data: Partial<User>) => {
   return res.data;
 };
 
+const getUser = async (userId: string) => {
+  const res = await api.get(`/users/show/${userId}`);
+  return res.data;
+};
+const updateUser = async (userId: string, data: Partial<User>) => {
+  const res = await api.put(`/users/update-user/${userId}`, data);
+  return res.data;
+};
+
 const deleteUser = async (id: string) => {
   const res = await api.delete(`/users/delete-user/${id}`);
   return res.data;
@@ -94,9 +103,11 @@ const AdminService = {
   createAgent,
   createTranslator,
   createSupervisor,
+  updateUser,
   deleteUser,
   createService,
   deleteService,
+  getUser,
 };
 
 export default AdminService;

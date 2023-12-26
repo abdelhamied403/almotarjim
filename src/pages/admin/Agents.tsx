@@ -1,7 +1,7 @@
 import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
-import { HiPlus } from "react-icons/hi";
+import { HiPencil, HiPlus } from "react-icons/hi2";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
@@ -34,12 +34,17 @@ const AgentsActions = ({ row, refetch }: any) => {
   };
 
   return (
-    <Button
-      variant={"danger"}
-      onClick={() => handleDeleteAgent(row.original.id)}
-    >
-      {loading ? <Spinner /> : <RiDeleteBin5Fill />}
-    </Button>
+    <div className="flex gap-4">
+      <Link to={`/agents/update/${row.original.id}`}>
+        <Button>{loading ? <Spinner /> : <HiPencil />}</Button>
+      </Link>
+      <Button
+        variant={"danger"}
+        onClick={() => handleDeleteAgent(row.original.id)}
+      >
+        {loading ? <Spinner /> : <RiDeleteBin5Fill />}
+      </Button>
+    </div>
   );
 };
 

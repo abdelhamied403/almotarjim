@@ -108,7 +108,7 @@
         "table": {
           "title": "عنوان",
           "status": "حالة",
-          "createdAt": "انشئ في",
+          "createdAt": "أنشئت في",
           "actions": "أجراءات"
         }
       },
@@ -136,7 +136,7 @@
         "table": {
           "title": "عنوان",
           "status": "حالة",
-          "createdAt": "انشئ في",
+          "createdAt": "أنشئت في",
           "actions": "أجراءات"
         }
       },
@@ -197,7 +197,7 @@
         "table": {
           "title": "عنوان",
           "status": "حالة",
-          "createdAt": "انشئ في",
+          "createdAt": "أنشئت في",
           "actions": "أجراءات"
         }
       },
@@ -233,7 +233,7 @@
         "table": {
           "title": "عنوان",
           "status": "حالة",
-          "createdAt": "انشئ في",
+          "createdAt": "أنشئت في",
           "actions": "أجراءات"
         }
       },
@@ -292,7 +292,7 @@
         "pending": "قيد الانتظار",
         "inProgress": "في تَقَدم",
         "online": "متصل",
-        "offline": "غير متصل"
+        "offline": "غير متصل على الانترنت"
       },
       "chooseService": {
         "id": "بطاقة تعريف",
@@ -325,7 +325,7 @@
         "phone": "هاتف",
         "status": "حالة",
         "online": "متصل",
-        "offline": "غير متصل",
+        "offline": "غير متصل على الانترنت",
         "numberOfClients": "عدد العملاء",
         "actions": "أجراءات",
         "createAgent": "إنشاء وكيل"
@@ -336,7 +336,7 @@
         "email": "بريد إلكتروني",
         "status": "حالة",
         "online": "متصل",
-        "offline": "غير متصل",
+        "offline": "غير متصل على الانترنت",
         "numberOfTranslations": "عدد الترجمات",
         "actions": "أجراءات",
         "createTranslator": "إنشاء مترجم"
@@ -347,7 +347,7 @@
         "email": "بريد إلكتروني",
         "status": "حالة",
         "online": "متصل",
-        "offline": "غير متصل",
+        "offline": "غير متصل على الانترنت",
         "chats": "الدردشات",
         "requests": "الطلبات",
         "actions": "أجراءات",
@@ -358,7 +358,7 @@
         "name": "اسم",
         "email": "بريد إلكتروني",
         "status": "حالة",
-        "image": "صوره",
+        "image": "صورة",
         "chats": "الدردشات",
         "requests": "الطلبات",
         "actions": "أجراءات"
@@ -369,6 +369,41 @@
         "error": "خطأ",
         "someFieldsAreInvalid": "بعض الحقول غير صالحة",
         "createNewAgent": "إنشاء وكيل جديد"
+      },
+      "updateAgent": {
+        "updated": "محدث",
+        "agentUpdatedSuccessfully": "تم تحديث الوكيل بنجاح",
+        "error": "خطأ",
+        "someFieldsAreInvalid": "بعض الحقول غير صالحة",
+        "updateNewAgent": "تحديث الوكيل الجديد"
+      },
+      "createSupervisor": {
+        "created": "مخلوق",
+        "supervisorCreatedSuccessfully": "تم إنشاء المشرف بنجاح",
+        "error": "خطأ",
+        "someFieldsAreInvalid": "بعض الحقول غير صالحة",
+        "createNewSupervisor": "إنشاء مشرف جديد"
+      },
+      "updateSupervisor": {
+        "updated": "محدث",
+        "supervisorUpdatedSuccessfully": "تم تحديث المشرف بنجاح",
+        "error": "خطأ",
+        "someFieldsAreInvalid": "بعض الحقول غير صالحة",
+        "updateNewSupervisor": "تحديث المشرف الجديد"
+      },
+      "createTranslator": {
+        "created": "مخلوق",
+        "translatorCreatedSuccessfully": "تم إنشاء المترجم بنجاح",
+        "error": "خطأ",
+        "someFieldsAreInvalid": "بعض الحقول غير صالحة",
+        "createNewTranslator": "إنشاء مترجم جديد"
+      },
+      "updateTranslator": {
+        "updated": "محدث",
+        "translatorUpdatedSuccessfully": "تم تحديث المترجم بنجاح",
+        "error": "خطأ",
+        "someFieldsAreInvalid": "بعض الحقول غير صالحة",
+        "updateNewTranslator": "تحديث مترجم جديد"
       }
     }
   }
