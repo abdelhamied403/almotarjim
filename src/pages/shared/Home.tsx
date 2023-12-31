@@ -33,21 +33,21 @@ const Home = () => {
   return (
     <div className="relative min-h-screen m-auto">
       <div className="flex flex-col h-screen justify-center relative z-10">
-        <div className="absolute top-0 right-0">
+        <div className="absolute top-0 right-0 -z-10">
           <img
             src={ellipse}
             alt="ellipse"
             className="w-[100px] h-[100px] md:h-auto md:w-auto"
           />
         </div>
-        <div className="absolute top-0 left-0">
+        <div className="absolute top-0 left-0 -z-10">
           <img
             src={ellipse2}
             alt="ellipse"
             className="w-[100px] h-[100px] md:h-auto md:w-auto"
           />
         </div>
-        <div className="absolute bottom-0 left-0">
+        <div className="absolute bottom-0 left-0 -z-10">
           <img
             src={ellipse3}
             alt="ellipse"
