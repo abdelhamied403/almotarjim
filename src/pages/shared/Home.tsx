@@ -54,7 +54,7 @@ const Home = () => {
             className="w-[100px] h-[100px] md:h-auto md:w-auto"
           />
         </div>
-        <div className="container mx-auto">
+        <div className="container mx-auto mt-5">
           <div className="flex justify-end">
             <LanguageDropdown />
           </div>
