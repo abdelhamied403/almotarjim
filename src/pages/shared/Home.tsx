@@ -31,7 +31,7 @@ const Home = () => {
   };
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen m-auto">
       <div className="flex flex-col h-screen justify-center relative z-10">
         <div className="absolute top-0 right-0">
           <img
