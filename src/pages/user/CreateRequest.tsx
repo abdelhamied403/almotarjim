@@ -43,11 +43,7 @@ const CreateRequest = () => {
 
   const { isFetching, data: currentService } = useQuery<Service>(
     "service",
-    async () => await ServiceService.getService(serviceId),
-    {
-      staleTime: Infinity,
-      cacheTime: Infinity,
-    }
+    async () => await ServiceService.getService(serviceId)
   );
 
   const onSubmit = async (data: CreateRequestSchemaType) => {
