@@ -30,6 +30,10 @@
       "chat": {
         "youAreStillInQueue": "أنت لا تزال في الطابور.."
       },
+      "date-picker": {
+        "pick-date": "اختر موعدا..."
+      },
+      "apply": "يتقدم",
       "footer": {
         "copyright": "© {{year}}-المترجم. "
       }
@@ -291,6 +295,7 @@
         "closed": "مغلق",
         "pending": "قيد الانتظار",
         "inProgress": "في تَقَدم",
+        "rejected": "تم رفضه",
         "online": "متصل",
         "offline": "غير متصل على الانترنت"
       },
@@ -376,6 +381,9 @@
         "error": "خطأ",
         "someFieldsAreInvalid": "بعض الحقول غير صالحة",
         "updateNewAgent": "تحديث الوكيل الجديد"
+      },
+      "viewAgent": {
+        "totalRequests": "عدد اجمالي الطلبات"
       },
       "createSupervisor": {
         "created": "مخلوق",

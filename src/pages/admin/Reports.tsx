@@ -1,11 +1,5 @@
-import BarChart from "@/components/BarChart";
-
-const Dashboard = () => {
-  return (
-    <div>
-      <BarChart />
-    </div>
-  );
+const Reports = () => {
+  return <div>test</div>;
 };
 
-export default Dashboard;
+export default Reports;

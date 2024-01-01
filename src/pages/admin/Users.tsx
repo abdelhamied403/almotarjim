@@ -42,7 +42,7 @@ const Users = () => {
       id: "actions",
       header: t("admin.users.actions"),
       cell: ({ row }) => (
-        <Link to={`/user/${row.original.id}`}>
+        <Link to={`/users/${row.original.id}`}>
           <Button>
             <HiEye />
           </Button>

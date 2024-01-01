@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import useI18n from "@/hooks/useI18n";
 import Pagination from "@/components/Pagination";
+import { HiEye } from "react-icons/hi";
 
 const AgentsActions = ({ row, refetch }: any) => {
   const [loading, setLoading] = useState(false);
@@ -35,8 +36,15 @@ const AgentsActions = ({ row, refetch }: any) => {
 
   return (
     <div className="flex gap-4">
+      <Link to={`/agents/${row.original.id}`}>
+        <Button>
+          <HiEye />
+        </Button>
+      </Link>
       <Link to={`/agents/update/${row.original.id}`}>
-        <Button>{loading ? <Spinner /> : <HiPencil />}</Button>
+        <Button>
+          <HiPencil />
+        </Button>
       </Link>
       <Button
         variant={"danger"}

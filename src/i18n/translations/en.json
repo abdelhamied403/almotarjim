@@ -30,6 +30,10 @@
       "chat": {
         "youAreStillInQueue": "you are still in queue..."
       },
+      "date-picker": {
+        "pick-date": "Pick a date..."
+      },
+      "apply": "Apply",
       "footer": {
         "copyright": "© {{year}}-Almotarjim. All rights reserved."
       }
@@ -291,6 +295,7 @@
         "closed": "Closed",
         "pending": "Pending",
         "inProgress": "InProgress",
+        "rejected": "Rejected",
         "online": "Online",
         "offline": "Offline"
       },
@@ -376,6 +381,9 @@
         "error": "Error",
         "someFieldsAreInvalid": "Some fields are invalid",
         "updateNewAgent": "Update New Agent"
+      },
+      "viewAgent": {
+        "totalRequests": "Total Requests"
       },
       "createSupervisor": {
         "created": "Created",

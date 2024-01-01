@@ -20,6 +20,8 @@ import CreateService from "@/pages/admin/create/CreateService";
 import UpdateAgent from "@/pages/admin/update/UpdateAgent";
 import UpdateSupervisor from "@/pages/admin/update/UpdateSupervisor";
 import UpdateTranslator from "@/pages/admin/update/UpdateTranslator";
+import ViewAgent from "@/pages/admin/view/ViewAgent";
+import ViewClient from "@/pages/admin/view/ViewClient";
 
 const adminRoutes: RouteObject[] = [
   {
@@ -82,6 +84,10 @@ const adminRoutes: RouteObject[] = [
             path: "update/:id",
             element: <UpdateAgent />,
           },
+          {
+            path: ":id",
+            element: <ViewAgent />,
+          },
         ],
       },
       {
@@ -124,6 +130,10 @@ const adminRoutes: RouteObject[] = [
           {
             path: "",
             element: <Users />,
+          },
+          {
+            path: ":id",
+            element: <ViewClient />,
           },
         ],
       },

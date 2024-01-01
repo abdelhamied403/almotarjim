@@ -1,4 +1,6 @@
 import DoughnutChart from "@/components/DoughnutChart";
+import Field from "@/components/Field";
+import { RangeDatePicker } from "@/components/RangeDatePicker";
 import Spinner from "@/components/ui/Spinner";
 import {
   Card,
@@ -14,6 +16,7 @@ import { useQuery } from "react-query";
 
 const Dashboard = () => {
   const { t } = useI18n();
+  const [period, setPeriod] = useState<any>();
   const [chatData, setChatData] = useState<
     ChartData<"doughnut", number[], unknown>
   >({
@@ -31,8 +34,8 @@ const Dashboard = () => {
   });
 
   const { isLoading, data: reports } = useQuery(
-    "reports",
-    AdminService.getReports,
+    ["reports", period],
+    () => AdminService.getReports(period?.from, period?.to),
     {
       onSuccess: (data) => {
         setChatData({
@@ -94,66 +97,70 @@ const Dashboard = () => {
     }
   );
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center">
-        <Spinner />
-      </div>
-    );
-  }
-
   return (
     <div className="flex flex-col gap-10">
       <div>
         <h1>{t("admin.dashboard.welcomeToAlmotarjim")}</h1>
         <p>{t("admin.dashboard.description")}</p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <Card>
-          <CardHeader>
-            <h1>{t("admin.dashboard.chats")}</h1>
-          </CardHeader>
-          <CardContent>
-            <DoughnutChart data={chatData} />
-          </CardContent>
-          <CardFooter>
-            <div className="flex flex-col">
-              <p>Total Chats: {reports.numberOfChats}</p>
-              <p>Open Chats: {reports.numberOfOpenChats}</p>
-              <p>Closed Chats: {reports.numberOfClosedChats}</p>
-            </div>
-          </CardFooter>
-        </Card>
-        <Card>
-          <CardHeader>
-            <h1>{t("admin.dashboard.requests")}</h1>
-          </CardHeader>
-          <CardContent>
-            <DoughnutChart data={requestData} />
-          </CardContent>
-          <CardFooter>
-            <div className="flex flex-col">
-              <p>Total Requests: {reports.numberOfRequests}</p>
-              <p>Pending Requests: {reports.numberOfPendingRequests}</p>
-              <p>InProgress Requests: {reports.numberOfInProgressRequests}</p>
-              <p>Closed Requests: {reports.numberOfDoneRequests}</p>
-            </div>
-          </CardFooter>
-        </Card>
-        <Card>
-          <CardHeader>
-            <h1>{t("admin.dashboard.agents")}</h1>
-          </CardHeader>
-          <CardContent>
-            <DoughnutChart data={availableAgents} />
-          </CardContent>
-          <CardFooter>
-            <div className="flex flex-col">
-              <p>Available Agents: {reports.numberOfAvailableAgents}</p>
-            </div>
-          </CardFooter>
-        </Card>
+      <div className="flex gap-4">
+        <Field label={t("shared.date-picker.pick-date")}>
+          <RangeDatePicker value={period} onChange={setPeriod} />
+        </Field>
       </div>
+      {isLoading && (
+        <div className="flex items-center justify-center">
+          <Spinner />
+        </div>
+      )}
+      {!isLoading && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <Card>
+            <CardHeader>
+              <h1>{t("admin.dashboard.chats")}</h1>
+            </CardHeader>
+            <CardContent>
+              <DoughnutChart data={chatData} />
+            </CardContent>
+            <CardFooter>
+              <div className="flex flex-col">
+                <p>Total Chats: {reports.numberOfChats}</p>
+                <p>Open Chats: {reports.numberOfOpenChats}</p>
+                <p>Closed Chats: {reports.numberOfClosedChats}</p>
+              </div>
+            </CardFooter>
+          </Card>
+          <Card>
+            <CardHeader>
+              <h1>{t("admin.dashboard.requests")}</h1>
+            </CardHeader>
+            <CardContent>
+              <DoughnutChart data={requestData} />
+            </CardContent>
+            <CardFooter>
+              <div className="flex flex-col">
+                <p>Total Requests: {reports.numberOfRequests}</p>
+                <p>Pending Requests: {reports.numberOfPendingRequests}</p>
+                <p>InProgress Requests: {reports.numberOfInProgressRequests}</p>
+                <p>Closed Requests: {reports.numberOfDoneRequests}</p>
+              </div>
+            </CardFooter>
+          </Card>
+          <Card>
+            <CardHeader>
+              <h1>{t("admin.dashboard.agents")}</h1>
+            </CardHeader>
+            <CardContent>
+              <DoughnutChart data={availableAgents} />
+            </CardContent>
+            <CardFooter>
+              <div className="flex flex-col">
+                <p>Available Agents: {reports.numberOfAvailableAgents}</p>
+              </div>
+            </CardFooter>
+          </Card>
+        </div>
+      )}
     </div>
   );
 };

@@ -22,7 +22,13 @@ const getSupervisors = async (page: number) => {
   return res.data.data;
 };
 
-const getReports = async () => {
+const getReports = async (from?: string, to?: string) => {
+  if (!!from || !!to) {
+    const res = await api.get(
+      `statistics/get-statistcs-with-period?from=${from}&to=${to || from}`
+    );
+    return res.data.data;
+  }
   const res = await api.get("/statistics/reports");
   return res.data.data;
 };
@@ -94,6 +100,15 @@ const deleteService = async (id: string) => {
   return res.data;
 };
 
+const getAgentHistory = async (id: string) => {
+  const res = await api.get(`/statistics/agent-history/${id}`);
+  return res.data;
+};
+const getClientHistory = async (id: string) => {
+  const res = await api.get(`/statistics/client-history/${id}`);
+  return res.data;
+};
+
 const AdminService = {
   getUsers,
   getAgents,
@@ -108,6 +123,8 @@ const AdminService = {
   createService,
   deleteService,
   getUser,
+  getAgentHistory,
+  getClientHistory,
 };
 
 export default AdminService;
