@@ -22,7 +22,7 @@ const googleLogin = async () => {
   return res.data;
 };
 const googleLoginCallback = async (credential: any) => {
-  const res = await api.post("/google/callback", { credential });
+  const res = await api.post("/google/callback", credential);
   return res.data;
 };
 const register = async (data: Partial<User>) => {

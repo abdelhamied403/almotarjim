@@ -1,12 +1,20 @@
-import facebook from "@/assets/auth/Facebook.svg";
-import google from "@/assets/auth/Google.svg";
 import AuthService from "@/services/auth.service";
-import { Button } from "./ui/button";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
+import useProfileStore from "@/store/profile.slice";
+import { useNavigate } from "react-router-dom";
 
 const SocialLinks = () => {
+  const { setUser } = useProfileStore();
+  const navigate = useNavigate();
+
   const handleGoogleLogin = async (credential: CredentialResponse) => {
-    await AuthService.googleLoginCallback(credential);
+    const res = await AuthService.googleLoginCallback({
+      access_token: credential.credential,
+    });
+    localStorage.setItem("token", res.token);
+    const userData = await AuthService.getUser();
+    setUser(userData.data);
+    navigate("/dashboard");
   };
 
   return (
@@ -17,15 +25,6 @@ const SocialLinks = () => {
           console.log("Login Failed");
         }}
       />
-      <Button
-        variant="link"
-        className="bg-primary-500 w-12 h-11 flex items-center justify-center rounded-lg shadow-xl"
-      >
-        <img src={facebook} alt="almotarjim-facebook" />
-      </Button>
-      <Button variant="link">
-        <img src={google} alt="almotarjim-google" />
-      </Button>
     </div>
   );
 };

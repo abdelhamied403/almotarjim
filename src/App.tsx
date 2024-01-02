@@ -31,7 +31,7 @@ const App = () => {
 
   return (
     <>
-      <GoogleOAuthProvider clientId="664770916101-q4sfcj3f6l0f1t9bhcrd26d5c1cdtv07.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId="83118576653-8akhfen8jq9uvei8ht5nbja3m39oom0e.apps.googleusercontent.com">
         <LanguageProvider defaultLocale="en">
           <QueryClientProvider client={queryClient}>
             {loading ? <Spinner /> : <MainRouter></MainRouter>}
