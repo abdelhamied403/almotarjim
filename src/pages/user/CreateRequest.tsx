@@ -43,7 +43,8 @@ const CreateRequest = () => {
 
   const { isFetching, data: currentService } = useQuery<Service>(
     "service",
-    async () => await ServiceService.getService(serviceId)
+    async () => await ServiceService.getService(serviceId),
+    { refetchOnWindowFocus: false }
   );
 
   const onSubmit = async (data: CreateRequestSchemaType) => {
