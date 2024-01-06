@@ -7,6 +7,7 @@ import UploadedFile from "@/interfaces/uploadedFile";
 import RequestService from "@/services/request.service";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Spinner from "@/components/ui/Spinner";
 
 const SubmitRequest = () => {
   const { t } = useI18n();
@@ -14,9 +15,11 @@ const SubmitRequest = () => {
   const { id = "" } = useParams();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [submitRequestLoading, setSubmitRequestLoading] = useState(false);
 
   const handleSubmitRequest = async () => {
     try {
+      setSubmitRequestLoading(true);
       const res = await RequestService.submitRequest(
         id,
         files.map(({ file }) => file)
@@ -32,6 +35,8 @@ const SubmitRequest = () => {
         description: error.response.data.message,
         variant: "destructive",
       });
+    } finally {
+      setSubmitRequestLoading(false);
     }
   };
 
@@ -45,8 +50,15 @@ const SubmitRequest = () => {
           </Field>
 
           <div className="my-4 flex justify-center">
-            <Button onClick={handleSubmitRequest}>
-              {t("translator.singleRequest.submit")}
+            <Button
+              onClick={handleSubmitRequest}
+              disabled={submitRequestLoading}
+            >
+              {submitRequestLoading ? (
+                <Spinner />
+              ) : (
+                t("translator.singleRequest.submit")
+              )}
             </Button>
           </div>
         </div>
