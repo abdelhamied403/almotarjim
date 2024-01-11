@@ -56,6 +56,7 @@ const Supervisors = () => {
     {
       accessorKey: "id",
       header: t("admin.supervisors.id"),
+      cell: ({ row }) => <span>{row.index + 1}</span>,
     },
     {
       accessorKey: "name",
