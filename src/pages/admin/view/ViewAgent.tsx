@@ -1,7 +1,6 @@
 import DoughnutChart from "@/components/DoughnutChart";
 import { Button } from "@/components/ui/button";
 import useI18n from "@/hooks/useI18n";
-import { downloadURI } from "@/lib/file";
 import AdminService from "@/services/admin.service";
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -24,10 +23,6 @@ const ViewAgent = () => {
     setExcelFileUrl(agentHistory.excel);
   }, [id]);
 
-  const downloadExcel = async () => {
-    await downloadURI(excelFileUrl);
-  };
-
   useEffect(() => {
     getAgent();
   }, [getAgent]);
@@ -49,7 +44,9 @@ const ViewAgent = () => {
         {t("admin.viewAgent.totalRequests")}: {agentHistory?.numberOfRequests}
       </p>
 
-      <Button onClick={downloadExcel}>Download Excel</Button>
+      <a href={excelFileUrl}>
+        <Button>Download Excel</Button>
+      </a>
 
       <div className="grid grid-cols-4">
         {agentHistory && agentHistory?.numberOfRequests > 0 && (
