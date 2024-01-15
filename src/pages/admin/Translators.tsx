@@ -56,6 +56,7 @@ const Translators = () => {
     {
       accessorKey: "id",
       header: t("admin.translators.id"),
+      cell: ({ row }) => <span>{row.index + 1}</span>,
     },
     {
       accessorKey: "name",

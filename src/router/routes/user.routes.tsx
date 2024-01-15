@@ -9,6 +9,7 @@ import SingleChat from "@/pages/user/SingleChat";
 import SingleRequest from "@/pages/user/SingleRequest";
 import UserLayout from "@/layouts/UserLayout";
 import ChooseService from "@/pages/user/ChooseService";
+import Contact from "@/pages/user/Contact";
 
 const userRoutes: RouteObject[] = [
   {
@@ -18,6 +19,10 @@ const userRoutes: RouteObject[] = [
       {
         path: "dashboard",
         element: <Home />,
+      },
+      {
+        path: "contact",
+        element: <Contact />,
       },
       {
         path: "request",

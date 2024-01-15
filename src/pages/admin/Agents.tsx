@@ -64,6 +64,7 @@ const Agents = () => {
     {
       accessorKey: "id",
       header: t("admin.agents.id"),
+      cell: ({ row }) => <span>{row.index + 1}</span>,
     },
     {
       accessorKey: "name",

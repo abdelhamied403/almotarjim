@@ -55,6 +55,7 @@ const ChooseService = () => {
     {
       accessorKey: "id",
       header: t("admin.chooseService.id"),
+      cell: ({ row }) => <span>{row.index + 1}</span>,
     },
     {
       accessorKey: "title",

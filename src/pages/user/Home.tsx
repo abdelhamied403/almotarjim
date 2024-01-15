@@ -4,6 +4,7 @@ import ServiceService from "@/services/services.service";
 import { useQuery } from "react-query";
 import { Button } from "@/components/ui/button";
 import { BsFillChatDotsFill } from "react-icons/bs";
+import { MdOutlineArrowOutward } from "react-icons/md";
 import useI18n from "@/hooks/useI18n";
 import { Link, useNavigate } from "react-router-dom";
 import Spinner from "@/components/ui/Spinner";
@@ -63,6 +64,14 @@ const Home = () => {
                 <Button className="flex gap-2" variant={"success"}>
                   <span>{t("user.home.whatsapp")}</span>
                   <BsFillChatDotsFill />
+                </Button>
+              </a>
+            </div>
+            <div>
+              <a href="/contact">
+                <Button className="flex gap-2" variant={"default"}>
+                  <span>{t("user.home.contact")}</span>
+                  <MdOutlineArrowOutward />
                 </Button>
               </a>
             </div>

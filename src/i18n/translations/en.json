@@ -92,7 +92,16 @@
         "createRequest": "Create Request",
         "checkServices": "can’t find what you’re looking for?",
         "chat": "Chat with us",
-        "whatsapp": "Whatsapp"
+        "whatsapp": "Whatsapp",
+        "contact": "Contact Us"
+      },
+      "contact": {
+        "title": "Almotarjim Platform",
+        "content": "ALMOTARJIM is the leading certified translation platform in the Kingdom of Saudi Arabia, specializing in providing certified translation of immigration, legal documents and certificates. Enjoy the most accurate, certified translation in Saudi Arabia.",
+        "address": "Address",
+        "addressContent": "Riyadh, Saudi Arabia",
+        "phone": "Phone",
+        "email": "Email"
       },
       "requests": {
         "create": "Create Request",
