@@ -43,9 +43,11 @@ const Teaser = () => {
           </div>
           <div className="flex flex-wrap gap-6">
             <div>
-              <Button className="flex gap-2">
-                <span>{t("user.home.chat")}</span>
-              </Button>
+              <a href="/contact">
+                <Button className="flex gap-2">
+                  <span>{t("user.home.contact")}</span>
+                </Button>
+              </a>
             </div>
             <div>
               <a
