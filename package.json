@@ -41,7 +41,7 @@
     "react-icons": "^4.11.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.15.0",
-    "sass": "^1.66.1",
+    "sass": "^1.69.7",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.6",
     "zod": "^3.22.4",
