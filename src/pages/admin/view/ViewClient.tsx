@@ -1,7 +1,8 @@
-import DoughnutChart from "@/components/DoughnutChart";
+import { DataTable } from "@/components/Datatable";
 import { Button } from "@/components/ui/button";
 import useI18n from "@/hooks/useI18n";
 import AdminService from "@/services/admin.service";
+import { ColumnDef } from "@tanstack/react-table";
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -11,6 +12,25 @@ const ViewClient = () => {
   const [client, setClient] = useState<any>();
   const [clientHistory, setClientHistory] = useState<any>();
   const [excelFileUrl, setExcelFileUrl] = useState("");
+
+  const columns: ColumnDef<any>[] = [
+    {
+      accessorKey: "pending",
+      header: t("admin.dashboard.pending"),
+    },
+    {
+      accessorKey: "inProgress",
+      header: t("admin.dashboard.inProgress"),
+    },
+    {
+      accessorKey: "closed",
+      header: t("admin.dashboard.closed"),
+    },
+    {
+      accessorKey: "rejected",
+      header: t("admin.dashboard.rejected"),
+    },
+  ];
 
   const getClient = useCallback(async () => {
     const client = await AdminService.getUser(id);
@@ -39,50 +59,24 @@ const ViewClient = () => {
         {t("admin.viewAgent.totalRequests")}: {clientHistory?.numberOfRequests}
       </p>
 
-      <a href={excelFileUrl}>
-        <Button>Download Excel</Button>
-      </a>
+      <div className="chart">
+        <DataTable
+          columns={columns}
+          data={[
+            {
+              pending: clientHistory?.numberOfPendingRequests,
+              inProgress: clientHistory?.numberOfInProgressRequests,
+              closed: clientHistory?.numberOfDoneRequests,
+              rejected: clientHistory?.numberOfRejectedRequests,
+            },
+          ]}
+        />
+      </div>
 
-      <div className="grid grid-cols-4">
-        {clientHistory && clientHistory?.numberOfRequests > 0 && (
-          <div className="chart">
-            <DoughnutChart
-              data={{
-                labels: [
-                  t("admin.dashboard.pending"),
-                  t("admin.dashboard.inProgress"),
-                  t("admin.dashboard.closed"),
-                  t("admin.dashboard.rejected"),
-                ],
-                datasets: [
-                  {
-                    label: t("admin.dashboard.requests"),
-                    data: [
-                      clientHistory?.numberOfPendingRequests,
-                      clientHistory?.numberOfInProgressRequests,
-                      clientHistory?.numberOfDoneRequests,
-                      clientHistory?.numberOfRejectedRequests,
-                    ],
-                    backgroundColor: [
-                      "rgba(54, 162, 235, 0.2)",
-                      "rgba(255, 206, 86, 0.2)",
-                      "rgba(255, 99, 132, 0.2)",
-                      "rgba(0, 0, 132, 0.2)",
-                    ],
-                    borderColor: [
-                      "rgba(54, 162, 235, 1)",
-                      "rgba(255, 206, 86, 1)",
-                      "rgba(255, 99, 132, 1)",
-                      "rgba(0, 0, 132, 1)",
-                    ],
-                    borderWidth: 1,
-                  },
-                ],
-              }}
-            />
-          </div>
-        )}
-        B
+      <div className="flex justify-end py-4">
+        <a href={excelFileUrl}>
+          <Button>Download Excel</Button>
+        </a>
       </div>
     </div>
   );
