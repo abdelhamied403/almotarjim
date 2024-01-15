@@ -4,6 +4,7 @@ import { RouteObject } from "react-router-dom";
 import Home from "@/pages/shared/Home";
 import Login from "@/pages/shared/Login";
 import Register from "@/pages/shared/Register";
+import Teaser from "@/pages/shared/Teaser";
 import Error404 from "@/pages/shared/error/Error404";
 
 const publicRoutes: RouteObject[] = [
@@ -21,6 +22,10 @@ const publicRoutes: RouteObject[] = [
       {
         path: "register",
         element: <Register />,
+      },
+      {
+        path: "teaser",
+        element: <Teaser />,
       },
       {
         path: "*",

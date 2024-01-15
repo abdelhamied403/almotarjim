@@ -27,7 +27,7 @@ const Home = () => {
         return;
       }
     }
-    navigate("/login");
+    navigate("/teaser");
   };
 
   return (
