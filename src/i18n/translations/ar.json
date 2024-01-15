@@ -288,10 +288,10 @@
         "services": "خدمات",
         "chats": "الدردشات",
         "requests": "الطلبات",
-        "agents": "عملاء",
+        "agents": "الموظفين",
         "tanslators": "المترجمين",
         "supervisors": "المشرفين",
-        "users": "المستخدمين",
+        "users": "العملاء",
         "reports": "التقارير"
       },
       "dashboard": {
