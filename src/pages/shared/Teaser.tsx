@@ -5,6 +5,7 @@ import useI18n from "@/hooks/useI18n";
 import Service from "@/interfaces/requestServices";
 import ServiceService from "@/services/services.service";
 import { BsFillChatDotsFill } from "react-icons/bs";
+import { FaPhoneFlip } from "react-icons/fa6";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 
@@ -45,7 +46,8 @@ const Teaser = () => {
             <div>
               <a href="/contact">
                 <Button className="flex gap-2">
-                  <span>{t("user.home.contact")}</span>
+                  <span>{t("user.home.chat")}</span>
+                  <BsFillChatDotsFill />
                 </Button>
               </a>
             </div>
@@ -57,6 +59,21 @@ const Teaser = () => {
                 <Button className="flex gap-2" variant={"success"}>
                   <span>{t("user.home.whatsapp")}</span>
                   <BsFillChatDotsFill />
+                </Button>
+              </a>
+            </div>
+            <div>
+              <a href="">
+                <Button className="flex gap-2" variant={"outline"}>
+                  <span>920013736</span>
+                  <FaPhoneFlip />
+                </Button>
+              </a>
+            </div>
+            <div>
+              <a href="/contact">
+                <Button className="flex gap-2" variant={"subtle"}>
+                  <span>{t("user.home.contact")}</span>
                 </Button>
               </a>
             </div>
