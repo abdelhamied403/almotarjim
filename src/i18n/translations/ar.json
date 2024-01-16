@@ -67,7 +67,7 @@
       "email": "بريد إلكتروني",
       "password": "كلمة المرور",
       "login": "تسجيل الدخول",
-      "anonymousLogin": "تسجيل دخول مجهول",
+      "anonymousLogin": "تسجيل دخول كضيف",
       "accountCheck": "ليس لديك حساب؟",
       "register": "يسجل"
     },
