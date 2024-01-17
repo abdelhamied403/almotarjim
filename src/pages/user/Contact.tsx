@@ -54,8 +54,7 @@ const Contact = () => {
                     <div>
                       <h1>{t("user.contact.phone")}</h1>
                       <p className="font-normal text-gray-600 text-base">
-                        From SAT To THR From 8 AM To 9 PM <br />
-                        FRI - From 2 PM To 9 PM
+                        Speek To Our Team
                       </p>
                     </div>
                     <p className="font-normal text-gray-600 text-base">
@@ -75,7 +74,7 @@ const Contact = () => {
                       </p>
                     </div>
                     <p className="font-normal text-gray-600 text-base">
-                      help@almotarjim.tech
+                      support@almotarjim.net
                     </p>
                   </div>
                 </div>
