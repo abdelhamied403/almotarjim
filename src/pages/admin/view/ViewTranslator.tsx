@@ -1,4 +1,5 @@
 import { DataTable } from "@/components/Datatable";
+import { Button } from "@/components/ui/button";
 import useI18n from "@/hooks/useI18n";
 import AdminService from "@/services/admin.service";
 import { ColumnDef } from "@tanstack/react-table";
@@ -60,6 +61,12 @@ const ViewTranslator = () => {
       </p>
 
       <DataTable columns={columns} data={translatorHistory?.details || []} />
+
+      <div className="flex justify-end py-4">
+        <a href={translatorHistory?.excel}>
+          <Button>Download Excel</Button>
+        </a>
+      </div>
     </div>
   );
 };
