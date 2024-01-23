@@ -22,6 +22,8 @@ import UpdateSupervisor from "@/pages/admin/update/UpdateSupervisor";
 import UpdateTranslator from "@/pages/admin/update/UpdateTranslator";
 import ViewAgent from "@/pages/admin/view/ViewAgent";
 import ViewClient from "@/pages/admin/view/ViewClient";
+import InternalUsers from "@/pages/admin/InternalUsers";
+import InternalChat from "@/pages/admin/InternalChat";
 
 const adminRoutes: RouteObject[] = [
   {
@@ -31,6 +33,13 @@ const adminRoutes: RouteObject[] = [
       {
         path: "dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "internal-chat",
+        children: [
+          { path: "", element: <InternalUsers /> },
+          { path: ":id", element: <InternalChat /> },
+        ],
       },
       {
         path: "services",
