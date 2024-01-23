@@ -24,6 +24,7 @@ import ViewAgent from "@/pages/admin/view/ViewAgent";
 import ViewClient from "@/pages/admin/view/ViewClient";
 import InternalUsers from "@/pages/admin/InternalUsers";
 import InternalChat from "@/pages/admin/InternalChat";
+import ViewTranslator from "@/pages/admin/view/ViewTranslator";
 
 const adminRoutes: RouteObject[] = [
   {
@@ -113,6 +114,10 @@ const adminRoutes: RouteObject[] = [
           {
             path: "update/:id",
             element: <UpdateTranslator />,
+          },
+          {
+            path: ":id",
+            element: <ViewTranslator />,
           },
         ],
       },
