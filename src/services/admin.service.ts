@@ -108,6 +108,10 @@ const getClientHistory = async (id: string) => {
   const res = await api.get(`/statistics/client-history/${id}`);
   return res.data;
 };
+const getTranslatorHistory = async (id: string) => {
+  const res = await api.get(`/statistics/translator-pages/${id}`);
+  return res.data;
+};
 
 const getInternalUsers = async () => {
   const res = await api.get("/internal-users");
@@ -139,6 +143,7 @@ const AdminService = {
   getClientHistory,
   getInternalUsers,
   createInternalUserChat,
+  getTranslatorHistory,
 };
 
 export default AdminService;
