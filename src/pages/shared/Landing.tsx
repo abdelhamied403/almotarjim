@@ -3,7 +3,7 @@ import RequestService from "@/components/RequestService";
 import Service from "@/interfaces/requestServices";
 import { BsFillChatDotsFill } from "react-icons/bs";
 import { MdOutlineArrowOutward } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ChatService from "@/services/chat.service";
 import Spinner from "@/components/ui/Spinner";
 import { useQuery } from "react-query";
@@ -11,6 +11,7 @@ import useI18n from "@/hooks/useI18n";
 import ServiceService from "@/services/services.service";
 import LanguageDropdown from "@/components/LanguageDropdown";
 import AuthService from "@/services/auth.service";
+import { FaPhone } from "react-icons/fa6";
 
 const Landing = () => {
   const { t } = useI18n();
@@ -69,13 +70,9 @@ const Landing = () => {
               </div>
               <div className="grid gird-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2">
                 {services?.data.map((service: Service) => (
-                  <Link
-                    key={service.id}
-                    to={`/request/create/${service.id}`}
-                    onClick={handleService}
-                  >
+                  <div key={service.id} onClick={handleService}>
                     <RequestService {...service} />
-                  </Link>
+                  </div>
                 ))}
               </div>
               <div className="flex flex-col gap-6">
@@ -112,6 +109,7 @@ const Landing = () => {
                   <div>
                     <a href="/">
                       <Button className="flex gap-2" variant={"outline"}>
+                        <FaPhone />
                         <span>920013736</span>
                       </Button>
                     </a>
