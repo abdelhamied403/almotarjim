@@ -9,6 +9,7 @@ import useI18n from "@/hooks/useI18n";
 import { Link, useNavigate } from "react-router-dom";
 import Spinner from "@/components/ui/Spinner";
 import ChatService from "@/services/chat.service";
+import { FaPhone } from "react-icons/fa6";
 
 const Home = () => {
   const { t } = useI18n();
@@ -72,6 +73,14 @@ const Home = () => {
                 <Button className="flex gap-2" variant={"default"}>
                   <span>{t("user.home.contact")}</span>
                   <MdOutlineArrowOutward />
+                </Button>
+              </a>
+            </div>
+            <div>
+              <a href="/">
+                <Button className="flex gap-2" variant={"outline"}>
+                  <FaPhone />
+                  <span>920013736</span>
                 </Button>
               </a>
             </div>
