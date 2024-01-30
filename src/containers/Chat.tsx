@@ -1,10 +1,7 @@
-import ChatType from "@/interfaces/chat";
-
 import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useRef,
   useState,
 } from "react";
@@ -28,8 +25,9 @@ import Spinner from "@/components/ui/Spinner";
 import { IoSend } from "react-icons/io5";
 import { Input } from "@/components/ui/input";
 import Message from "@/components/Message";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-type ChatProps = Partial<ChatType> & {
+type ChatProps = any & {
   onSend?: (message: { type: string; content: any }) => Promise<any>;
   children: JSX.Element | JSX.Element[];
 };
@@ -153,37 +151,41 @@ const ChatHeaderActions = ({ children }: ChatHeaderActionsProps) => {
 
 export type ChatBodyProps = {
   children?: JSX.Element | JSX.Element[];
+  fetchMoreMessages?: () => Promise<void>;
 };
-const ChatBody = ({ children }: ChatBodyProps) => {
+const ChatBody = ({ children, fetchMoreMessages }: ChatBodyProps) => {
   const { messages } = useContext(ChatProvider);
 
-  const messagesContainer = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (messagesContainer.current) {
-      messagesContainer.current.scrollTop =
-        messagesContainer.current?.scrollHeight;
-    }
-  }, [messages]);
+  const onLoadMore = async () => {
+    fetchMoreMessages && (await fetchMoreMessages());
+  };
 
   if (children)
     return (
-      <div
-        className="flex-1 h-full flex flex-col gap-4 p-8 bg-white rounded-2xl overflow-y-auto space-y-8"
-        ref={messagesContainer}
-      >
+      <div className="flex-1 h-full flex flex-col gap-4 p-8 bg-white rounded-2xl overflow-y-auto space-y-8">
         {children}
       </div>
     );
 
   return (
     <div
-      className="flex-1 h-full flex flex-col gap-4 p-8 bg-white rounded-2xl overflow-y-auto space-y-8"
-      ref={messagesContainer}
+      id="scrollableDiv"
+      className="flex-1 h-full flex flex-col-reverse gap-4 p-8 bg-white rounded-2xl overflow-y-auto space-y-8"
     >
-      {messages?.map((msg: any) => (
-        <Message {...msg} />
-      ))}
+      {/*Put the scroll bar always on the bottom*/}
+      <InfiniteScroll
+        dataLength={messages?.data?.length}
+        next={onLoadMore}
+        style={{ display: "flex", flexDirection: "column-reverse" }} //To put endMessage and loader to the top.
+        inverse={true} //
+        loader={<h4>Loading...</h4>}
+        hasMore={messages?.current_page < messages?.last_page}
+        scrollableTarget="scrollableDiv"
+      >
+        {messages?.data?.map((msg: any) => (
+          <Message {...msg} key={msg.id} />
+        ))}
+      </InfiniteScroll>
     </div>
   );
 };

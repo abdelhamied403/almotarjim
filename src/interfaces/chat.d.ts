@@ -8,6 +8,8 @@ type Chat = {
   receiver: User;
   request_id: number;
   status: "open" | "closed";
+  last_message?: Message;
+  is_read?: boolean;
 };
 
 export default Chat;

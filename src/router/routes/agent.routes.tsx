@@ -9,8 +9,9 @@ import SingleRequest from "@/pages/agent/SingleRequest";
 import Error404 from "@/pages/shared/error/Error404";
 import AgentLayout from "@/layouts/AgentLayout";
 import CreateRequests from "@/pages/agent/CreateRequests";
-import InternalUsers from "@/pages/agent/InternalUsers";
 import InternalChat from "@/pages/agent/InternalChat";
+import InternalChats from "@/pages/admin/InternalChats";
+import CreateInternalChat from "@/pages/admin/CreateInternalChat";
 
 const agentRoutes: RouteObject[] = [
   {
@@ -22,9 +23,10 @@ const agentRoutes: RouteObject[] = [
         element: <Dashboard />,
       },
       {
-        path: "internal-chat",
+        path: "internal-chats",
         children: [
-          { path: "", element: <InternalUsers /> },
+          { path: "", element: <InternalChats /> },
+          { path: "new", element: <CreateInternalChat /> },
           { path: ":id", element: <InternalChat /> },
         ],
       },

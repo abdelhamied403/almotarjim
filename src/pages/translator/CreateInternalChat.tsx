@@ -4,9 +4,9 @@ import User from "@/interfaces/user";
 import AdminService from "@/services/admin.service";
 import { useEffect, useState } from "react";
 import { HiChat } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const InternalUsers = () => {
+const CreateInternalChat = () => {
   const [internalUsers, setInternalUsers] = useState([]);
   const navigate = useNavigate();
 
@@ -17,8 +17,7 @@ const InternalUsers = () => {
 
   const handleInternalChat = async (id: string) => {
     const res = await AdminService.createInternalUserChat(id);
-    navigate(`/chat/${res.data.id}`);
-    // console.log(res.data);
+    navigate(`/internal-chats/${res.data.receiver.id}`);
   };
 
   useEffect(() => {
@@ -26,7 +25,10 @@ const InternalUsers = () => {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
+      <Link to="/internal-chats">
+        <Button>Back</Button>
+      </Link>
       {internalUsers.map((internalUser: User) => (
         <div className="flex justify-between items-center bg-white p-4 rounded-xl">
           <div className="flex items-center gap-4">
@@ -62,8 +64,8 @@ const InternalUsers = () => {
           </Button>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 
-export default InternalUsers;
+export default CreateInternalChat;

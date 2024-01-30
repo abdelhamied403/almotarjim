@@ -11,9 +11,9 @@ import { HiChat } from "react-icons/hi";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 
-const ChatRow = (chat: Chat) => {
+const ChatRow = (chat: any) => {
   const lastMessage = useMemo(
-    () => chat.messages.slice(-1)[0],
+    () => chat.messages?.data.slice(-1)[0],
     [chat.messages]
   );
   return (

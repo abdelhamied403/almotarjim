@@ -1,6 +1,7 @@
 import Chat from "@/containers/Chat";
 import usePusher from "@/hooks/usePusher";
 import ChatType from "@/interfaces/chat";
+import Message from "@/interfaces/message";
 import ChatService from "@/services/chat.service";
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -9,10 +10,15 @@ const SingleChat = () => {
   const pusher = usePusher();
   const { id = "" } = useParams();
   const [chat, setChat] = useState<Partial<ChatType>>({});
+  const [messages, setMessages] = useState<{ data: Array<Message> }>({
+    data: [],
+  });
+  const [page, setPage] = useState(1);
 
   const getChat = useCallback(async () => {
     const res = await ChatService.getSingleChat(id);
-    setChat(res);
+    setChat(res.data);
+    setMessages(res.messages);
   }, [id]);
 
   const handleSend = useCallback(
@@ -22,13 +28,20 @@ const SingleChat = () => {
     [id]
   );
 
+  const onFetchMore = async () => {
+    const res = await ChatService.getSingleChat(id, page + 1);
+    setPage((prev) => prev + 1);
+    setMessages((prev) => ({
+      ...prev,
+      ...res.messages,
+      data: [...prev.data, ...res.messages.data],
+    }));
+  };
+
   useEffect(() => {
     const channel = pusher.subscribe(`chat.${id}`);
     channel.bind("message-sent", (data: any) => {
-      setChat((prev: any) => ({
-        ...prev,
-        messages: [...(prev.messages ? [...prev.messages] : []), data],
-      }));
+      setMessages((prev: any) => ({ ...prev, data: [data, ...prev.data] }));
     });
 
     return () => {
@@ -41,18 +54,11 @@ const SingleChat = () => {
   }, [getChat]);
 
   return (
-    <Chat {...chat} onSend={handleSend}>
+    <Chat {...chat} messages={messages} onSend={handleSend}>
       <Chat.Header>
         <Chat.Header.Title></Chat.Header.Title>
-        <Chat.Header.Actions></Chat.Header.Actions>
       </Chat.Header>
-      <Chat.Body>
-        <>
-          {chat.messages?.map((message) => (
-            <Chat.Message {...message} />
-          ))}
-        </>
-      </Chat.Body>
+      <Chat.Body fetchMoreMessages={onFetchMore}></Chat.Body>
       <Chat.Footer />
     </Chat>
   );

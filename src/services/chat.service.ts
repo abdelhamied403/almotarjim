@@ -6,9 +6,9 @@ const getAllChats = async (page: number) => {
   return res.data.data;
 };
 
-const getSingleChat = async (id?: string) => {
-  const res = await api.get(`/messages/show/${id}`);
-  return res.data.data;
+const getSingleChat = async (id?: string, page: number = 1) => {
+  const res = await api.get(`/messages/show/${id}?page=${page}`);
+  return res.data;
 };
 const createChat = async (data: Partial<Chat>) => {
   const res = await api.post(`/messages/create-chat`, data);

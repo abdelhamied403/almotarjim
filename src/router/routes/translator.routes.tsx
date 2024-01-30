@@ -7,9 +7,10 @@ import SingleRequest from "@/pages/translator/SingleRequest";
 import SubmitRequest from "@/pages/translator/SubmitRequest";
 import Error404 from "@/pages/shared/error/Error404";
 import TranslatorLayout from "@/layouts/TranslatorLayout";
-import InternalUsers from "@/pages/translator/InternalUsers";
-import InternalChat from "@/pages/translator/InternalChat";
 import SingleChat from "@/pages/translator/SingleChat";
+import InternalChats from "@/pages/translator/InternalChats";
+import CreateInternalChat from "@/pages/translator/CreateInternalChat";
+import InternalChat from "@/pages/translator/InternalChat";
 
 const translatorRoutes: RouteObject[] = [
   {
@@ -21,9 +22,10 @@ const translatorRoutes: RouteObject[] = [
         element: <Dashboard />,
       },
       {
-        path: "internal-chat",
+        path: "internal-chats",
         children: [
-          { path: "", element: <InternalUsers /> },
+          { path: "", element: <InternalChats /> },
+          { path: "new", element: <CreateInternalChat /> },
           { path: ":id", element: <InternalChat /> },
         ],
       },

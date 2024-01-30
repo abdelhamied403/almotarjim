@@ -19,7 +19,7 @@ const AdminLayout = () => {
               {t("admin.layout.dashboard")}
             </span>
           </SidebarItem>
-          <SidebarItem to="/internal-chat" end>
+          <SidebarItem to="/internal-chats" end>
             <HiChat />
             <span className="hidden lg:block">Almotarjim Chat</span>
           </SidebarItem>
