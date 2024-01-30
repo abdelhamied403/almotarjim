@@ -22,9 +22,9 @@ const Contact = () => {
           <div className="flex flex-col gap-16">
             <div className="flex flex-col gap-4 text-center">
               <p className="text-center text-primary font-semibold">
-                - Almotarjim platform -
+                - {t("user.contact.title")}-
               </p>
-              <h1 className="text-3xl">We Would Love To Hear From You</h1>
+              <h1 className="text-3xl">{t("user.contact.content")}</h1>
             </div>
             <div className="gap-5">
               <div className="flex flex-col gap-5">
@@ -38,11 +38,11 @@ const Contact = () => {
                     <div>
                       <h1>{t("user.contact.address")}</h1>
                       <p className="font-normal text-gray-600 text-base">
-                        Visit Our Office HQ
+                        {t("user.contact.addressDesc")}
                       </p>
                     </div>
                     <p className="font-normal text-gray-600 text-base">
-                      Riyadh, Saudi Arabia
+                      {t("user.contact.addressContent")}
                     </p>
                   </div>
                   <div className="flex flex-col gap-3 p-5 border hover:shadow-xl transition-all border-primary rounded-lg">
@@ -54,7 +54,7 @@ const Contact = () => {
                     <div>
                       <h1>{t("user.contact.phone")}</h1>
                       <p className="font-normal text-gray-600 text-base">
-                        Speek To Our Team
+                        {t("user.contact.phoneContetnt")}
                       </p>
                     </div>
                     <p className="font-normal text-gray-600 text-base">
@@ -70,7 +70,7 @@ const Contact = () => {
                     <div>
                       <h1>{t("user.contact.email")}</h1>
                       <p className="font-normal text-gray-600 text-base">
-                        Chat With Our Friendly Team
+                        {t("user.contact.emailContent")}
                       </p>
                     </div>
                     <p className="font-normal text-gray-600 text-base">
