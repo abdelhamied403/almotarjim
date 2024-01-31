@@ -8,7 +8,7 @@ import {
 import useUser from "@/hooks/useUser";
 import useMic from "@/hooks/useMic";
 import { useToast } from "@/components/ui/use-toast";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useI18n from "@/hooks/useI18n";
 
 import ChatService from "@/services/chat.service";
@@ -40,10 +40,11 @@ const Chat = ({
   children,
   onSend,
   messages,
+  id,
 }: ChatProps) => {
   return (
     <ChatProvider.Provider
-      value={{ onSend, owner, receiver, status, messages }}
+      value={{ onSend, owner, receiver, status, messages, id }}
     >
       {children}
     </ChatProvider.Provider>
@@ -103,11 +104,10 @@ export type ChatHeaderActionsProps = {
   children?: JSX.Element | JSX.Element[];
 };
 const ChatHeaderActions = ({ children }: ChatHeaderActionsProps) => {
-  const { status } = useContext(ChatProvider);
+  const { status, id } = useContext(ChatProvider);
   const { role } = useUser();
   const { t } = useI18n();
   const { toast } = useToast();
-  const { id = "" } = useParams();
 
   const handleEndChat = async () => {
     try {

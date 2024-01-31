@@ -35,6 +35,8 @@ import { useToast } from "@/components/ui/use-toast";
 import Spinner from "@/components/ui/Spinner";
 import usePusher from "@/hooks/usePusher";
 import ChatService from "@/services/chat.service";
+import Message from "@/interfaces/message";
+import ChatType from "@/interfaces/chat";
 
 const SingleRequest = () => {
   const { t } = useI18n();
@@ -42,6 +44,12 @@ const SingleRequest = () => {
 
   const [request, setRequest] = useState<Request>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [chat, setChat] = useState<Partial<ChatType>>({});
+  const [messages, setMessages] = useState<{ data: Array<Message> }>({
+    data: [],
+  });
+  const [page, setPage] = useState(1);
+
   const { id = "" } = useParams();
   const { toast } = useToast();
 
@@ -100,15 +108,33 @@ const SingleRequest = () => {
     setLoading(false);
   }, [id]);
 
-  const onMessageSend = async (message: { type: string; content: any }) => {
-    if (request?.chat) {
-      await ChatService.sendMessage(message, request?.chat?.id);
-    }
+  const getChat = useCallback(async () => {
+    const res = await ChatService.getSingleChat(id);
+    setChat(res.data);
+    setMessages(res.messages);
+  }, [id]);
+
+  const handleSend = useCallback(
+    async (message: { type: string; content: any }) => {
+      await ChatService.sendMessage(message, id);
+    },
+    [id]
+  );
+
+  const onFetchMore = async () => {
+    const res = await ChatService.getSingleChat(id, page + 1);
+    setPage((prev) => prev + 1);
+    setMessages((prev) => ({
+      ...prev,
+      ...res.messages,
+      data: [...prev.data, ...res.messages.data],
+    }));
   };
 
   useEffect(() => {
     getRequest();
-  }, [getRequest]);
+    getChat();
+  }, [getChat, getRequest]);
 
   useEffect(() => {
     if (request) {
@@ -190,12 +216,12 @@ const SingleRequest = () => {
                 {t("supervisor.singleRequest.assign")}
               </Button>
             </div>
-            <Chat {...request?.chat} onSend={onMessageSend}>
+            <Chat {...chat} messages={messages} onSend={handleSend}>
               <Chat.Header>
                 <Chat.Header.Title></Chat.Header.Title>
                 <Chat.Header.Actions></Chat.Header.Actions>
               </Chat.Header>
-              <Chat.Body />
+              <Chat.Body fetchMoreMessages={onFetchMore}></Chat.Body>
               <Chat.Footer />
             </Chat>
           </div>

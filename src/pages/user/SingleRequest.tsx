@@ -14,6 +14,8 @@ import { downloadURI } from "@/lib/file";
 import ChatService from "@/services/chat.service";
 import usePusher from "@/hooks/usePusher";
 import { cn } from "@/lib/utils";
+import Message from "@/interfaces/message";
+import ChatType from "@/interfaces/chat";
 
 const SingleRequest = () => {
   const { t } = useI18n();
@@ -21,6 +23,12 @@ const SingleRequest = () => {
 
   const [request, setRequest] = useState<Request>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [chat, setChat] = useState<Partial<ChatType>>({});
+  const [messages, setMessages] = useState<{ data: Array<Message> }>({
+    data: [],
+  });
+  const [page, setPage] = useState(1);
+
   const { id = "" } = useParams();
 
   //download all attachments
@@ -32,17 +40,35 @@ const SingleRequest = () => {
     });
   };
 
+  const getChat = useCallback(async (chatId: string) => {
+    const res = await ChatService.getSingleChat(chatId);
+    setChat(res.data);
+    setMessages(res.messages);
+  }, []);
+
   const getRequest = useCallback(async () => {
     setLoading(true);
     const request = await RequestService.getRequest(id).catch(console.log);
     setRequest(request);
+    getChat(request?.chat?.id);
     setLoading(false);
-  }, [id]);
+  }, [getChat, id]);
 
-  const onMessageSend = async (message: { type: string; content: any }) => {
-    if (request?.chat) {
-      await ChatService.sendMessage(message, request?.chat?.id);
-    }
+  const handleSend = useCallback(
+    async (message: { type: string; content: any }) => {
+      await ChatService.sendMessage(message, request?.chat?.id || "");
+    },
+    [request?.chat?.id]
+  );
+
+  const onFetchMore = async () => {
+    const res = await ChatService.getSingleChat(request?.chat?.id, page + 1);
+    setPage((prev) => prev + 1);
+    setMessages((prev) => ({
+      ...prev,
+      ...res.messages,
+      data: [...prev.data, ...res.messages.data],
+    }));
   };
 
   useEffect(() => {
@@ -53,13 +79,7 @@ const SingleRequest = () => {
     if (request) {
       const channel = pusher.subscribe(`chat.${request?.chat?.id}`);
       channel.bind("message-sent", (data: any) => {
-        setRequest((prev: any) => ({
-          ...prev,
-          chat: {
-            ...prev.chat,
-            messages: [...prev.chat.messages, data],
-          },
-        }));
+        setMessages((prev: any) => ({ ...prev, data: [data, ...prev.data] }));
       });
 
       return () => {
@@ -117,12 +137,12 @@ const SingleRequest = () => {
               "h-full max-h-[900px] lg:max-h-none overflow-y-auto flex-1 flex flex-col gap-4 bg-white p-4 rounded-xl row-span-3"
             )}
           >
-            <Chat {...request?.chat} onSend={onMessageSend}>
+            <Chat {...chat} messages={messages} onSend={handleSend}>
               <Chat.Header>
                 <Chat.Header.Title></Chat.Header.Title>
                 <Chat.Header.Actions></Chat.Header.Actions>
               </Chat.Header>
-              <Chat.Body />
+              <Chat.Body fetchMoreMessages={onFetchMore}></Chat.Body>
               <Chat.Footer />
             </Chat>
           </div>

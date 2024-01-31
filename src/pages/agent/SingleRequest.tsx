@@ -32,6 +32,8 @@ import Spinner from "@/components/ui/Spinner";
 import ChatService from "@/services/chat.service";
 import usePusher from "@/hooks/usePusher";
 import { cn } from "@/lib/utils";
+import Message from "@/interfaces/message";
+import ChatType from "@/interfaces/chat";
 
 const requestStatusVariants: any = {
   PENDING: "warning",
@@ -45,6 +47,13 @@ const SingleRequest = () => {
 
   const [request, setRequest] = useState<Request>();
   const [loading, setLoading] = useState<boolean>(false);
+
+  const [chat, setChat] = useState<Partial<ChatType>>({});
+  const [messages, setMessages] = useState<{ data: Array<Message> }>({
+    data: [],
+  });
+  const [page, setPage] = useState(1);
+
   const { id = "" } = useParams();
 
   // reopen
@@ -79,18 +88,35 @@ const SingleRequest = () => {
     setIsApproveDialogOpen(false);
   };
 
+  const getChat = useCallback(async (chatId: string) => {
+    const res = await ChatService.getSingleChat(chatId);
+    setChat(res.data);
+    setMessages(res.messages);
+  }, []);
+
   const getRequest = useCallback(async () => {
     setLoading(true);
     const request = await RequestService.getRequest(id).catch(console.log);
     setRequest(request);
+    getChat(request?.chat?.id);
     setLoading(false);
-  }, [id]);
+  }, [getChat, id]);
 
-  //handle send message
-  const handleSend = async (message: { type: string; content: any }) => {
-    if (request?.chat) {
-      await ChatService.sendMessage(message, request?.chat?.id);
-    }
+  const handleSend = useCallback(
+    async (message: { type: string; content: any }) => {
+      await ChatService.sendMessage(message, request?.chat?.id || "");
+    },
+    [request?.chat?.id]
+  );
+
+  const onFetchMore = async () => {
+    const res = await ChatService.getSingleChat(request?.chat?.id, page + 1);
+    setPage((prev) => prev + 1);
+    setMessages((prev) => ({
+      ...prev,
+      ...res.messages,
+      data: [...prev.data, ...res.messages.data],
+    }));
   };
 
   useEffect(() => {
@@ -101,13 +127,7 @@ const SingleRequest = () => {
     if (request) {
       const channel = pusher.subscribe(`chat.${request?.chat?.id}`);
       channel.bind("message-sent", (data: any) => {
-        setRequest((prev: any) => ({
-          ...prev,
-          chat: {
-            ...prev.chat,
-            messages: [...prev.chat.messages, data],
-          },
-        }));
+        setMessages((prev: any) => ({ ...prev, data: [data, ...prev.data] }));
       });
 
       return () => {
@@ -177,12 +197,12 @@ const SingleRequest = () => {
                 {t("agent.singleRequest.assign")}
               </Button>
             </div>
-            <Chat {...request?.chat} onSend={handleSend}>
+            <Chat {...chat} messages={messages} onSend={handleSend}>
               <Chat.Header>
                 <Chat.Header.Title></Chat.Header.Title>
                 <Chat.Header.Actions></Chat.Header.Actions>
               </Chat.Header>
-              <Chat.Body />
+              <Chat.Body fetchMoreMessages={onFetchMore}></Chat.Body>
               <Chat.Footer />
             </Chat>
           </div>
