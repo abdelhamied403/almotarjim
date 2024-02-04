@@ -3,7 +3,6 @@ import { HiArrowNarrowLeft, HiArrowNarrowRight } from "react-icons/hi";
 import home from "../../assets/auth/home.svg";
 import ellipse from "../../assets/auth/Ellipse18.svg";
 import ellipse2 from "../../assets/auth/Ellipse19.svg";
-import ellipse3 from "../../assets/auth/Ellipsedown.svg";
 import LanguageDropdown from "@/components/LanguageDropdown";
 // import AuthService from "@/services/auth.service";
 // import { useNavigate } from "react-router-dom";
@@ -32,7 +31,7 @@ const Home = () => {
 
   return (
     <div className="relative min-h-screen m-auto">
-      <div className="flex flex-col h-screen justify-center relative z-10">
+      <div className="flex flex-col relative z-10">
         <div className="absolute top-0 right-0 -z-10">
           <img
             src={ellipse}
@@ -47,14 +46,8 @@ const Home = () => {
             className="w-[100px] h-[100px] md:h-auto md:w-auto"
           />
         </div>
-        <div className="absolute bottom-0 left-0 -z-10">
-          <img
-            src={ellipse3}
-            alt="ellipse"
-            className="w-[100px] h-[100px] md:h-auto md:w-auto"
-          />
-        </div>
-        <div className="container mx-auto mt-5">
+
+        <div className="container mx-auto py-12 mt-5 mb-12">
           <div className="flex justify-end">
             <LanguageDropdown />
           </div>

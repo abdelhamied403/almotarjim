@@ -16,7 +16,7 @@
       "requestStatus": {
         "PENDING": "قيد الانتظار",
         "IN_PROGRESS": "في تَقَدم",
-        "DONE": "منتهي"
+        "DONE": "مكتمل"
       },
       "dropzone": {
         "clickToUpload": "انقر للتحميل",
